@@ -1,0 +1,12 @@
+{
+  "name": "px-docs-spike",
+  "private": true,
+  "version": "1.0.0",
+  "description": "npm packages for the hugo docs site",
+  "scripts": {
+    "algolia": "atomic-algolia"
+  },
+  "dependencies": {
+    "atomic-algolia": "^0.3.15"
+  }
+}

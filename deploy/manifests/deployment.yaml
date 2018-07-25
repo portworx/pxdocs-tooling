@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: frontend-${VERSIONS_TAG}
+  namespace: px-docs-spike
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: frontend-${VERSIONS_TAG}
+    spec:
+      containers:
+      - name: frontend
+        image: ${IMAGE}
+        ports:
+        - containerPort: 80
