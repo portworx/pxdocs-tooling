@@ -22,16 +22,8 @@ When doing a hugo build - it will need to have the following variables set:
  * `ALGOLIA_API_KEY`
  * `ALGOLIA_INDEX_NAME`
 
-To upload the index (do this once you have generated a hugo build) - we need to first build the node.js indexer image and then run the script passing in the `algolia.json` index file and the correct variables:
+To upload the new algolia index for a given build - run the following from within the pxdocs repo:
 
 ```bash
-docker build -t px-docs-indexer:latest -f Dockerfile.indexer .
-docker run --rm \
-  --name px-docs-indexer \
-  -v $PWD/public/algolia.json:/algolia.json:ro \
-  -e ALGOLIA_APP_ID \
-  -e ALGOLIA_ADMIN_KEY \
-  -e ALGOLIA_INDEX_NAME \
-  -e ALGOLIA_INDEX_FILE=/algolia.json \
-  px-docs-indexer:latest
+make search-index
 ```
