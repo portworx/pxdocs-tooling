@@ -1,8 +1,8 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: frontend-${VERSIONS_TAG}
-  namespace: px-docs-spike
+  name: docs-${VERSIONS_TAG}
+  namespace: pxdocs
 spec:
   replicas: 1
   strategy:
@@ -11,10 +11,10 @@ spec:
   template:
     metadata:
       labels:
-        app: frontend-${VERSIONS_TAG}
+        app: docs-${VERSIONS_TAG}
     spec:
       containers:
-      - name: frontend
+      - name: nginx
         image: ${IMAGE}
         ports:
         - containerPort: 80

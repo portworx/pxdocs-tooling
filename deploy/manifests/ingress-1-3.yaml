@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: pxdocs
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+  - hosts:
+    - 1.3.docs.portworx.wk1.co
+    secretName: ingress-pxdocs-1-3
+  rules:
+  - host: 1.3.docs.portworx.wk1.co
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: docs-1-3
+          servicePort: 80
