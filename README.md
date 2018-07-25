@@ -6,7 +6,7 @@ When you update this theme (and git pushed) - you will then need to update it fo
 
 ```
 cd pxdocs
-make update.theme
+make update-theme
 ```
 
 It also contains the shared deployment files that are used in the build and deployment of the docs site.  This is so we have a common shared source for these files across multiple content branches.
