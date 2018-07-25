@@ -1,0 +1,18 @@
+<div class="header-wrapper">
+  <div class="header-container">
+    <div class="github-link-cell">
+      <a target="_blank" href="{{- .Site.Params.GithubRepo }}/edit/master/content/{{ replace .File.Dir "\\" "/" }}{{ .File.LogicalName }}">
+        edit this page on github
+      </a>
+    </div>
+    <h1 class="page-title">
+      {{ .Title }}
+    </h1>
+  </div>
+  <div class="header-container">
+    <div class="page-subtitle">
+      Last edited: {{ dateFormat "Monday, Jan 2, 2006" .Lastmod }} {{- with .GitInfo }} by {{ .AuthorName }}{{- end}}
+    </div>
+  </div>
+</div>
+<hr />

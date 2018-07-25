@@ -1,0 +1,85 @@
+<!--
+  prev-link
+ -->
+{{- define "prev-page" }}
+  <a href="{{ .url }}" class="no-underline">
+    <div class="prevnextlink-container mdl-shadow--2dp">
+      <i class="material-icons bigger-icon" role="presentation">arrow_back</i> Previous
+      <div class="float-right prev-next-title">{{ .title }}</div>
+    </div>
+  </a>
+{{- end}}
+
+<!--
+  next-link
+ -->
+{{- define "next-page" }}
+  <a href="{{ .url }}" class="no-underline">
+    <div class="prevnextlink-container mdl-shadow--2dp">
+      <span class="float-right"> Next <i class="material-icons bigger-icon" role="presentation">arrow_forward</i></span>
+      <div class="prev-next-title">{{ .title }}</div>
+    </div>
+  </a>
+{{- end}}
+
+<div>
+
+  {{- .Scratch.Set "prevnext-colsize" "12" }}
+
+  <!--
+    work out the auto prev and next based on page structure
+    if the page has disabled auto prev and next then don't
+
+    NOTE - this is the wrong way around because somehow higher numbers
+    mean lower in the ordering in hugo :-()
+   -->
+  {{- if not .Params.disableprevnext }}
+    {{- if .NextInSection }}
+      {{- .Scratch.Set "prevpage" .NextInSection }}
+    {{- end}}
+    {{- if .PrevInSection }}
+      {{- .Scratch.Set "nextpage" .PrevInSection }}
+    {{- end}}
+  {{- end}}
+
+  <!--
+    allow page overrides of the prev and next pages in the frontmatter
+    this ignores disableprevnext meaning we can have a custom next page
+    with no automatic previous for example
+   -->
+  {{- if isset .Params "prevpage" }}
+    {{- .Scratch.Set "prevpage" ($.Site.GetPage "page" .Params.prevpage) }}
+  {{- end}}
+
+  {{- if isset .Params "nextpage" }}
+    {{- .Scratch.Set "nextpage" ($.Site.GetPage "page" .Params.nextpage) }}
+  {{- end}}
+
+  <!--
+    work out the grid size
+    it's 12 unless both are set
+   -->
+  {{- if and (.Scratch.Get "prevpage") (.Scratch.Get "nextpage")}}
+    {{- .Scratch.Set "prevnext-colsize" "6" }}
+  {{- end}}
+
+  {{- $colSize := .Scratch.Get "prevnext-colsize" }}
+
+  {{- if or (.Scratch.Get "prevpage") (.Scratch.Get "nextpage")}}
+    <hr class="margin" />
+  {{- end}}
+
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--6-col">
+      {{- with .Scratch.Get "prevpage" }}
+        {{- template "prev-page" dict "url" .URL "title" .Title }}
+      {{- end}}
+    </div>
+
+    <div class="mdl-cell mdl-cell--6-col">
+      {{- with .Scratch.Get "nextpage" }}
+          {{- template "next-page" dict "url" .URL "title" .Title }}
+      {{- end}}
+    </div>
+  </div>
+</div>
