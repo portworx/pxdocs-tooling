@@ -5,8 +5,7 @@ RUN apk upgrade
 RUN apk add bash git
 WORKDIR /app/indexer
 COPY ./package.json /app/indexer/package.json
-COPY ./yarn.lock /app/indexer/yarn.lock
-RUN yarn install
-COPY ./hugo_public /app/indexer/public
+COPY ./package-lock.json /app/indexer/package-lock.json
+RUN npm install
 ENTRYPOINT ["npm", "run"]
 CMD ["algolia"]
