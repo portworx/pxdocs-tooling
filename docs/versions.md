@@ -17,9 +17,10 @@ If you are making updates to the core build itself - make those changes in `mast
 To add a new version branch to the build we need to follow these steps:
 
  1. add a new ingress and service manifests to k8s
- 2. update the secret variables in travis
- 3. create and push new branch in the pxdocs repo
- 4. rebuild all other version branches
+ 2. update the VERSIONS_ALL variable in travis
+ 3. create a new algolia index
+ 4. create and push new branch in the pxdocs repo
+ 5. rebuild all other version branches
 
 #### add new ingress and service manifests
 
@@ -39,9 +40,15 @@ kubectl apply -f deploy/manifests/ingress-1-5.yaml
 
 If this version should be the default one - change the selector in `deploy/manifests/ingress-default.yaml` and reapply it also.
 
-#### update travis variables
+#### update travis variable
 
 To enable a build and show the version in the drop-down - you will need to add the version to the `VERSIONS_ALL` variable in the [Travis secret variables page](https://travis-ci.org/portworx/pxdocs/settings)
+
+#### create a new algolia index
+
+You must create a new index with algolia with the name of the new version.
+
+If the version is `1.5` - the index name must be `1-5` (replace the periods with dashes).
 
 #### create new branch
 
