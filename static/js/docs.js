@@ -23,74 +23,81 @@ $(function() {
     algolia search
     
   */
-  var search = instantsearch({
-    appId: ALGOLIA_APP_ID,
-    apiKey: ALGOLIA_API_KEY,
-    indexName: ALGOLIA_INDEX_NAME,
-    routing: true,
-    searchParameters: {
-      hitsPerPage: 5,
-      attributesToRetrieve: ['title', 'objectID', 'sectionTitles', 'url', 'sectionURL'], 
-      attributesToHighlight: ['title', 'objectID', 'sectionTitles', 'url', 'sectionURL'],
-    },
-    searchFunction: function(helper) {
-      var searchResults = $('#search-hits');
-      if (helper.state.query === '') {
-        searchResults.hide()
-      }
-      else {
-        searchResults.show()
-      }
-      helper.search()
-    }
-  })
-
-  search.addWidget(
-    instantsearch.widgets.searchBox({
-      container: '#search-box',
-      placeholder: 'Search for pages',
-      cssClasses: {
-        root: 'search-box-root',
-        input: 'search-box-input',
+  function setupAlgolia() {
+    var search = instantsearch({
+      appId: ALGOLIA_APP_ID,
+      apiKey: ALGOLIA_API_KEY,
+      indexName: ALGOLIA_INDEX_NAME,
+      routing: true,
+      searchParameters: {
+        hitsPerPage: 5,
+        attributesToRetrieve: ['title', 'objectID', 'sectionTitles', 'url', 'sectionURL'], 
+        attributesToHighlight: ['title', 'objectID', 'sectionTitles', 'url', 'sectionURL'],
       },
-      reset: true,
-      magnifier: true,
+      searchFunction: function(helper) {
+        var searchResults = $('#search-hits');
+        if (helper.state.query === '') {
+          searchResults.hide()
+        }
+        else {
+          searchResults.show()
+        }
+        helper.search()
+      }
     })
-  )
 
-  search.addWidget(
-    instantsearch.widgets.hits({
-      container: '#search-hits',
-      templates: {
-        empty: [
-          '<div class="search-hits-empty">',
-              'no results',
-          '</div>',
-        ].join("\n"),
-        item: [
-          '<div class="search-hits-row">',
-            '<div class="search-hits-section">',
-              '<a href="{{{sectionURL}}}">',
-                '{{{_highlightResult.sectionTitles.value}}}',
-              '</a>',
-            '</div>',
-            '<div class="search-hits-page">',
-              '<a href="{{{url}}}">',
-                '{{{_highlightResult.title.value}}}',
-              '</a>',
-            '</div>',
-          '</div>',
-        ].join("\n")
-      },
-      transformData: {
-        item: function(item) {
-          return item
+    search.addWidget(
+      instantsearch.widgets.searchBox({
+        container: '#search-box',
+        placeholder: 'Search for pages',
+        cssClasses: {
+          root: 'search-box-root',
+          input: 'search-box-input',
         },
-      }
-    })
-  )
+        reset: true,
+        magnifier: true,
+      })
+    )
 
-  search.start()
+    search.addWidget(
+      instantsearch.widgets.hits({
+        container: '#search-hits',
+        templates: {
+          empty: [
+            '<div class="search-hits-empty">',
+                'no results',
+            '</div>',
+          ].join("\n"),
+          item: [
+            '<div class="search-hits-row">',
+              '<div class="search-hits-section">',
+                '<a href="{{{sectionURL}}}">',
+                  '{{{_highlightResult.sectionTitles.value}}}',
+                '</a>',
+              '</div>',
+              '<div class="search-hits-page">',
+                '<a href="{{{url}}}">',
+                  '{{{_highlightResult.title.value}}}',
+                '</a>',
+              '</div>',
+            '</div>',
+          ].join("\n")
+        },
+        transformData: {
+          item: function(item) {
+            return item
+          },
+        }
+      })
+    )
+
+    search.start()
+  }
+
+  if(ALGOLIA_APP_ID && ALGOLIA_API_KEY && ALGOLIA_INDEX_NAME) {
+    setupAlgolia()
+  }
+  
 
   /*
   
