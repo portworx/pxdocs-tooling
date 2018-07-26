@@ -4,17 +4,29 @@ metadata:
   name: docs-${VERSIONS_TAG}
   namespace: pxdocs
 spec:
-  replicas: 1
+  replicas: 3
   strategy:
     rollingUpdate:
-      maxUnavailable: 0
+      maxUnavailable: 1
   template:
     metadata:
       labels:
         app: docs-${VERSIONS_TAG}
     spec:
       containers:
-      - name: nginx
-        image: ${IMAGE}
-        ports:
-        - containerPort: 80
+        - name: nginx
+          image: ${IMAGE}
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            timeoutSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            timeoutSeconds: 1
