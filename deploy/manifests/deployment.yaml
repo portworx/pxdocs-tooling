@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: ${IMAGE}
+          image: ${DEPLOYMENT_IMAGE}
           ports:
             - containerPort: 80
           livenessProbe:
