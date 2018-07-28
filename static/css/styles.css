@@ -6,12 +6,6 @@ html, body {
   color: rgba(0, 0, 0, 0.54);
 }
 
-.docs-drawer {
-  border: none;
-  height: calc(100% - 113px) !important;
-  max-height: calc(100% - 113px) !important;
-  top: 113px !important;
-}
 
 /*
 
@@ -27,6 +21,11 @@ html, body {
 }
 
 @media screen and (max-width: 1025px) {
+
+  .docs-header {
+    height: 60px;
+  }
+
   .docs-header .navbar-menus {
     display: none !important;
   }
@@ -50,6 +49,15 @@ html, body {
   margin-top: 19px;
   margin-left: 20px;
   height: 75px;
+}
+
+@media screen and (max-width: 1025px) {
+
+  .docs-header .container .navbar-brand img {
+    margin-top: 6px;
+    margin-left: 70px;
+    height: 46px;
+  }
 }
 
 .docs-header .container .navbar-menus {
@@ -159,6 +167,26 @@ html, body {
   SIDE MENU
   
 */
+
+
+.docs-drawer {
+  border: none;
+  height: calc(100% - 113px) !important;
+  max-height: calc(100% - 113px) !important;
+  top: 113px !important;
+}
+
+
+@media screen and (max-width: 1025px) {
+
+  .docs-drawer {
+    height: calc(100% - 60px) !important;
+    max-height: calc(100% - 60px) !important;
+    top: 60px !important;
+  }
+}
+
+
 /* iOS Safari specific workaround */
 .docs-drawer .mdl-menu__container {
   z-index: -1;
@@ -171,21 +199,26 @@ html, body {
   display: flex;
   align-items: center;
 }
+
 .docs-drawer-header {
-  padding: 10px 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 10px;
+  padding-top: 10px;
   border: none;
   border-bottom: 1px solid #e5e5e5;
-}
-
-.docs-drawer-header .docs-logo-image {
-  max-height: 44px;
-  margin: auto;
 }
 
 .docs-navigation {
   flex-grow: 1;
   padding-top: 10px !important;
+  padding-bottom: 30px !important;
 }
+
+.docs-navigation #menu-content {
+  padding-top: 10px !important;
+}
+
 .docs-layout .docs-navigation .mdl-navigation__link {
   display: flex !important;
   flex-direction: row;
@@ -465,7 +498,7 @@ hr.margin {
 }
 
 .search-box-input {
-  width: 300px !important;
+  width: 100% !important;
 }
 
 #search-hits .search-hits-empty {
@@ -499,12 +532,6 @@ hr.margin {
 @media screen and (max-width: 1025px) {
   #search-hits {
     top: 56px;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .search-box-input {
-    width: 160px !important;
   }
 }
 
@@ -603,9 +630,9 @@ h2,h3,h4,h5,h6 a {
 
 #version-menu {
   border-bottom: 1px solid #e5e5e5;
-  padding-top: 10px;
-  padding-bottom: 15px;
-  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  
   display: none;
 }
 

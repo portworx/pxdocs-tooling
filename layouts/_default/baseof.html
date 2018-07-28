@@ -151,11 +151,6 @@
         SIDEBAR
        -->
       <div class="docs-drawer mdl-layout__drawer mdl-color--grey-100">
-        <header class="docs-drawer-header">
-          <a href="{{"" | relURL}}">
-            <img src="{{"images/portworx-logo.png" | relURL}}" class="docs-logo-image">
-          </a>
-        </header>
         <nav class="docs-navigation mdl-navigation mdl-color--grey-100">
 
           <div id="version-menu">
@@ -172,6 +167,12 @@
               
             </ul>
           </div>
+
+          <header class="docs-drawer-header">
+            <div id="search-box">
+              
+            </div>
+          </header>
           
           <div id="menu-content">
             {{- partial "menu.html" . }}
