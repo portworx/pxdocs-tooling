@@ -486,15 +486,17 @@ hr.margin {
 
 #search-hits {
   position: absolute;
-  right: 40px;
-  top: 64px;
+  left: 240px;
+  top: 240px;
   width: 400px;
   padding: 10px;
-  border: 1px dashed #999;
-  border-radius: 10px;
+  border: 1px solid #999;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   background-color: #fafafa;
   z-index: 1000;
   display: none;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, .15);
 }
 
 .search-box-input {
@@ -509,7 +511,7 @@ hr.margin {
 #search-hits .search-hits-row {
   margin: 15px;
   padding-bottom: 15px;
-  border-bottom: 1px dashed #ccc;
+  border-bottom: 1px solid #ccc;
 }
 
 #search-hits .search-hits-section {
