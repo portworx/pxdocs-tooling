@@ -1,5 +1,10 @@
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
+  height: 100%;
+}
+
+.docs-layout {
+  height: 100%;
 }
 
 .docs-layout .mdl-layout__header .mdl-layout__drawer-button {
@@ -239,12 +244,10 @@ html, body {
   background-color: #e5e5e5;
   padding-top: 10px;
   padding-bottom: 10px;
-  display: none;
 }
 
-#version-menu-holding-space {
-  height: 56px;
-  background-color: #e5e5e5;
+#version-menu-dropdown {
+  visibility: hidden;
 }
 
 #version-menu #vert-button {

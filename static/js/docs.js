@@ -159,9 +159,6 @@ $(function() {
   if(ALGOLIA_APP_ID && ALGOLIA_API_KEY && ALGOLIA_INDEX_NAME && $('#search-box').length >= 1) {
     setupAlgolia()
   }
-  else {
-    $('#search-container-holding-space').hide()
-  }
   
 
   /*
@@ -183,18 +180,15 @@ $(function() {
       $('#version-menu #version-menu-options').append(versionOption)
     })
     $('#version-menu #text-button').text('Version: ' + VERSIONS_CURRENT)
-    $('#version-menu').show()
-    $('#version-menu-holding-space').hide()
   }
 
   if(VERSIONS_BASE_URL) {
     activateVersionMenu()
+    $('#version-menu-dropdown').css({
+      visibility: 'visible'
+    })
   }
-  else {
-    $('#version-menu-holding-space').hide()
-  }
-
-
+  
   /*
   
     scrollspy
@@ -377,5 +371,4 @@ $(function() {
   }
 
   setupDropDownMenus()
-
 })
