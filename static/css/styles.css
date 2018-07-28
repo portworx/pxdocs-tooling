@@ -174,8 +174,10 @@ html, body {
   height: calc(100% - 113px) !important;
   max-height: calc(100% - 113px) !important;
   top: 113px !important;
+  overflow-y: hidden !important;
+  display: flex;
+  flex-flow: column;
 }
-
 
 @media screen and (max-width: 1025px) {
 
@@ -200,24 +202,61 @@ html, body {
   align-items: center;
 }
 
-.docs-drawer-header {
+#search-container {
   padding-left: 5px;
   padding-right: 5px;
   padding-bottom: 10px;
   padding-top: 10px;
   border: none;
-  border-bottom: 1px solid #e5e5e5;
+  background-color: #e5e5e5;
 }
 
 .docs-navigation {
-  flex-grow: 1;
-  padding-top: 10px !important;
-  padding-bottom: 30px !important;
+  flex: 2;
+  overflow: auto;
+  padding-top: 0px !important;
+  padding-bottom: 20px !important;
 }
 
 .docs-navigation #menu-content {
   padding-top: 10px !important;
 }
+
+
+/*
+
+  version menu
+  
+*/
+
+#version-menu {
+  background-color: #e5e5e5;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  
+  display: none;
+}
+
+#version-menu #vert-button {
+  margin-left: 10px;
+  color: #666;
+}
+
+#version-menu #text-button {
+  color: #666 !important;
+}
+
+#version-menu .mdl-menu__container {
+  margin-left: 20px;
+  z-index: 1000 !important;
+}
+
+/*
+
+  SIDE MENU NAV BUTTONS
+  
+*/
+
 
 .docs-layout .docs-navigation .mdl-navigation__link {
   display: flex !important;
@@ -504,8 +543,8 @@ hr.margin {
 
 #search-hits {
   position: absolute;
-  left: 240px;
-  top: 240px;
+  left: 280px;
+  top: 178px;
   width: 400px;
   padding: 10px;
   border: 1px solid #999;
@@ -653,30 +692,3 @@ h2,h3,h4,h5,h6 a {
   color: #666;
 }
 
-/*
-
-  version menu
-  
-*/
-
-#version-menu {
-  border-bottom: 1px solid #e5e5e5;
-  padding-top: 5px;
-  padding-bottom: 10px;
-  
-  display: none;
-}
-
-#version-menu #vert-button {
-  margin-left: 10px;
-  color: #666;
-}
-
-#version-menu #text-button {
-  color: #666 !important;
-}
-
-#version-menu .mdl-menu__container {
-  margin-left: 20px;
-  z-index: 1000 !important;
-}
