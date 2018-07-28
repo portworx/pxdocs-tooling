@@ -22,17 +22,23 @@
 
   {{- with .node}}
     <a style="padding-left: {{- mul $depth 10 }}px" class="mdl-navigation__link{{- if eq .URL $currentNode.URL}} active mdl-color-text--primary {{ end }}" href="{{ .URL }}">
-      {{- if eq $mode "branch"}}
-        <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">{{- if $open }}arrow_drop_down{{- else }}arrow_right{{- end }}</i>
-      {{- else}}
-        <span class="empty-icon" role="presentation"></span>
-      {{- end}}
 
-      {{- if or (eq $mode "branch") (eq $depth 0) }} 
-        <span class="branchlink{{- if eq .URL $currentNode.URL}} active mdl-color-text--primary {{ end }}">{{.LinkTitle}}</span>
-      {{- else}}
-        <span class="leaflink{{- if eq .URL $currentNode.URL}} active mdl-color-text--primary {{ end }}">{{.LinkTitle}}</span>
-      {{- end}}
+      <div class="menu-link-title">
+        {{- if or (eq $mode "branch") (eq $depth 0) }} 
+          <span class="branchlink{{- if eq .URL $currentNode.URL}} active mdl-color-text--primary {{ end }}">&nbsp;&nbsp;&nbsp;{{.LinkTitle}}</span>
+        {{- else}}
+          <span class="leaflink{{- if eq .URL $currentNode.URL}} active mdl-color-text--primary {{ end }}">&nbsp;&nbsp;&nbsp;{{.LinkTitle}}</span>
+        {{- end}}
+      </div>
+
+      <div class="menu-link-icon">
+        {{- if eq $mode "branch"}}
+          <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">arrow_drop_down</i>
+        {{- else}}
+          <span class="empty-icon" role="presentation"></span>
+        {{- end}}
+      </div>
+    
         
     </a>
   {{- end}}

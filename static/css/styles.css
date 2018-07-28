@@ -223,9 +223,25 @@ html, body {
   display: flex !important;
   flex-direction: row;
   font-weight: 350;
-  font-size: 1.2em;
-  padding: 6px 0px;
+  font-size: 1em;
+  padding: 4px 0px;
   color: #000;
+}
+
+.docs-layout .docs-navigation .mdl-navigation__link .menu-link-row {
+  display: flex;
+  flex-direction:row;
+}
+
+.docs-layout .docs-navigation .mdl-navigation__link .menu-link-title {
+  display: block;
+  flex: 1 0 auto;
+}
+
+.docs-layout .docs-navigation .mdl-navigation__link .menu-link-icon {
+  display: block;
+  flex: 0 0 auto;
+  padding-right: 10px;
 }
 
 .docs-layout .docs-navigation .mdl-navigation__link.active {
@@ -308,12 +324,14 @@ hr.margin {
 }
 
 .mdl-layout__content * {
-  color: rgb(59, 69, 78);
-  font-size: 16px;
+  font-size: 15px;
+  
 }
 
 .mdl-layout__content p {
-  font-weight: 400;
+  color: rgb(51, 68, 76) !important;
+  font-weight: 100;
+  font-family: "Open Sans",sans-serif !important;
 }
 
 .mdl-layout__content a {
