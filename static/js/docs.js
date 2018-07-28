@@ -249,4 +249,66 @@ $(function() {
   if(VERSIONS_BASE_URL) {
     activateVersionMenu()
   }
+
+  /*
+  
+    drop down menus
+    
+  */
+  function showDropDownMenu(menu) {
+    var link = menu.parent()
+    var position = link.position()
+    var linkWidth = link.width()
+    var menuWidth = menu.width()
+    menu.css({
+      left: position.left + (linkWidth/2) - (menuWidth/2),
+      top: position.top + 30,
+    })
+    menu.show()
+  }
+
+  function setupDropDownMenus() {
+    $('a[data-dropdown]').each(function() {
+      var menuLink = $(this)
+      var menuId = menuLink.attr('data-dropdown')
+      var menu = $('#' + menuId)
+
+      menu.click(function(e) {
+        e.stopPropagation()
+      })
+
+      menuLink.click(function(e) {
+        e.preventDefault()
+        e.stopPropagation()
+
+        if(menu.is(':visible')) {
+          menu.hide()
+        }
+        else {
+          $('.dropdown-menu').hide()
+          showDropDownMenu(menu)
+          
+        }
+      })
+    })
+
+    $('body').click(function() {
+      $('.dropdown-menu').hide()
+    })
+
+    $(window).resize(function() {
+      $('a[data-dropdown]').each(function() {
+        var menuLink = $(this)
+        var menuId = menuLink.attr('data-dropdown')
+        var menu = $('#' + menuId)
+
+        if(menu.is(':visible')) {
+          showDropDownMenu(menu)
+        }
+      })
+    })
+  }
+
+  setupDropDownMenus()
+
 })
