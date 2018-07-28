@@ -26,6 +26,14 @@ $(function() {
     algolia search
     
   */
+
+  // how many chars either side of a match to display in the results
+  var SEARCH_HIGHLIGHT_BLEED = 30
+
+  function getMatchIndex(text, search) {
+    return text.toLowerCase().indexOf(search.toLowerCase())
+  }
+
   function setupAlgolia() {
     var search = instantsearch({
       appId: ALGOLIA_APP_ID,
@@ -34,8 +42,8 @@ $(function() {
       routing: true,
       searchParameters: {
         hitsPerPage: 5,
-        attributesToRetrieve: ['title', 'objectID', 'sectionTitles', 'url', 'sectionURL'], 
-        attributesToHighlight: ['title', 'objectID', 'sectionTitles', 'url', 'sectionURL'],
+        attributesToRetrieve: ['title', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'], 
+        attributesToHighlight: ['title', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
       },
       searchFunction: function(helper) {
         var searchResults = $('#search-hits');
@@ -83,11 +91,59 @@ $(function() {
                   '{{{_highlightResult.title.value}}}',
                 '</a>',
               '</div>',
+              '<div class="search-hits-matches">',
+                '<a href="{{{url}}}">',
+                  '{{{_resultMatches}}}',
+                '</a>',
+              '</div>',
             '</div>',
           ].join("\n")
         },
         transformData: {
           item: function(item) {
+
+            var highlightResult = item._highlightResult.content
+            var searchWords = highlightResult.matchedWords
+            var text = $(highlightResult.value).text()
+
+            var allWords = searchWords.join(' ')
+
+            var foundTerms = {}
+
+            var resultMatches = searchWords
+              .filter(function(word) {
+                return getMatchIndex(text, word) >= 0
+              })
+              .map(function(word) {
+                var firstMatch = getMatchIndex(text, word)
+                
+                var startMatch = firstMatch - SEARCH_HIGHLIGHT_BLEED
+                if(startMatch < 0) startMatch = 0
+
+                var endMatch = firstMatch + word.length + SEARCH_HIGHLIGHT_BLEED
+                if(endMatch > text.length-1) endMatch = text.length-1
+
+                var textChunk = text.substring(startMatch, endMatch)
+
+                searchWords.forEach(function(word) {
+                  textChunk = textChunk.replace(new RegExp(word, 'gi'), '<em>' + word + '</em>')
+                })
+
+                return '...' + textChunk + '...'
+              })
+              .filter(function(match) {
+                var matchingChunk = match.match(/\<.*\>/)[0]
+                if(!matchingChunk) return true
+                if(foundTerms[matchingChunk]) return false
+                foundTerms[matchingChunk] = true
+                return true
+              })
+
+            if(resultMatches.length > 3) {
+              resultMatches = resultMatches.slice(0,3)
+            }
+
+            item._resultMatches = resultMatches.join('<br />')
             return item
           },
         }
