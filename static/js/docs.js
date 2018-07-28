@@ -151,12 +151,49 @@ $(function() {
     )
 
     search.start()
+
+    $('#search-container').show()
+    $('#search-container-holding-space').hide()
   }
 
   if(ALGOLIA_APP_ID && ALGOLIA_API_KEY && ALGOLIA_INDEX_NAME && $('#search-box').length >= 1) {
     setupAlgolia()
   }
+  else {
+    $('#search-container-holding-space').hide()
+  }
   
+
+  /*
+  
+    versions drop-down
+    
+  */
+
+  function activateVersionMenu() {
+    var allVersions = VERSIONS_ALL.split(',')
+    allVersions.forEach(function(version) {
+      var versionOption = $('<li class="mdl-menu__item">Version ' + version + '</li>')
+
+      versionOption.click(function() {
+        var url = location.protocol + '//' + version + '.' + VERSIONS_BASE_URL
+        document.location = url
+      })
+      
+      $('#version-menu #version-menu-options').append(versionOption)
+    })
+    $('#version-menu #text-button').text('Version: ' + VERSIONS_CURRENT)
+    $('#version-menu').show()
+    $('#version-menu-holding-space').hide()
+  }
+
+  if(VERSIONS_BASE_URL) {
+    activateVersionMenu()
+  }
+  else {
+    $('#version-menu-holding-space').hide()
+  }
+
 
   /*
   
@@ -279,32 +316,6 @@ $(function() {
       }, 1000)
     })
   })
-
-  /*
-  
-    versions drop-down
-    
-  */
-
-  function activateVersionMenu() {
-    var allVersions = VERSIONS_ALL.split(',')
-    allVersions.forEach(function(version) {
-      var versionOption = $('<li class="mdl-menu__item">Version ' + version + '</li>')
-
-      versionOption.click(function() {
-        var url = location.protocol + '//' + version + '.' + VERSIONS_BASE_URL
-        document.location = url
-      })
-      
-      $('#version-menu #version-menu-options').append(versionOption)
-    })
-    $('#version-menu #text-button').text('Version: ' + VERSIONS_CURRENT)
-    $('#version-menu').show()
-  }
-
-  if(VERSIONS_BASE_URL) {
-    activateVersionMenu()
-  }
 
   /*
   

@@ -209,6 +209,12 @@ html, body {
   padding-top: 10px;
   border: none;
   background-color: #e5e5e5;
+  display: none;
+}
+
+#search-container-holding-space {
+  height: 66px;
+  background-color: #e5e5e5;
 }
 
 .docs-navigation {
@@ -233,8 +239,12 @@ html, body {
   background-color: #e5e5e5;
   padding-top: 10px;
   padding-bottom: 10px;
-  
   display: none;
+}
+
+#version-menu-holding-space {
+  height: 56px;
+  background-color: #e5e5e5;
 }
 
 #version-menu #vert-button {
