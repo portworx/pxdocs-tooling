@@ -1,3 +1,6 @@
+const SCROLLSPY_FIXED_OFFSET = 200
+SCROLLSPY_ACTIVE_BUFFER = 80
+
 $(function() {
   /*
   
@@ -94,7 +97,7 @@ $(function() {
     search.start()
   }
 
-  if(ALGOLIA_APP_ID && ALGOLIA_API_KEY && ALGOLIA_INDEX_NAME) {
+  if(ALGOLIA_APP_ID && ALGOLIA_API_KEY && ALGOLIA_INDEX_NAME && $('#search-box').length >= 1) {
     setupAlgolia()
   }
   
@@ -120,7 +123,7 @@ $(function() {
 
   function checkScrollPositions() {
 
-    if(mainContent.scrollTop() > 180) {
+    if(mainContent.scrollTop() > SCROLLSPY_FIXED_OFFSET) {
       scrollspyNav.addClass('fixed') 
     }
     else {
@@ -140,7 +143,7 @@ $(function() {
       var headerItem = $(this)
       var headerItemOffset = headerItem.offset().top
 
-      if(headerItemOffset < windowHeight && headerItemOffset < 100) {
+      if(headerItemOffset < windowHeight && headerItemOffset < (SCROLLSPY_FIXED_OFFSET - SCROLLSPY_ACTIVE_BUFFER)) {
         activeElement = headerItem
       }
     })

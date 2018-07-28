@@ -8,7 +8,122 @@ html, body {
 
 .docs-drawer {
   border: none;
+  height: calc(100% - 113px) !important;
+  max-height: calc(100% - 113px) !important;
+  top: 113px !important;
 }
+
+/*
+
+  HEADER
+  
+*/
+.docs-header {
+  height: 113px;
+  margin-left: 0px !important;
+  width: 100% !important;
+  box-shadow: none !important;
+  background-color: rgb(44, 43, 45) !important;
+}
+
+@media screen and (max-width: 1025px) {
+  .docs-header .navbar-menus {
+    display: none !important;
+  }
+}
+
+.docs-header .container {
+  width: 100%;
+  height: 100%;
+  max-width: 1130px;
+  min-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Libre Franklin',sans-serif;
+}
+
+.docs-header .container .navbar-brand {
+  float: left;
+}
+
+.docs-header .container .navbar-brand img {
+  margin-top: 19px;
+  margin-left: 20px;
+  height: 75px;
+}
+
+.docs-header .container .navbar-menus {
+  display: inline-block;
+  float: right;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.docs-header .container .navbar-menus ul {
+  line-height: 22.857px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-rendering: optimizeLegibility;
+  list-style-type: none;
+  font-size: 14px;
+}
+
+.docs-header .container .navbar-menus li {
+  display: inline-block;
+}
+
+.docs-header .container .navbar-menus a {
+  font-weight: 100;
+  text-decoration: none;
+  background-color: transparent;
+  transition: all .5s ease;
+}
+
+
+.docs-header .container .navbar-menus .header-top-menu {
+  list-style-type: none;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.docs-header .container .navbar-menus .header-main-menu {
+  list-style-type: none;
+  margin-left: 4px;
+  margin-top: 30px;
+}
+
+
+.docs-header .container .navbar-menus .header-top-menu li:first-of-type:after {
+  content: '|';
+  color: #ff5000;
+}
+
+.docs-header .container .navbar-menus .header-top-menu li a {
+  color: #ff5000;
+  text-transform: uppercase;
+  padding: 0 15px;
+  font-size: 17px;
+  line-height: 25px;
+}
+
+.docs-header .container .navbar-menus .header-main-menu li a {
+  color: #ffffff;
+  padding: 2px;
+  font-size: 15px;
+  line-height: 20px;
+  margin-left: 10px;
+  margin-bottom: 15px;
+  margin-top: 30px;
+  margin-right: 10px;
+}
+    
+
+
+/*
+
+  MENU
+  
+*/
 /* iOS Safari specific workaround */
 .docs-drawer .mdl-menu__container {
   z-index: -1;
@@ -63,6 +178,16 @@ html, body {
   color: rgba(255, 255, 255);
   margin-right: 32px;
   padding-left: 20px;
+}
+
+.docs-header .mdl-layout__drawer-button {
+  display: none;
+}
+
+@media screen and (max-width: 1025px) {
+  .docs-header .mdl-layout__drawer-button {
+    display: block;
+  }
 }
 
 .docs-content {
@@ -358,7 +483,7 @@ hr.margin {
 #scrollspy-container nav.fixed {
   position: fixed;
   margin-right: 66px;
-  top: 80px;
+  top: 113px;
 }
 
 .scrollspy-item {
