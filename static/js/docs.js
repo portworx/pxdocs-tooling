@@ -288,10 +288,19 @@ $(function() {
     copy paste
     
   */
-  $('.highlight').each(function() {
+  $('.highlight').each(function(i) {
     var highlightElem = $(this)
     var codeElem = highlightElem.find('pre code')
-    var copyDiv = $('<div class="copy-link">copy</div>')
+    var copyDiv = $([
+      '<div class="copy-link">',
+        '<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">',
+          '<i class="material-icons" id="clipboard-icon-' + i + '">assignment</i>',
+          '<div class="mdl-tooltip mdl-tooltip--small" for="clipboard-icon-' + i + '">',
+            'copy to clipboard',
+          '</div>',
+        '</button>',
+      '</div>'
+    ].join("\n"))
 
     highlightElem.prepend(copyDiv)
 
@@ -303,10 +312,15 @@ $(function() {
       document.execCommand("copy")
       $temp.remove()
 
-      copyDiv.addClass('active')
+      copyDiv
+        .find('button')
+        .addClass('mdl-button--primary')
 
       setTimeout(function() {
-        copyDiv.removeClass('active')
+        copyDiv
+          .find('button')
+          .removeClass('mdl-button--primary')
+
       }, 1000)
     })
   })

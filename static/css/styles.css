@@ -704,7 +704,10 @@ h2,h3,h4,h5,h6 a {
   
 */
 
-.highlight .copy-link {
+.mdl-tooltip {
+  font-size: 10px;
+}
+.highlight .copy-link-old {
   margin-left: 10px;
   cursor: pointer;
   background-color: #fff;
@@ -717,10 +720,22 @@ h2,h3,h4,h5,h6 a {
   float: right;
 }
 
-.highlight .copy-link.active {
+
+.highlight .copy-link-old.active {
   background-color: #f15a24;
   color: #fff;  
 }
+
+.highlight .copy-link {
+  margin-left: 10px;
+  cursor: pointer;
+  padding: 3px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 8pt;
+  float: right;
+}
+
 
 .mdl-layout__content pre {
   padding: 20px;
