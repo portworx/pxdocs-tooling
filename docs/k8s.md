@@ -13,6 +13,31 @@ gcloud container clusters get-credentials production-app-cluster
 kubectl get no
 ```
 
+## create service account with token for ops
+
+First we create a service account that has access to these roles:
+
+ * `roles/container.developer`
+ * `roles/storage.admin`
+
+
+```bash
+export SERVICE_ACCOUNT_NAME=k8s-ops
+export PROJECT_NAME=production-apps-210001
+export SERVICE_ACCOUNT_EMAIL=$SERVICE_ACCOUNT_NAME@$PROJECT_NAME.iam.gserviceaccount.com
+gcloud iam service-accounts create $SERVICE_ACCOUNT_NAME --display-name "k8s ops service account"
+gcloud iam service-accounts keys create $SERVICE_ACCOUNT_NAME.json \
+  --iam-account $SERVICE_ACCOUNT_EMAIL
+gcloud projects add-iam-policy-binding $PROJECT_NAME \
+    --member serviceAccount:$SERVICE_ACCOUNT_EMAIL --role roles/container.developer
+gcloud projects add-iam-policy-binding $PROJECT_NAME \
+    --member serviceAccount:$SERVICE_ACCOUNT_EMAIL --role roles/storage.admin
+```
+
+You now have a `k8s-ops.json` file - keep it secure.
+
+You will need to add a base64 encoded version of this key to the `GCLOUD_SERVICE_ACCOUNT_TOKEN` secret variable in travis.
+
 ## create admin role for your user
 
 ```bash
