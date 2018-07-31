@@ -30,21 +30,29 @@ $(function() {
   function setupSidebarMenu() {
     $('a[data-menu-type]').each(function() {
       var link = $(this)
+      var type = link.attr('data-menu-type')
       var id = link.attr('data-menu-id')
       var url = link.attr('data-menu-url')
 
+      var childrenContent = $('#menu-children-' + id)
+
       link.click(function(e) {
+        if(type == 'leaf') return
         e.preventDefault()
         e.stopPropagation()
 
-        console.log('-------------------------------------------');
-        console.dir(link.attr('data-menu-id'))
-        console.dir(link.attr('data-menu-url'))
+        if(childrenContent.hasClass('open')) {
+          childrenContent.removeClass('open')
+        }
+        else {
+          childrenContent.addClass('open')  
+        }
+
       })
     })
   }
 
-  //setupSidebarMenu()
+  setupSidebarMenu()
 
   /*
   

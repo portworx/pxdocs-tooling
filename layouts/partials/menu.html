@@ -82,8 +82,6 @@
            -->
           {{- template "nav-link" dict "node" . "currentnode" $currentNode "depth" $depth "mode" "branch"}}
 
-    
-          {{- if $open }}
           <div id="menu-children-{{- .UniqueID -}}" class="menu-children {{- if $open }} open{{ end }}">
             <!--
               collate children
@@ -103,7 +101,6 @@
               
             {{- end}}
           </div>
-          {{- end }}
 
         
         
