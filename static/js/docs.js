@@ -44,7 +44,7 @@ $(function() {
     })
   }
 
-  setupSidebarMenu()
+  //setupSidebarMenu()
 
   /*
   
