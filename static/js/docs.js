@@ -28,7 +28,7 @@ $(function() {
     
   */
   function setupSidebarMenu() {
-    $('a[data-menu-type]').each(function() {
+    $('div[data-menu-type]').each(function() {
       var link = $(this)
       var type = link.attr('data-menu-type')
       var id = link.attr('data-menu-id')

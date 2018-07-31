@@ -24,9 +24,6 @@
       style="padding-left: {{- mul $depth 10 }}px" 
       class="mdl-navigation__link{{- if eq .URL $currentNode.URL}} active mdl-color-text--primary {{ end }}" 
       href="{{ .URL }}"
-      data-menu-type="{{ $mode }}"
-      data-menu-url="{{ .URL }}"
-      data-menu-id="{{- .UniqueID -}}"
     >
 
       <div class="menu-link-title">
@@ -37,7 +34,12 @@
         {{- end}}
       </div>
 
-      <div class="menu-link-icon">
+      <div
+        class="menu-link-icon"
+        data-menu-type="{{ $mode }}"
+        data-menu-url="{{ .URL }}"
+        data-menu-id="{{- .UniqueID -}}"
+      >
         {{- if eq $mode "branch"}}
           <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">arrow_drop_down</i>
         {{- else}}

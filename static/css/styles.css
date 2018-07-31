@@ -755,6 +755,10 @@ h2,h3,h4,h5,h6 a {
   
 */
 
+.sidemenu-arrow-link {
+  display: inline-block;
+}
+
 .menu-children {
   -webkit-transition:all 0.5s ease;
   -moz-transition:all 0.6s ease;
