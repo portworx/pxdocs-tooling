@@ -21,6 +21,31 @@ $(function() {
     display: 'table-cell'
   })
 
+
+  /*
+  
+    sidebar drop-downs
+    
+  */
+  function setupSidebarMenu() {
+    $('a[data-menu-type]').each(function() {
+      var link = $(this)
+      var id = link.attr('data-menu-id')
+      var url = link.attr('data-menu-url')
+
+      link.click(function(e) {
+        e.preventDefault()
+        e.stopPropagation()
+
+        console.log('-------------------------------------------');
+        console.dir(link.attr('data-menu-id'))
+        console.dir(link.attr('data-menu-url'))
+      })
+    })
+  }
+
+  setupSidebarMenu()
+
   /*
   
     algolia search

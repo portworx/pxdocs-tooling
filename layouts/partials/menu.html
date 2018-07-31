@@ -18,10 +18,16 @@
   {{- $depth := .depth }}
   {{- $node := .node }}
   {{- $mode := .mode }}
-  {{- $open := .open }}
 
   {{- with .node}}
-    <a style="padding-left: {{- mul $depth 10 }}px" class="mdl-navigation__link{{- if eq .URL $currentNode.URL}} active mdl-color-text--primary {{ end }}" href="{{ .URL }}">
+    <a 
+      style="padding-left: {{- mul $depth 10 }}px" 
+      class="mdl-navigation__link{{- if eq .URL $currentNode.URL}} active mdl-color-text--primary {{ end }}" 
+      href="{{ .URL }}"
+      data-menu-type="{{ $mode }}"
+      data-menu-url="{{ .URL }}"
+      data-menu-id="{{- .UniqueID -}}"
+    >
 
       <div class="menu-link-title">
         {{- if or (eq $mode "branch") (eq $depth 0) }} 
@@ -74,11 +80,10 @@
           <!--
             render link
            -->
-          {{- template "nav-link" dict "node" . "currentnode" $currentNode "depth" $depth "mode" "branch" "open" $open}}
+          {{- template "nav-link" dict "node" . "currentnode" $currentNode "depth" $depth "mode" "branch"}}
 
-          
-          {{- if $open }}
-
+    
+          <div id="menu-children-{{- .UniqueID -}}" class="menu-children {{- if $open }} open{{ end }}">
             <!--
               collate children
              -->
@@ -96,7 +101,7 @@
               {{- template "nav-tree" dict "section" . "currentnode" $currentNode "depth" (add $depth 1)}}
               
             {{- end}}
-          {{- end}}
+          </div>
 
         
         
