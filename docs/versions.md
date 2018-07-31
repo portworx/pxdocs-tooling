@@ -6,18 +6,30 @@ To build the version drop-down that will redirect to another version of the site
  * `VERSIONS_BASE_URL` - the base url that the version will be prepended to (e.g. `docs.portworx.wk1.co`)
  * `VERSIONS_CURRENT` - the current version we are building
 
-We manage content for each version in it's own branch (named after the version). The `content` directory is sourced from a branch named after the version that is being built and is merged with the rest of the files from `master`.
+The above variables are populated by the travis job based on the contents on the `BRANCH_VERSION_CONFIG` variable.
 
-If you are making content updates - you must make the changes in the branch named after the version you are updating.
+This maps each branch onto a deploy version - it is a comma seperated list in the following format:
 
-If you are making updates to the core build itself - make those changes in `master`.
+```
+master=1.4,1.3=1.3
+```
+
+Or more generally:
+
+```
+<branch>=<version>,<branch>=<version>
+```
+
+This means we can use the `master` branch to deploy to a version.
+
+The values of `VERSIONS_ALL` and `VERSIONS_CURRENT` are populated by processing the `TRAVIS_BRANCH` and `BRANCH_VERSION_CONFIG` together.
 
 ### add new version branch
 
 To add a new version branch to the build we need to follow these steps:
 
  1. add a new ingress and service manifests to k8s
- 2. update the VERSIONS_ALL variable in travis
+ 2. update the BRANCH_VERSION_CONFIG variable in travis
  3. create a new algolia index
  4. create and push new branch in the pxdocs repo
  5. rebuild all other version branches
@@ -42,7 +54,7 @@ If this version should be the default one - change the selector in `deploy/manif
 
 #### update travis variable
 
-To enable a build and show the version in the drop-down - you will need to add the version to the `VERSIONS_ALL` variable in the [Travis secret variables page](https://travis-ci.org/portworx/pxdocs/settings)
+To enable a build and show the version in the drop-down - you will need to add the version to the `BRANCH_VERSION_CONFIG` variable in the [Travis secret variables page](https://travis-ci.org/portworx/pxdocs/settings)
 
 #### create a new algolia index
 
