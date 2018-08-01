@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const atomicalgolia = require("atomic-algolia")
+const atomicalgolia = require('./update')
 const indexName = process.env.ALGOLIA_INDEX_NAME
 const indexDataFilename = path.join(__dirname, process.env.ALGOLIA_INDEX_FILE)
 
@@ -61,7 +61,7 @@ const processedIndexData = indexData.reduce((all, record) => {
 
 console.log(`${processedIndexData.length} records to index after processing`)
 
-atomicalgolia(indexName, processedIndexData, (error, result) => {
+atomicalgolia(indexName, processedIndexData, {verbose: true}, (error, result) => {
   if(error) {
     console.error(error)
     process.exit(1)
