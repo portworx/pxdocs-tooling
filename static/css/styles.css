@@ -660,6 +660,10 @@ hr.margin {
   top: 113px;
 }
 
+#scrollspy-container ul {
+  background-color: #fff;
+}
+
 .scrollspy-item {
   margin-bottom: 6px;
 }
