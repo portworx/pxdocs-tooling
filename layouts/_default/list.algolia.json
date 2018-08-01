@@ -25,7 +25,7 @@
     {{- $currentSectionTitles := $.Scratch.Get "currentSectionTitles" -}}
     {{- $sectionURL := $.Scratch.Get "currentSectionURL" -}}
     {{- $sectionTitles := printf "%s" (delimit $currentSectionTitles " : ") -}}
-    {{- $.Scratch.Add "index" (dict "objectID" .UniqueID "sectionTitles" $sectionTitles "sectionURL" $sectionURL "date" .Date.UTC.Unix "kind" .Kind "content" .Content "title" .Title "type" .Type "url" .URL)}}
+    {{- $.Scratch.Add "index" (dict "objectID" .UniqueID "sectionTitles" $sectionTitles "sectionURL" $sectionURL "content" .Content "title" .Title "url" .URL)}}
   {{- end -}}
 {{- end -}}
 {{- $.Scratch.Get "index" | jsonify -}}
