@@ -648,11 +648,32 @@ hr.margin {
     width: 100%;
 }
 
+
+/*
+
+  content
+  
+*/
+
+
+#page-content {
+  width: 75% !important;
+}
+
+@media screen and (max-width: 1025px) {
+  #page-content {
+    width: 100% !important;
+  }
+}
 /*
 
   scrollspy
   
 */
+
+#scrollspy-container {
+  width: 25% !important;
+}
 
 #scrollspy-container nav.fixed {
   position: fixed;
@@ -787,4 +808,5 @@ h2,h3,h4,h5,h6 a {
 .mdl-layout__content img {
   max-width: 100% !important;
 }
+
 
