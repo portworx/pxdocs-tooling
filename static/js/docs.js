@@ -135,9 +135,12 @@ $(function() {
         transformData: {
           item: function(item) {
 
+            const re = new RegExp('^.*?<p>', 's')
+
             var highlightResult = item._highlightResult.content
             var searchWords = highlightResult.matchedWords
-            var text = $(highlightResult.value).text()
+            var processedText = (highlightResult.value || '').replace(re, '<p>')
+            var text = $(processedText).text()
 
             var allWords = searchWords.join(' ')
 
