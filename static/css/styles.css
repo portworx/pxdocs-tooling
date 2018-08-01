@@ -777,3 +777,14 @@ h2,h3,h4,h5,h6 a {
   height: auto;
 }
 
+
+/*
+
+  images
+  
+*/
+
+.mdl-layout__content img {
+  max-width: 100% !important;
+}
+
