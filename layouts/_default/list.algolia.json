@@ -15,8 +15,11 @@
         {{- $currentSectionDirs := $.Scratch.Get "currentSectionDirs" -}}
         {{- $sectionPath := printf "%s" (delimit $currentSectionDirs "/") -}}
         {{- $currentSection := $.Site.GetPage "section" $sectionPath -}}
-        {{- $.Scratch.Add "currentSectionTitles" $currentSection.Title -}}
-        {{- $.Scratch.Set "currentSectionURL" $currentSection.URL -}}
+
+        {{- with $currentSection -}}
+          {{- $.Scratch.Add "currentSectionTitles" .Title -}}
+          {{- $.Scratch.Set "currentSectionURL" .URL -}}
+        {{- end -}}
 
       {{- end -}}
 
