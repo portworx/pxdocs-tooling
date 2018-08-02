@@ -810,3 +810,35 @@ h2,h3,h4,h5,h6 a {
 }
 
 
+/*
+
+  logo list
+  
+*/
+
+.logo-list-container {
+  text-align: center;
+}
+
+.logo-list-block {
+  background-color: #f5f5f5;
+  padding: 40px;
+  border: 1px solid #999;
+  display: inline-block; 
+  margin: 40px;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.09);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.09);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.09);
+}
+
+.logo-list-image {
+
+}
+
+.logo-list-title {
+  text-align: center;
+  padding-top: 30px;
+  font-size: 1.6em;
+}
+
+

@@ -13,13 +13,24 @@
   {{- end }}
   {{- if not .Params.hidesections }}
     {{- $section := . }}
-    {{- range $pages.ByWeight }}
-      {{- if and (eq .Parent $section) (not .Params.Hidden)}}
-        <div class="listmargin">
-          {{ .Render "li" }}
-        </div>
-      {{ end }}
-    {{ end }} 
+
+    {{- if $section.Params.logoList -}}
+      <div class="logo-list-container">
+        {{- range $pages.ByWeight }}
+          {{- if and (eq .Parent $section) (not .Params.Hidden)}}
+            {{ .Render "logo-li" }}
+          {{ end }}
+        {{ end }} 
+      </div>
+    {{- else -}}
+      {{- range $pages.ByWeight }}
+        {{- if and (eq .Parent $section) (not .Params.Hidden)}}
+          <div class="listmargin">
+            {{ .Render "li" }}
+          </div>
+        {{ end }}
+      {{ end }} 
+    {{- end -}}
   {{- end}}
   {{- partial "prevnext.html" . }}
 {{end}}
