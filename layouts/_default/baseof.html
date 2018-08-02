@@ -198,6 +198,8 @@
       var VERSIONS_BASE_URL = '{{ getenv "VERSIONS_BASE_URL" }}'
       var VERSIONS_CURRENT = '{{ getenv "VERSIONS_CURRENT" }}'
 
+      var EQUALIZE_TABLE_WIDTHS = '{{ .Params.equalizeTableWidths }}'
+
     </script>
     <script src="{{"js/docs.js" | relURL}}?timestamp={{ now.Unix }}"></script>
   </body>

@@ -19,6 +19,13 @@ $(function() {
       border: '1px solid #ccc'
     })
 
+  if(EQUALIZE_TABLE_WIDTHS) {
+    $('.mdl-layout__content table td')
+    .css({
+      width: EQUALIZE_TABLE_WIDTHS
+    })
+  }
+
 
   /*
   
