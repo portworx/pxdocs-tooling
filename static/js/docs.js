@@ -7,19 +7,17 @@ $(function() {
     style markdown components
     
   */
-  $('.mdl-layout__content th,.mdl-layout__content td')
-    .addClass('mdl-data-table__cell--non-numeric')
   $('.mdl-layout__content table')
-    .addClass('mdl-data-table mdl-js-data-table')
+    .css({
+      borderCollapse: 'collapse',
+    })
     .show()
-  $('.mdl-layout__content table').css({
-    display: 'table',
-    maxWidth: '800px',
-  })
-  $('.mdl-layout__content table th,td').css({
-    maxWidth: '1px',
-    display: 'table-cell'
-  })
+
+  $('.mdl-layout__content table th,td')
+    .css({
+      padding: '10px',
+      border: '1px solid #ccc'
+    })
 
 
   /*
