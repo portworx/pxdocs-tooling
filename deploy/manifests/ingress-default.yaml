@@ -17,5 +17,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: docs-1-3
+          serviceName: docs-1-4
           servicePort: 80
