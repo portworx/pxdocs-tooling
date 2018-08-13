@@ -361,6 +361,7 @@ $(function() {
   var footerElemPadding = $('.docs-footer-padding')
   var footerElem = $('.docs-footer')
   var sidebarElem = $('.docs-drawer')
+  var scrollspyContainer = $('#scrollspy-container nav.fixed')
 
   var DEFAULT_SIDEBAR_TOP = 113
 
@@ -378,12 +379,20 @@ $(function() {
         height: 'calc(100% - ' + (sidebarOffset + 113) + 'px)',
         maxHeight: 'calc(100% - ' + (sidebarOffset + 113) + 'px)',
       })
+
+      scrollspyContainer.css({
+        top: (113 - sidebarOffset) + 'px',
+      })
     }
     else {
       // reset sidebar to normal position
       sidebarElem.css({
         height: 'calc(100% - 113px)',
         maxHeight: 'calc(100% - 113px)',
+      })
+
+      scrollspyContainer.css({
+        top: '113px',
       })
     }
   }

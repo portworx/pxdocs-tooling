@@ -147,6 +147,7 @@ html, body {
   background-color: red;
   height: 300px;
   display: none;
+  z-index: 1200;
 }
     
 /*
