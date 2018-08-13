@@ -144,7 +144,7 @@ html, body {
 */
 
 .docs-footer {
-  display: none;
+  visibility: hidden;
   position: relative;
   z-index: 5000 !important;
   bottom: 0px;
@@ -152,6 +152,18 @@ html, body {
   color: #ffffff;
   padding: 30px 0 60px 0;
   font-family: "Libre Franklin", sans-serif;
+}
+
+@media screen and (max-width: 1025px) {
+
+  .docs-footer {
+    display: none;
+  }
+
+  .docs-footer-padding {
+    display: none;
+  }
+
 }
 
 .docs-footer .footer-container {
@@ -450,6 +462,7 @@ html, body {
   overflow-y: hidden !important;
   display: flex;
   flex-flow: column;
+  transition: left .35s ease-in-out;
 }
 
 @media screen and (max-width: 1025px) {
@@ -458,7 +471,12 @@ html, body {
     height: calc(100% - 60px);
     max-height: calc(100% - 60px);
     top: 60px;
+    left: -300px;
   }
+}
+
+.docs-drawer.visible {
+  left: 0px !important;
 }
 
 /* END iOS Safari specific workaround */
@@ -633,8 +651,8 @@ hr.margin {
 .docs-content {
   
   
-  padding-left: 60px;
-  padding-right: 60px;
+  padding-left: 30px;
+  padding-right: 30px;
   padding-bottom: 40px;
 
   /* top offset for topbar */
@@ -642,7 +660,19 @@ hr.margin {
   /* left offset for sidebar */
   margin-left: 300px;
   /* this needs to be the 300px for the sidebar - 120px padding - 250px scrollspy */
-  width: calc(100% - 670px);
+  width: calc(100% - 610px);
+}
+
+@media screen and (max-width: 1025px) {
+  .docs-content {
+
+    /* top offset for topbar */
+    padding-top: 47px;
+    /* left offset for sidebar */
+    margin-left: 0px;
+    /* this needs to be the 300px for the sidebar - 120px padding */
+    width: calc(100% - 60px);
+  }
 }
 
 .docs-content * {
@@ -945,11 +975,8 @@ hr.margin {
 }
 
 @media screen and (max-width: 1025px) {
-
   #scrollspy-container {
-    height: calc(100% - 60px);
-    max-height: calc(100% - 60px);
-    top: 60px;
+    display: none;
   }
 }
 
@@ -1008,12 +1035,6 @@ h2,h3,h4,h5,h6 a {
   text-decoration: none;
 }
 
-@media screen and (max-width: 1025px) {
-  #scrollspy-container {
-    display: none;
-  }
-}
-
 
 
 /*
@@ -1056,7 +1077,7 @@ h2,h3,h4,h5,h6 a {
 
 
 .docs-content pre {
-  padding: 20px;
+  padding: 15px;
   background-color: #fafafa;
   border: 1px solid #ccc;
   overflow: auto;
@@ -1066,6 +1087,26 @@ h2,h3,h4,h5,h6 a {
   font-size: 10pt;
   color: #666;
 }
+
+.docs-content pre code {
+  display:inline-block;
+  line-height: 20px;
+  font-size: 0.8em;
+}
+
+@media screen and (max-width: 1025px) {
+  .docs-content pre {
+    padding: 5px;
+  }
+
+  .docs-content pre code {
+    display:inline-block;
+    line-height: 14px;
+    font-size: 0.6em;
+  }
+}
+
+
 
 /*
 

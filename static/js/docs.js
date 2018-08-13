@@ -359,7 +359,7 @@ $(function() {
   function checkFooterPadding() {
 
     footerElem.css({
-      display: 'block'
+      visibility: 'visible'
     })
 
     var footerOffset = footerElem.offset().top
@@ -478,4 +478,23 @@ $(function() {
   }
 
   setupDropDownMenus()
+
+  /*
+  
+    sidebar toggle button
+    
+  */
+  var docsDrawer = $('.docs-drawer')
+  function setupSidebarToggleButton() {
+    $('#toggle-sidebar-button').click(function() {
+      if(docsDrawer.hasClass('visible')) {
+        docsDrawer.removeClass('visible')
+      }
+      else {
+        docsDrawer.addClass('visible')
+      }
+    })
+  }
+
+  setupSidebarToggleButton()
 })
