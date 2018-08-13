@@ -145,6 +145,8 @@ html, body {
 
 .docs-footer {
   display: none;
+  position: relative;
+  bottom: 0px;
   background-color: #262729;
   color: #ffffff;
   padding: 30px 0 60px 0;
@@ -637,8 +639,8 @@ hr.margin {
   padding-top: 100px;
   /* left offset for sidebar */
   margin-left: 300px;
-  /* this needs to be the 300px for the sidebar - 120px padding */
-  width: calc(100% - 420px);
+  /* this needs to be the 300px for the sidebar - 120px padding - 250px scrollspy */
+  width: calc(100% - 670px);
 }
 
 .docs-content * {
@@ -821,7 +823,7 @@ hr.margin {
 */
 
 #search-hits {
-  position: absolute;
+  position: fixed;
   left: 280px;
   top: 178px;
   width: 400px;
@@ -919,14 +921,9 @@ hr.margin {
 
 
 #page-content {
-  width: 75% !important;
+  width: 100% !important;
 }
 
-@media screen and (max-width: 1025px) {
-  #page-content {
-    width: 100% !important;
-  }
-}
 /*
 
   scrollspy
@@ -934,17 +931,34 @@ hr.margin {
 */
 
 #scrollspy-container {
-  width: 25% !important;
+  max-width: 250px;
+  max-width: 300px;
+  height: calc(100% - 113px);
+  max-height: calc(100% - 113px);
+  position: fixed;
+  overflow-y: auto;
+  top: 113px;
+  right: 0px;
 }
 
-#scrollspy-container nav.fixed {
-  position: fixed;
-  margin-right: 66px;
-  top: 113px;
+@media screen and (max-width: 1025px) {
+
+  #scrollspy-container {
+    height: calc(100% - 60px);
+    max-height: calc(100% - 60px);
+    top: 60px;
+  }
+}
+
+#scrollspy-container nav {
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 30px;
 }
 
 #scrollspy-container ul {
-  background-color: #fff;
+  
+  
 }
 
 .scrollspy-item {
@@ -953,10 +967,15 @@ hr.margin {
 
 .scrollspy-item, .scrollspy-item a  {
   color: #999;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 400 !important;
+  font-family: Roboto, Helvetica, sans-serif !important;
 }
 
 .scrollspy-item.active, .scrollspy-item.active a  {
   color: #f15a24;
+  font-weight: 600 !important;
 }
 
 .scrollspy-H2 a {

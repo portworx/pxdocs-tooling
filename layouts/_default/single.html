@@ -1,18 +1,9 @@
 {{ define "main" }}
-  {{- partial "contentheader.html" . }}
-  <div class="mdl-grid">
-    <div id="page-content">
-      {{ .Content }}
-    </div>
-    <div id="scrollspy-container">
-      <nav>
-        <ul id="scrollspy-list">
+  <div id="page-content">
+    {{- partial "contentheader.html" . }}
 
-        </ul>
-      </nav>
-    </div>
+    {{ .Content }}
+
+    {{- partial "prevnext.html" . }}
   </div>
-  
-  {{- partial "prevnext.html" . }}
-
 {{ end }}
