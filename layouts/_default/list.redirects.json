@@ -1,0 +1,17 @@
+{{/* Generates a JSON map of 301 redirects to burn into the nginx image */}}
+{{- $.Scratch.Add "redirects" slice -}}
+{{- range .Site.AllPages -}}
+  {{- if and (not .Draft) (and (not .Params.private) (and (not .Params.hidden) (not .Params.disableSearch))) -}}
+
+
+    {{- $page := . }}
+
+    {{- with .Params.redirect_from }}
+      {{- range $index, $redirect := . -}}
+        {{- $.Scratch.Add "redirects" (dict "from" $redirect "to" $page.URL)}}
+      {{- end }}
+    {{- end }}
+
+  {{- end -}}
+{{- end -}}
+{{- $.Scratch.Get "redirects" | jsonify -}}
