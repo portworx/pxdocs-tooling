@@ -144,12 +144,163 @@ html, body {
 */
 
 .docs-footer {
-  background-color: red;
-  height: 300px;
   display: none;
-  z-index: 1200;
+  background-color: #262729;
+  color: #ffffff;
+  padding: 30px 0 60px 0;
+  font-family: "Libre Franklin", sans-serif;
 }
-    
+
+.docs-footer .footer-container {
+  max-width: 1130px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.docs-footer .left-col {
+  padding: 10px;
+  min-width: 330px;
+  flex: 0;
+}
+
+.docs-footer .middle-col {
+  flex: 1;
+  background-color: green;
+}
+
+.docs-footer .right-col {
+  min-width: 300px;
+  flex: 0;
+  background-color: yellow;
+}
+
+/*
+
+  FOOTER LEFT COL
+  
+*/
+.docs-footer .left-col .page-sub-header {
+  font-size: 30px;
+  font-weight: 300;
+  margin: 0;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.docs-footer .footer-input {
+  padding: 5px !important;
+  border-radius: 0;
+  background-color: #9d9fa2;
+  color: #fff;
+  border: none;
+  box-shadow: none;
+  font: inherit;
+}
+
+.docs-footer .mktoForm .mktoFormCol {
+
+}
+
+.docs-footer label {
+  font-weight: 200 !important;
+  display: none;
+}
+
+.docs-footer input {
+  line-height: 20px !important;
+  border-radius: 0;
+  background-color: #9d9fa2;
+  color: #fff;
+  border: none;
+  max-width: 100%;
+  font-weight: 200 !important;
+  width: 100%;
+}
+
+.docs-footer input::placeholder {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  font-weight: 200 !important;
+}
+
+.docs-footer textarea {
+  line-height: 20px !important;
+  border-radius: 0;
+  background-color: #9d9fa2;
+  color: #fff;
+  border: none;
+  max-width: 100%;
+  width: 100%;
+}
+
+.docs-footer textarea::placeholder {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  font-weight: 200 !important;
+}
+
+.docs-footer select {
+  line-height: 20px !important;
+  border-radius: 0;
+  background-color: #9d9fa2;
+  color: #fff;
+  border: none;
+  max-width: 100%;
+  width: 100%;
+}
+
+.docs-footer .mktoForm .mktoGutter {
+  float: left;
+  height: 1.2em;
+}
+
+.docs-footer .mktoForm .mktoOffset {
+  display: none;
+}
+
+.docs-footer .mktoForm .mktoFormCol {
+  margin-bottom: 3px !important;
+}
+
+.docs-footer .mktoHtmlText {
+  font-size: 0.8em;
+  font-weight: 100 !important;
+}
+
+.docs-footer .mktoButtonRow {
+  float: right;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  right: 30px !important;
+  margin-top: -3px !important;
+}
+
+.docs-footer button.mktoButton {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 0 0 5px !important;
+  font-family: 'Libre Franklin',sans-serif;
+  font-weight: 700;
+  box-shadow: none !important;
+  height: 23px !important;
+  line-height: 18px !important;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 13px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.4);
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  float: right;
+}
+
 /*
 
   DROP DOWN MENUS
@@ -209,9 +360,9 @@ html, body {
 @media screen and (max-width: 1025px) {
 
   .docs-drawer {
-    height: calc(100% - 60px) !important;
-    max-height: calc(100% - 60px) !important;
-    top: 60px !important;
+    height: calc(100% - 60px);
+    max-height: calc(100% - 60px);
+    top: 60px;
   }
 }
 
