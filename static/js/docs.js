@@ -375,13 +375,15 @@ $(function() {
       var sidebarOffset = documentHeight - footerPosition
 
       sidebarElem.css({
-        top: (DEFAULT_SIDEBAR_TOP - sidebarOffset) + 'px'
+        height: 'calc(100% - ' + (sidebarOffset + 113) + 'px)',
+        maxHeight: 'calc(100% - ' + (sidebarOffset + 113) + 'px)',
       })
     }
     else {
       // reset sidebar to normal position
       sidebarElem.css({
-        top: DEFAULT_SIDEBAR_TOP + 'px'
+        height: 'calc(100% - 113px)',
+        maxHeight: 'calc(100% - 113px)',
       })
     }
   }
@@ -407,6 +409,10 @@ $(function() {
     })
 
     checkFooterPadding()
+
+    scrollWindow.resize(function() {
+      checkFooterScrollPosition()
+    })
 
     scrollWindow.scroll(function() {
       checkFooterScrollPosition()

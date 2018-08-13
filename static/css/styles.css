@@ -195,8 +195,8 @@ html, body {
 
 .docs-drawer {
   border: none;
-  height: calc(100% - 113px) !important;
-  max-height: calc(100% - 113px) !important;
+  height: calc(100% - 113px);
+  max-height: calc(100% - 113px);
   max-width: 300px;
   position: fixed;
   top: 113px;
