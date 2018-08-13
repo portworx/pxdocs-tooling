@@ -293,7 +293,7 @@ $(function() {
     const newHashId = activeElement.attr('id')
     const currentHashId = window.location.hash.replace('#', '')
 
-    if(newHashId != currentHashId) {
+    if(newHashId && newHashId != currentHashId) {
       if(history.pushState) {
         history.pushState(null, null, '#' + newHashId)
       }
@@ -307,6 +307,7 @@ $(function() {
     const currentHashId = window.location.hash.replace('#', '')
     if(!currentHashId) return
     const headerItem = $('#' + currentHashId)
+    if(headerItem.length <= 0) return
     scrollWindow.scrollTop(headerItem.offset().top - 140)
   }
 
@@ -350,6 +351,69 @@ $(function() {
   setupScrollspyMenu()
   checkScrollPositions()
   setupInitialScrollPosition()
+
+  /*
+  
+    footer scroll
+    
+  */
+
+  var footerElemPadding = $('.docs-footer-padding')
+  var footerElem = $('.docs-footer')
+  var sidebarElem = $('.docs-drawer')
+
+  var DEFAULT_SIDEBAR_TOP = 113
+
+  function checkFooterScrollPosition() {
+    var documentHeight = scrollWindow.height()
+    var windowScroll = scrollWindow.scrollTop()
+    var footerOffset = footerElem.offset().top
+    var footerPosition = footerOffset - windowScroll
+
+    if(footerPosition < documentHeight) {
+      // move sidebar up by the amount of visible footer
+      var sidebarOffset = documentHeight - footerPosition
+
+      sidebarElem.css({
+        top: (DEFAULT_SIDEBAR_TOP - sidebarOffset) + 'px'
+      })
+    }
+    else {
+      // reset sidebar to normal position
+      sidebarElem.css({
+        top: DEFAULT_SIDEBAR_TOP + 'px'
+      })
+    }
+  }
+
+  function checkFooterPadding() {
+
+    var footerOffset = footerElem.offset().top
+    var documentHeight = scrollWindow.height()
+
+    // give the foot a top-margin for short documents
+    if(footerOffset < documentHeight) {
+      var footerHeightOffset = documentHeight - footerOffset
+      footerElemPadding.css({
+        height: footerHeightOffset + 'px',
+      })
+    }
+  }
+
+  function setupFooterScroll() {
+
+    footerElem.css({
+      display: 'block'
+    })
+
+    checkFooterPadding()
+
+    scrollWindow.scroll(function() {
+      checkFooterScrollPosition()
+    })
+  }
+
+  setupFooterScroll()
 
   /*
   

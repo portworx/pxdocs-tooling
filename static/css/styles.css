@@ -146,6 +146,7 @@ html, body {
 .docs-footer {
   background-color: red;
   height: 300px;
+  display: none;
 }
     
 /*
@@ -198,7 +199,7 @@ html, body {
   max-height: calc(100% - 113px) !important;
   max-width: 300px;
   position: fixed;
-  top: 113px !important;
+  top: 113px;
   overflow-y: hidden !important;
   display: flex;
   flex-flow: column;
