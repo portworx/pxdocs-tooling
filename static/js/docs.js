@@ -372,12 +372,6 @@ $(function() {
     var footerOffset = footerElem.offset().top
     var footerPosition = footerOffset - windowScroll
 
-    console.log({
-      topbarHeight,
-      documentHeight,
-      footerPosition
-    })
-
     if(footerPosition < documentHeight) {
       // move sidebar up by the amount of visible footer
       var sidebarOffset = documentHeight - footerPosition
