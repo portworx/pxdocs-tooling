@@ -390,7 +390,7 @@ hr.margin {
   padding-bottom: 40px;
 
   /* top offset for topbar */
-  margin-top: 130px;
+  padding-top: 100px;
   /* left offset for sidebar */
   margin-left: 300px;
   /* this needs to be the 300px for the sidebar - 120px padding */

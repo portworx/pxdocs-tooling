@@ -1,6 +1,3 @@
-const SCROLLSPY_FIXED_OFFSET = 200
-SCROLLSPY_ACTIVE_BUFFER = 80
-
 $(function() {
   /*
   
@@ -235,11 +232,16 @@ $(function() {
     scrollspy
     
   */
+
+  var SCROLLSPY_FIXED_OFFSET = 170
+  var SCROLLSPY_ACTIVE_BUFFER = 150
+
   var scrollspyContainer = $('#scrollspy-container')
   var scrollspyList = $('#scrollspy-list')
   var scrollspyNav = $('#scrollspy-container nav')
-  var mainContent = $('.mdl-layout__content')
   var pageContent = $('#page-content')
+
+  var scrollWindow = $(window)
 
   function highlightScrollLink(id) {
     if(!id) return
@@ -251,7 +253,9 @@ $(function() {
 
   function checkScrollPositions() {
 
-    if(mainContent.scrollTop() > SCROLLSPY_FIXED_OFFSET) {
+    var windowScroll = scrollWindow.scrollTop()
+
+    if(windowScroll > SCROLLSPY_FIXED_OFFSET) {
       scrollspyNav.addClass('fixed') 
     }
     else {
@@ -263,19 +267,30 @@ $(function() {
       return
     }
 
-    var activeElement = null
+    
     var allElements = pageContent.find("h2,h3")
     var windowHeight = $(window).height()
 
-    allElements.each(function() {
-      var headerItem = $(this)
-      var headerItemOffset = headerItem.offset().top
+    var elementsAboveFold = []
 
-      if(headerItemOffset < windowHeight && headerItemOffset < (SCROLLSPY_FIXED_OFFSET - SCROLLSPY_ACTIVE_BUFFER)) {
-        activeElement = headerItem
+    var activeElement = null
+
+    for(var i=0; i<allElements.length; i++) {
+      var headerItem = allElements.eq(i)
+      var headerItemPosition = headerItem.offset().top - windowScroll
+
+      if(headerItemPosition < SCROLLSPY_ACTIVE_BUFFER) {
+        elementsAboveFold.push(headerItem)
       }
-    })
+    }
 
+    var activeElement = elementsAboveFold.length > 0 ? elementsAboveFold[elementsAboveFold.length-1] : allElements.eq(0)
+
+    if(activeElement) {
+      highlightScrollLink(activeElement.attr('id'))  
+    }
+
+/*
     if(!activeElement) {
       activeElement = allElements.eq(0)
     }
@@ -283,11 +298,11 @@ $(function() {
     if(activeElement) {
       highlightScrollLink(activeElement.attr('id'))  
     }
-
-    window.location.hash = ''
+*/
+    //window.location.hash = ''
   }
 
-  mainContent.scroll(function() {
+  scrollWindow.scroll(function() {
     checkScrollPositions()
   })
 
@@ -299,9 +314,12 @@ $(function() {
       var scrollItem = $('<li></li>')
       var scrollItemLink = $('<a href="#' + headerItem.attr('id') + '">' + headerItem.text() + '</a>')
 
-      scrollItemLink.click(function() {
-        clickLinkHash = headerItem.attr('id')
-        highlightScrollLink(clickLinkHash)
+      scrollItemLink.click(function(e) {
+        setTimeout(function() {
+          clickLinkHash = headerItem.attr('id')
+          highlightScrollLink(clickLinkHash)
+          scrollWindow.scrollTop(headerItem.offset().top - 140)
+        })
       })
 
       scrollItem.append(scrollItemLink)      
