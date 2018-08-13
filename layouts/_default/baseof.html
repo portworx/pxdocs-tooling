@@ -18,62 +18,34 @@
     <link rel="stylesheet" href="{{"css/instantsearch-theme-algolia.min.css" | relURL}}?timestamp={{ now.Unix }}">
   </head>
   <body data-url="{{ .RelPermalink }}">
-    <div class="docs-layout mdl-js-layout mdl-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <div class="docs-layout">
 
-      {{- partial "topbar.html" . }}
-
-      <div id="search-hits">
-      </div>
+      <header class="docs-header">
+        {{- partial "topbar.html" . }}
+      </header>
 
       <!--
         SIDEBAR
        -->
-      <div class="docs-drawer mdl-layout__drawer mdl-color--grey-100">
-        <header id="search-container-holding-space">
-          <div id="search-box-holding">
-            <div id="ais-search-box-holding">
-              <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Search for pages" role="textbox" spellcheck="false" type="text" value="" class="ais-search-box--input-holding">
-            </div>
-          </div>
-        </header>
-        <header id="search-container">
-          <div id="search-box">
-            
-          </div>
-        </header>
-        
-        <nav class="docs-navigation mdl-navigation mdl-color--grey-100">
-
-          <div id="menu-content">
-            {{- partial "menu.html" . }}
-          </div>
-
-        </nav>
-
-        <footer id="version-menu">
-          <div id="version-menu-dropdown">
-            <button id="vert-button" class="mdl-button mdl-js-button mdl-button--icon">
-              <i class="material-icons">more_vert</i>
-            </button>
-            <button id="text-button" class="mdl-button mdl-js-button">
-              
-            </button>
-          </div>
-          <ul id="version-menu-options" class="mdl-menu mdl-menu--top-left mdl-js-menu mdl-js-ripple-effect"
-              for="version-menu-dropdown">
-            
-          </ul>
-        </footer>
-
+      <div id="search-hits">
       </div>
+      <div class="docs-drawer">
+        {{- partial "sidebar.html" . }}
+      </div>
+    
 
       <!--
         CONTENT
        -->
-      <main class="mdl-layout__content mdl-color--white-50 docs-content">
+      <main class="docs-content mdl-color--white-50">
         {{ block "main" . }}
         {{ end }}
       </main>
+
+
+      <footer class="docs-footer">
+        {{- partial "footer.html" . }}
+      </footer>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>

@@ -7,20 +7,20 @@ $(function() {
     style markdown components
     
   */
-  $('.mdl-layout__content table')
+  $('.docs-content table')
     .css({
       borderCollapse: 'collapse',
     })
     .show()
 
-  $('.mdl-layout__content table th,td')
+  $('.docs-content table th,td')
     .css({
       padding: '10px',
       border: '1px solid #ccc'
     })
 
   if(EQUALIZE_TABLE_WIDTHS) {
-    $('.mdl-layout__content table td')
+    $('.docs-content table td')
     .css({
       width: EQUALIZE_TABLE_WIDTHS
     })

@@ -7,7 +7,11 @@ html, body {
   height: 100%;
 }
 
-.docs-layout .mdl-layout__header .mdl-layout__drawer-button {
+.docs-main {
+  height: 100%;
+}
+
+.docs-layout .mdl-layout__drawer-button {
   color: rgba(0, 0, 0, 0.54);
 }
 
@@ -23,6 +27,9 @@ html, body {
   width: 100% !important;
   box-shadow: none !important;
   background-color: rgb(44, 43, 45) !important;
+  position: fixed;
+  top: 0px;
+  z-index: 100;
 }
 
 @media screen and (max-width: 1025px) {
@@ -129,6 +136,17 @@ html, body {
   margin-top: 30px;
   margin-right: 10px;
 }
+
+/*
+
+  FOOTER
+  
+*/
+
+.docs-footer {
+  background-color: red;
+  height: 300px;
+}
     
 /*
 
@@ -178,6 +196,8 @@ html, body {
   border: none;
   height: calc(100% - 113px) !important;
   max-height: calc(100% - 113px) !important;
+  max-width: 300px;
+  position: fixed;
   top: 113px !important;
   overflow-y: hidden !important;
   display: flex;
@@ -193,14 +213,6 @@ html, body {
   }
 }
 
-
-/* iOS Safari specific workaround */
-.docs-drawer .mdl-menu__container {
-  z-index: -1;
-}
-.docs-drawer .docs-navigation {
-  z-index: -2;
-}
 /* END iOS Safari specific workaround */
 .docs-drawer .mdl-menu .mdl-menu__item {
   display: flex;
@@ -330,10 +342,6 @@ html, body {
   }
 }
 
-.docs-content {
-  padding-bottom: 40px;
-}
-
 /*
 
   hide large content and show small content when screen is small
@@ -374,57 +382,67 @@ hr.margin {
   
 */
 
-.mdl-layout__content {
+.docs-content {
+  
+  
   padding-left: 60px;
   padding-right: 60px;
+  padding-bottom: 40px;
+
+  /* top offset for topbar */
+  margin-top: 130px;
+  /* left offset for sidebar */
+  margin-left: 300px;
+  /* this needs to be the 300px for the sidebar - 120px padding */
+  width: calc(100% - 420px);
 }
 
-.mdl-layout__content * {
+.docs-content * {
   font-size: 15px;
   
 }
 
-.mdl-layout__content p {
+.docs-content p {
   color: rgb(51, 68, 76) !important;
   font-weight: 100;
   font-family: "Open Sans",sans-serif !important;
 }
 
-.mdl-layout__content a {
+.docs-content a {
   color: #f15a24;
   font-weight: normal;
 }
 
-.mdl-layout__content a * {
+.docs-content a * {
   color: #f15a24;
   font-weight: normal;
 }
 
-.mdl-layout__content p > code {
+.docs-content p > code {
   color: #666;
   background-color: #f5f5f5;
   padding: 4px;
   font-weight: 500;
 }
 
-.mdl-layout__content .header-wrapper {
+.docs-content .header-wrapper {
   margin-top: 35px;
   padding-top: 15px;
   padding-bottom: 15px;
 }
 
-.mdl-layout__content .header-container {
+.docs-content .header-container {
   border-left: 1px solid #ff0000;
 }
 
-.mdl-layout__content .page-title {
+.docs-content .page-title {
   margin: 0px;
   padding: 0px;
   padding-left: 20px;
   padding-bottom: 10px;
 }
 
-.mdl-layout__content .page-subtitle {
+.docs-content .page-subtitle {
   margin: 0px;
   padding: 0px;
   padding-left: 20px;
@@ -432,7 +450,7 @@ hr.margin {
   color: #999;
 }
 
-.mdl-layout__content .github-link-cell {
+.docs-content .github-link-cell {
   float: right;
   padding-top: 12px;
 }
@@ -440,7 +458,7 @@ hr.margin {
 /*
   these will be be shown by javascript once the material design classes have been applied
 */
-.mdl-layout__content table {
+.docs-content table {
   display: none;
   width: 100%;
   margin-top: 30px;
@@ -450,32 +468,32 @@ hr.margin {
 /*
   the default header sizes are a bit too big
 */
-.mdl-layout__content h1 {
+.docs-content h1 {
   font-size: 30px;
   font-weight: 500;
 }
 
-.mdl-layout__content h2 {
+.docs-content h2 {
   font-size: 24px;
   font-weight: 500;
 }
 
-.mdl-layout__content h3 {
+.docs-content h3 {
   font-size: 20px;
   font-weight: 500;
 }
 
-.mdl-layout__content h4 {
+.docs-content h4 {
   font-size: 18px;
   font-weight: 500;
 }
 
-.mdl-layout__content h5 {
+.docs-content h5 {
   font-size: 16px;
   font-weight: 500;
 }
 
-.mdl-layout__content h6 {
+.docs-content h6 {
   font-size: 14px;
   font-weight: 500;
 }
@@ -762,7 +780,7 @@ h2,h3,h4,h5,h6 a {
 }
 
 
-.mdl-layout__content pre {
+.docs-content pre {
   padding: 20px;
   background-color: #fafafa;
   border: 1px solid #ccc;
@@ -805,7 +823,7 @@ h2,h3,h4,h5,h6 a {
   
 */
 
-.mdl-layout__content img {
+.docs-content img {
   max-width: 100% !important;
 }
 
