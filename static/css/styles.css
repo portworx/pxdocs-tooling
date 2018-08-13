@@ -146,6 +146,7 @@ html, body {
 .docs-footer {
   display: none;
   position: relative;
+  z-index: 5000 !important;
   bottom: 0px;
   background-color: #262729;
   color: #ffffff;
@@ -444,6 +445,7 @@ html, body {
   max-height: calc(100% - 113px);
   max-width: 300px;
   position: fixed;
+  z-index: 2000;
   top: 113px;
   overflow-y: hidden !important;
   display: flex;
@@ -931,6 +933,7 @@ hr.margin {
 */
 
 #scrollspy-container {
+  min-width: 250px;
   max-width: 250px;
   max-width: 300px;
   height: calc(100% - 113px);
@@ -988,6 +991,15 @@ hr.margin {
 }
 
 .scrollspy-H3 a {
+  font-size: 10pt !important;
+  text-decoration: none;
+}
+
+.scrollspy-H4 {
+  margin-left: 20px;
+}
+
+.scrollspy-H4 a {
   font-size: 10pt !important;
   text-decoration: none;
 }

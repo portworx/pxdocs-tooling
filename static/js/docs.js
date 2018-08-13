@@ -235,6 +235,7 @@ $(function() {
 
   var SCROLLSPY_FIXED_OFFSET = 170
   var SCROLLSPY_ACTIVE_BUFFER = 150
+  var SCROLLSPY_HEADER_SELECTOR = "h2,h3"
 
   var scrollspyContainer = $('#scrollspy-container')
   var scrollspyList = $('#scrollspy-list')
@@ -260,7 +261,7 @@ $(function() {
       return
     }
 
-    var allElements = pageContent.find("h2,h3")
+    var allElements = pageContent.find(SCROLLSPY_HEADER_SELECTOR)
     var windowHeight = $(window).height()
 
     var elementsAboveFold = []
@@ -310,7 +311,7 @@ $(function() {
   function setupScrollspyMenu() {
     if(scrollspyContainer.length <= 0) return
     
-    pageContent.find("h2,h3").each(function() {
+    pageContent.find(SCROLLSPY_HEADER_SELECTOR).each(function() {
       var headerItem = $(this)
       var scrollItem = $('<li></li>')
       var scrollItemLink = $('<a href="#' + headerItem.attr('id') + '">' + headerItem.text() + '</a>')
@@ -346,48 +347,18 @@ $(function() {
 
   /*
   
-    footer scroll
+    footer padding
     
   */
 
-  var footerElemPadding = $('.docs-footer-padding')
   var footerElem = $('.docs-footer')
-  var sidebarElem = $('.docs-drawer')
-  var scrollspyContainer = $('#scrollspy-container')
-
-  function checkFooterScrollPosition() {
-
-    var topbarHeight = $('.docs-header').height()
-
-    var documentHeight = scrollWindow.height()
-    var windowScroll = scrollWindow.scrollTop()
-    var footerOffset = footerElem.offset().top
-    var footerPosition = footerOffset - windowScroll
-
-    if(footerPosition < documentHeight) {
-      // move sidebar up by the amount of visible footer
-      var sidebarOffset = documentHeight - footerPosition
-      var newCss = {
-        height: 'calc(100% - ' + (sidebarOffset + topbarHeight) + 'px)',
-        maxHeight: 'calc(100% - ' + (sidebarOffset + topbarHeight) + 'px)',
-      }
-
-      sidebarElem.css(newCss)
-      scrollspyContainer.css(newCss)
-    }
-    else {
-      // reset sidebar to normal position
-      var newCss = {
-        height: 'calc(100% - ' + topbarHeight + 'px)',
-        maxHeight: 'calc(100% - ' + topbarHeight + 'px)',
-      }
-
-      sidebarElem.css(newCss)
-      scrollspyContainer.css(newCss)
-    }
-  }
+  var footerElemPadding = $('.docs-footer-padding')
 
   function checkFooterPadding() {
+
+    footerElem.css({
+      display: 'block'
+    })
 
     var footerOffset = footerElem.offset().top
     var documentHeight = scrollWindow.height()
@@ -401,24 +372,7 @@ $(function() {
     }
   }
 
-  function setupFooterScroll() {
-
-    footerElem.css({
-      display: 'block'
-    })
-
-    checkFooterPadding()
-
-    scrollWindow.resize(function() {
-      checkFooterScrollPosition()
-    })
-
-    scrollWindow.scroll(function() {
-      checkFooterScrollPosition()
-    })
-  }
-
-  setupFooterScroll()
+  checkFooterPadding()
 
   /*
   
