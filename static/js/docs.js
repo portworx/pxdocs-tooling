@@ -290,16 +290,24 @@ $(function() {
       highlightScrollLink(activeElement.attr('id'))  
     }
 
-/*
-    if(!activeElement) {
-      activeElement = allElements.eq(0)
-    }
+    const newHashId = activeElement.attr('id')
+    const currentHashId = window.location.hash.replace('#', '')
 
-    if(activeElement) {
-      highlightScrollLink(activeElement.attr('id'))  
+    if(newHashId != currentHashId) {
+      if(history.pushState) {
+        history.pushState(null, null, '#' + newHashId)
+      }
+      else {
+        location.hash = '#' + activeElement.attr('id')
+      }
     }
-*/
-    //window.location.hash = ''
+  }
+
+  function setupInitialScrollPosition() {
+    const currentHashId = window.location.hash.replace('#', '')
+    if(!currentHashId) return
+    const headerItem = $('#' + currentHashId)
+    scrollWindow.scrollTop(headerItem.offset().top - 140)
   }
 
   scrollWindow.scroll(function() {
@@ -341,6 +349,7 @@ $(function() {
 
   setupScrollspyMenu()
   checkScrollPositions()
+  setupInitialScrollPosition()
 
   /*
   
