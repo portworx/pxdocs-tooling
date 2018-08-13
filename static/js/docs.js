@@ -266,8 +266,6 @@ $(function() {
 
     var elementsAboveFold = []
 
-    var activeElement = null
-
     for(var i=0; i<allElements.length; i++) {
       var headerItem = allElements.eq(i)
       var headerItemPosition = headerItem.offset().top - windowScroll
@@ -277,16 +275,20 @@ $(function() {
       }
     }
 
-    var activeElement = elementsAboveFold.length > 0 ? elementsAboveFold[elementsAboveFold.length-1] : allElements.eq(0)
+    var activeElement = elementsAboveFold.length > 0 ? elementsAboveFold[elementsAboveFold.length-1] : null
 
-    if(activeElement) {
-      highlightScrollLink(activeElement.attr('id'))  
+    if(!activeElement) {
+      $('.scrollspy-item').removeClass('active')
+      return
     }
+
+    highlightScrollLink(activeElement.attr('id'))
 
     const newHashId = activeElement.attr('id')
     const currentHashId = window.location.hash.replace('#', '')
 
     if(newHashId && newHashId != currentHashId) {
+      
       if(history.pushState) {
         history.pushState(null, null, '#' + newHashId)
       }
