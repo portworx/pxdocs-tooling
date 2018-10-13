@@ -3,6 +3,14 @@ html, body {
   height: 100%;
 }
 
+h2 {
+  margin-bottom: 0;
+}
+
+.infoblock {
+  margin-bottom: 20px;
+}
+
 .docs-layout {
   height: 100%;
 }
@@ -19,7 +27,7 @@ html, body {
 /*
 
   HEADER
-  
+
 */
 .docs-header {
   height: 113px;
@@ -140,7 +148,7 @@ html, body {
 /*
 
   FOOTER
-  
+
 */
 
 .docs-footer {
@@ -195,7 +203,7 @@ html, body {
 /*
 
   FOOTER LEFT COL
-  
+
 */
 .docs-footer .left-col .page-sub-header {
   font-size: 30px;
@@ -322,7 +330,7 @@ html, body {
 /*
 
   FOOTER MIDDLE COL
-  
+
 */
 
 .docs-footer .middle-col .link-col {
@@ -363,11 +371,11 @@ html, body {
 /*
 
   FOOTER RIGHT COL
-  
+
 */
 
 .docs-footer .right-col > img.portworx-logo {
-  max-height: 70px;  
+  max-height: 70px;
   margin: 0;
 }
 
@@ -403,14 +411,14 @@ html, body {
 
 .docs-footer .right-col .copyright {
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased; 
+  -webkit-font-smoothing: antialiased;
 }
 
 
 /*
 
   DROP DOWN MENUS
-  
+
 */
 
 .docs-header .container .navbar-menus .header-main-menu .dropdown-menu {
@@ -447,7 +455,7 @@ html, body {
 /*
 
   SIDE MENU
-  
+
 */
 
 
@@ -519,7 +527,7 @@ html, body {
 /*
 
   version menu
-  
+
 */
 
 #version-menu {
@@ -549,7 +557,7 @@ html, body {
 /*
 
   SIDE MENU NAV BUTTONS
-  
+
 */
 
 
@@ -583,7 +591,7 @@ html, body {
 }
 
 .docs-layout .docs-navigation .mdl-navigation__link:hover {
-  
+
 }
 
 .docs-layout .docs-navigation .mdl-navigation__link .empty-icon {
@@ -611,7 +619,7 @@ html, body {
 /*
 
   hide large content and show small content when screen is small
-  
+
 */
 .docs-wide-content {
   display: none;
@@ -645,12 +653,12 @@ hr.margin {
 /*
 
   apply material design rules to page content
-  
+
 */
 
 .docs-content {
-  
-  
+
+
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 40px;
@@ -677,7 +685,7 @@ hr.margin {
 
 .docs-content * {
   font-size: 15px;
-  
+
 }
 
 .docs-content p {
@@ -829,7 +837,7 @@ hr.margin {
 /*
 
   menu
-  
+
 */
 
 .branchlink {
@@ -851,7 +859,7 @@ hr.margin {
 /*
 
   search
-  
+
 */
 
 #search-hits {
@@ -948,7 +956,7 @@ hr.margin {
 /*
 
   content
-  
+
 */
 
 
@@ -959,7 +967,7 @@ hr.margin {
 /*
 
   scrollspy
-  
+
 */
 
 #scrollspy-container {
@@ -987,8 +995,8 @@ hr.margin {
 }
 
 #scrollspy-container ul {
-  
-  
+
+
 }
 
 .scrollspy-item {
@@ -1040,7 +1048,7 @@ h2,h3,h4,h5,h6 a {
 /*
 
   copy paste
-  
+
 */
 
 .mdl-tooltip {
@@ -1062,7 +1070,7 @@ h2,h3,h4,h5,h6 a {
 
 .highlight .copy-link-old.active {
   background-color: #f15a24;
-  color: #fff;  
+  color: #fff;
 }
 
 .highlight .copy-link {
@@ -1111,7 +1119,7 @@ h2,h3,h4,h5,h6 a {
 /*
 
   menu-children
-  
+
 */
 
 .sidemenu-arrow-link {
@@ -1136,7 +1144,7 @@ h2,h3,h4,h5,h6 a {
 /*
 
   images
-  
+
 */
 
 .docs-content img {
@@ -1147,7 +1155,7 @@ h2,h3,h4,h5,h6 a {
 /*
 
   logo list
-  
+
 */
 
 .logo-list-container {
@@ -1158,7 +1166,7 @@ h2,h3,h4,h5,h6 a {
   background-color: #f5f5f5;
   padding: 40px;
   border: 1px solid #999;
-  display: inline-block; 
+  display: inline-block;
   margin: 40px;
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.09);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.09);
@@ -1174,5 +1182,3 @@ h2,h3,h4,h5,h6 a {
   padding-top: 30px;
   font-size: 1.6em;
 }
-
-
