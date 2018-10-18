@@ -1165,16 +1165,21 @@ h2,h3,h4,h5,h6 a {
 .logo-list-block {
   background-color: #f5f5f5;
   padding: 40px;
-  border: 1px solid #999;
+  border: 1px solid #ccc;
   display: inline-block;
-  margin: 40px;
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.09);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.09);
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.09);
+  height: 175px;
+  margin: 1em;
+  width: 175px;
+  text-align: center;
 }
 
-.logo-list-image {
+.logo-list-block:hover {
+  background: #f0f0f0;
+}
 
+.logo-list-image img {
+  width: auto;
+  height: 100px;
 }
 
 .logo-list-title {
