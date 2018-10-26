@@ -1,0 +1,28 @@
+{{ if .IsNamedParams }}
+  {{- $series := .Get "series" -}}
+  <ul class="list-series">
+    {{ range where .Site.Pages "Params.series" $series }}
+      <li class="list-series__item mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__media">
+          <a href="{{.Permalink}}">
+            <img src="https://imgplaceholder.com/420x320/ff7f7f/333333/fa-image">
+          </a>
+        </div>
+        <div class="mdl-card__title">
+          <h2 class="mdl-card__title-text">
+            <a href="{{.Permalink}}">{{.Title}}</a>
+          </h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+            <p>{{.Description}}</p>
+        </div>
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}
+<style>
+  .docs-content {width: calc(100% - 360px)}
+  @media screen and (max-width: 1035px) {
+    .docs-content {width: calc(100% - 60px)}
+  }
+</style>
