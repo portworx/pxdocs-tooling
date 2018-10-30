@@ -1,8 +1,8 @@
 $(function() {
   /*
-  
+
     style markdown components
-    
+
   */
   $('.docs-content table')
     .css({
@@ -25,9 +25,9 @@ $(function() {
 
 
   /*
-  
+
     sidebar drop-downs
-    
+
   */
   function setupSidebarMenu() {
     $('div[data-menu-type]').each(function() {
@@ -47,7 +47,7 @@ $(function() {
           childrenContent.removeClass('open')
         }
         else {
-          childrenContent.addClass('open')  
+          childrenContent.addClass('open')
         }
 
       })
@@ -57,9 +57,9 @@ $(function() {
   setupSidebarMenu()
 
   /*
-  
+
     algolia search
-    
+
   */
 
   // how many chars either side of a match to display in the results
@@ -77,7 +77,7 @@ $(function() {
       routing: true,
       searchParameters: {
         hitsPerPage: 5,
-        attributesToRetrieve: ['title', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'], 
+        attributesToRetrieve: ['title', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
         attributesToHighlight: ['title', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
       },
       searchFunction: function(helper) {
@@ -154,7 +154,7 @@ $(function() {
               })
               .map(function(word) {
                 var firstMatch = getMatchIndex(text, word)
-                
+
                 var startMatch = firstMatch - SEARCH_HIGHLIGHT_BLEED
                 if(startMatch < 0) startMatch = 0
 
@@ -197,12 +197,12 @@ $(function() {
   if(ALGOLIA_APP_ID && ALGOLIA_API_KEY && ALGOLIA_INDEX_NAME && $('#search-box').length >= 1) {
     setupAlgolia()
   }
-  
+
 
   /*
-  
+
     versions drop-down
-    
+
   */
 
   function activateVersionMenu() {
@@ -214,7 +214,7 @@ $(function() {
         var url = location.protocol + '//' + version + '.' + VERSIONS_BASE_URL
         document.location = url
       })
-      
+
       $('#version-menu #version-menu-options').append(versionOption)
     })
     $('#version-menu #text-button').text('Version: ' + VERSIONS_CURRENT)
@@ -226,11 +226,11 @@ $(function() {
       visibility: 'visible'
     })
   }
-  
+
   /*
-  
+
     scrollspy
-    
+
   */
 
   var SCROLLSPY_FIXED_OFFSET = 170
@@ -288,7 +288,7 @@ $(function() {
     const currentHashId = window.location.hash.replace('#', '')
 
     if(newHashId && newHashId != currentHashId) {
-      
+
       if(history.pushState) {
         history.pushState(null, null, '#' + newHashId)
       }
@@ -312,7 +312,7 @@ $(function() {
 
   function setupScrollspyMenu() {
     if(scrollspyContainer.length <= 0) return
-    
+
     pageContent.find(SCROLLSPY_HEADER_SELECTOR).each(function() {
       var headerItem = $(this)
       var scrollItem = $('<li></li>')
@@ -326,7 +326,7 @@ $(function() {
         })
       })
 
-      scrollItem.append(scrollItemLink)      
+      scrollItem.append(scrollItemLink)
       scrollItem.addClass('scrollspy-item')
       scrollItem.addClass('scrollspy-' + headerItem.prop("tagName"))
       scrollItem.attr('id', 'scrollspy-menu-' + headerItem.attr('id'))
@@ -348,9 +348,9 @@ $(function() {
   setupInitialScrollPosition()
 
   /*
-  
+
     footer padding
-    
+
   */
 
   var footerElem = $('.docs-footer')
@@ -377,9 +377,9 @@ $(function() {
   checkFooterPadding()
 
   /*
-  
+
     copy paste
-    
+
   */
   $('.highlight').each(function(i) {
     var highlightElem = $(this)
@@ -419,9 +419,9 @@ $(function() {
   })
 
   /*
-  
+
     drop down menus
-    
+
   */
   function showDropDownMenu(menu) {
     var link = menu.parent()
@@ -455,7 +455,7 @@ $(function() {
         else {
           $('.dropdown-menu').hide()
           showDropDownMenu(menu)
-          
+
         }
       })
     })
@@ -480,9 +480,9 @@ $(function() {
   setupDropDownMenus()
 
   /*
-  
+
     sidebar toggle button
-    
+
   */
   var docsDrawer = $('.docs-drawer')
   function setupSidebarToggleButton() {
@@ -497,4 +497,22 @@ $(function() {
   }
 
   setupSidebarToggleButton()
+
+  /*
+
+    sidebar scroll
+
+  */
+  $(window).scroll( function() {
+    var headerHeight = $('.docs-header').height()
+    var windowHeight = $(document).height()
+    var scrolledVal = $(document).scrollTop().valueOf()
+    var calcDiff = headerHeight - scrolledVal
+    if (scrolledVal >= headerHeight) {
+      $('.docs-drawer').css('top', '0px')
+    }
+    else {
+      $('.docs-drawer').css('top', calcDiff)
+    }
+  })
 })

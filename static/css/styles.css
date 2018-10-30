@@ -35,8 +35,6 @@ h2 {
   width: 100% !important;
   box-shadow: none !important;
   background-color: rgb(44, 43, 45) !important;
-  position: fixed;
-  top: 0px;
   z-index: 100;
 }
 
@@ -461,12 +459,11 @@ h2 {
 
 .docs-drawer {
   border: none;
-  height: calc(100% - 113px);
-  max-height: calc(100% - 113px);
   max-width: 300px;
   position: fixed;
   z-index: 2000;
   top: 113px;
+  bottom: 0;
   overflow-y: hidden !important;
   display: flex;
   flex-flow: column;
@@ -662,9 +659,6 @@ hr.margin {
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 40px;
-
-  /* top offset for topbar */
-  padding-top: 100px;
   /* left offset for sidebar */
   margin-left: 300px;
   /* this needs to be the 300px for the sidebar - 120px padding - 250px scrollspy */
