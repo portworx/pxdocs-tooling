@@ -1168,6 +1168,7 @@ h2,h3,h4,h5,h6 a {
   margin: .5em;
   border: 1px solid #ccc;
   text-align: center;
+  max-width: 235px;
 }
 
 @media screen and (max-width: 480px) {
