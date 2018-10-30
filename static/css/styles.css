@@ -1231,6 +1231,30 @@ h2,h3,h4,h5,h6 a {
   overflow: hidden;
 }
 
+@media screen and (max-width: 1499px) {
+  .list-series__item .mdl-card__media {
+    height: 120px
+  }
+}
+
+@media screen and (max-width: 1299px) {
+  .list-series__item .mdl-card__media {
+    height: 100px
+  }
+}
+
+@media screen and (max-width: 1099px) {
+  .list-series__item .mdl-card__media {
+    height: 80px
+  }
+}
+
+@media screen and (max-width: 759px) {
+  .list-series__item .mdl-card__media {
+    height: 120px
+  }
+}
+
 .list-series__item .mdl-card__media img {
   width: 100%;
   height: auto;
