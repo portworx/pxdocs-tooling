@@ -1280,3 +1280,8 @@ h2,h3,h4,h5,h6 a {
   color: #888 !important;
   font-weight: 500;
 }
+
+.docs-content img {
+  width: auto;
+  margin-top: .5em;
+}
