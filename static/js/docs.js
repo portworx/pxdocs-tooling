@@ -510,9 +510,15 @@ $(function() {
     var calcDiff = headerHeight - scrolledVal
     if (scrolledVal >= headerHeight) {
       $('.docs-drawer, #search-hits').css('top', '0px')
+      if ($(window).width() < 580) {
+        $('#search-hits').css('top', '65px')
+      }
     }
     else {
       $('.docs-drawer, #search-hits').css('top', calcDiff)
+      if ($(window).width() < 580) {
+        $('#search-hits').css('top', (calcDiff + 65))
+      }
     }
   })
 })

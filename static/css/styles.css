@@ -870,6 +870,31 @@ hr.margin {
   overflow-y: auto;
 }
 
+@media screen and (max-width: 1025px) {
+  #search-hits {
+    top: 60px;
+  }
+}
+
+@media screen and (max-width: 759px) {
+  #search-hits {
+    width: auto;
+    right: 0;
+  }
+}
+
+@media screen and (max-width: 579px) {
+  #search-hits {
+    bottom: 0;
+    left: 0;
+    right: auto;
+    top: 127px;
+    max-width: 280px;
+    z-index: 10000;
+    max-height: 100%;
+  }
+}
+
 .search-box-input {
   width: 100% !important;
 }
@@ -911,12 +936,6 @@ hr.margin {
 
 #search-hits .search-hits-matches em {
   color: #f15a24;
-}
-
-@media screen and (max-width: 1025px) {
-  #search-hits {
-    top: 56px;
-  }
 }
 
 .ais-search-box-holding {
