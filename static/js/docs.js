@@ -76,7 +76,7 @@ $(function() {
       indexName: ALGOLIA_INDEX_NAME,
       routing: true,
       searchParameters: {
-        hitsPerPage: 5,
+        hitsPerPage: 9999,
         attributesToRetrieve: ['title', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
         attributesToHighlight: ['title', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
       },
@@ -509,10 +509,10 @@ $(function() {
     var scrolledVal = $(document).scrollTop().valueOf()
     var calcDiff = headerHeight - scrolledVal
     if (scrolledVal >= headerHeight) {
-      $('.docs-drawer').css('top', '0px')
+      $('.docs-drawer, #search-hits').css('top', '0px')
     }
     else {
-      $('.docs-drawer').css('top', calcDiff)
+      $('.docs-drawer, #search-hits').css('top', calcDiff)
     }
   })
 })

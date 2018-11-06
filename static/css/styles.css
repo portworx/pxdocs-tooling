@@ -858,17 +858,16 @@ hr.margin {
 
 #search-hits {
   position: fixed;
-  left: 280px;
-  top: 178px;
+  left: 296px;
+  top: 113px;
   width: 400px;
   padding: 10px;
-  border: 1px solid #999;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
   background-color: #fafafa;
   z-index: 1000;
   display: none;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, .15);
+  max-height: 450px;
+  overflow-y: auto;
 }
 
 .search-box-input {
