@@ -82,4 +82,18 @@
       {{- end}}
     </div>
   </div>
+
+  <hr>
+
+  <div class="header-container">
+    <div class="page-subtitle">
+      Last edited: {{ dateFormat "Monday, Jan 2, 2006" .Lastmod }} {{- with .GitInfo }} by {{ .AuthorName }}{{- end}}
+    </div>
+    <div class="page-subtitle">
+      <a target="_blank" href="{{- .Site.Params.GithubRepo }}/edit/{{ default "master" (getenv "TRAVIS_BRANCH") }}/content/{{ replace .File.Dir "\\" "/" }}{{ .File.LogicalName }}">
+        edit this page on github
+      </a>
+    </div>
+  </div>
+  
 </div>
