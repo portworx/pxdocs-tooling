@@ -725,10 +725,13 @@ hr.margin {
 
 .docs-content .page-subtitle {
   margin: 0px;
-  padding: 0px;
-  padding-left: 20px;
-  padding-bottom: 10px;
+  padding: .05em 0 .05em 1em;
   color: #999;
+  font-size: 13px;
+}
+
+.docs-content .page-subtitle a {
+  font-size: 13px;
 }
 
 .docs-content .github-link-cell {
