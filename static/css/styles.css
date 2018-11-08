@@ -663,6 +663,7 @@ hr.margin {
   margin-left: 300px;
   /* this needs to be the 300px for the sidebar - 120px padding - 250px scrollspy */
   width: calc(100% - 690px);
+  max-width: 1000px;
 }
 
 @media screen and (max-width: 1025px) {
