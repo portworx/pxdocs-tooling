@@ -662,7 +662,7 @@ hr.margin {
   /* left offset for sidebar */
   margin-left: 300px;
   /* this needs to be the 300px for the sidebar - 120px padding - 250px scrollspy */
-  width: calc(100% - 610px);
+  width: calc(100% - 690px);
 }
 
 @media screen and (max-width: 1025px) {
@@ -983,9 +983,8 @@ hr.margin {
 */
 
 #scrollspy-container {
-  min-width: 250px;
-  max-width: 250px;
-  max-width: 300px;
+  min-width: 330px;
+  max-width: 330px;
   height: calc(100% - 113px);
   max-height: calc(100% - 113px);
   position: fixed;
