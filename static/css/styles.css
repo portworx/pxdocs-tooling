@@ -1239,8 +1239,18 @@ h2,h3,h4,h5,h6 a {
 }
 
 .list-series__item {
+  border-radius: 0;
+  border-top: 10px solid #f15a24;
   display: block;
-  width: 100%
+  width: 100%;
+  min-height: 160px;
+}
+
+.list-series__item i {
+  position: absolute;
+  bottom: 1em;
+  font-size: 18px;
+  right: 1em;
 }
 
 .list-series__item .mdl-card__media {
