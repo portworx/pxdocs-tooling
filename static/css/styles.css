@@ -1243,7 +1243,7 @@ h2,h3,h4,h5,h6 a {
   border-top: 10px solid #f15a24;
   display: block;
   width: 100%;
-  min-height: 160px;
+  min-height: 200px;
 }
 
 .list-series__item i {
@@ -1295,9 +1295,10 @@ h2,h3,h4,h5,h6 a {
 
 .list-series__item .mdl-card__title-text a {
   text-decoration: none;
-  color: #636363;
-  font-weight: 600;
-  font-size: .65em;
+  color: #000;
+  font-weight: 500;
+  font-size: .8em;
+  padding: .5em 0;
 }
 
 .list-series__item .mdl-card__supporting-text {
@@ -1305,7 +1306,8 @@ h2,h3,h4,h5,h6 a {
 }
 
 .list-series__item .mdl-card__supporting-text p {
-  color: #888 !important;
+  font-size: 1em;
+  color: #000;
   font-weight: 500;
 }
 
