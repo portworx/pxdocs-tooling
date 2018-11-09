@@ -1243,7 +1243,7 @@ h2,h3,h4,h5,h6 a {
 
 .list-series__item {
   border-radius: 0;
-  border-top: 10px solid #f15a24;
+  border-top: 5px solid #f15a24;
   display: block;
   width: 100%;
   min-height: 200px;
