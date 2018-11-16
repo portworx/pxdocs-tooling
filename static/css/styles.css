@@ -1343,4 +1343,6 @@ h2,h3,h4,h5,h6 a {
   text-transform: uppercase;
   font-weight: 700;
   margin-right: .5em;
+  text-align: center;
+  width: 80px;
 }
