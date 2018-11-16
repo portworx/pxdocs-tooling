@@ -504,6 +504,7 @@ $(function() {
 
   */
   $(window).scroll( function() {
+    console.log('scroll')
     var headerHeight = $('.docs-header').height()
     var windowHeight = $(document).height()
     var scrolledVal = $(document).scrollTop().valueOf()
@@ -519,6 +520,20 @@ $(function() {
       if ($(window).width() < 580) {
         $('#search-hits').css('top', (calcDiff + 65))
       }
+    }
+  })
+
+  /*
+
+    footer toggle
+
+  */
+  $('body').on('click', '.btn-orange', function() {
+    $('.form').toggle('slow')
+    if ($(this).text() == 'Contact') {
+      $(this).text('Close')
+    } else {
+      $(this).text('Contact')
     }
   })
 })
