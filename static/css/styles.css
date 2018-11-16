@@ -813,6 +813,10 @@ hr.margin {
   font-size: 18px;
 }
 
+.prevnextlink-container .material-icons{
+  color: #f15a24 !important;
+}
+
 .no-underline {
   text-decoration: none;
 }
