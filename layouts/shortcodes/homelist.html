@@ -3,15 +3,17 @@
   <ul class="list-series">
     {{ range where .Site.Pages "Params.series" $series }}
       <li class="list-series__item mdl-card mdl-shadow--2dp">
-        <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">
-            <a href="{{.Permalink}}">{{.Title}}</a>
-          </h2>
-        </div>
-        <div class="mdl-card__supporting-text">
-            <p>{{.Description}}</p>
-        </div>
-        <a href="{{.Permalink}}"><i class="material-icons">arrow_forward_ios</i></a>
+        <a href="{{.Permalink}}">
+          <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">
+              <a href="{{.Permalink}}">{{.Title}}</a>
+            </h2>
+          </div>
+          <div class="mdl-card__supporting-text">
+              <p>{{.Description}}</p>
+          </div>
+          <a href="{{.Permalink}}"><i class="material-icons">arrow_forward_ios</i></a>
+        </a>
       </li>
     {{ end }}
   </ul>
