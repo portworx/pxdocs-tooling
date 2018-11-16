@@ -6,7 +6,23 @@
     <meta name="description" content="{{ .Description }}">
     <meta name="keywords" content="{{ .Keywords }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>{{ .Site.Title }}</title>
+    <title>{{ .Title }}</title>
+
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{ .Title }}" />
+    <meta property="og:description" content="{{ .Description }}" />
+    <meta property="og:url" content="{{ .URL }}" />
+    <meta property="og:site_name" content="Portworx Documentation" />
+    <meta property="fb:app_id" content="1541540289287091" />
+    <meta property="og:image" content="https://portworx.com/wp-content/uploads/2016/06/portworx-logo.png" />
+    <meta property="og:image:secure_url" content="https://portworx.com/wp-content/uploads/2016/06/portworx-logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:description" content="{{ .Description }}" />
+    <meta name="twitter:title" content="{{ .Title }}" />
+    <meta name="twitter:site" content="@portwx" />
+    <meta name="twitter:image" content="https://portworx.com/wp-content/uploads/2016/06/portworx-logo.png" />
+    <meta name="twitter:creator" content="@portwx" />
 
     <link rel="shortcut icon" href="https://portworx.com/wp-content/themes/portworx/favicon.ico">
 
