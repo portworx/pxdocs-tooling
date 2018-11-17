@@ -56,8 +56,10 @@
        -->
       <main class="docs-content mdl-color--white-50">
         <div class="top-padding"></div>
-        {{ block "main" . }}
-        {{ end }}
+        <div id="page-content">
+          {{ block "main" . }}
+          {{ end }}
+        </div>
       </main>
 
       <div id="scrollspy-container">
