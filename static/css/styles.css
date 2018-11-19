@@ -1320,7 +1320,7 @@ h2,h3,h4,h5,h6 a {
 }
 
 .list-series__item .mdl-card__supporting-text p {
-  font-size: 1em;
+  font-size: 13px;
   color: #000;
   font-weight: 500;
 }
