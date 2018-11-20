@@ -1258,6 +1258,7 @@ h2,h3,h4,h5,h6 a {
   border-top: 5px solid #f15a24;
   display: block;
   display: inline-block;
+  width: 100%;
 }
 
 .list-series__item i {
@@ -1275,24 +1276,6 @@ h2,h3,h4,h5,h6 a {
 }
 
 @media screen and (max-width: 1499px) {
-  .list-series__item .mdl-card__media {
-    height: 120px
-  }
-}
-
-@media screen and (max-width: 1299px) {
-  .list-series__item .mdl-card__media {
-    height: 100px
-  }
-}
-
-@media screen and (max-width: 1099px) {
-  .list-series__item .mdl-card__media {
-    height: 80px
-  }
-}
-
-@media screen and (max-width: 759px) {
   .list-series__item .mdl-card__media {
     height: 120px
   }
@@ -1323,6 +1306,40 @@ h2,h3,h4,h5,h6 a {
   font-size: 13px;
   color: #000;
   font-weight: 500;
+}
+
+@media screen and (max-width: 1299px) {
+  .list-series__item .mdl-card__media {
+    height: 100px
+  }
+}
+
+@media screen and (max-width: 1099px) {
+  .list-series__item .mdl-card__media {
+    height: 80px
+  }
+}
+
+@media screen and (max-width: 759px) {
+  .list-series__item .mdl-card__media {
+    height: 120px
+  }
+
+  .list-series__item.mdl-card {
+    min-height: 125px;
+  }
+
+  .list-series__item .mdl-card__supporting-text {
+    padding-top: 0;
+  }
+
+  .list-series__item .mdl-card__title {
+    padding: 10px 1em 0;
+  }
+  
+  .list-series__item .mdl-card__title-text a {
+    padding-bottom: 5px;
+  }
 }
 
 .docs-content img {
