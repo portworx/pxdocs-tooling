@@ -689,7 +689,6 @@ hr.margin {
 
 .docs-content p {
   color: rgb(51, 68, 76) !important;
-  font-weight: 100;
   font-family: "Open Sans",sans-serif !important;
 }
 
@@ -1336,7 +1335,7 @@ h2,h3,h4,h5,h6 a {
   .list-series__item .mdl-card__title {
     padding: 10px 1em 0;
   }
-  
+
   .list-series__item .mdl-card__title-text a {
     padding-bottom: 5px;
   }
