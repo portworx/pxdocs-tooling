@@ -528,6 +528,7 @@ $(function() {
     footer toggle
 
   */
+
   $('body').on('click', '.btn-orange', function() {
     $('.form').toggle('slow')
     if ($(this).text() == 'Contact') {
@@ -536,4 +537,12 @@ $(function() {
       $(this).text('Contact')
     }
   })
+  /*
+
+    open external links target="_blank"
+
+  */
+  $(document.links).filter(function() {
+    return this.hostname != window.location.hostname
+  }).attr('target', '_blank')
 })
