@@ -211,6 +211,7 @@ $(function() {
       var versionOption = $('<li class="mdl-menu__item">Version ' + version + '</li>')
 
       versionOption.click(function() {
+        if(version == VERSIONS_CURRENT) return
         var url = location.protocol + '//' + version + '.' + VERSIONS_BASE_URL
         document.location = url
       })
