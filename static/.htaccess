@@ -1,0 +1,2 @@
+Redirect 301 /testing https://docs.portworx.wk1.co/portworx-install-with-kubernetes
+Redirect 301 /testing2 /portworx-install-with-kubernetes
