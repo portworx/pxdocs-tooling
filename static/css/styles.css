@@ -1236,6 +1236,18 @@ h2,h3,h4,h5,h6 a {
   padding: 30px 0;
 }
 
+@media screen and (max-width: 1299px) {
+  .list-series {
+    grid-template-columns: repeat(2, minmax(48%, 1fr));
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  .list-series {
+    grid-template-columns: repeat(3, minmax(30%, 1fr));
+  }
+}
+
 @media screen and (max-width: 759px) {
   .list-series {
     grid-template-columns: repeat(2, minmax(48%, 1fr));
