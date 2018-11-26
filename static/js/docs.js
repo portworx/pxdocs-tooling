@@ -198,6 +198,20 @@ $(function() {
     setupAlgolia()
   }
 
+  $(document).keyup(function (e) {
+    if ($('.ais-search-box--input:focus') && (e.keyCode === 13)  && !$('#search-hits').hasClass('full-screen')) {
+      $('#search-hits, .docs-drawer').addClass('full-screen')
+      $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer').hide()
+      $('#search-box').prepend('<a href="#" class="full-screen__close"><i class="material-icons">close</i><br/>Close</a>')
+    }
+  })
+
+  $('body').on('click', '.full-screen__close', function() {
+    $('#search-hits, .docs-drawer').removeClass('full-screen')
+    $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer').show()
+    $(this).remove()
+  })
+
 
   /*
 
