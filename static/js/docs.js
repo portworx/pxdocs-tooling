@@ -568,13 +568,13 @@ $(function() {
   $('body').on('click', '.full-screen__link', function() {
     var windowHeight = $(document).height()
     var iframeHeight = windowHeight - 113
-    $('.full-screen__iframe').css('height', iframeHeight)
-    $('.full-screen__iframe, .full-screen__iframe__close').show()
+    $('.full-screen__iframe-wrap').css('height', iframeHeight)
+    $('.full-screen__iframe-wrap, .full-screen__iframe__close').show()
     $('.docs-footer').hide()
   })
 
   $('body').on('click', '.full-screen__iframe__close', function() {
-    $('.full-screen__iframe, .full-screen__iframe__close').hide()
+    $('.full-screen__iframe-wrap, .full-screen__iframe__close').hide()
     $('.docs-footer').show()
   })
 })

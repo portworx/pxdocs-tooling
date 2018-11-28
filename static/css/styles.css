@@ -1465,7 +1465,7 @@ h2,h3,h4,h5,h6 a {
 
 }
 
-.full-screen__iframe {
+.full-screen__iframe-wrap {
   position: absolute;
   top: 113px;
   left: 300px;
@@ -1476,6 +1476,15 @@ h2,h3,h4,h5,h6 a {
   height: 100%;
   width: calc(100% - 300px);
   border: none;
+  overflow: hidden;
+}
+
+.full-screen__iframe {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border: none;
+  top: -60px;
 }
 
 .full-screen__iframe__close {
@@ -1495,14 +1504,15 @@ h2,h3,h4,h5,h6 a {
 }
 
 @media screen and (max-width: 1025px) {
-  .full-screen__iframe {
+  .full-screen__iframe-wrap {
     left: 0;
     width: 100%;
     top: 60px;
   }
 
   .full-screen__iframe__close {
-    top: 65px;
+    top: auto;
+    bottom: 20px;
     right: 20px;
   }
 }
