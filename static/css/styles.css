@@ -1422,6 +1422,18 @@ h2,h3,h4,h5,h6 a {
   overflow-y: inherit;
 }
 
+#search-hits.full-screen .search-hits-section {
+  font-size: 1em;
+}
+
+#search-hits.full-screen .search-hits-page {
+  font-size: 1.2em;
+}
+
+#search-hits.full-screen .search-hits-matches a {
+  font-size: 1em;
+}
+
 .full-screen__close,
 .full-screen__iframe__close {
   position: absolute;
