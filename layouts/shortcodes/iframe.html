@@ -1,0 +1,7 @@
+{{ if .IsNamedParams }}
+  {{- $url := .Get "url" -}}
+  {{- $text := .Get "text" -}}
+  <a href="#" class="full-screen__link">{{$text}}</a>
+  <a href="#" class="full-screen__iframe__close"><i class="material-icons">close</i><br/>Close</a>
+  <iframe src="{{$url}}" class="full-screen__iframe"></iframe>
+{{ end }}

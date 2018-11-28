@@ -560,4 +560,21 @@ $(function() {
   $(document.links).filter(function() {
     return this.hostname != window.location.hostname
   }).attr('target', '_blank')
+  /*
+
+    full screen iframe
+
+  */
+  $('body').on('click', '.full-screen__link', function() {
+    var windowHeight = $(document).height()
+    var iframeHeight = windowHeight - 113
+    $('.full-screen__iframe').css('height', iframeHeight)
+    $('.full-screen__iframe, .full-screen__iframe__close').show()
+    $('.docs-footer').hide()
+  })
+
+  $('body').on('click', '.full-screen__iframe__close', function() {
+    $('.full-screen__iframe, .full-screen__iframe__close').hide()
+    $('.docs-footer').show()
+  })
 })
