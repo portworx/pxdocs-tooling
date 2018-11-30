@@ -226,7 +226,12 @@ $(function() {
 
       versionOption.click(function() {
         if(version == VERSIONS_CURRENT) return
-        var url = location.protocol + '//' + version + '.' + VERSIONS_BASE_URL
+
+        // NOTE: use this if you want subdomain based versioning - e.g. 3.0.docs.portworx.com
+        // var url = location.protocol + '//' + version + '.' + VERSIONS_BASE_URL
+
+        // NOTE: use this if you want path based versioning - e.g. docs.portworx.com/3.0
+        var url = location.protocol + '//' + VERSIONS_BASE_URL + '/' + version
         document.location = url
       })
 
