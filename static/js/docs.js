@@ -199,8 +199,8 @@ $(function() {
   }
 
   $(document).keyup(function (e) {
-    console.log($('.ais-search-box--input-holding').val().length)
-    if ($('.ais-search-box--input:focus') && $('.ais-search-box--input-holding').val().length > 0 && (e.keyCode === 13)  && !$('#search-hits').hasClass('full-screen')) {
+    console.log($('.ais-search-box--input').val().length)
+    if ($('.ais-search-box--input:focus') && $('.ais-search-box--input').val().length > 0 && (e.keyCode === 13)  && !$('#search-hits').hasClass('full-screen')) {
       $('#search-hits, .docs-drawer').addClass('full-screen')
       $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer').hide()
       $('#search-box').prepend('<a href="#" class="full-screen__close"><i class="material-icons">close</i><br/>Close</a>')
