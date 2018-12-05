@@ -33,6 +33,9 @@
     <link rel="stylesheet" href="{{"css/syntax.css" | relURL}}?timestamp={{ now.Unix }}">
     <link rel="stylesheet" href="{{"css/instantsearch.min.css" | relURL}}?timestamp={{ now.Unix }}">
     <link rel="stylesheet" href="{{"css/instantsearch-theme-algolia.min.css" | relURL}}?timestamp={{ now.Unix }}">
+
+
+
   </head>
   <body data-url="{{ .RelPermalink }}">
     <div class="docs-layout">
@@ -76,6 +79,7 @@
         {{- partial "footer.html" . }}
       </footer>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script src="{{"js/instantsearch.min.js" | relURL}}?timestamp={{ now.Unix }}"></script>
@@ -93,5 +97,16 @@
 
     </script>
     <script src="{{"js/docs.js" | relURL}}?timestamp={{ now.Unix }}"></script>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('set', 'contentGroup1', '{{ .Title }}');
+      ga('send', 'pageview');
+
+    </script>
   </body>
 </html>
