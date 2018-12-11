@@ -38,6 +38,13 @@ $(function() {
 
       var childrenContent = $('#menu-children-' + id)
 
+      if(childrenContent.hasClass('open')) {
+        link.find('.material-icons').html('arrow_drop_down')
+      }
+      else {
+        link.find('.material-icons').html('arrow_drop_up')
+      }
+
       link.click(function(e) {
         if(type == 'leaf') return
         e.preventDefault()
@@ -45,9 +52,11 @@ $(function() {
 
         if(childrenContent.hasClass('open')) {
           childrenContent.removeClass('open')
+          link.find('.material-icons').html('arrow_drop_up')
         }
         else {
           childrenContent.addClass('open')
+          link.find('.material-icons').html('arrow_drop_down')
         }
 
       })
