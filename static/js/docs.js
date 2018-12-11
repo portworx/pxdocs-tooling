@@ -137,7 +137,7 @@ $(function() {
         transformData: {
           item: function(item) {
 
-            const re = new RegExp('^.*?<p>', 's')
+            const re = new RegExp('^.*?<p>')
 
             var highlightResult = item._highlightResult.content
             var searchWords = highlightResult.matchedWords
