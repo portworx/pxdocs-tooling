@@ -146,11 +146,19 @@ $(function() {
         transformData: {
           item: function(item) {
 
-            const re = new RegExp('^.*?<p>', 's')
+            const re = new RegExp('^[\s\S]*?<p>')
 
             var highlightResult = item._highlightResult.content
             var searchWords = highlightResult.matchedWords
-            var processedText = (highlightResult.value || '').replace(re, '<p>')
+
+            let processedText = (highlightResult.value || '')
+              .replace(/^.*?(<\w+)/, function(wholeMatch, chunk) {
+                return chunk
+              })
+              .replace(/^.*?<\/li>/, '')
+
+            processedText = '<div>' + processedText + '</div>'
+
             var text = $(processedText).text()
 
             var allWords = searchWords.join(' ')
@@ -208,7 +216,6 @@ $(function() {
   }
 
   $(document).keyup(function (e) {
-    console.log($('.ais-search-box--input').val().length)
     if ($('.ais-search-box--input:focus') && $('.ais-search-box--input').val().length > 0 && (e.keyCode === 13)  && !$('#search-hits').hasClass('full-screen')) {
       $('#search-hits, .docs-drawer').addClass('full-screen')
       $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer').hide()
