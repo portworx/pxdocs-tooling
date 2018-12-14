@@ -38,6 +38,13 @@ $(function() {
 
       var childrenContent = $('#menu-children-' + id)
 
+      if(childrenContent.hasClass('open')) {
+        link.find('.material-icons').html('arrow_drop_down')
+      }
+      else {
+        link.find('.material-icons').html('arrow_drop_up')
+      }
+
       link.click(function(e) {
         if(type == 'leaf') return
         e.preventDefault()
@@ -45,9 +52,11 @@ $(function() {
 
         if(childrenContent.hasClass('open')) {
           childrenContent.removeClass('open')
+          link.find('.material-icons').html('arrow_drop_up')
         }
         else {
           childrenContent.addClass('open')
+          link.find('.material-icons').html('arrow_drop_down')
         }
 
       })
@@ -137,11 +146,19 @@ $(function() {
         transformData: {
           item: function(item) {
 
-            const re = new RegExp('^.*?<p>', 's')
+            const re = new RegExp('^[\s\S]*?<p>')
 
             var highlightResult = item._highlightResult.content
             var searchWords = highlightResult.matchedWords
-            var processedText = (highlightResult.value || '').replace(re, '<p>')
+
+            let processedText = (highlightResult.value || '')
+              .replace(/^.*?(<\w+)/, function(wholeMatch, chunk) {
+                return chunk
+              })
+              .replace(/^.*?<\/li>/, '')
+
+            processedText = '<div>' + processedText + '</div>'
+
             var text = $(processedText).text()
 
             var allWords = searchWords.join(' ')
@@ -199,7 +216,6 @@ $(function() {
   }
 
   $(document).keyup(function (e) {
-    console.log($('.ais-search-box--input').val().length)
     if ($('.ais-search-box--input:focus') && $('.ais-search-box--input').val().length > 0 && (e.keyCode === 13)  && !$('#search-hits').hasClass('full-screen')) {
       $('#search-hits, .docs-drawer').addClass('full-screen')
       $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer').hide()
