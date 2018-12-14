@@ -222,9 +222,6 @@ $(function() {
       $('#search-box').prepend('<a href="#" class="full-screen__close"><i class="material-icons">close</i><br/>Close</a>')
     }
     if ($('.ais-search-box--input:focus')) {
-      if (is.firefox()) {
-        window.confirm('We are working hard to support search on Firefox, please use Google Chrome for now.')
-      }
       if (is.ie()) {
         window.confirm('We are working hard to support search on Internet Explorer, please use Google Chrome for now.')
       }
