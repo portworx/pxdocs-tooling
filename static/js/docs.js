@@ -221,11 +221,6 @@ $(function() {
       $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer').hide()
       $('#search-box').prepend('<a href="#" class="full-screen__close"><i class="material-icons">close</i><br/>Close</a>')
     }
-    if ($('.ais-search-box--input:focus')) {
-      if (is.ie()) {
-        window.confirm('We are working hard to support search on Internet Explorer, please use Google Chrome for now.')
-      }
-    }
   })
 
   $('body').on('click', '.full-screen__close', function() {
