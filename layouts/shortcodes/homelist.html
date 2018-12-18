@@ -1,7 +1,39 @@
 {{ if .IsNamedParams }}
   {{- $series := .Get "series" -}}
+  {{- $series2 := .Get "series2" -}}
+  {{- $series3 := .Get "series3" -}}
   <ul class="list-series">
     {{ range where .Site.Pages "Params.series" $series }}
+      <li class="list-series__item mdl-card mdl-shadow--2dp">
+        <a href="{{.Permalink}}">
+          <div class="mdl-card__title">
+            <h3 class="mdl-card__title-text">
+              {{.Title}}
+            </h3>
+          </div>
+          <div class="mdl-card__supporting-text">
+              <p>{{.Description}}</p>
+          </div>
+          <i class="material-icons">arrow_forward_ios</i>
+        </a>
+      </li>
+    {{ end }}
+    {{ range where .Site.Pages "Params.series2" $series2 }}
+      <li class="list-series__item mdl-card mdl-shadow--2dp">
+        <a href="{{.Permalink}}">
+          <div class="mdl-card__title">
+            <h3 class="mdl-card__title-text">
+              {{.Title}}
+            </h3>
+          </div>
+          <div class="mdl-card__supporting-text">
+              <p>{{.Description}}</p>
+          </div>
+          <i class="material-icons">arrow_forward_ios</i>
+        </a>
+      </li>
+    {{ end }}
+    {{ range where .Site.Pages "Params.series3" $series3 }}
       <li class="list-series__item mdl-card mdl-shadow--2dp">
         <a href="{{.Permalink}}">
           <div class="mdl-card__title">
