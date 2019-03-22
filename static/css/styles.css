@@ -1533,3 +1533,25 @@ code .s {
   color: rgba(0,0,0,0.87) !important;
   font-size: 12px;
 }
+
+.ls, .rs {
+  display: inline-block;
+  width: 49%;
+}
+
+.rs a {
+  display: inline-block;
+  text-align: right;
+}
+
+@media screen and (max-width: 480px) {
+  .ls, .rs {
+    width: 100%;
+  }
+
+  .rs a {
+    display: block;
+    padding: .5em .25em .5em 1em;
+    text-align: left;
+  }
+}
