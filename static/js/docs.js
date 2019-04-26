@@ -415,11 +415,13 @@ $(function() {
   */
   $('.highlight').each(function(i) {
     var highlightElem = $(this)
-    var codeElem = highlightElem.find('pre code')
+    var codeElem = highlightElem.find('pre code.language-text');
+    codeElem.parent().parent().addClass('copyable');
+    highlightElem.find('pre code.language-output').parent().parent().addClass('typeOutput');
     var copyDiv = $([
       '<div class="copy-link">',
-        '<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">',
-          '<i class="material-icons" id="clipboard-icon-' + i + '">assignment</i>',
+        '<button id="clipboard-icon-\' + i + \'" class="button">',
+          '<i class="material-icons">assignment</i>',
           '<div class="mdl-tooltip mdl-tooltip--small" for="clipboard-icon-' + i + '">',
             'copy to clipboard',
           '</div>',
