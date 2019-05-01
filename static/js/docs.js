@@ -440,20 +440,17 @@ $(function() {
       $temp.select()
       document.execCommand("copy")
       $temp.remove()
-      copyDiv
-          .find('copy-link').addClass('active');
+
       copyDiv
         .find('button')
-        .addClass('mdl-button--primary active')
+        .addClass('mdl-button--primary active').parent().addClass('active');
 
       setTimeout(function() {
         copyDiv
           .find('button')
-          .removeClass('mdl-button--primary active');
-        copyDiv
-            .find('copy-link').removeClass('active');
+          .removeClass('mdl-button--primary active').parent().removeClass('active');
 
-      }, 1000)
+      }, 1500)
     })
   })
 
