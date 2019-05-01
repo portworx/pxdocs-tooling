@@ -1109,11 +1109,22 @@ h2,h3,h4,h5,h6 a {
   border-color: #f1732f;
   padding: 5px 5px;
   cursor:pointer;
+  transition: all 1.5s;
 }
 .highlight .copy-link .button, .highlight .copy-link .button i
 {
   vertical-align: text-bottom;
 }
+
+.highlight .copy-link.active {
+  display:block;
+}
+
+.highlight .copy-link .button.active {
+  background: #d74f26;
+  color:#000;
+}
+
 
 .highlight .copy-link {
   display:none;

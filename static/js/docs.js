@@ -420,16 +420,18 @@ $(function() {
     highlightElem.find('pre code.language-output').parent().parent().addClass('typeOutput');
     var copyDiv = $([
       '<div class="copy-link">',
-        '<button id="clipboard-icon-\' + i + \'" class="button">',
+        '<button id="clipboard-icon-' + i + '" class="button">',
           '<i class="material-icons">assignment</i>',
-          '<div class="mdl-tooltip mdl-tooltip--small" for="clipboard-icon-' + i + '">',
-            'copy to clipboard',
-          '</div>',
+
         '</button>',
+        '<div class="mdl-tooltip mdl-tooltip--small" for="clipboard-icon-' + i + '">',
+        'copy to clipboard',
+        '</div>',
       '</div>'
     ].join("\n"))
 
     highlightElem.prepend(copyDiv)
+
 
     copyDiv.click(function() {
 
@@ -438,15 +440,18 @@ $(function() {
       $temp.select()
       document.execCommand("copy")
       $temp.remove()
-
+      copyDiv
+          .find('copy-link').addClass('active');
       copyDiv
         .find('button')
-        .addClass('mdl-button--primary')
+        .addClass('mdl-button--primary active')
 
       setTimeout(function() {
         copyDiv
           .find('button')
-          .removeClass('mdl-button--primary')
+          .removeClass('mdl-button--primary active');
+        copyDiv
+            .find('copy-link').removeClass('active');
 
       }, 1000)
     })
