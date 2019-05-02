@@ -39,10 +39,10 @@ $(function() {
       var childrenContent = $('#menu-children-' + id)
 
       if(childrenContent.hasClass('open')) {
-        link.find('.material-icons').html('arrow_drop_down')
+        link.find('.material-icons').html('keyboard_arrow_down')
       }
       else {
-        link.find('.material-icons').html('arrow_drop_up')
+        link.find('.material-icons').html('keyboard_arrow_right')
       }
 
       link.click(function(e) {
@@ -52,11 +52,11 @@ $(function() {
 
         if(childrenContent.hasClass('open')) {
           childrenContent.removeClass('open')
-          link.find('.material-icons').html('arrow_drop_up')
+          link.find('.material-icons').html('keyboard_arrow_right')
         }
         else {
           childrenContent.addClass('open')
-          link.find('.material-icons').html('arrow_drop_down')
+          link.find('.material-icons').html('keyboard_arrow_down')
         }
 
       })
@@ -415,19 +415,23 @@ $(function() {
   */
   $('.highlight').each(function(i) {
     var highlightElem = $(this)
-    var codeElem = highlightElem.find('pre code')
+    var codeElem = highlightElem.find('pre code.language-text');
+    codeElem.parent().parent().addClass('copyable');
+    highlightElem.find('pre code.language-output').parent().parent().addClass('typeOutput');
     var copyDiv = $([
       '<div class="copy-link">',
-        '<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">',
-          '<i class="material-icons" id="clipboard-icon-' + i + '">assignment</i>',
-          '<div class="mdl-tooltip mdl-tooltip--small" for="clipboard-icon-' + i + '">',
-            'copy to clipboard',
-          '</div>',
+        '<button id="clipboard-icon-' + i + '" class="button">',
+          '<i class="material-icons">assignment</i>',
+
         '</button>',
+        '<div class="mdl-tooltip mdl-tooltip--small" for="clipboard-icon-' + i + '">',
+        'copy to clipboard',
+        '</div>',
       '</div>'
     ].join("\n"))
 
     highlightElem.prepend(copyDiv)
+
 
     copyDiv.click(function() {
 
@@ -439,14 +443,14 @@ $(function() {
 
       copyDiv
         .find('button')
-        .addClass('mdl-button--primary')
+        .addClass('mdl-button--primary active').parent().addClass('active');
 
       setTimeout(function() {
         copyDiv
           .find('button')
-          .removeClass('mdl-button--primary')
+          .removeClass('mdl-button--primary active').parent().removeClass('active');
 
-      }, 1000)
+      }, 1500)
     })
   })
 
