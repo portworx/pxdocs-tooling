@@ -39,10 +39,10 @@ $(function() {
       var childrenContent = $('#menu-children-' + id)
 
       if(childrenContent.hasClass('open')) {
-        link.find('.material-icons').html('arrow_drop_down')
+        link.find('.material-icons').html('keyboard_arrow_down')
       }
       else {
-        link.find('.material-icons').html('arrow_drop_up')
+        link.find('.material-icons').html('keyboard_arrow_right')
       }
 
       link.click(function(e) {
@@ -52,11 +52,11 @@ $(function() {
 
         if(childrenContent.hasClass('open')) {
           childrenContent.removeClass('open')
-          link.find('.material-icons').html('arrow_drop_up')
+          link.find('.material-icons').html('keyboard_arrow_right')
         }
         else {
           childrenContent.addClass('open')
-          link.find('.material-icons').html('arrow_drop_down')
+          link.find('.material-icons').html('keyboard_arrow_down')
         }
 
       })
