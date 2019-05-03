@@ -504,7 +504,7 @@ h2 {
   padding-bottom: 10px;
   padding-top: 10px;
   border: none;
-  background-color: #000000;
+  background-color: #e5e5e5;
   display: none;
 }
 
@@ -1460,7 +1460,7 @@ h2,h3,h4,h5,h6 a {
 }
 
 .docs-drawer.full-screen #search-container {
-  background: none;
+  background: transparent !important;
   width: 400px;
   margin: 0 auto;
 }
