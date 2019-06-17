@@ -1,5 +1,5 @@
 {{/* Generates a valid Algolia search index */}}
-{{- $.Scratch.Add "index" slice -}}
+{{- $.Scratch.Add   "index" slice -}}
 {{- range .Site.AllPages -}}
   {{- if and (not .Draft) (and (not .Params.private) (and (not .Params.hidden) (not .Params.disableSearch))) -}}
 
@@ -19,6 +19,7 @@
         {{- with $currentSection -}}
           {{- $.Scratch.Add "currentSectionTitles" .Title -}}
           {{- $.Scratch.Set "currentSectionURL" .URL -}}
+          {{- $.Scratch.Set "currentSectionKeywords" .Keywords -}}
         {{- end -}}
 
       {{- end -}}
@@ -28,7 +29,8 @@
     {{- $currentSectionTitles := $.Scratch.Get "currentSectionTitles" -}}
     {{- $sectionURL := $.Scratch.Get "currentSectionURL" -}}
     {{- $sectionTitles := printf "%s" (delimit $currentSectionTitles " : ") -}}
-    {{- $.Scratch.Add "index" (dict "objectID" .UniqueID "sectionTitles" $sectionTitles "sectionURL" $sectionURL "content" .Content "title" .Title "url" .URL)}}
+    {{- $keywords := printf "%s" (delimit .Keywords " ") -}}
+    {{- $.Scratch.Add "index" (dict "objectID" .UniqueID "sectionTitles" $sectionTitles "sectionURL" $sectionURL "content" .Content "title" .Title "url" .URL "keywords" $keywords)}}
   {{- end -}}
 {{- end -}}
 {{- $.Scratch.Get "index" | jsonify -}}

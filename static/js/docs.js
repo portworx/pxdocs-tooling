@@ -86,8 +86,8 @@ $(function() {
       routing: true,
       searchParameters: {
         hitsPerPage: 9999,
-        attributesToRetrieve: ['title', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
-        attributesToHighlight: ['title', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
+        attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
+        attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
       },
       searchFunction: function(helper) {
         var searchResults = $('#search-hits');
