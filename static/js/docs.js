@@ -249,7 +249,7 @@ $(function() {
 
       $('#version-menu #version-menu-options').append(versionOption)
     })
-    $('#version-menu #text-button').text('Version: ' + VERSIONS_CURRENT)
+    $('#version-menu #text-button').text('Portworx Version: ' + VERSIONS_CURRENT).append('<i class="material-icons inline-arrow">keyboard_arrow_up</i>')
   }
 
   if(VERSIONS_BASE_URL) {

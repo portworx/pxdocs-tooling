@@ -547,32 +547,30 @@ h2 {
 }
 
 #version-menu #vert-button {
+  display: none;
   margin-left: 10px;
   color: #666;
 }
 
 #version-menu #text-button {
-  color: #666 !important;
-
-  /* Styling options for version select button:
-
-  * A solid border around the version number:
-
-  border-style: solid;
-  line-height: normal;
-  border-width: 2px;
-  border-color: #f15a24;
-
-  * Buttonize the version number:
-
-  background-color: #f15a24;
-  line-height: normal;
+  /* background-color: #f15a24; */
+  /* background-color: #4a94d0; */
+  background-color: #55565a;
+  /* line-height: normal; */
   color: #FFF;
   font-weight: 400;
+  /* color: #666 !important; */
+  display: block;
+  /* margin: auto; */
+  /* width: 90%; */
+  margin-left: 15px;
+  padding-right: 10px;
+  text-transform: capitalize;
+}
 
-  *
-  */
-
+#version-menu .inline-arrow {
+  margin-bottom: 3px;
+}
 
 }
 
