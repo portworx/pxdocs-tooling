@@ -553,16 +553,12 @@ h2 {
 }
 
 #version-menu #text-button {
-  /* background-color: #f15a24; */
-  /* background-color: #4a94d0; */
-  background-color: #55565a;
-  /* line-height: normal; */
+  background-color: #f15a24;
   color: #FFF;
   font-weight: 400;
-  /* color: #666 !important; */
   display: block;
-  /* margin: auto; */
-  /* width: 90%; */
+  margin: auto;
+  width: 90%;
   margin-left: 15px;
   padding-right: 10px;
   text-transform: capitalize;
