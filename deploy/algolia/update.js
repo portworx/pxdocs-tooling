@@ -19,7 +19,7 @@ module.exports = function update(indexName, indexData, options, cb) {
         if (typeof options === "function" && typeof cb !== "function") {
             cb = options
         }
-            
+
         var client = algoliaSearch(
             process.env.ALGOLIA_APP_ID,
             process.env.ALGOLIA_ADMIN_KEY
@@ -63,7 +63,7 @@ module.exports = function update(indexName, indexData, options, cb) {
                     var toDelete = operations.delete.map(function(id) {
                         return actionDelete(id, indexName)
                     })
-                        
+
                     var batchActions = [].concat(toAdd, toUpdate, toDelete)
 
                     // Perform the batch API call
@@ -87,6 +87,7 @@ module.exports = function update(indexName, indexData, options, cb) {
         index.setSettings({
             attributeForDistinct: 'url',
             distinct: 1,
+            searchableAttributes: ['keywords', 'sectionTitles', 'title', 'content']
         }, function(err, content) {
             if(err) {
                 cb(err)
@@ -96,8 +97,8 @@ module.exports = function update(indexName, indexData, options, cb) {
             }
         })
 
-        
-        
+
+
     } catch (err) {
         cb(err)
     }
