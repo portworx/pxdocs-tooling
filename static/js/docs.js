@@ -321,11 +321,12 @@ $(function() {
 
     if(newHashId && newHashId != currentHashId) {
 
+      // disable history push state for right side menu items
       if(history.pushState) {
-        history.pushState(null, null, '#' + newHashId)
+        // history.pushState(null, null, '#' + newHashId)
       }
       else {
-        location.hash = '#' + activeElement.attr('id')
+        // location.hash = '#' + activeElement.attr('id')
       }
     }
   }
