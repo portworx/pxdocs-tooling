@@ -51,13 +51,6 @@ spec:
           serviceName: docs-1-7
           servicePort: 80
         path: /
-  - host: docsnew.portworx.com
-    http:
-      paths:
-      - backend:
-          serviceName: docs-2-0
-          servicePort: 80
-        path: /
   tls:
   - hosts:
     - docs.portworx.com
