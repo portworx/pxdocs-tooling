@@ -1,0 +1,15 @@
+{{ define "main" }}
+    {{- partial "contentheader.html" . }}
+
+
+{{ range .Site.Pages }}
+  {{ if eq .Params.homepagegroup "k8s 1"}}
+  <h2>{{ .Title }}</h2>
+    <p> <strong> Description: </strong> {{ .Description }} </p>
+    <p> <strong>Link: </strong> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </p>
+  {{ end }}
+
+{{ end }}
+
+    {{- partial "prevnext.html" . }}
+{{ end }}
