@@ -7,7 +7,7 @@
 
 -->
 
-{{- range (( where .Site.Pages "Section" "Other orchestrators") .Site.Pages.ByWeight)}}
+{{- range (( where .Site.Pages "Section" "other-orchestrators") .Site.Pages.ByWeight)}}
   {{- if eq .Parent (.Site.GetPage "/other-orchestrators") }}
       {{- template "nav-tree" dict "section" . "currentnode" $currentNode "depth" $depth}}
   {{- end}}
@@ -107,7 +107,7 @@
             <!--
               loop children
              -->
-            {{- range (( where .Site.Pages "Section" "Other orchestrators") .Site.Pages.ByWeight)}}
+            {{- range (( where .Site.Pages "Section" "other-orchestrators") .Site.Pages.ByWeight)}}
 
               {{- template "nav-tree" dict "section" . "currentnode" $currentNode "depth" (add $depth 1)}}
 
