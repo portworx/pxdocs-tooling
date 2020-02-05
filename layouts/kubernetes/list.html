@@ -20,7 +20,7 @@
           {{- if and (eq .Parent $section) (not .Params.Hidden)}}
             {{ .Render "logo-li" }}
           {{ end }}
-        {{ end }}
+        {{ end }} 
       </div>
     {{- else -}}
       {{- range $pages.ByWeight }}
@@ -29,8 +29,9 @@
             {{ .Render "li" }}
           </div>
         {{ end }}
-      {{ end }}
+      {{ end }} 
     {{- end -}}
   {{- end}}
   {{- partial "prevnext.html" . }}
 {{end}}
+

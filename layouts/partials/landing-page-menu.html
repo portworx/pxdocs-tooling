@@ -1,8 +1,14 @@
 {{- $currentNode := . }}
 {{- $depth := 0 }}
 
-{{- range (( where .Site.Pages "Section" "other-orchestrators") .Site.Pages.ByWeight)}}
-  {{- if eq .Parent (.Site.GetPage "/other-orchestrators") }}
+<!--
+{{- .Scratch.Set "pages" (.Site.Home.Pages | union .Site.Home.Sections) }}
+{{- $pages := (.Scratch.Get "pages") }}
+
+-->
+
+{{- range (( where .Site.Pages "Section" "kubernetes") .Site.Pages.ByWeight)}}
+  {{- if eq .Parent (.Site.GetPage "/kubernetes") }}
       {{- template "nav-tree" dict "section" . "currentnode" $currentNode "depth" $depth}}
   {{- end}}
 {{- end}}
@@ -101,7 +107,11 @@
             <!--
               loop children
              -->
+            {{- range (( where .Site.Pages "Section" "kubernetes") .Site.Pages.ByWeight)}}
 
+              {{- template "nav-tree" dict "section" . "currentnode" $currentNode "depth" (add $depth 1)}}
+
+            {{- end}}
           </div>
 
 

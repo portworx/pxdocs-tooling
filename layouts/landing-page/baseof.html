@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="{{"css/instantsearch-theme-algolia.min.css" | relURL}}?timestamp={{ now.Unix }}">
 
     <link rel="canonical" href="{{ .Permalink }}">
+
   </head>
   <body data-url="{{ .RelPermalink }}">
     <div class="docs-layout">
@@ -52,7 +53,7 @@
       <div id="search-hits">
       </div>
       <div class="docs-drawer">
-        {{- partial "other-orchestrators-section-sidebar.html" . }}
+        {{- partial "landing-page-sidebar.html" . }}
       </div>
 
 

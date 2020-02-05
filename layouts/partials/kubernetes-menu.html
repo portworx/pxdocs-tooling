@@ -107,13 +107,11 @@
             <!--
               loop children
              -->
-
             {{- range (( where .Site.Pages "Section" "kubernetes") .Site.Pages.ByWeight)}}
-
+ 
               {{- template "nav-tree" dict "section" . "currentnode" $currentNode "depth" (add $depth 1)}}
 
             {{- end}}
-
           </div>
 
 
@@ -131,3 +129,5 @@
 
   {{- end}}
 {{- end}}
+
+
