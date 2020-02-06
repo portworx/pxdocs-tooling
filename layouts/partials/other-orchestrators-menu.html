@@ -1,11 +1,12 @@
 {{- $currentNode := . }}
 {{- $depth := 0 }}
+
 {{- .Scratch.Set "pages" (.Site.Home.Pages | union .Site.Home.Sections) }}
 {{- $pages := (.Scratch.Get "pages") }}
 
 {{- range $pages.ByWeight}}
   {{- if eq .Parent .Site.Home }}
-    {{- if eq .Section "kubernetes"}}
+    {{- if eq .Section "other-orchestrators"}}
       {{- template "nav-tree" dict "section" . "currentnode" $currentNode "depth" $depth}}
     {{- end }}
   {{- end}}
@@ -94,7 +95,7 @@
              -->
             {{- .Scratch.Set "pages" .Pages }}
             {{- if .Sections}}
-              {{- if eq .Section "kubernetes"}}
+              {{- if eq .Section "other-orchestrators"}}
                 {{- .Scratch.Set "pages" (.Pages | union .Sections) }}
               {{- end}}
             {{- end}}
@@ -125,5 +126,4 @@
 
   {{- end}}
 {{- end}}
-
 

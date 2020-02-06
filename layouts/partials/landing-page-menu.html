@@ -1,21 +1,12 @@
 {{- $currentNode := . }}
 {{- $depth := 0 }}
-
-<!--
 {{- .Scratch.Set "pages" (.Site.Home.Pages | union .Site.Home.Sections) }}
 {{- $pages := (.Scratch.Get "pages") }}
-
 {{- range $pages.ByWeight}}
   {{- if eq .Parent .Site.Home }}
-    {{- template "nav-tree" dict "section" . "currentnode" $currentNode "depth" $depth}}
-  {{- end}}
-{{- end}}
-
--->
-
-{{- range (( where .Site.Pages "Section" "kubernetes" | union .Site.Home.Sections ) .Site.Pages.ByWeight)}}
-  {{- if eq .Parent (.Site.GetPage "/kubernetes") }}
+    {{- if eq .Section "kubernetes"}}
       {{- template "nav-tree" dict "section" . "currentnode" $currentNode "depth" $depth}}
+     {{- end}}
   {{- end}}
 {{- end}}
 
@@ -100,20 +91,18 @@
             <!--
               collate children
              -->
-
-            <!--
-            Commenting this for now...
             {{- .Scratch.Set "pages" .Pages }}
             {{- if .Sections}}
-              {{- .Scratch.Set "pages" (.Pages | union .Sections) }}
+              {{- if eq .Section "kubernetes"}}
+                {{- .Scratch.Set "pages" (.Pages | union .Sections) }}
+              {{- end}}
             {{- end}}
             {{- $pages := (.Scratch.Get "pages") }}
-            -->
 
             <!--
               loop children
              -->
-            {{- range (( where .Site.Pages "Section" "kubernetes" | union .Site.Home.Sections ) .Site.Pages.ByWeight)}}
+            {{- range $pages.ByWeight }}
 
               {{- template "nav-tree" dict "section" . "currentnode" $currentNode "depth" (add $depth 1)}}
 
@@ -135,3 +124,4 @@
 
   {{- end}}
 {{- end}}
+
