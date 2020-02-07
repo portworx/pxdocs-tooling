@@ -1612,3 +1612,22 @@ code .s {
     text-align: left;
   }
 }
+
+/*
+
+  Landing page version side div
+
+*/
+
+.landing-sidebar {
+  display: flex;
+  max-width: 300px;
+  flex-direction: column;
+  padding: 2rem;
+  position: absolute;
+}
+.version li, .orchestrator li, a {
+  list-style: none;
+  color: #111;
+  /* font-weight: 350; */
+}

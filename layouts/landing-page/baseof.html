@@ -48,13 +48,43 @@
       </header>
 
       <!--
-        SIDEBAR
+        VERSION SIDEBAR
        -->
       <div id="search-hits">
       </div>
-      <div class="docs-drawer">
-        {{- partial "landing-page-sidebar.html" . }}
+      <div class="landing-sidebar">
+        <div class="version">
+          <h4>Versions</h4>
+          <ul>
+            <li>
+              <a style="color: #f15a24;">2.3</a>
+            </li>
+            <li>
+              <a>2.2</a>
+            </li>
+            <li>
+              <a>2.1</a>
+            </li>
+            <li>
+              <a>2.0</a>
+            </li>
+            <li>
+              <a>1.7</a>
+            </li>
+          </div>
+          <div class="orchestrator">
+            <h4>Orchestrator</h4>
+            <ul>
+              <li>
+                <a>Kubernetes</a>
+              </li>
+              <li>
+                <a>Other Orchestrators</a>
+              </li>
+            </ul>
+          </div>
       </div>
+
 
 
       <!--
@@ -68,15 +98,8 @@
         </div>
       </main>
 
-      <div id="scrollspy-container">
-        <nav>
-          <ul id="scrollspy-list">
 
-          </ul>
-        </nav>
-      </div>
-
-
+      <!-- We need to modify the footer. maybe we can add a wrap div to the other baseof that shortens it on the left side when the sidebar is present -->
       <div class="docs-footer-padding"></div>
       <footer class="docs-footer">
         {{- partial "footer.html" . }}
