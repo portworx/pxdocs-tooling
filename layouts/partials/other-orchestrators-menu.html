@@ -7,7 +7,7 @@
 {{- range $pages.ByWeight}}
   {{- if eq .Parent .Site.Home }}
     {{- if eq .Section "other-orchestrators"}}
-      {{- template "nav-tree" dict "section" . "currentnode" $currentNode "depth" $depth}}
+      {{- template "other-orchestrators-nav-tree" dict "section" . "currentnode" $currentNode "depth" $depth}}
     {{- end }}
   {{- end}}
 {{- end}}
@@ -15,7 +15,7 @@
 <!--
   nav-link template
  -->
-{{- define "nav-link" }}
+{{- define "other-orchestrators-nav-link" }}
   {{- $currentNode := .currentnode }}
   {{- $depth := .depth }}
   {{- $node := .node }}
@@ -60,7 +60,7 @@
 <!--
   nav-tree template
  -->
-{{- define "nav-tree" }}
+{{- define "other-orchestrators-nav-tree" }}
   {{- $currentNode := .currentnode }}
   {{- $depth := .depth }}
   {{- $section := .section }}
@@ -87,7 +87,7 @@
           <!--
             render link
            -->
-          {{- template "nav-link" dict "node" . "currentnode" $currentNode "depth" $depth "mode" "branch"}}
+          {{- template "other-orchestrators-nav-link" dict "node" . "currentnode" $currentNode "depth" $depth "mode" "branch"}}
 
           <div id="menu-children-{{- .UniqueID -}}" class="menu-children {{- if $open }} open{{ end }}">
             <!--
@@ -106,7 +106,7 @@
              -->
             {{- range $pages.ByWeight }}
 
-              {{- template "nav-tree" dict "section" . "currentnode" $currentNode "depth" (add $depth 1)}}
+              {{- template "other-orchestrators-nav-tree" dict "section" . "currentnode" $currentNode "depth" (add $depth 1)}}
 
             {{- end}}
           </div>
@@ -118,7 +118,7 @@
        -->
       {{- else}}
 
-        {{- template "nav-link" dict "node" . "currentnode" $currentNode "depth" $depth "mode" "leaf"}}
+        {{- template "other-orchestrators-nav-link" dict "node" . "currentnode" $currentNode "depth" $depth "mode" "leaf"}}
 
       {{- end}}
     {{- end}}
