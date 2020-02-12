@@ -55,36 +55,40 @@
       <div class="landing-sidebar">
         <div class="version">
           <h4>Versions</h4>
-          <ul>
-            <li>
-              <a style="color: #f15a24;">2.3</a>
-            </li>
-            <li>
-              <a>2.2</a>
-            </li>
-            <li>
-              <a>2.1</a>
-            </li>
-            <li>
-              <a>2.0</a>
-            </li>
-            <li>
-              <a>1.7</a>
-            </li>
+            <div>
+              <ul id="side-version-menu">
+
+              </ul>
+            </div>
           </div>
           <div class="orchestrator">
             <h4>Orchestrator</h4>
             <ul>
               <li>
-                <a>Kubernetes</a>
+                <a href="/kubernetes">Kubernetes</a>
               </li>
               <li>
-                <a>Other Orchestrators</a>
+                <a href="/other-orchestrators">Other Orchestrators</a>
               </li>
             </ul>
           </div>
       </div>
-
+      <!-- we can probably modify the current version partial to be static -->
+      <script>
+      window.onload = function sideVersionMenu() {
+        var sideAllVersions = VERSIONS_ALL.split(',')
+        sideAllVersions.forEach(function(sideVersion) {
+          if(sideVersion == VERSIONS_CURRENT) {
+            isCurrentVersion = 'style="color: #f15a24;"'
+          } else {
+            isCurrentVersion = ''
+          }
+          var sideVersionUrl = location.protocol + '//' + sideVersion + '.' + VERSIONS_BASE_URL
+          var sideVersionOption = $('<li> <a ' + isCurrentVersion + ' href="' + sideVersionUrl + '">' + sideVersion + '</a> </li>')
+          $('#side-version-menu').append(sideVersionOption)
+        })
+      }
+      </script>
 
 
       <!--
