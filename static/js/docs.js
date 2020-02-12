@@ -261,6 +261,29 @@ $(function() {
 
   /*
 
+    sidebar version list
+
+  */
+
+  function sideVersionMenu() {
+    var sideAllVersions = VERSIONS_ALL.split(',')
+    sideAllVersions.forEach(function(sideVersion) {
+      if(sideVersion == VERSIONS_CURRENT) {
+        isCurrentVersion = 'style="color: #f15a24;"'
+      } else {
+        isCurrentVersion = ''
+      }
+      var sideVersionUrl = location.protocol + '//' + sideVersion + '.' + VERSIONS_BASE_URL
+      var sideVersionOption = $('<li> <a ' + isCurrentVersion + ' href="' + sideVersionUrl + '">' + sideVersion + '</a> </li>')
+      $('#side-version-menu').append(sideVersionOption)
+    })
+  }
+
+  if(VERSIONS_BASE_URL) {
+    sideVersionMenu()
+  }
+  /*
+
     scrollspy
 
   */
