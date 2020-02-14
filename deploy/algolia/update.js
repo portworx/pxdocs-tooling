@@ -86,8 +86,8 @@ module.exports = function update(indexName, indexData, options, cb) {
 
         index.setSettings({
             attributeForDistinct: 'url',
+            attributesForFaceting: ['category'],
             distinct: 1,
-            searchableAttributes: ['keywords', 'sectionTitles', 'title', 'content']
         }, function(err, content) {
             if(err) {
                 cb(err)

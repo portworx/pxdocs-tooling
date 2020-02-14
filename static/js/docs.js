@@ -78,7 +78,20 @@ $(function() {
     return text.toLowerCase().indexOf(search.toLowerCase())
   }
 
+  function getMeta(metaName) {
+    return document.getElementsByName('category')[0].getAttribute('content')
+  }
+
   function setupAlgolia() {
+    // Retrieve `category` attribute
+    const currentCategory = getMeta('category')
+    let currentFilters
+    if (currentCategory === 'k8s')
+      {
+        currentFilters = 'category:k8s' // TODO: We shouldn't hardcode this. Instead, we should put all these values in JSON file. Then, all our scripts should read the values from that JSON file. I can do this some time later, once we're sure everything works
+      } else {
+        currentFilters = 'category:non-k8s' // Ditto
+      }
     var search = instantsearch({
       appId: ALGOLIA_APP_ID,
       apiKey: ALGOLIA_API_KEY,
@@ -86,8 +99,9 @@ $(function() {
       routing: true,
       searchParameters: {
         hitsPerPage: 9999,
-        attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
-        attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
+        attributesToRetrieve: ['title', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content', 'category'],
+        attributesToHighlight: ['title', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
+        filters: currentFilters,
       },
       searchFunction: function(helper) {
         var searchResults = $('#search-hits');
@@ -100,6 +114,7 @@ $(function() {
         helper.search()
       }
     })
+
 
     search.addWidget(
       instantsearch.widgets.searchBox({
@@ -261,29 +276,6 @@ $(function() {
 
   /*
 
-    sidebar version list
-
-  */
-
-  function sideVersionMenu() {
-    var sideAllVersions = VERSIONS_ALL.split(',')
-    sideAllVersions.forEach(function(sideVersion) {
-      if(sideVersion == VERSIONS_CURRENT) {
-        isCurrentVersion = 'style="color: #f15a24;"'
-      } else {
-        isCurrentVersion = ''
-      }
-      var sideVersionUrl = location.protocol + '//' + sideVersion + '.' + VERSIONS_BASE_URL
-      var sideVersionOption = $('<li> <a ' + isCurrentVersion + ' href="' + sideVersionUrl + '">' + sideVersion + '</a> </li>')
-      $('#side-version-menu').append(sideVersionOption)
-    })
-  }
-
-  if(VERSIONS_BASE_URL) {
-    sideVersionMenu()
-  }
-  /*
-
     scrollspy
 
   */
@@ -344,12 +336,11 @@ $(function() {
 
     if(newHashId && newHashId != currentHashId) {
 
-      // disable history push state for right side menu items
       if(history.pushState) {
-        // history.pushState(null, null, '#' + newHashId)
+        history.pushState(null, null, '#' + newHashId)
       }
       else {
-        // location.hash = '#' + activeElement.attr('id')
+        location.hash = '#' + activeElement.attr('id')
       }
     }
   }
