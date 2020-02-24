@@ -86,12 +86,17 @@ $(function() {
     // Retrieve `category` attribute
     const currentCategory = getMeta('category')
     let currentFilters
-    if (currentCategory === 'k8s')
-      {
-        currentFilters = 'category:k8s' // TODO: We shouldn't hardcode this. Instead, we should put all these values in JSON file. Then, all our scripts should read the values from that JSON file. I can do this some time later, once we're sure everything works
-      } else {
-        currentFilters = 'category:non-k8s' // Ditto
-      }
+    switch (currentCategory) {
+      case 'k8s':
+        currentFilters = 'category:k8s'
+        break
+      case 'non-k8s':
+        currentFilters = 'category:non-k8s'
+        break
+      case 'common':
+        currentFilters = 'category:k8s OR category:non-k8s OR category:common'
+        break
+    }
     var search = instantsearch({
       appId: ALGOLIA_APP_ID,
       apiKey: ALGOLIA_API_KEY,
