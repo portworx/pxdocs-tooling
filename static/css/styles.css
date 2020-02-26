@@ -662,6 +662,20 @@ hr.margin {
 
 */
 
+
+.new {
+
+
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 40px;
+  /* left offset for sidebar */
+  margin-left: 300px;
+  /* this needs to be the 300px for the sidebar - 120px padding - 250px scrollspy */
+  width: calc(100% - 690px);
+  max-width: 1000px;
+}
+
 .docs-content {
 
 

@@ -1,25 +1,5 @@
 {{ define "main" }}
 
-<h1>Portworx Documentation</h1>
-
-<header id="search-container-holding-space">
-  <div id="search-box-holding">
-    <div id="ais-search-box-holding">
-      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Search for pages" role="textbox" spellcheck="false" type="text" value="" class="ais-search-box--input-holding">
-    </div>
-  </div>
-</header>
-<header id="search-container">
-  <div id="search-box">
-
-  </div>
-</header>
-
-<div id="search-hits-wrapper-landingpage">
-  <div id="search-hits"></div>
-</div>
-
-
 <!-- Draw the section titles and their child section titles -->
 {{ range .Site.Pages }}
   {{ if eq .Params.homepagegroup "k8s 1"}}
