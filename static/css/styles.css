@@ -504,7 +504,7 @@ h2 {
   padding-bottom: 10px;
   padding-top: 10px;
   border: none;
-  background-color: #e5e5e5;
+  /* background-color: #e5e5e5; */
   display: none;
 }
 
@@ -662,10 +662,9 @@ hr.margin {
 
 */
 
-
+/* Testing --> */
 .new {
-
-
+  height: 100%;
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 40px;
@@ -675,6 +674,20 @@ hr.margin {
   width: calc(100% - 690px);
   max-width: 1000px;
 }
+
+.new.full-screen {
+  max-width: 100%;
+  background: #fff;
+  padding-top: 30px;
+}
+
+.new.full-screen #search-container {
+  background: transparent !important;
+  width: 400px;
+  margin: 0 auto;
+}
+
+/* Testing <-- */
 
 .docs-content {
 
@@ -893,9 +906,10 @@ hr.margin {
 
 
 #search-hits-wrapper-landing-page {
+  height: 100%;
   position: absolute;
   left: 240px;
-  top: 200px;
+  top: 0px;
 }
 
 #search-hits {
@@ -911,7 +925,18 @@ hr.margin {
   max-height: 450px;
   overflow-y: auto;
 }
-```
+
+#page-title {
+  color: rgba(0,0,0,.87);
+  line-height: 1.35;
+  letter-spacing: -.02em;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 10px;
+}
 
 @media screen and (max-width: 1025px) {
   #search-hits {

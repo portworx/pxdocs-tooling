@@ -234,16 +234,15 @@ $(function() {
 
   $(document).keyup(function (e) {
     if ($('.ais-search-box--input:focus') && $('.ais-search-box--input').val().length > 0 && (e.keyCode === 13)  && !$('#search-hits').hasClass('full-screen')) {
-      console.log('Add class full-screen')
-      $('#search-hits, .docs-drawer').addClass('full-screen')
-      $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer, #landing-sidebar, .landing-sidebar').hide() //change this
+      $('#search-hits, .docs-drawer, .new').addClass('full-screen')
+      $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer, .landing-sidebar, #page-title').hide()
       $('#search-box').prepend('<a href="#" class="full-screen__close"><i class="material-icons">close</i><br/>Close</a>')
     }
   })
 
   $('body').on('click', '.full-screen__close', function() {
-    $('#search-hits, .docs-drawer').removeClass('full-screen')
-    $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer').show()
+    $('#search-hits, .docs-drawer, .new').removeClass('full-screen')
+    $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer, .landing-sidebar, #page-title').show()
     $(this).remove()
   })
 
@@ -558,7 +557,6 @@ $(function() {
 
   */
   $(window).scroll( function() {
-    console.log('scroll')
     var headerHeight = $('.docs-header').height()
     var windowHeight = $(document).height()
     var scrolledVal = $(document).scrollTop().valueOf()
