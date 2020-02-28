@@ -662,8 +662,8 @@ hr.margin {
 
 */
 
-/* Testing --> */
-.new {
+/* This is to show the search results in the right place.*/
+.landing-page-wrapper {
   height: 100%;
   padding-left: 30px;
   padding-right: 30px;
@@ -675,19 +675,6 @@ hr.margin {
   max-width: 1000px;
 }
 
-.new.full-screen {
-  max-width: 100%;
-  background: #fff;
-  padding-top: 30px;
-}
-
-.new.full-screen #search-container {
-  background: transparent !important;
-  width: 400px;
-  margin: 0 auto;
-}
-
-/* Testing <-- */
 
 .docs-content {
 

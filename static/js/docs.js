@@ -233,15 +233,16 @@ $(function() {
   }
 
   $(document).keyup(function (e) {
-    if ($('.ais-search-box--input:focus') && $('.ais-search-box--input').val().length > 0 && (e.keyCode === 13)  && !$('#search-hits').hasClass('full-screen')) {
-      $('#search-hits, .docs-drawer, .new').addClass('full-screen')
+    // NOTE: The next line of code disables full-screen search results for the landing page.
+    if ($('.ais-search-box--input:focus') && $('.ais-search-box--input').val().length > 0 && (e.keyCode === 13)  && !$('#search-hits').hasClass('full-screen') && window.location.pathname !== '/landing-page/') {
+      $('#search-hits, .docs-drawer').addClass('full-screen')
       $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer, .landing-sidebar, #page-title').hide()
       $('#search-box').prepend('<a href="#" class="full-screen__close"><i class="material-icons">close</i><br/>Close</a>')
     }
   })
 
   $('body').on('click', '.full-screen__close', function() {
-    $('#search-hits, .docs-drawer, .new').removeClass('full-screen')
+    $('#search-hits, .docs-drawer').removeClass('full-screen')
     $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer, .landing-sidebar, #page-title').show()
     $(this).remove()
   })
