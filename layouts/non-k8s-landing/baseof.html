@@ -129,6 +129,9 @@
                   {{ range .Sections }}
                       <li> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </li>
                   {{ end }}
+                  {{ range .Pages }}
+                      <li> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </li>
+                  {{ end }}
                 {{ end }}
                   <li>
                     <a id="landing-section-more-link" href="{{.RelPermalink}}">more</a>
