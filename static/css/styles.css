@@ -1668,6 +1668,7 @@ code .s {
   list-style: none;
   color: #111;
   /* font-weight: 350; */
+  text-decoration: none;
 }
 
 /*
