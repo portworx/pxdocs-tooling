@@ -889,12 +889,16 @@ hr.margin {
   top: 80px;
 }
 
-
+/* typo in source, doesn't match this selector */
 #search-hits-wrapper-landing-page {
   height: 100%;
   position: absolute;
   left: 240px;
   top: 0px;
+}
+/* I think we need to just set this one to zero */
+#search-hits-wrapper-landingpage {
+  height: 0;
 }
 
 #search-hits {
@@ -1677,12 +1681,14 @@ code .s {
 
 */
 .landing-section {
-  /* columnated */
-  display: flex;
+  /* list multiple sections columnated */
+  /* display: flex; */
+
+  /* horizontal */
 }
 .landing-section-wrapper {
   /* max-height: 300px; */
-  width: 300px;
+  /* width: 300px; */
 }
 .landing-section-title {
   text-decoration: none;
@@ -1695,6 +1701,11 @@ code .s {
 }
 .landing-section-content ul {
   list-style-type: none;
+  /* break the list into a fixed number of columns */
+  column-count: 3;
+}
+.landing-section-content li {
+
 }
 .landing-section-content a {
   text-decoration: none;
