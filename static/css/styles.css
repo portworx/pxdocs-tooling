@@ -664,10 +664,8 @@ hr.margin {
 
 /* This is to show the search results in the right place.*/
 .landing-page-wrapper {
-  height: 100%;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-bottom: 40px;
+  /* height: 100%; */
+  padding: 30px;
   /* left offset for sidebar */
   margin-left: 300px;
   /* this needs to be the 300px for the sidebar - 120px padding - 250px scrollspy */
@@ -1670,4 +1668,42 @@ code .s {
   list-style: none;
   color: #111;
   /* font-weight: 350; */
+}
+
+/*
+
+  Landing page content divs
+
+*/
+.landing-section {
+  /* columnated */
+  display: flex;
+}
+.landing-section-wrapper {
+  /* max-height: 300px; */
+  width: 300px;
+}
+.landing-section-title {
+  text-decoration: none;
+}
+.landing-section-title a {
+  text-decoration: none;
+}
+.landing-section-title h2 {
+
+}
+.landing-section-content ul {
+  list-style-type: none;
+}
+.landing-section-content a {
+  text-decoration: none;
+}
+
+.landing-section-content{
+
+}
+#landing-section-more-link {
+  /* float:right;
+  margin-right: 30px; */
+  color: black;
 }
