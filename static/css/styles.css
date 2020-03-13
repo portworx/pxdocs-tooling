@@ -1697,7 +1697,7 @@ code .s {
   text-decoration: none;
 }
 .landing-section-title h2 {
-
+  color: black;
 }
 .landing-section-content ul {
   list-style-type: none;
@@ -1718,4 +1718,11 @@ code .s {
   /* float:right;
   margin-right: 30px; */
   color: black;
+}
+.landing-section-icons {
+  /* tells css to render this as inline item under the flex defined in the `landing-sidebar` selector */
+  display: inline-flex;
+}
+.landing-section-icons img {
+  margin: auto;
 }
