@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pxbackup-${VERSIONS_TAG}
+  namespace: pxdocs
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: pxbackup-${VERSIONS_TAG}
