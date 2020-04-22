@@ -6,7 +6,7 @@ metadata:
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /
   name: pxbackup-ingress
-  namespace: pxbackup
+  namespace: pxdocs-backup
 spec:
   rules:
   - host: backup.docs.portworx.com

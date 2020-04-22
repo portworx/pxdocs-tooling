@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: pxbackup-${VERSIONS_TAG}
-  namespace: pxbackup
+  namespace: pxdocs-backup
 spec:
   replicas: 3
   strategy:
