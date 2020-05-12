@@ -7,7 +7,7 @@
     "algolia": "node index.js"
   },
   "dependencies": {
-    "atomic-algolia": "^0.3.15",
-    "algoliasearch": "^3.24.9"
+    "algoliasearch": "^3.24.9",
+    "atomic-algolia": "^0.3.17"
   }
 }

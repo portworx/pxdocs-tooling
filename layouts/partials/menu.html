@@ -122,3 +122,21 @@
 
   {{- end}}
 {{- end}}
+
+{{- if eq .Site.Title "Portworx Documentation"}}
+  <a
+      style="color:rgb(0, 0, 0);"
+      class="mdl-navigation__link"
+      href="https://backup.docs.portworx.com/"
+    >
+    <span>&nbsp;&nbsp;&nbsp;PX-Backup</span> </a>
+{{- end}}
+
+{{- if eq .Site.Title "PX-Backup Documentation"}}
+  <a
+      style="color:rgb(0, 0, 0);"
+      class="mdl-navigation__link"
+      href="https://docs.portworx.com/"
+    >
+    <span>&nbsp;&nbsp;&nbsp;PX-Enterprise</span> </a>
+{{- end}}
