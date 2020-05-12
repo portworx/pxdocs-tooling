@@ -117,32 +117,36 @@
           <!-- Draw the section titles and their child section titles -->
           {{ range .Site.Pages }}
             {{ if eq .Params.landing "k8s"}}
-            <div class="landing-section-wrapper">
-              <div class="landing-section-title">
-                <a href="{{.RelPermalink}}"><h2>{{ .Title }}</h2></a>
-                <!-- <p> <strong> Description: </strong> {{ .Description }} </p>
-                <p> <strong>Link: </strong> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </p> -->
-              </div>
-              <div class="landing-section-content">
-                <ul>
-                {{ with . }}
-                  <div class="landing-section-icons" style="display:none;">
-                    <!-- using px logo as a placeholder, we'll have to decide if we want to draw this from themes or content -->
-                    <img src="/images/portworx-logo.png" style="display:none;"></img>
+                <div class="landing-section-wrapper">
+                  <div class="landing-section-title">
+                    <a href="{{.RelPermalink}}"><h2>{{ .Title }}</h2></a>
+                    <!-- <p> <strong> Description: </strong> {{ .Description }} </p>
+                    <p> <strong>Link: </strong> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </p> -->
                   </div>
-                  {{ range .Sections.ByWeight }}
-                      <li> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </li>
-                  {{ end }}
-                  {{ range .Pages.ByWeight }}
-                      <li> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </li>
-                  {{ end }}
-                {{ end }}
-                  <li>
-                    <a id="landing-section-more-link" href="{{.RelPermalink}}">more</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+                  <div class="landing-section-content">
+                    <ul>
+                    {{ with . }}
+                      <div class="landing-section-icons" style="display:none;">
+                        <!-- using px logo as a placeholder, we'll have to decide if we want to draw this from themes or content -->
+                        <img src="/images/portworx-logo.png" style="display:none;"></img>
+                      </div>
+                      {{ range .Sections.ByWeight }}
+                        {{ if not .Params.Hidden }}
+                          <li> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </li>
+                        {{ end }}
+                      {{ end }}
+                      {{ range .Pages.ByWeight }}
+                        {{ if not .Params.Hidden }}
+                          <li> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </li>
+                        {{ end }}
+                      {{ end }}
+                    {{ end }}
+                      <li>
+                        <a id="landing-section-more-link" href="{{.RelPermalink}}">more</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
             {{ end }}
           {{ end }}
         </div>
