@@ -126,10 +126,14 @@
               <div class="landing-section-content">
                 <ul>
                 {{ with . }}
-                  {{ range .Sections }}
+                  <div class="landing-section-icons" style="display:none;">
+                    <!-- using px logo as a placeholder, we'll have to decide if we want to draw this from themes or content -->
+                    <img src="/images/portworx-logo.png" style="display:none;"></img>
+                  </div>
+                  {{ range .Sections.ByWeight }}
                       <li> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </li>
                   {{ end }}
-                  {{ range .Pages }}
+                  {{ range .Pages.ByWeight }}
                       <li> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </li>
                   {{ end }}
                 {{ end }}

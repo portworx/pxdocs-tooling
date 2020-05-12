@@ -1,8 +1,17 @@
 {{ define "main" }}
 
+<h1>Portworx Documentation</h1>
+
+<div id="search-box-holding">
+  <div id="ais-search-box-holding">
+    <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Search Portworx version 2.3 on Kubernetes" role="textbox" spellcheck="false" type="text" value="" class="ais-search-box--input-holding">
+  </div>
+</div>
+
+
 <!-- Draw the section titles and their child section titles -->
 {{ range .Site.Pages }}
-  {{ if eq .Params.homepagegroup "k8s 1"}}
+  {{ if eq .Params.landing "k8s"}}
   <div>
     <div>
       <a href="{{.RelPermalink}}"><h2>{{ .Title }}</h2></a>
