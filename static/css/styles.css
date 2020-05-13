@@ -1,3 +1,6 @@
+/* Using Sass for more complex landing page css. Make edits in `sassy.scss` and build outputs to `sassy-output.css` */
+@import 'sassy-output.css'
+
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
   height: 100%;
@@ -1654,74 +1657,3 @@ code .s {
   }
 }
 
-/*
-
-  Landing page version side div
-
-*/
-
-.landing-sidebar {
-  display: flex;
-  max-width: 300px;
-  flex-direction: column;
-  padding: 2rem;
-  position: absolute;
-}
-.version li, .orchestrator li, a {
-  list-style: none;
-  color: #111;
-  /* font-weight: 350; */
-  text-decoration: none;
-}
-
-/*
-
-  Landing page content divs
-
-*/
-.landing-section {
-  /* list multiple sections columnated */
-  /* display: flex; */
-
-  /* horizontal */
-}
-.landing-section-wrapper {
-  /* max-height: 300px; */
-  /* width: 300px; */
-}
-.landing-section-title {
-  text-decoration: none;
-}
-.landing-section-title a {
-  text-decoration: none;
-}
-.landing-section-title h2 {
-  color: black;
-}
-.landing-section-content ul {
-  list-style-type: none;
-  /* break the list into a fixed number of columns */
-  column-count: 3;
-}
-.landing-section-content li {
-
-}
-.landing-section-content a {
-  text-decoration: none;
-}
-
-.landing-section-content{
-
-}
-#landing-section-more-link {
-  /* float:right;
-  margin-right: 30px; */
-  color: black;
-}
-.landing-section-icons {
-  /* tells css to render this as inline item under the flex defined in the `landing-sidebar` selector */
-  display: inline-flex;
-}
-.landing-section-icons img {
-  margin: auto;
-}

@@ -1,0 +1,73 @@
+/*
+
+  Landing page version side div
+
+*/
+.landing-sidebar {
+  display: flex;
+  max-width: 300px;
+  flex-direction: column;
+  padding: 2rem;
+  position: absolute; }
+
+.version li, .orchestrator li, a {
+  list-style: none;
+  color: #111;
+  /* font-weight: 350; */
+  text-decoration: none; }
+
+/*
+
+  Landing page content divs
+
+*/
+.landing-section {
+  /* list multiple sections columnated */
+  display: flex;
+  flex-wrap: wrap;
+  /* horizontal */ }
+
+.landing-section-wrapper {
+  /* max-height: 300px; */
+  min-width: 285px;
+  padding: 15px; }
+
+.landing-section-title {
+  text-decoration: none; }
+  .landing-section-title a {
+    text-decoration: none; }
+    .landing-section-title a h2 {
+      color: black; }
+
+.landing-section-content {
+  display: flex;
+  flex-direction: column; }
+  .landing-section-content ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding-left: 0; }
+  .landing-section-content li {
+    line-height: 1.3;
+    padding-top: 7px;
+    max-width: 284px;
+    margin-right: 25px; }
+  .landing-section-content a {
+    text-decoration: none; }
+
+#landing-section-more-link {
+  /* float:right;
+  margin-right: 30px; */
+  color: black;
+  font-weight: 500;
+  display: none; }
+
+.landing-section-icons {
+  /* tells css to render this as inline item under the flex defined in the `landing-sidebar` selector */
+  display: inline-flex; }
+
+.landing-section-icons img {
+  margin: auto; }
+
+/*# sourceMappingURL=sassy-output.css.map */
