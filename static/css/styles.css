@@ -1,5 +1,5 @@
 /* Using Sass for more complex landing page css. Make edits in `sassy.scss` and build outputs to `sassy-output.css` */
-@import 'sassy-output.css'
+@import 'sassy-output.css';
 
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
@@ -419,6 +419,285 @@ h2 {
 }
 
 .docs-footer .right-col .copyright {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+/* 
+
+  Landing page footer
+  There's no reason for it be this compliated
+
+*/
+
+.landing-docs-footer {
+  /* visibility: hidden; */
+  position: relative;
+  z-index: 5000 !important;
+  bottom: 0px;
+  background-color: #262729;
+  color: #ffffff;
+  font-family: "Libre Franklin", sans-serif;
+  /* left: 300px; */
+  /* width: calc(100% - 300px) */
+}
+
+@media screen and (max-width: 1025px) {
+
+  .landing-docs-footer {
+    display: none;
+  }
+
+  .landing-docs-footer-padding {
+    display: none;
+  }
+
+}
+
+.landing-docs-footer .footer-container {
+
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.landing-docs-footer .left-col {
+  padding: 0 0 10px 2em;
+  min-width: 200px;
+  flex: 0;
+}
+
+.landing-docs-footer .middle-col {
+  flex: 1;
+  display: flex;
+  padding: 2.2em 20px 0;
+}
+
+.landing-docs-footer .right-col {
+  min-width: 300px;
+  padding:2px 0;
+  flex: 0;
+}
+
+/*
+
+  LANDING FOOTER LEFT COL
+
+*/
+.landing-docs-footer .left-col .page-sub-header {
+  font-size: 30px;
+  font-weight: 300;
+  margin: 0;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.landing-docs-footer .footer-input {
+  padding: 5px !important;
+  border-radius: 0;
+  background-color: #9d9fa2;
+  color: #fff;
+  border: none;
+  box-shadow: none;
+  font: inherit;
+}
+
+.landing-docs-footer .mktoForm .mktoFormCol {
+
+}
+
+.landing-docs-footer label {
+  font-weight: 200 !important;
+  display: none;
+}
+
+.landing-docs-footer input {
+  line-height: 20px !important;
+  border-radius: 0;
+  background-color: #9d9fa2;
+  color: #fff;
+  border: none;
+  max-width: 100%;
+  font-weight: 200 !important;
+  width: 100%;
+}
+
+.landing-docs-footer input::placeholder {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  font-weight: 200 !important;
+}
+
+.landing-docs-footer textarea {
+  line-height: 20px !important;
+  border-radius: 0;
+  background-color: #9d9fa2;
+  color: #fff;
+  border: none;
+  max-width: 100%;
+  width: 100%;
+}
+
+.landing-docs-footer textarea::placeholder {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  font-weight: 200 !important;
+}
+
+.landing-docs-footer select {
+  line-height: 20px !important;
+  border-radius: 0;
+  background-color: #9d9fa2;
+  color: #fff;
+  border: none;
+  max-width: 100%;
+  width: 100%;
+}
+
+.landing-docs-footer .mktoForm .mktoGutter {
+  float: left;
+  height: 1.2em;
+}
+
+.landing-docs-footer .mktoForm .mktoOffset {
+  display: none;
+}
+
+.landing-docs-footer .mktoForm .mktoFormCol {
+  margin-bottom: 3px !important;
+}
+
+.landing-docs-footer .mktoHtmlText {
+  font-size: 0.8em;
+  font-weight: 100 !important;
+}
+
+.landing-docs-footer .mktoButtonRow {
+  float: right;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  right: 30px !important;
+  margin-top: -3px !important;
+}
+
+.landing-docs-footer button.mktoButton {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 0 0 5px !important;
+  font-family: 'Libre Franklin',sans-serif;
+  font-weight: 700;
+  box-shadow: none !important;
+  height: 23px !important;
+  line-height: 18px !important;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 13px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.4);
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  float: right;
+}
+
+
+/*
+
+  LANDING FOOTER MIDDLE COL
+
+*/
+
+.landing-docs-footer .middle-col {
+  flex: 1;
+  display: flex;
+  padding: 24px 20px 0;
+}
+
+.landing-docs-footer .middle-col .link-col {
+  flex: 1;
+}
+
+.landing-docs-footer .middle-col ul.footer-links {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.landing-docs-footer .middle-col ul.footer-links > li {
+  line-height: 25px;
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+
+.landing-docs-footer .middle-col a {
+  font-family: "Benton Sans Lt", "Open Sans", sans-serif !important;
+  text-decoration: none;
+  color: #ccc;
+  font-size: 12px !important;
+  letter-spacing: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 400 !important;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0 .35em
+}
+
+.landing-docs-footer .middle-col .font-600 {
+  font-weight: 500 !important;
+}
+
+
+
+/*
+
+  LANDING FOOTER RIGHT COL
+
+*/
+
+.landing-docs-footer .right-col > img.portworx-logo {
+  max-height: 70px;
+  margin: 0;
+}
+
+.landing-docs-footer .right-col .footer-right-indent {
+  padding-left: 30px;
+  padding-top: 30px;
+}
+
+.landing-docs-footer .right-col img.footer-social {
+  height: 40px;
+  width: 40px;
+  padding: 5px;
+  vertical-align: middle;
+  max-height: 70px;
+}
+
+.landing-docs-footer .right-col a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 400;
+}
+
+.landing-docs-footer .right-col address {
+  font-family: "Benton Sans Lt", "Open Sans", sans-serif !important;
+  font-weight: 100 !important;
+  margin-bottom: 20px;
+  font-style: normal;
+  line-height: 1.42857143;
+  font-size: 14px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.landing-docs-footer .right-col .copyright {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
