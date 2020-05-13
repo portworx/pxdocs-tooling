@@ -969,6 +969,10 @@ hr.margin {
   max-width: 1000px;
 }
 
+.docs-content-landing {
+  width: 70%;
+}
+
 @media screen and (max-width: 1025px) {
   .docs-content {
 

@@ -81,7 +81,7 @@
     // add padding to control how visually dispersed each line item is
     padding-top: 7px;
     // prevent lines from exceeding max width, trying to wrap multiple lines if there's horizontal space.
-    max-width: 284px;
+    width: 277px;
     // push the next wrapped column to the right
     margin-right: 25px;
   }
