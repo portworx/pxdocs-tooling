@@ -85,7 +85,7 @@
       <div class="landing-page-wrapper">
 
         <div id="page-title">
-          Portworx Documentation
+          PX-Enterprise Documentation
         </div>
 
         <header id="search-container-holding-space">
@@ -95,8 +95,8 @@
             </div>
           </div>
         </header>
-        <header id="search-container">
-          <div id="search-box">
+        <header id="search-container" class="landing-search-container">
+          <div id="search-box" class="landing-search-box">
           </div>
         </header>
 
@@ -130,12 +130,9 @@
                         <!-- using px logo as a placeholder, we'll have to decide if we want to draw this from themes or content -->
                         <img src="/images/portworx-logo.png" style="display:none;"></img>
                       </div>
-                      {{ range .Sections.ByWeight }}
-                        {{ if not .Params.Hidden }}
-                          <li> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </li>
-                        {{ end }}
-                      {{ end }}
-                      {{ range .Pages.ByWeight }}
+                      {{- .Scratch.Set "pages" (.Pages | union .Sections) }}
+                      {{- $landingPages := (.Scratch.Get "pages") }}
+                      {{- range $landingPages.ByWeight }}
                         {{ if not .Params.Hidden }}
                           <li> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </li>
                         {{ end }}
