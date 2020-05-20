@@ -7,6 +7,9 @@
     <meta name="keywords" content="{{ .Keywords }}">
     <meta name="category" content="{{ .Params.Category }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    {{- if .Params.hasSibling}}
+    <meta name="robots" content="noindex">
+    {{end}}
     <title>{{ .Title }}</title>
 
     <meta property="og:locale" content="en_US" />
@@ -112,5 +115,3 @@
     </script>
   </body>
 </html>
-
-
