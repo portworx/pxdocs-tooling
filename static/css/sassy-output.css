@@ -3,12 +3,23 @@
   Landing page version side div
 
 */
+.landing-page-wrapper {
+  padding-top: 40px; }
+
+.landing-title {
+  font-size: 40px;
+  font-weight: 400;
+  padding-bottom: 20px; }
+
 .landing-sidebar {
   display: flex;
-  max-width: 300px;
+  width: 300px;
+  height: 100%;
   flex-direction: column;
-  padding: 2rem;
-  position: absolute; }
+  position: absolute;
+  background-color: #f5f5f5; }
+  .landing-sidebar .landing-sidebar-content {
+    padding: 2rem; }
 
 .version li, .orchestrator li, a {
   list-style: none;
