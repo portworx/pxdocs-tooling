@@ -130,7 +130,7 @@
                 <div class="landing-section-wrapper">
                   <div class="landing-section-title">
                     <a href="{{.RelPermalink}}"><h2>{{ .Title }}</h2></a>
-                      <p> <strong> Description: </strong> {{ .Description }} </p>
+                      <p>{{ .Description }} </p>
                     <!-- <p> <strong>Link: </strong> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </p> -->
                   </div>
                   <div class="landing-section-content">
@@ -147,10 +147,12 @@
                           <li> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </li>
                         {{ end }}
                       {{ end }}
+                      {{ if gt (len $landingPages) 7 }}
+                        <li>
+                          <a id="landing-section-more-link" href="{{.RelPermalink}}">more</a>
+                        </li>
+                      {{ end }}
                     {{ end }}
-                      <li>
-                        <a id="landing-section-more-link" href="{{.RelPermalink}}">more</a>
-                      </li>
                     </ul>
                   </div>
                 </div>
