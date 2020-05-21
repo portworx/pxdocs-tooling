@@ -51,7 +51,8 @@
   .landing-section-title a {
     text-decoration: none; }
     .landing-section-title a h2 {
-      color: black; }
+      color: black;
+      font-weight: 450; }
   .landing-section-title .landing-section-description {
     max-width: 277px;
     color: #8e8e8e !important;
@@ -65,10 +66,11 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    padding-left: 0; }
+    padding-left: 0;
+    margin-top: 8px; }
   .landing-section-content li {
     line-height: 1.3;
-    padding-top: 7px;
+    padding-top: 10px;
     width: 277px;
     margin-right: 25px; }
   .landing-section-content a {
