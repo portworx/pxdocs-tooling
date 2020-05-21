@@ -76,7 +76,7 @@
         color: black;
         }
     }
-  p {
+  .landing-section-description {
     max-width: 277px;
     color: #8e8e8e !important;
     margin: 0px;
@@ -117,7 +117,7 @@
 #landing-section-more-link {
   /* float:right;
   margin-right: 30px; */
-  color: black;
+  color: #8e8e8e;
   font-weight: 500;
   // hide this for now, since we're not concatenating the list
   // display: none;

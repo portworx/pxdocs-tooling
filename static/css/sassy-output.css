@@ -52,7 +52,7 @@
     text-decoration: none; }
     .landing-section-title a h2 {
       color: black; }
-  .landing-section-title p {
+  .landing-section-title .landing-section-description {
     max-width: 277px;
     color: #8e8e8e !important;
     margin: 0px; }
@@ -77,7 +77,7 @@
 #landing-section-more-link {
   /* float:right;
   margin-right: 30px; */
-  color: black;
+  color: #8e8e8e;
   font-weight: 500; }
 
 .landing-section-icons {
