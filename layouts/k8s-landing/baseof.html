@@ -130,8 +130,8 @@
                 <div class="landing-section-wrapper">
                   <div class="landing-section-title">
                     <a href="{{.RelPermalink}}"><h2>{{ .Title }}</h2></a>
-                    <!-- <p> <strong> Description: </strong> {{ .Description }} </p>
-                    <p> <strong>Link: </strong> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </p> -->
+                      <p> <strong> Description: </strong> {{ .Description }} </p>
+                    <!-- <p> <strong>Link: </strong> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </p> -->
                   </div>
                   <div class="landing-section-content">
                     <ul>
@@ -142,7 +142,7 @@
                       </div>
                       {{- .Scratch.Set "pages" (.Pages | union .Sections) }}
                       {{- $landingPages := (.Scratch.Get "pages") }}
-                      {{- range $landingPages.ByWeight }}
+                      {{- range first 7 $landingPages.ByWeight }}
                         {{ if not .Params.Hidden }}
                           <li> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </li>
                         {{ end }}
