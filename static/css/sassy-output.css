@@ -128,4 +128,9 @@
   list-style-type: none;
   padding-left: 0; }
 
+.landing-docs-footer {
+  width: unset !important;
+  left: unset !important;
+  visibility: unset !important; }
+
 /*# sourceMappingURL=sassy-output.css.map */
