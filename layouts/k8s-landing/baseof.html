@@ -46,8 +46,7 @@
 
   </head>
 
-  <body data-url="{{ .RelPermalink }}">
-    <div class="docs-layout">
+  <body data-url="{{ .RelPermalink }}" class="landing-body">
 
       <header class="docs-header">
         {{- partial "topbar.html" . }}
@@ -60,6 +59,7 @@
       <!--
           SEARCH
          -->
+    <div class="landing-content">
       <div class="landing-sidebar">
         <div class="landing-sidebar-content">
           <div class="version">
@@ -105,71 +105,69 @@
             </div>
           </div>
         </header>
-        <header id="search-container" class="landing-search-container">
-          <div id="search-box" class="landing-search-box">
+        <header id="landing-search-container" class="landing-search-container">
+          <div id="landing-search-box" class="landing-search-box">
           </div>
         </header>
 
         <div id="search-hits-wrapper-landingpage">
           <div id="search-hits"></div>
         </div>
-    </div>
+    
 
-      <!--
-          CONTENT
-         -->
-      <main class="docs-content mdl-color--white-50 docs-content-landing">
-        <div class="top-padding"></div>
-        <div id="page-content">
+        <!--
+            CONTENT
+          -->
+        <main class="mdl-color--white-50 docs-content-landing">
+          <div class="top-padding"></div>
+          <div id="page-content">
 
-          <!-- Wrap all section divs -->
-          <div class="landing-section">
-          <!-- Draw the section titles and their child section titles -->
-          {{ range .Site.Pages }}
-            {{ if eq .Params.landing "k8s"}}
-                <div class="landing-section-wrapper">
-                  <div class="landing-section-title">
-                    <a href="{{.RelPermalink}}"><h2>{{ .Title }}</h2></a>
-                      <p class="landing-section-description">{{ .Description }} </p>
-                    <!-- <p> <strong>Link: </strong> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </p> -->
-                  </div>
-                  <div class="landing-section-content">
-                    <ul>
-                    {{ with . }}
-                      <div class="landing-section-icons" style="display:none;">
-                        <!-- using px logo as a placeholder, we'll have to decide if we want to draw this from themes or content -->
-                        <img src="/images/portworx-logo.png" style="display:none;"></img>
-                      </div>
-                      {{- .Scratch.Set "pages" (.Pages | union .Sections) }}
-                      {{- $landingPages := (.Scratch.Get "pages") }}
-                      {{- range first 7 $landingPages.ByWeight }}
-                        {{ if not .Params.Hidden }}
-                          <li> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </li>
+            <!-- Wrap all section divs -->
+            <div class="landing-section">
+            <!-- Draw the section titles and their child section titles -->
+            {{ range .Site.Pages }}
+              {{ if eq .Params.landing "k8s"}}
+                  <div class="landing-section-wrapper">
+                    <div class="landing-section-title">
+                      <a href="{{.RelPermalink}}"><h2>{{ .Title }}</h2></a>
+                        <p class="landing-section-description">{{ .Description }} </p>
+                      <!-- <p> <strong>Link: </strong> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </p> -->
+                    </div>
+                    <div class="landing-section-content">
+                      <ul>
+                      {{ with . }}
+                        <div class="landing-section-icons" style="display:none;">
+                          <!-- using px logo as a placeholder, we'll have to decide if we want to draw this from themes or content -->
+                          <img src="/images/portworx-logo.png" style="display:none;"></img>
+                        </div>
+                        {{- .Scratch.Set "pages" (.Pages | union .Sections) }}
+                        {{- $landingPages := (.Scratch.Get "pages") }}
+                        {{- range first 7 $landingPages.ByWeight }}
+                          {{ if not .Params.Hidden }}
+                            <li> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </li>
+                          {{ end }}
+                        {{ end }}
+                        {{ if gt (len $landingPages) 7 }}
+                          <li>
+                            <a id="landing-section-more-link" href="{{.RelPermalink}}">View all</a>
+                          </li>
                         {{ end }}
                       {{ end }}
-                      {{ if gt (len $landingPages) 7 }}
-                        <li>
-                          <a id="landing-section-more-link" href="{{.RelPermalink}}">View all</a>
-                        </li>
-                      {{ end }}
-                    {{ end }}
-                    </ul>
+                      </ul>
+                    </div>
                   </div>
-                </div>
+              {{ end }}
             {{ end }}
-          {{ end }}
-        </div>
+          </div>
 
-        </div>
-      </main>
-
-
-      <!-- We need to modify the footer. maybe we can add a wrap div to the other baseof that shortens it on the left side when the sidebar is present -->
-      <div class="docs-footer-padding"></div>
-      <footer class="landing-docs-footer">
-        {{- partial "footer.html" . }}
-      </footer>
+          </div>
+        </main>
+      </div>
     </div>
+    <div class="docs-footer-padding"></div>
+    <footer class="landing-docs-footer">
+      {{- partial "footer.html" . }}
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>

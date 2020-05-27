@@ -3,9 +3,19 @@
   Landing page version side div
 
 */
+.landing-content {
+  display: flex;
+  width: 100%; }
+
+.landing-body {
+  height: unset; }
+
 .landing-page-wrapper {
+  padding: 30px;
   padding-top: 40px;
-  padding-bottom: 0px; }
+  padding-bottom: 0px;
+  max-width: 1000px;
+  display: block; }
 
 .landing-title {
   font-size: 40px;
@@ -19,8 +29,11 @@
   width: 300px;
   height: 100%;
   flex-direction: column;
-  position: absolute;
-  background-color: #f5f5f5; }
+  background-color: #f5f5f5;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: -1; }
   .landing-sidebar .landing-sidebar-content {
     padding: 2rem; }
 
@@ -52,11 +65,15 @@
     text-decoration: none; }
     .landing-section-title a h2 {
       color: black;
-      font-weight: 450; }
+      font-weight: 450;
+      max-width: 299px;
+      font-size: 24px; }
   .landing-section-title .landing-section-description {
     max-width: 277px;
     color: #8e8e8e !important;
-    margin: 0px; }
+    margin: 0px;
+    font-family: "Open Sans",sans-serif !important;
+    font-size: 15px; }
 
 .landing-section-content {
   display: flex;
@@ -74,13 +91,17 @@
     width: 277px;
     margin-right: 25px; }
   .landing-section-content a {
-    text-decoration: none; }
+    text-decoration: none;
+    color: #f15a24;
+    font-weight: normal;
+    font-size: 15px; }
 
 #landing-section-more-link {
   /* float:right;
   margin-right: 30px; */
   color: #8e8e8e;
-  font-weight: 500; }
+  font-weight: 500;
+  font-size: 15px; }
 
 .landing-section-icons {
   /* tells css to render this as inline item under the flex defined in the `landing-sidebar` selector */

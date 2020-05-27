@@ -944,17 +944,6 @@ hr.margin {
 
 */
 
-/* This is to show the search results in the right place.*/
-.landing-page-wrapper {
-  /* height: 100%; */
-  padding: 30px;
-  /* left offset for sidebar */
-  margin-left: 300px;
-  /* this needs to be the 300px for the sidebar - 120px padding - 250px scrollspy */
-  width: calc(100% - 690px);
-  max-width: 1000px;
-}
-
 
 .docs-content {
 
@@ -967,10 +956,6 @@ hr.margin {
   /* this needs to be the 300px for the sidebar - 120px padding - 250px scrollspy */
   width: calc(100% - 690px);
   max-width: 1000px;
-}
-
-.docs-content-landing {
-  width: 70%;
 }
 
 @media screen and (max-width: 1025px) {
