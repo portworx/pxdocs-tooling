@@ -432,7 +432,7 @@ $(function() {
   var footerElemPadding = $('.docs-footer-padding')
 
   function checkFooterPadding() {
-
+    
     footerElem.css({
       visibility: 'visible'
     })
