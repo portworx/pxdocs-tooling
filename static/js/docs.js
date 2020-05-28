@@ -98,7 +98,6 @@ $(function() {
   }
 
   function setupAlgolia() {
-    console.log('setupAlgolia')
     // Retrieve the `category` attribute
     const currentCategory = getMeta('category')
     let currentFilters
