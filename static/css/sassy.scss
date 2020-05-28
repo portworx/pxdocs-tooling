@@ -15,7 +15,7 @@
 .landing-page-wrapper {
   padding: 30px;
   padding-top: 40px;
-  padding-bottom: 0px;
+  padding-bottom: 70px;
   max-width: 1000px;
   display: block;
 }
@@ -31,6 +31,7 @@
 .landing-sidebar {
   display: flex;
   width: 300px;
+  min-width: 300px;
   height: 100%;
   flex-direction: column;
   // position: fixed;
@@ -45,7 +46,22 @@
   // set the ensure the sidebar sits underneath the footer
   z-index: -1;
   .landing-sidebar-content {
-    padding: 2rem;
+    padding: 28px;
+    padding-top: 24px;
+    h4 {
+      margin-bottom: 4px;
+    }
+    ul {
+      margin-top: 0px;
+      margin-bottom: 24px;
+      li {
+        a{
+          font-weight: normal;
+          font-size: 15px;
+          color: #414042;
+        }
+      }
+    }
   }
 }
 
@@ -185,8 +201,14 @@
 .docs-content-landing {
 }
 
+// Customize the header and footer for the landing page only
+
 .landing-docs-footer {
   width: unset !important;
   left: unset !important;
   visibility: unset !important;
+}
+
+.landing-docs-header {
+  display: flex;
 }

@@ -13,7 +13,7 @@
 .landing-page-wrapper {
   padding: 30px;
   padding-top: 40px;
-  padding-bottom: 0px;
+  padding-bottom: 70px;
   max-width: 1000px;
   display: block; }
 
@@ -27,6 +27,7 @@
 .landing-sidebar {
   display: flex;
   width: 300px;
+  min-width: 300px;
   height: 100%;
   flex-direction: column;
   background-color: #f5f5f5;
@@ -35,7 +36,17 @@
   height: 100vh;
   z-index: -1; }
   .landing-sidebar .landing-sidebar-content {
-    padding: 2rem; }
+    padding: 28px;
+    padding-top: 24px; }
+    .landing-sidebar .landing-sidebar-content h4 {
+      margin-bottom: 4px; }
+    .landing-sidebar .landing-sidebar-content ul {
+      margin-top: 0px;
+      margin-bottom: 24px; }
+      .landing-sidebar .landing-sidebar-content ul li a {
+        font-weight: normal;
+        font-size: 15px;
+        color: #414042; }
 
 .version li, .orchestrator li, a {
   list-style: none;
@@ -132,5 +143,8 @@
   width: unset !important;
   left: unset !important;
   visibility: unset !important; }
+
+.landing-docs-header {
+  display: flex; }
 
 /*# sourceMappingURL=sassy-output.css.map */
