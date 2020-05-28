@@ -602,16 +602,20 @@ $(function() {
     var windowHeight = $(document).height()
     var scrolledVal = $(document).scrollTop().valueOf()
     var calcDiff = headerHeight - scrolledVal
-    if (scrolledVal >= headerHeight) {
-      $(`.docs-drawer, #${SEARCH_HITS_NAME}`).css('top', '0px')
-      if ($(window).width() < 580) {
-        $(`#${SEARCH_HITS_NAME}`).css('top', '65px')
+
+    if (window.location.pathname != '/kubernetes/' && window.location.pathname != '/other-orchestrators/')
+    {
+      if (scrolledVal >= headerHeight) {
+        $('.docs-drawer, #search-hits').css('top', '0px')
+        if ($(window).width() < 580) {
+          $('#search-hits').css('top', '65px')
+        }
       }
-    }
-    else {
-      $(`.docs-drawer, #${SEARCH_HITS_NAME}`).css('top', calcDiff)
-      if ($(window).width() < 580) {
-        $(`#${SEARCH_HITS_NAME}`).css('top', (calcDiff + 65))
+      else {
+        $('.docs-drawer, #search-hits').css('top', calcDiff)
+        if ($(window).width() < 580) {
+          $('#search-hits').css('top', (calcDiff + 65))
+        }
       }
     }
   })
