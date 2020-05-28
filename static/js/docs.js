@@ -74,6 +74,21 @@ $(function() {
   // how many chars either side of a match to display in the results
   var SEARCH_HIGHLIGHT_BLEED = 30
 
+  // We're using different divs for the search box and search hits, depending on whether the user is on the landing page or not.
+  var SEARCH_BOX_NAME = ''
+  var SEARCH_HITS_NAME = ''
+  function setNames () {
+    if (window.location.pathname == '/kubernetes/' || window.location.pathname == '/other-orchestrators/') {
+      SEARCH_BOX_NAME = 'landing-search-box'
+      SEARCH_HITS_NAME = 'landing-search-hits'
+    } else {
+      SEARCH_BOX_NAME = 'search-box'
+      SEARCH_HITS_NAME = 'search-hits'
+    }
+  }
+
+  setNames()
+
   function getMatchIndex(text, search) {
     return text.toLowerCase().indexOf(search.toLowerCase())
   }
@@ -83,7 +98,8 @@ $(function() {
   }
 
   function setupAlgolia() {
-    // Retrieve `category` attribute
+    console.log('setupAlgolia')
+    // Retrieve the `category` attribute
     const currentCategory = getMeta('category')
     let currentFilters
     switch (currentCategory) {
@@ -106,7 +122,7 @@ $(function() {
         filters: currentFilters,
       },
       searchFunction: function(helper) {
-        var searchResults = $('#search-hits');
+        var searchResults = $(`#${SEARCH_HITS_NAME}`);
         if (helper.state.query === '') {
           searchResults.hide()
         }
@@ -120,7 +136,7 @@ $(function() {
 
     search.addWidget(
       instantsearch.widgets.searchBox({
-        container: '#search-box',
+        container: `#${SEARCH_BOX_NAME}`,
         placeholder: 'Search for pages',
         cssClasses: {
           root: 'search-box-root',
@@ -133,26 +149,26 @@ $(function() {
 
     search.addWidget(
       instantsearch.widgets.hits({
-        container: '#search-hits',
+        container: `#${SEARCH_HITS_NAME}`,
         templates: {
           empty: [
-            '<div class="search-hits-empty">',
+            `<div class="${SEARCH_HITS_NAME}-empty">`,
                 'no results',
             '</div>',
           ].join("\n"),
           item: [
-            '<div class="search-hits-row">',
-              '<div class="search-hits-section">',
+            `<div class="${SEARCH_HITS_NAME}-row">`,
+              `<div class="${SEARCH_HITS_NAME}-section">`,
                 '<a href="{{{sectionURL}}}" target="_blank">',
                   '{{{_highlightResult.sectionTitles.value}}}',
                 '</a>',
               '</div>',
-              '<div class="search-hits-page">',
+              `<div class="${SEARCH_HITS_NAME}-page">`,
                 '<a href="{{{url}}}"  target="_blank">',
                   '{{{_highlightResult.title.value}}}',
                 '</a>',
               '</div>',
-              '<div class="search-hits-matches">',
+              `<div class="${SEARCH_HITS_NAME}-matches">`,
                 '<a href="{{{url}}}"  target="_blank">',
                   '{{{_resultMatches}}}',
                 '</a>',
@@ -228,21 +244,21 @@ $(function() {
     $('#search-container-holding-space').hide()
   }
 
-  if(ALGOLIA_APP_ID && ALGOLIA_API_KEY && ALGOLIA_INDEX_NAME && $('#search-box').length >= 1) {
+  if(ALGOLIA_APP_ID && ALGOLIA_API_KEY && ALGOLIA_INDEX_NAME && $(`#${SEARCH_BOX_NAME}`).length >= 1) {
     setupAlgolia()
   }
 
   $(document).keyup(function (e) {
     // NOTE: The next line of code disables full-screen search results for the landing page.
-    if ($('.ais-search-box--input:focus') && $('.ais-search-box--input').val().length > 0 && (e.keyCode === 13)  && !$('#search-hits').hasClass('full-screen') && window.location.pathname !== '/landing-page/') {
-      $('#search-hits, .docs-drawer').addClass('full-screen')
+    if ($('.ais-search-box--input:focus') && $('.ais-search-box--input').val().length > 0 && (e.keyCode === 13)  && !$(`#${SEARCH_HITS_NAME}`).hasClass('full-screen') && window.location.pathname !== '/kubernetes/') {
+      $(`#${SEARCH_HITS_NAME}, .docs-drawer`).addClass('full-screen')
       $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer, .landing-sidebar, #page-title').hide()
-      $('#search-box').prepend('<a href="#" class="full-screen__close"><i class="material-icons">close</i><br/>Close</a>')
+      $(`#${SEARCH_BOX_NAME}`).prepend('<a href="#" class="full-screen__close"><i class="material-icons">close</i><br/>Close</a>')
     }
   })
 
   $('body').on('click', '.full-screen__close', function() {
-    $('#search-hits, .docs-drawer').removeClass('full-screen')
+    $(`#${SEARCH_HITS_NAME}, .docs-drawer`).removeClass('full-screen')
     $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer, .landing-sidebar, #page-title').show()
     $(this).remove()
   })
@@ -432,7 +448,7 @@ $(function() {
   var footerElemPadding = $('.docs-footer-padding')
 
   function checkFooterPadding() {
-    
+
     footerElem.css({
       visibility: 'visible'
     })
@@ -588,15 +604,15 @@ $(function() {
     var scrolledVal = $(document).scrollTop().valueOf()
     var calcDiff = headerHeight - scrolledVal
     if (scrolledVal >= headerHeight) {
-      $('.docs-drawer, #search-hits').css('top', '0px')
+      $(`.docs-drawer, #${SEARCH_HITS_NAME}`).css('top', '0px')
       if ($(window).width() < 580) {
-        $('#search-hits').css('top', '65px')
+        $(`#${SEARCH_HITS_NAME}`).css('top', '65px')
       }
     }
     else {
-      $('.docs-drawer, #search-hits').css('top', calcDiff)
+      $(`.docs-drawer, #${SEARCH_HITS_NAME}`).css('top', calcDiff)
       if ($(window).width() < 580) {
-        $('#search-hits').css('top', (calcDiff + 65))
+        $(`#${SEARCH_HITS_NAME}`).css('top', (calcDiff + 65))
       }
     }
   })

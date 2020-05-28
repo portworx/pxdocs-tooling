@@ -887,6 +887,20 @@ hr.margin {
   overflow-y: auto;
 }
 
+#landing-search-hits {
+  position: fixed;
+  left: 26%;
+  top: 35%;
+  width: 400px;
+  padding: 10px;
+  background-color: #fafafa;
+  z-index: 1000;
+  display: none;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, .15);
+  max-height: 450px;
+  overflow-y: auto;
+}
+
 @media screen and (max-width: 1025px) {
   #search-hits {
     top: 60px;
@@ -952,6 +966,47 @@ hr.margin {
 }
 
 #search-hits .search-hits-matches em {
+  color: #f15a24;
+}
+
+/* Landing page search hits */
+
+#landing-search-hits .landing-search-hits-empty {
+  margin: 15px;
+  color: #f15a24;
+}
+
+#landing-search-hits .landing-search-hits-row {
+  margin: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+#landing-search-hits .landing-search-hits-section {
+  font-size: 0.8em;
+}
+
+#landing-search-hits .landing-search-hits-section a {
+  text-decoration: none;
+  color: #f15a24;
+}
+
+#landing-search-hits .landing-search-hits-page a {
+  color: #666;
+}
+
+#landing-search-hits .landing-search-hits-page em {
+  color: #f15a24;
+}
+
+#landing-search-hits .landing-search-hits-matches a {
+  font-size: 0.8em;
+  font-weight: normal;
+  color: #999;
+  text-decoration: none;
+}
+
+#landing-search-hits .landing-search-hits-matches em {
   color: #f15a24;
 }
 
