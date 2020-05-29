@@ -888,9 +888,9 @@ hr.margin {
 }
 
 #landing-search-hits {
-  position: unset;
-  left: 26%;
-  top: 35%;
+  position: fixed;
+  left: 330px;
+  top: 230px;
   width: 400px;
   padding: 10px;
   background-color: #fafafa;

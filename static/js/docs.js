@@ -602,23 +602,28 @@ $(function() {
     var windowHeight = $(document).height()
     var scrolledVal = $(document).scrollTop().valueOf()
     var calcDiff = headerHeight - scrolledVal
+    let landingPageOffset = 0
 
-    if (window.location.pathname != '/kubernetes/' && window.location.pathname != '/other-orchestrators/')
-    {
-      if (scrolledVal >= headerHeight) {
-        $('.docs-drawer, #search-hits').css('top', '0px')
-        if ($(window).width() < 580) {
-          $('#search-hits').css('top', '65px')
-        }
-      }
-      else {
-        $('.docs-drawer, #search-hits').css('top', calcDiff)
-        if ($(window).width() < 580) {
-          $('#search-hits').css('top', (calcDiff + 65))
-        }
+    if (window.location.pathname == '/kubernetes/' || window.location.pathname == '/other-orchestrators/') {
+      console.log('landingPageOffset')
+      landingPageOffset = 165
+      // $(`#${SEARCH_HITS_NAME}`).hide()
+    }
+
+    if (scrolledVal >= headerHeight) {
+      $(`.docs-drawer, #${SEARCH_HITS_NAME}`).css('top', landingPageOffset)
+      if ($(window).width() < 580) {
+        $(`#${SEARCH_HITS_NAME}`).css('top', 65 + landingPageOffset)
       }
     }
-  })
+    else {
+      $(`.docs-drawer, #${SEARCH_HITS_NAME}`).css('top', calcDiff + landingPageOffset)
+      if ($(window).width() < 580) {
+        $(`#${SEARCH_HITS_NAME}`).css('top', (calcDiff + 65 + landingPageOffset))
+      }
+    }
+  }
+  )
 
   /*
 
