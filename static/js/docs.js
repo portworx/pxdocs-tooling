@@ -249,7 +249,7 @@ $(function() {
 
   $(document).keyup(function (e) {
     // NOTE: The next line of code disables full-screen search results for the landing page.
-    if ($('.ais-search-box--input:focus') && $('.ais-search-box--input').val().length > 0 && (e.keyCode === 13)  && !$(`#${SEARCH_HITS_NAME}`).hasClass('full-screen') && window.location.pathname !== '/kubernetes/') {
+    if ($('.ais-search-box--input:focus') && $('.ais-search-box--input').val().length > 0 && (e.keyCode === 13)  && !$(`#${SEARCH_HITS_NAME}`).hasClass('full-screen') && ( window.location.pathname !== '/kubernetes/' || window.location.pathname !== '/other-orchestrators/' )) {
       $(`#${SEARCH_HITS_NAME}, .docs-drawer`).addClass('full-screen')
       $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer, .landing-sidebar, #page-title').hide()
       $(`#${SEARCH_BOX_NAME}`).prepend('<a href="#" class="full-screen__close"><i class="material-icons">close</i><br/>Close</a>')
