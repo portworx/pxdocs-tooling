@@ -605,7 +605,6 @@ $(function() {
     let landingPageOffset = 0
 
     if (window.location.pathname == '/kubernetes/' || window.location.pathname == '/other-orchestrators/') {
-      console.log('landingPageOffset')
       landingPageOffset = 165
       // $(`#${SEARCH_HITS_NAME}`).hide()
     }
