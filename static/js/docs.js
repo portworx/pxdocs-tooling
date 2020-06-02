@@ -77,10 +77,14 @@ $(function() {
   // We're using different divs for the search box and search hits, depending on whether the user is on the landing page or not.
   var SEARCH_BOX_NAME = ''
   var SEARCH_HITS_NAME = ''
+  var SEARCH_INPUT_NAME = 'search-box-input'
+  var SEARCH_BOX_ROOT = 'search-box-root'
   function setNames () {
     if (window.location.pathname == '/kubernetes/' || window.location.pathname == '/other-orchestrators/') {
       SEARCH_BOX_NAME = 'landing-search-box'
       SEARCH_HITS_NAME = 'landing-search-hits'
+      SEARCH_INPUT_NAME = 'landing-search-input'
+      SEARCH_BOX_ROOT = 'landing-search-box-root'
     } else {
       SEARCH_BOX_NAME = 'search-box'
       SEARCH_HITS_NAME = 'search-hits'
@@ -132,14 +136,13 @@ $(function() {
       }
     })
 
-
     search.addWidget(
       instantsearch.widgets.searchBox({
         container: `#${SEARCH_BOX_NAME}`,
         placeholder: 'Search for pages',
         cssClasses: {
-          root: 'search-box-root',
-          input: 'search-box-input',
+          root: `${SEARCH_BOX_ROOT}`, 
+          input: `${SEARCH_INPUT_NAME}`, 
         },
         reset: true,
         magnifier: true,

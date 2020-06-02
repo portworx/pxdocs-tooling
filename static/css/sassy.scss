@@ -213,3 +213,24 @@
 .landing-docs-header {
   display: flex;
 }
+
+// Landing page search css
+// making these important because they must override the Algolia styles, which sit lower in the cascade. Ideally, we should find out how to move these down in the cascade, so they overwrite Algolia's styles without the important tag.
+
+.landing-search-input {
+  width: 700px !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-bottom-width: 3px !important;
+  border-color: #f15a24 !important;
+  border-radius: 0 !important;
+  font-family: "Open Sans",sans-serif !important;
+  font-size: 15px !important;
+  box-shadow: none !important;
+}
+
+.landing-search-box-root {
+  width: 700px !important;
+  max-width: 700px !important;
+}

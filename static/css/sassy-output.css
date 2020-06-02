@@ -148,4 +148,20 @@
 .landing-docs-header {
   display: flex; }
 
+.landing-search-input {
+  width: 700px !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-bottom-width: 3px !important;
+  border-color: #f15a24 !important;
+  border-radius: 0 !important;
+  font-family: "Open Sans",sans-serif !important;
+  font-size: 15px !important;
+  box-shadow: none !important; }
+
+.landing-search-box-root {
+  width: 700px !important;
+  max-width: 700px !important; }
+
 /*# sourceMappingURL=sassy-output.css.map */
