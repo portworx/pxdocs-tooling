@@ -595,37 +595,37 @@ $(function() {
 
   setupSidebarToggleButton()
 
-  /*
+  // /*
 
-    sidebar scroll
+  //   sidebar scroll
 
-  */
-  $(window).scroll( function() {
-    var headerHeight = $('.docs-header').height()
-    var windowHeight = $(document).height()
-    var scrolledVal = $(document).scrollTop().valueOf()
-    var calcDiff = headerHeight - scrolledVal
-    let landingPageOffset = 0
+  // */
+  // $(window).scroll( function() {
+  //   var headerHeight = $('.docs-header').height()
+  //   var windowHeight = $(document).height()
+  //   var scrolledVal = $(document).scrollTop().valueOf()
+  //   var calcDiff = headerHeight - scrolledVal
+  //   let landingPageOffset = 0
 
-    if (window.location.pathname == '/kubernetes/' || window.location.pathname == '/other-orchestrators/') {
-      landingPageOffset = 165
-      // $(`#${SEARCH_HITS_NAME}`).hide()
-    }
+  //   if (window.location.pathname == '/kubernetes/' || window.location.pathname == '/other-orchestrators/') {
+  //     landingPageOffset = 165
+  //     // $(`#${SEARCH_HITS_NAME}`).hide()
+  //   }
 
-    if (scrolledVal >= headerHeight) {
-      $(`.docs-drawer, #${SEARCH_HITS_NAME}`).css('top', landingPageOffset)
-      if ($(window).width() < 580) {
-        $(`#${SEARCH_HITS_NAME}`).css('top', 65 + landingPageOffset)
-      }
-    }
-    else {
-      $(`.docs-drawer, #${SEARCH_HITS_NAME}`).css('top', calcDiff + landingPageOffset)
-      if ($(window).width() < 580) {
-        $(`#${SEARCH_HITS_NAME}`).css('top', (calcDiff + 65 + landingPageOffset))
-      }
-    }
-  }
-  )
+  //   if (scrolledVal >= headerHeight) {
+  //     $(`.docs-drawer, #${SEARCH_HITS_NAME}`).css('top', landingPageOffset)
+  //     if ($(window).width() < 580) {
+  //       $(`#${SEARCH_HITS_NAME}`).css('top', 65 + landingPageOffset)
+  //     }
+  //   }
+  //   else {
+  //     $(`.docs-drawer, #${SEARCH_HITS_NAME}`).css('top', calcDiff + landingPageOffset)
+  //     if ($(window).width() < 580) {
+  //       $(`#${SEARCH_HITS_NAME}`).css('top', (calcDiff + 65 + landingPageOffset))
+  //     }
+  //   }
+  // }
+  // )
 
   /*
 
