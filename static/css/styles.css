@@ -1017,7 +1017,7 @@ hr.margin {
 }
 
 #landing-search-hits .landing-search-hits-matches a {
-  font-size: 0.8em;
+  /* font-size: 0.8em; */
   font-weight: normal;
   color: #999;
   text-decoration: none;
