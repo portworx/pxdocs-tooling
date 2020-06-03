@@ -888,17 +888,25 @@ hr.margin {
 }
 
 #landing-search-hits {
-  position: fixed;
-  left: 330px;
-  top: 230px;
-  width: 400px;
+  width: 680px;
   padding: 10px;
   background-color: #fafafa;
+  /* set a high z index so it floats over the other divs */
   z-index: 1000;
   display: none;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, .15);
   max-height: 450px;
   overflow-y: auto;
+
+  /* define how this should be displayed, flex works */
+  display: flex;
+  /* position this relative to it's location within the other divs */
+  position: relative;
+  /* pin this div to the top left of its position  */
+  top: 0px;
+  left: 0px;
+  /* pull the content below it up underneath it */
+  margin-bottom: -470px;
 }
 
 @media screen and (max-width: 1025px) {
