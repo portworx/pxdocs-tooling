@@ -79,6 +79,35 @@ $(function() {
   }
 
   function setupAlgolia() {
+    const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
+    const index = searchClient.initIndex(ALGOLIA_INDEX_NAME)
+
+    index.search('kubernetes', {
+      hitsPerPage: 9999,
+      attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
+      attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
+      searchFunction: function(helper) {
+        var searchResults = $('#search-hits');
+        if (helper.state.query === '') {
+          searchResults.hide()
+        }
+        else {
+          searchResults.show()
+        }
+        helper.search()
+      }
+    }).then(({ hits }) => {
+      console.log(hits);
+    });
+
+    const search = instantsearch({
+      indexName: ALGOLIA_INDEX_NAME,
+      searchClient,
+    });
+
+    console.log(search)
+
+    /*
     var search = instantsearch({
       appId: ALGOLIA_APP_ID,
       apiKey: ALGOLIA_API_KEY,
@@ -100,8 +129,9 @@ $(function() {
         helper.search()
       }
     })
+    */
 
-    search.addWidget(
+    searchClient.addWidgets(
       instantsearch.widgets.searchBox({
         container: '#search-box',
         placeholder: 'Search for pages',
@@ -114,7 +144,7 @@ $(function() {
       })
     )
 
-    search.addWidget(
+    searchClient.addWidget(
       instantsearch.widgets.hits({
         container: '#search-hits',
         templates: {
@@ -209,19 +239,24 @@ $(function() {
 
     $('#search-container').show()
     $('#search-container-holding-space').hide()
+
+
   }
+
 
   if(ALGOLIA_APP_ID && ALGOLIA_API_KEY && ALGOLIA_INDEX_NAME && $('#search-box').length >= 1) {
     setupAlgolia()
   }
 
+  /*
   $(document).keyup(function (e) {
-    if ($('.ais-search-box--input:focus') && $('.ais-search-box--input').val().length > 0 && (e.keyCode === 13)  && !$('#search-hits').hasClass('full-screen')) {
+    if ($('.ais-search-box-input:focus') && $('.ais-search-box-input').val().length > 0 && (e.keyCode === 13)  && !$('#search-hits').hasClass('full-screen')) {
       $('#search-hits, .docs-drawer').addClass('full-screen')
       $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer').hide()
       $('#search-box').prepend('<a href="#" class="full-screen__close"><i class="material-icons">close</i><br/>Close</a>')
     }
   })
+  */
 
   $('body').on('click', '.full-screen__close', function() {
     $('#search-hits, .docs-drawer').removeClass('full-screen')
