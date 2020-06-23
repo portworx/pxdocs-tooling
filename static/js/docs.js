@@ -78,31 +78,67 @@ $(function() {
     return text.toLowerCase().indexOf(search.toLowerCase())
   }
 
+  function transformItem(item) {
+    console.log(item)
+    const re = new RegExp('^[\s\S]*?<p>')
+
+    var highlightResult = item._highlightResult.content
+    var searchWords = highlightResult.matchedWords
+
+    let processedText = (highlightResult.value || '')
+      .replace(/^.*?(<\w+)/, function(wholeMatch, chunk) {
+        return chunk
+      })
+      .replace(/^.*?<\/li>/, '')
+
+    processedText = '<div>' + processedText + '</div>'
+
+    var text = $(processedText).text()
+
+    var allWords = searchWords.join(' ')
+
+    var foundTerms = {}
+
+    var resultMatches = searchWords
+      .filter(function(word) {
+        return getMatchIndex(text, word) >= 0
+      })
+      .map(function(word) {
+        var firstMatch = getMatchIndex(text, word)
+
+        var startMatch = firstMatch - SEARCH_HIGHLIGHT_BLEED
+        if(startMatch < 0) startMatch = 0
+
+        var endMatch = firstMatch + word.length + SEARCH_HIGHLIGHT_BLEED
+        if(endMatch > text.length-1) endMatch = text.length-1
+
+        var textChunk = text.substring(startMatch, endMatch)
+
+        searchWords.forEach(function(word) {
+          textChunk = textChunk.replace(new RegExp(word, 'gi'), '<em>' + word + '</em>')
+        })
+
+        return '...' + textChunk + '...'
+      })
+      .filter(function(match) {
+        var matchingChunk = match.match(/\<.*\>/)[0]
+        if(!matchingChunk) return true
+        if(foundTerms[matchingChunk]) return false
+        foundTerms[matchingChunk] = true
+        return true
+      })
+
+    if(resultMatches.length > 3) {
+      resultMatches = resultMatches.slice(0,3)
+    }
+
+    item._resultMatches = resultMatches.join('<br />')
+    return item
+  }
+
   function setupAlgolia() {
     const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
 
-    // We're not actually using this...
-    const index = searchClient.initIndex(ALGOLIA_INDEX_NAME)
-
-    /*
-    index.search('kubernetes', {
-      hitsPerPage: 9999,
-      attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
-      attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
-      searchFunction: function(helper) {
-        var searchResults = $('#search-hits');
-        if (helper.state.query === '') {
-          searchResults.hide()
-        }
-        else {
-          searchResults.show()
-        }
-        helper.search()
-      }
-    }).then(({ hits }) => {
-      console.log(hits);
-    });
-    */
 
     const search = instantsearch({
       indexName: ALGOLIA_INDEX_NAME,
@@ -122,29 +158,6 @@ $(function() {
 
     console.log(search)
 
-    /*
-    var search = instantsearch({
-      appId: ALGOLIA_APP_ID,
-      apiKey: ALGOLIA_API_KEY,
-      indexName: ALGOLIA_INDEX_NAME,
-      routing: true,
-      searchParameters: {
-        hitsPerPage: 9999,
-        attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
-        attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
-      },
-      searchFunction: function(helper) {
-        var searchResults = $('#search-hits');
-        if (helper.state.query === '') {
-          searchResults.hide()
-        }
-        else {
-          searchResults.show()
-        }
-        helper.search()
-      }
-    })
-    */
 
    const searchBox = instantsearch.widgets.searchBox({
     container: '#search-box',
@@ -185,7 +198,11 @@ $(function() {
         '</div>',
       ].join("\n")
     },
-  });
+    transformItems(items) {
+
+      return items.map(transformItem)
+    },
+  })
 
   search.addWidgets([searchBox, hits]);
 
