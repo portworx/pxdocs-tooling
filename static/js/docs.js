@@ -80,8 +80,11 @@ $(function() {
 
   function setupAlgolia() {
     const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
+
+    // We're not actually using this...
     const index = searchClient.initIndex(ALGOLIA_INDEX_NAME)
 
+    /*
     index.search('kubernetes', {
       hitsPerPage: 9999,
       attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
@@ -99,10 +102,22 @@ $(function() {
     }).then(({ hits }) => {
       console.log(hits);
     });
+    */
 
     const search = instantsearch({
       indexName: ALGOLIA_INDEX_NAME,
       searchClient,
+      routing: true,
+      searchFunction: function(helper) {
+        var searchResults = $('#search-hits');
+        if (helper.state.query === '') {
+          searchResults.hide()
+        }
+        else {
+          searchResults.show()
+        }
+        helper.search()
+      }
     });
 
     console.log(search)
@@ -131,109 +146,48 @@ $(function() {
     })
     */
 
-    searchClient.addWidgets(
-      instantsearch.widgets.searchBox({
-        container: '#search-box',
-        placeholder: 'Search for pages',
-        cssClasses: {
-          root: 'search-box-root',
-          input: 'search-box-input',
-        },
-        reset: true,
-        magnifier: true,
-      })
-    )
+   const searchBox = instantsearch.widgets.searchBox({
+    container: '#search-box',
+    placeholder: 'Search for pages',
+    cssClasses: {
+      root: 'search-box-root',
+      input: 'search-box-input',
+    },
+    reset: true,
+    magnifier: true,
+  });
 
-    searchClient.addWidget(
-      instantsearch.widgets.hits({
-        container: '#search-hits',
-        templates: {
-          empty: [
-            '<div class="search-hits-empty">',
-                'no results',
-            '</div>',
-          ].join("\n"),
-          item: [
-            '<div class="search-hits-row">',
-              '<div class="search-hits-section">',
-                '<a href="{{{sectionURL}}}" target="_blank">',
-                  '{{{_highlightResult.sectionTitles.value}}}',
-                '</a>',
-              '</div>',
-              '<div class="search-hits-page">',
-                '<a href="{{{url}}}"  target="_blank">',
-                  '{{{_highlightResult.title.value}}}',
-                '</a>',
-              '</div>',
-              '<div class="search-hits-matches">',
-                '<a href="{{{url}}}"  target="_blank">',
-                  '{{{_resultMatches}}}',
-                '</a>',
-              '</div>',
-            '</div>',
-          ].join("\n")
-        },
-        transformData: {
-          item: function(item) {
+  const hits = instantsearch.widgets.hits({
+    container: '#search-hits',
+    templates: {
+      empty: [
+        '<div class="search-hits-empty">',
+            'no results',
+        '</div>',
+      ].join("\n"),
+      item: [
+        '<div class="search-hits-row">',
+          '<div class="search-hits-section">',
+            '<a href="{{{sectionURL}}}" target="_blank">',
+              '{{{_highlightResult.sectionTitles.value}}}',
+            '</a>',
+          '</div>',
+          '<div class="search-hits-page">',
+            '<a href="{{{url}}}"  target="_blank">',
+              '{{{_highlightResult.title.value}}}',
+            '</a>',
+          '</div>',
+          '<div class="search-hits-matches">',
+            '<a href="{{{url}}}"  target="_blank">',
+              '{{{_resultMatches}}}',
+            '</a>',
+          '</div>',
+        '</div>',
+      ].join("\n")
+    },
+  });
 
-            const re = new RegExp('^[\s\S]*?<p>')
-
-            var highlightResult = item._highlightResult.content
-            var searchWords = highlightResult.matchedWords
-
-            let processedText = (highlightResult.value || '')
-              .replace(/^.*?(<\w+)/, function(wholeMatch, chunk) {
-                return chunk
-              })
-              .replace(/^.*?<\/li>/, '')
-
-            processedText = '<div>' + processedText + '</div>'
-
-            var text = $(processedText).text()
-
-            var allWords = searchWords.join(' ')
-
-            var foundTerms = {}
-
-            var resultMatches = searchWords
-              .filter(function(word) {
-                return getMatchIndex(text, word) >= 0
-              })
-              .map(function(word) {
-                var firstMatch = getMatchIndex(text, word)
-
-                var startMatch = firstMatch - SEARCH_HIGHLIGHT_BLEED
-                if(startMatch < 0) startMatch = 0
-
-                var endMatch = firstMatch + word.length + SEARCH_HIGHLIGHT_BLEED
-                if(endMatch > text.length-1) endMatch = text.length-1
-
-                var textChunk = text.substring(startMatch, endMatch)
-
-                searchWords.forEach(function(word) {
-                  textChunk = textChunk.replace(new RegExp(word, 'gi'), '<em>' + word + '</em>')
-                })
-
-                return '...' + textChunk + '...'
-              })
-              .filter(function(match) {
-                var matchingChunk = match.match(/\<.*\>/)[0]
-                if(!matchingChunk) return true
-                if(foundTerms[matchingChunk]) return false
-                foundTerms[matchingChunk] = true
-                return true
-              })
-
-            if(resultMatches.length > 3) {
-              resultMatches = resultMatches.slice(0,3)
-            }
-
-            item._resultMatches = resultMatches.join('<br />')
-            return item
-          },
-        }
-      })
-    )
+  search.addWidgets([searchBox, hits]);
 
     search.start()
 
@@ -256,14 +210,14 @@ $(function() {
       $('#search-box').prepend('<a href="#" class="full-screen__close"><i class="material-icons">close</i><br/>Close</a>')
     }
   })
-  */
+
 
   $('body').on('click', '.full-screen__close', function() {
     $('#search-hits, .docs-drawer').removeClass('full-screen')
     $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer').show()
     $(this).remove()
   })
-
+  */
 
   /*
 
