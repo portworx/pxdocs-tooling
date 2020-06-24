@@ -79,10 +79,11 @@ $(function() {
   }
 
   function transformItem(item) {
-    console.log(item)
+    // console.log(item)
     const re = new RegExp('^[\s\S]*?<p>')
-
+    // console.log(item)
     var highlightResult = item._highlightResult.content
+    // console.log(highlightResult.matchedWords)
     var searchWords = highlightResult.matchedWords
 
     let processedText = (highlightResult.value || '')
@@ -93,9 +94,8 @@ $(function() {
 
     processedText = '<div>' + processedText + '</div>'
 
-    var text = $(processedText).text()
+    let text = $(processedText).text()
 
-    var allWords = searchWords.join(' ')
 
     var foundTerms = {}
 
@@ -117,7 +117,7 @@ $(function() {
         searchWords.forEach(function(word) {
           textChunk = textChunk.replace(new RegExp(word, 'gi'), '<em>' + word + '</em>')
         })
-
+        console.log(textChunk)
         return '...' + textChunk + '...'
       })
       .filter(function(match) {
@@ -139,6 +139,13 @@ $(function() {
   function setupAlgolia() {
     const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
 
+    /*
+    let index = searchClient.initIndex(ALGOLIA_INDEX_NAME)
+    console.log(index)
+    index.setSettings({ }).then(() => {
+      // done
+    })
+    */
 
     const search = instantsearch({
       indexName: ALGOLIA_INDEX_NAME,
@@ -156,10 +163,8 @@ $(function() {
       }
     });
 
-    console.log(search)
 
-
-   const searchBox = instantsearch.widgets.searchBox({
+  const searchBox = instantsearch.widgets.searchBox({
     container: '#search-box',
     placeholder: 'Search for pages',
     cssClasses: {
@@ -199,18 +204,43 @@ $(function() {
       ].join("\n")
     },
     transformItems(items) {
-
-      return items.map(transformItem)
+      const newItems = items.map(x => transformItem(x))
+      return newItems
     },
   })
 
-  search.addWidgets([searchBox, hits]);
+  search.addWidgets([
+    instantsearch.widgets.configure({
+      hitsPerPage: 9999,
+      attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
+      attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content']
+    }),
+    searchBox,
+    hits,
+  ])
 
-    search.start()
+  /*
+  const renderHits = (renderOptions, isFirstRender) => {
+    const { widgetParams } = renderOptions;
 
-    $('#search-container').show()
-    $('#search-container-holding-space').hide()
+    widgetParams.container.innerHTML = '...';
+  }
 
+  const customHits = instantsearch.connectors.connectHits(
+    renderHits
+  )
+
+  search.addWidgets([
+    customHits({
+      escapeHTML: false
+    })
+  ])
+  */
+
+  search.start()
+
+  $('#search-container').show()
+  $('#search-container-holding-space').hide()
 
   }
 
