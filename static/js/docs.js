@@ -176,6 +176,7 @@ $(function() {
   });
 
   const hits = instantsearch.widgets.hits({
+    escapeHTML: false,
     container: '#search-hits',
     templates: {
       empty: [
