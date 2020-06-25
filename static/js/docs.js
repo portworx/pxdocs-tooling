@@ -79,11 +79,8 @@ $(function() {
   }
 
   function transformItem(item) {
-    // console.log(item)
     const re = new RegExp('^[\s\S]*?<p>')
-    // console.log(item)
     var highlightResult = item._highlightResult.content
-    // console.log(highlightResult.matchedWords)
     var searchWords = highlightResult.matchedWords
 
     let processedText = (highlightResult.value || '')
@@ -117,7 +114,6 @@ $(function() {
         searchWords.forEach(function(word) {
           textChunk = textChunk.replace(new RegExp(word, 'gi'), '<em>' + word + '</em>')
         })
-        console.log(textChunk)
         return '...' + textChunk + '...'
       })
       .filter(function(match) {
@@ -137,16 +133,114 @@ $(function() {
   }
 
   function setupAlgolia() {
+    const ALGOLIA_SECONDARY_INDEX_NAME = '2-5' // TODO: Read this from env
     const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
+    const search = instantsearch({
+      routing: true,
+      indexName: ALGOLIA_INDEX_NAME,
+      searchClient,
+    });
+    search.addWidgets([
+      instantsearch.widgets.configure({
+        hitsPerPage: 9999,
+        attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
+        attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content']
+      }),
+      instantsearch.widgets.searchBox({
+        container: '#search-box',
+        cssClasses: {
+          root: 'search-box-root',
+          input: 'search-box-input',
+        },
+        reset: true,
+        magnifier: true,
+      }),
+      instantsearch.widgets.hits({
+        escapeHTML: false,
+        container: '#search-hits',
+        templates: {
+          empty: [
+            '<div class="search-hits-empty">',
+                'no results',
+            '</div>',
+          ].join("\n"),
+          item: [
+            '<div class="search-hits-row">',
+              '<div class="search-hits-section">',
+                '<a href="{{{sectionURL}}}" target="_blank">',
+                  '{{{_highlightResult.sectionTitles.value}}}',
+                '</a>',
+              '</div>',
+              '<div class="search-hits-page">',
+                '<a href="{{{url}}}"  target="_blank">',
+                  '{{{_highlightResult.title.value}}}',
+                '</a>',
+              '</div>',
+              '<div class="search-hits-matches">',
+                '<a href="{{{url}}}"  target="_blank">',
+                  '{{{_resultMatches}}}',
+                '</a>',
+              '</div>',
+            '</div>',
+          ].join("\n")
+        },
+        transformItems(items) {
+          const newItems = items.map(item => transformItem(item))
+          // TODO: Remove the following two lines when everything works as expected
+          console.log('Primary index')
+          console.log(newItems)
+          return newItems
+        },
+      }),
+      instantsearch.widgets
+        .index({ indexName: ALGOLIA_SECONDARY_INDEX_NAME })
+        .addWidgets([
+          instantsearch.widgets.configure({
+            hitsPerPage: 9999,
+            attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
+            attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content']
+          }),
+          instantsearch.widgets.hits({
+            escapeHTML: false,
+            container: '#search-hits-secondary-index',
+            templates: {
+              empty: [
+                '<div class="search-hits-empty">',
+                    'no results',
+                '</div>',
+              ].join("\n"),
+              item: [
+                '<div class="search-hits-row">',
+                  '<div class="search-hits-section">',
+                    '<a href="{{{sectionURL}}}" target="_blank">',
+                      '{{{_highlightResult.sectionTitles.value}}}',
+                    '</a>',
+                  '</div>',
+                  '<div class="search-hits-page">',
+                    '<a href="{{{url}}}"  target="_blank">',
+                      '{{{_highlightResult.title.value}}}',
+                    '</a>',
+                  '</div>',
+                  '<div class="search-hits-matches">',
+                    '<a href="{{{url}}}"  target="_blank">',
+                      '{{{_resultMatches}}}',
+                    '</a>',
+                  '</div>',
+                '</div>',
+              ].join("\n")
+            },
+            transformItems(items) {
+              const newItems = items.map(item => transformItem(item))
+              // TODO: Remove the following two lines when everything works as expected
+              console.log('Secondary index')
+              console.log(newItems)
+              return newItems
+            },
+          }),
+        ]),
+    ]);
 
-    /*
-    let index = searchClient.initIndex(ALGOLIA_INDEX_NAME)
-    console.log(index)
-    index.setSettings({ }).then(() => {
-      // done
-    })
-    */
-
+    /* Single index search
     const search = instantsearch({
       indexName: ALGOLIA_INDEX_NAME,
       searchClient,
@@ -162,7 +256,6 @@ $(function() {
         helper.search()
       }
     });
-
 
   const searchBox = instantsearch.widgets.searchBox({
     container: '#search-box',
@@ -218,23 +311,6 @@ $(function() {
     }),
     searchBox,
     hits,
-  ])
-
-  /*
-  const renderHits = (renderOptions, isFirstRender) => {
-    const { widgetParams } = renderOptions;
-
-    widgetParams.container.innerHTML = '...';
-  }
-
-  const customHits = instantsearch.connectors.connectHits(
-    renderHits
-  )
-
-  search.addWidgets([
-    customHits({
-      escapeHTML: false
-    })
   ])
   */
 
@@ -578,7 +654,6 @@ $(function() {
 
   */
   $(window).scroll( function() {
-    console.log('scroll')
     var headerHeight = $('.docs-header').height()
     var windowHeight = $(document).height()
     var scrolledVal = $(document).scrollTop().valueOf()
