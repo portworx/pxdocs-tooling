@@ -34,9 +34,8 @@
     <link rel="stylesheet" href="{{"css/material.min.css" | relURL}}?timestamp={{ now.Unix }}">
     <link rel="stylesheet" href="{{"css/styles.css" | relURL}}?timestamp={{ now.Unix }}">
     <link rel="stylesheet" href="{{"css/syntax.css" | relURL}}?timestamp={{ now.Unix }}">
-    <!-- The new Algolia CSS. Better comment it out...
-    <link rel="stylesheet" href="{{"css/algolia.min.css" | relURL}}?timestamp={{ now.Unix }}">
-    -->
+    <!-- the base algolia stylesheet is no longer of much use to us. we may just remove it. <link rel="stylesheet" href="{{"css/algolia.min.css" | relURL}}?timestamp={{ now.Unix }}"> -->
+
 
     <link rel="canonical" href="{{ .Permalink }}">
 
@@ -51,10 +50,11 @@
       <!--
         SIDEBAR
        -->
-      <div id="search-hits">
-      </div>
-
-      <div id="search-hits-secondary-index">
+      <div id="search-wrapper">
+        <div id="search-hits">
+        </div>
+        <div id="search-hits-secondary-index">
+        </div>
       </div>
 
       <div class="docs-drawer">

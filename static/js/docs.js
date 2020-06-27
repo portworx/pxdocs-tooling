@@ -71,13 +71,14 @@ $(function() {
 
   */
 
-  // how many chars either side of a match to display in the results
-  var SEARCH_HIGHLIGHT_BLEED = 30
+  // This defines how many chars on either side of a match we display in the results.
+  var SEARCH_HIGHLIGHT_BLEED = 40
 
   function getMatchIndex(text, search) {
     return text.toLowerCase().indexOf(search.toLowerCase())
   }
 
+  // this function before we display the results, cleaning the output so that it's user-readable.
   function transformItem(item) {
     const re = new RegExp('^[\s\S]*?<p>')
     var highlightResult = item._highlightResult.content
@@ -132,6 +133,11 @@ $(function() {
     return item
   }
 
+  // this function fires up Algolia when it's called. It's responsible for adding the search box and results to the DOM. 
+
+instantsearch.widgets.index({ indexName: 'instant_search' })
+
+
   function setupAlgolia() {
     const ALGOLIA_SECONDARY_INDEX_NAME = '2-5' // TODO: Read this from env
     const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
@@ -139,21 +145,39 @@ $(function() {
       routing: true,
       indexName: ALGOLIA_INDEX_NAME,
       searchClient,
+      searchFunction: function(helper) {
+        var searchResults = $('#search-wrapper');
+        if (helper.state.query === '') {
+          searchResults.hide()
+        }
+        else {
+          searchResults.show()
+        }
+        helper.search()
+      },
     });
     search.addWidgets([
       instantsearch.widgets.configure({
-        hitsPerPage: 9999,
+        hitsPerPage: 4,
         attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
         attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content']
       }),
       instantsearch.widgets.searchBox({
         container: '#search-box',
         cssClasses: {
-          root: 'search-box-root',
-          input: 'search-box-input',
+          // hiding this temporarily. TODO: re-add and restyle the css for the search box
+          // root: 'search-box-root',
+          // input: 'search-box-input',
         },
-        reset: true,
-        magnifier: true,
+        showReset: false,
+        showLoadingIndicator: false,
+        showSubmit: false,
+        placeholder: 'Search for pages',
+        templates: {
+          // submit: 'submit',
+          // reset: 'reset',
+          // loadingIndicator: 'loading',
+        },
       }),
       instantsearch.widgets.hits({
         escapeHTML: false,
@@ -196,7 +220,7 @@ $(function() {
         .index({ indexName: ALGOLIA_SECONDARY_INDEX_NAME })
         .addWidgets([
           instantsearch.widgets.configure({
-            hitsPerPage: 9999,
+            hitsPerPage: 4,
             attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
             attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content']
           }),
