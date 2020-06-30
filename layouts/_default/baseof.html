@@ -50,11 +50,20 @@
       <!--
         SIDEBAR
        -->
-      <div id="search-wrapper">
-        <div id="search-hits">
-        </div>
-        <div id="search-hits-secondary-index">
-        </div>
+       <div id="search-wrapper">
+        {{- $productName := getenv "PRODUCT_NAME" -}}
+        {{- if eq $productName "PX-Enterprise" -}}
+          <div id="search-hits">
+          </div>
+          <div id="search-hits-secondary-index">
+          </div>
+        {{- end -}}
+        {{- if eq $productName "PX-Backup" -}}
+          <div id="search-hits-secondary-index">
+          </div>
+          <div id="search-hits">
+          </div>
+        {{- end -}}
       </div>
 
       <div class="docs-drawer">
