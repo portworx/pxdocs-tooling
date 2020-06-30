@@ -467,7 +467,7 @@ h2 {
 
 .docs-drawer {
   border: none;
-  max-width: 300px;
+  width: 300px;
   position: fixed;
   z-index: 2000;
   top: 70px;
