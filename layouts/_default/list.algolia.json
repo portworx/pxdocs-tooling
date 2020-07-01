@@ -1,5 +1,5 @@
 {{/* Generates a valid Algolia search index */}}
-{{- $urlPrefix := "https://docs.portworx.com" -}}
+{{- $urlPrefix := getenv "PRODUCT_URL" -}}
 {{- $.Scratch.Add   "index" slice -}}
 {{- range .Site.AllPages -}}
   {{- if and (not .Draft) (and (not .Params.private) (and (not .Params.hidden) (not .Params.disableSearch))) -}}
