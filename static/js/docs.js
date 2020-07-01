@@ -139,7 +139,7 @@ instantsearch.widgets.index({ indexName: 'instant_search' })
 
 
   function setupAlgolia() {
-    const ALGOLIA_SECONDARY_INDEX_NAME = '2-5' // TODO: Read this from env
+    const ALGOLIA_SECONDARY_INDEX_NAME = 'PX-Backup-1-0' // TODO: Read this from env
     const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
     const search = instantsearch({
       routing: true,
@@ -158,7 +158,7 @@ instantsearch.widgets.index({ indexName: 'instant_search' })
     });
     search.addWidgets([
       instantsearch.widgets.configure({
-        hitsPerPage: 4,
+        hitsPerPage: 100,
         attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
         attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content']
       }),
@@ -220,7 +220,7 @@ instantsearch.widgets.index({ indexName: 'instant_search' })
         .index({ indexName: ALGOLIA_SECONDARY_INDEX_NAME })
         .addWidgets([
           instantsearch.widgets.configure({
-            hitsPerPage: 4,
+            hitsPerPage: 100,
             attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
             attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content']
           }),
@@ -350,22 +350,22 @@ instantsearch.widgets.index({ indexName: 'instant_search' })
     setupAlgolia()
   }
 
-  /*
   $(document).keyup(function (e) {
-    if ($('.ais-search-box-input:focus') && $('.ais-search-box-input').val().length > 0 && (e.keyCode === 13)  && !$('#search-hits').hasClass('full-screen')) {
-      $('#search-hits, .docs-drawer').addClass('full-screen')
+    if ($('.ais-SearchBox-input:focus') && $('.ais-SearchBox-input').val().length > 0 && (e.keyCode === 13)  && !$('#search-hits').hasClass('full-screen')) {
+      $('#search-wrapper, .docs-drawer').addClass('full-screen')
       $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer').hide()
+      $('#search-hits li').addClass('show-li')
       $('#search-box').prepend('<a href="#" class="full-screen__close"><i class="material-icons">close</i><br/>Close</a>')
     }
   })
 
 
   $('body').on('click', '.full-screen__close', function() {
-    $('#search-hits, .docs-drawer').removeClass('full-screen')
+    $('#search-wrapper, .docs-drawer').removeClass('full-screen')
+    $('#search-hits li').removeClass('show-li')
     $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer').show()
     $(this).remove()
   })
-  */
 
   /*
 
