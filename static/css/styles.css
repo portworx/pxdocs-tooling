@@ -12,7 +12,7 @@ h2 {
 }
 
 .docs-layout {
-  height: 100%;
+  /* height: 100%; */
 }
 
 .docs-main {
@@ -467,7 +467,7 @@ h2 {
 
 .docs-drawer {
   border: none;
-  max-width: 300px;
+  width: 300px;
   position: fixed;
   z-index: 2000;
   top: 70px;
@@ -870,85 +870,260 @@ hr.margin {
 
 */
 
-#search-hits {
-  position: fixed;
-  left: 296px;
-  top: 113px;
-  width: 400px;
-  padding: 10px;
-  background-color: #fafafa;
+
+
+/* begin new search */
+
+.ais-Hits {
+  /* display: flex; */
+  /* width: 550px; */
+  /* height: 90vh; */
+  /* max-height: 750px; */
+  /* overflow: scroll; */
   z-index: 1000;
-  display: none;
+}
+
+.ais-Hits-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+}
+
+.ais-Hits-item {
+  padding: 15px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
+.search-hits-row {
+  border-bottom-style: solid;
+  border-color: #ccc;
+  border-width: 1px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+/* .ais-Hits-item::after {
+  content: '';
+  width: 100%;
+  border-bottom: solid 1px #000;
+  margin-bottom: 5px;
+} */
+
+
+/* end new search */
+
+#search-wrapper {
+  flex-direction: column;
+  display: flex;
+  position: sticky;
+  top: 0;
+  width: 550px;
+  left:300px;
+  overflow: scroll;
+  /* this works, but is fixed in height, so even if there are fewer results, the pane will be full height */
+  height: 800px;
+  margin-bottom: calc(800px * -1);
+
+
+
   box-shadow: 5px 5px 10px rgba(0, 0, 0, .15);
-  max-height: 450px;
-  overflow-y: auto;
+  background-color: #fafafa;
+  display: none;
+  z-index: 1000;
+}
+
+/* #search-hits::before, #search-hits-secondary-index::before {
+  content: 'index';
+  display: flex;
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-bottom: 7px;
+  padding-right: 30px;
+  color: #fff;
+  background-color: #414042;
+  font-size: 16px;
+  font-weight: 450;
+} */
+
+#search-hits-title, #search-hits-secondary-title {
+  display: flex;
+
+  /* testing sticky titles */
+  /* position: sticky;
+  bottom:0; */
+  
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-bottom: 7px;
+  padding-right: 30px;
+  margin:10px;
+  margin-bottom: 0px;
+  color: #fff;
+  background-color: #414042;
+  font-size: 16px;
+  font-weight: 450;
+}
+
+#search-hits {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  z-index: 1000;
+  /* display: none; */
+}
+
+#search-hits li:nth-of-type(1n+5), #search-hits-secondary-index li:nth-of-type(1n+5) {
+  display: none;
+}
+
+.show-li{
+  display: list-item!important;
+}
+
+
+#search-hits-secondary-index {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  z-index: 1000;
+  /* display: none; */
 }
 
 @media screen and (max-width: 1025px) {
-  #search-hits {
-    top: 60px;
+  #search-wrapper {
+    /* top: 60px; */
   }
 }
 
-@media screen and (max-width: 759px) {
-  #search-hits {
+/* @media screen and (max-width: 759px) {
+  #search-wrapper {
     width: auto;
     right: 0;
   }
-}
+} */
 
-@media screen and (max-width: 579px) {
-  #search-hits {
+@media screen and (max-width: 840px) {
+  #search-wrapper {
     bottom: 0;
     left: 0;
     right: auto;
-    top: 127px;
-    max-width: 280px;
+    /* this set's the search wrapper div's location in relation to where the div originates. We need the `0` value here to instruct the browser where to pin search wrapper when scrolling with sticky positioning */
+    top: 0;
+    /* this renders the div down, out of the way of the search bar, but preserves its original location for sticky pinning  */
+    transform: translateY(65px);
+    width: 300px;
     z-index: 10000;
     max-height: 100%;
+    box-shadow: none;
+    /* this adheres search-wrapper to the top of the header */
+    position: sticky;
+  }
+  #search-hits-secondary-index, #search-hits {
+    z-index: 10000;
   }
 }
 
-.search-box-input {
+.ais-SearchBox-input {
   width: 100% !important;
+  -webkit-appearance: none;
+  -webkit-rtl-ordering: logical;
+  -webkit-user-select: text;
+  background-attachment: scroll;
+  background-clip: border-box;
+  background-color: #fff;
+  background-image: url("../images/magnifierIcon.svg");
+  background-repeat: no-repeat;
+  background-origin: padding-box;
+  background-position-x: 15px;
+  background-position-y: 50%;
+  background-size: 20px;
+  border-color: rgb(212, 216, 227);
+  border-style: solid;
+  border-radius: 4px;
+  border-width: 1px;
+  box-shadow: rgba(85, 95, 110, 0.2) 0px 1px 1px 0px;
+  box-sizing: border-box;
+  color: #000;
+  display: inline-block;
+  font-family: Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  height: 46px;
+  line-height: 20px;
+  margin: 0px;
+  padding-bottom: 10px;
+  padding-left: 35px;
+  padding-right: 10px;
+  padding-top: 10px;
+  text-align: start;
+  text-indent: 0px;
+  /* transition-delay: 0s, 0s;
+  transition-duration: 0.4s, 0.4s;
+  transition-property: box-shadow, background;
+  transition-timing-function: ease, ease; */
+  /* vertical-align: middle;
+  white-space: normal; */
+  writing-mode: horizontal-tb;
+  outline: none;
 }
 
-#search-hits .search-hits-empty {
+.search-box-root {
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.87);
+  rgba(0,0,0,.87)html	material.min.css:8
+  texthtml	User Agent Style Sheet
+  display: inline-block;
+  font-family: Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  height: 46px;
+  line-height: 20px;
+  max-width: 300px;
+  position: relative;
+  white-space: nowrap;
+  width: 290px;
+}
+
+.aa-input-search::-webkit-search-decoration {
+  background: url("http://www.w3.org/2000/svg") no-repeat;
+}
+
+.search-hits-empty {
   margin: 15px;
   color: #f15a24;
 }
 
-#search-hits .search-hits-row {
+.search-hits-row {
   margin: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid #ccc;
 }
 
-#search-hits .search-hits-section {
+.search-hits-section {
   font-size: 0.8em;
 }
 
-#search-hits .search-hits-section a {
+.search-hits-section a {
   text-decoration: none;
   color: #f15a24;
 }
 
-#search-hits .search-hits-page a {
+.search-hits-page a {
   color: #666;
 }
 
-#search-hits .search-hits-page em {
+.search-hits-page em {
   color: #f15a24;
 }
 
-#search-hits .search-hits-matches a {
+.search-hits-matches a {
   font-size: 0.8em;
   font-weight: normal;
   color: #999;
   text-decoration: none;
 }
 
-#search-hits .search-hits-matches em {
+.search-hits-matches em {
   color: #f15a24;
 }
 
@@ -1464,12 +1639,12 @@ h2,h3,h4,h5,h6 a {
   margin: 0 auto;
 }
 
-#search-hits.full-screen {
-  left: 0;
+#search-wrapper.full-screen {
+  left: 25%;
   background: #fff;
   bottom: 0;
-  height: 100%;
-  max-height: 100%;
+  height: unset;
+  max-height: unset;
   position: relative;
   width: 620px;
   margin: 0 auto;
