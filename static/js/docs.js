@@ -210,9 +210,6 @@ instantsearch.widgets.index({ indexName: 'instant_search' })
         },
         transformItems(items) {
           const newItems = items.map(item => transformItem(item))
-          // TODO: Remove the following two lines when everything works as expected
-          console.log('Primary index')
-          console.log(newItems)
           return newItems
         },
       }),
@@ -255,9 +252,6 @@ instantsearch.widgets.index({ indexName: 'instant_search' })
             },
             transformItems(items) {
               const newItems = items.map(item => transformItem(item))
-              // TODO: Remove the following two lines when everything works as expected
-              console.log('Secondary index')
-              console.log(newItems)
               return newItems
             },
           }),
