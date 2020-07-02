@@ -992,7 +992,7 @@ hr.margin {
 
 @media screen and (max-width: 1025px) {
   #search-wrapper {
-    top: 60px;
+    /* top: 60px; */
   }
 }
 
