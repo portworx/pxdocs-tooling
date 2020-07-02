@@ -71,26 +71,82 @@ $(function() {
 
   */
 
-  // how many chars either side of a match to display in the results
-  var SEARCH_HIGHLIGHT_BLEED = 30
+  // This defines how many chars on either side of a match we display in the results.
+  var SEARCH_HIGHLIGHT_BLEED = 40
 
   function getMatchIndex(text, search) {
     return text.toLowerCase().indexOf(search.toLowerCase())
   }
 
+  // this function before we display the results, cleaning the output so that it's user-readable.
+  function transformItem(item) {
+    const re = new RegExp('^[\s\S]*?<p>')
+    var highlightResult = item._highlightResult.content
+    var searchWords = highlightResult.matchedWords
+
+    let processedText = (highlightResult.value || '')
+      .replace(/^.*?(<\w+)/, function(wholeMatch, chunk) {
+        return chunk
+      })
+      .replace(/^.*?<\/li>/, '')
+
+    processedText = '<div>' + processedText + '</div>'
+
+    let text = $(processedText).text()
+
+
+    var foundTerms = {}
+
+    var resultMatches = searchWords
+      .filter(function(word) {
+        return getMatchIndex(text, word) >= 0
+      })
+      .map(function(word) {
+        var firstMatch = getMatchIndex(text, word)
+
+        var startMatch = firstMatch - SEARCH_HIGHLIGHT_BLEED
+        if(startMatch < 0) startMatch = 0
+
+        var endMatch = firstMatch + word.length + SEARCH_HIGHLIGHT_BLEED
+        if(endMatch > text.length-1) endMatch = text.length-1
+
+        var textChunk = text.substring(startMatch, endMatch)
+
+        searchWords.forEach(function(word) {
+          textChunk = textChunk.replace(new RegExp(word, 'gi'), '<em>' + word + '</em>')
+        })
+        return '...' + textChunk + '...'
+      })
+      .filter(function(match) {
+        var matchingChunk = match.match(/\<.*\>/)[0]
+        if(!matchingChunk) return true
+        if(foundTerms[matchingChunk]) return false
+        foundTerms[matchingChunk] = true
+        return true
+      })
+
+    if(resultMatches.length > 3) {
+      resultMatches = resultMatches.slice(0,3)
+    }
+
+    item._resultMatches = resultMatches.join('<br />')
+    return item
+  }
+
+  // this function fires up Algolia when it's called. It's responsible for adding the search box and results to the DOM. 
+
+instantsearch.widgets.index({ indexName: 'instant_search' })
+
+
   function setupAlgolia() {
-    var search = instantsearch({
-      appId: ALGOLIA_APP_ID,
-      apiKey: ALGOLIA_API_KEY,
-      indexName: ALGOLIA_INDEX_NAME,
+    const ALGOLIA_SECONDARY_INDEX_NAME = 'PX-Backup-1-0' // TODO: Read this from env
+    const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
+    const search = instantsearch({
       routing: true,
-      searchParameters: {
-        hitsPerPage: 9999,
-        attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
-        attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
-      },
+      indexName: ALGOLIA_INDEX_NAME,
+      searchClient,
       searchFunction: function(helper) {
-        var searchResults = $('#search-hits');
+        var searchResults = $('#search-wrapper');
         if (helper.state.query === '') {
           searchResults.hide()
         }
@@ -98,24 +154,33 @@ $(function() {
           searchResults.show()
         }
         helper.search()
-      }
-    })
-
-    search.addWidget(
+      },
+    });
+    search.addWidgets([
+      instantsearch.widgets.configure({
+        hitsPerPage: 100,
+        attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
+        attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content']
+      }),
       instantsearch.widgets.searchBox({
         container: '#search-box',
-        placeholder: 'Search for pages',
         cssClasses: {
-          root: 'search-box-root',
-          input: 'search-box-input',
+          // hiding this temporarily. TODO: re-add and restyle the css for the search box
+          // root: 'search-box-root',
+          // input: 'search-box-input',
         },
-        reset: true,
-        magnifier: true,
-      })
-    )
-
-    search.addWidget(
+        showReset: false,
+        showLoadingIndicator: false,
+        showSubmit: false,
+        placeholder: 'Search for pages',
+        templates: {
+          // submit: 'submit',
+          // reset: 'reset',
+          // loadingIndicator: 'loading',
+        },
+      }),
       instantsearch.widgets.hits({
+        escapeHTML: false,
         container: '#search-hits',
         templates: {
           empty: [
@@ -143,92 +208,158 @@ $(function() {
             '</div>',
           ].join("\n")
         },
-        transformData: {
-          item: function(item) {
+        transformItems(items) {
+          const newItems = items.map(item => transformItem(item))
+          return newItems
+        },
+      }),
+      instantsearch.widgets
+        .index({ indexName: ALGOLIA_SECONDARY_INDEX_NAME })
+        .addWidgets([
+          instantsearch.widgets.configure({
+            hitsPerPage: 100,
+            attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
+            attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content']
+          }),
+          instantsearch.widgets.hits({
+            escapeHTML: false,
+            container: '#search-hits-secondary-index',
+            templates: {
+              empty: [
+                '<div class="search-hits-empty">',
+                    'no results',
+                '</div>',
+              ].join("\n"),
+              item: [
+                '<div class="search-hits-row">',
+                  '<div class="search-hits-section">',
+                    '<a href="{{{sectionURL}}}" target="_blank">',
+                      '{{{_highlightResult.sectionTitles.value}}}',
+                    '</a>',
+                  '</div>',
+                  '<div class="search-hits-page">',
+                    '<a href="{{{url}}}"  target="_blank">',
+                      '{{{_highlightResult.title.value}}}',
+                    '</a>',
+                  '</div>',
+                  '<div class="search-hits-matches">',
+                    '<a href="{{{url}}}"  target="_blank">',
+                      '{{{_resultMatches}}}',
+                    '</a>',
+                  '</div>',
+                '</div>',
+              ].join("\n")
+            },
+            transformItems(items) {
+              const newItems = items.map(item => transformItem(item))
+              return newItems
+            },
+          }),
+        ]),
+    ]);
 
-            const re = new RegExp('^[\s\S]*?<p>')
-
-            var highlightResult = item._highlightResult.content
-            var searchWords = highlightResult.matchedWords
-
-            let processedText = (highlightResult.value || '')
-              .replace(/^.*?(<\w+)/, function(wholeMatch, chunk) {
-                return chunk
-              })
-              .replace(/^.*?<\/li>/, '')
-
-            processedText = '<div>' + processedText + '</div>'
-
-            var text = $(processedText).text()
-
-            var allWords = searchWords.join(' ')
-
-            var foundTerms = {}
-
-            var resultMatches = searchWords
-              .filter(function(word) {
-                return getMatchIndex(text, word) >= 0
-              })
-              .map(function(word) {
-                var firstMatch = getMatchIndex(text, word)
-
-                var startMatch = firstMatch - SEARCH_HIGHLIGHT_BLEED
-                if(startMatch < 0) startMatch = 0
-
-                var endMatch = firstMatch + word.length + SEARCH_HIGHLIGHT_BLEED
-                if(endMatch > text.length-1) endMatch = text.length-1
-
-                var textChunk = text.substring(startMatch, endMatch)
-
-                searchWords.forEach(function(word) {
-                  textChunk = textChunk.replace(new RegExp(word, 'gi'), '<em>' + word + '</em>')
-                })
-
-                return '...' + textChunk + '...'
-              })
-              .filter(function(match) {
-                var matchingChunk = match.match(/\<.*\>/)[0]
-                if(!matchingChunk) return true
-                if(foundTerms[matchingChunk]) return false
-                foundTerms[matchingChunk] = true
-                return true
-              })
-
-            if(resultMatches.length > 3) {
-              resultMatches = resultMatches.slice(0,3)
-            }
-
-            item._resultMatches = resultMatches.join('<br />')
-            return item
-          },
+    /* Single index search
+    const search = instantsearch({
+      indexName: ALGOLIA_INDEX_NAME,
+      searchClient,
+      routing: true,
+      searchFunction: function(helper) {
+        var searchResults = $('#search-hits');
+        if (helper.state.query === '') {
+          searchResults.hide()
         }
-      })
-    )
+        else {
+          searchResults.show()
+        }
+        helper.search()
+      }
+    });
 
-    search.start()
+  const searchBox = instantsearch.widgets.searchBox({
+    container: '#search-box',
+    placeholder: 'Search for pages',
+    cssClasses: {
+      root: 'search-box-root',
+      input: 'search-box-input',
+    },
+    reset: true,
+    magnifier: true,
+  });
 
-    $('#search-container').show()
-    $('#search-container-holding-space').hide()
+  const hits = instantsearch.widgets.hits({
+    escapeHTML: false,
+    container: '#search-hits',
+    templates: {
+      empty: [
+        '<div class="search-hits-empty">',
+            'no results',
+        '</div>',
+      ].join("\n"),
+      item: [
+        '<div class="search-hits-row">',
+          '<div class="search-hits-section">',
+            '<a href="{{{sectionURL}}}" target="_blank">',
+              '{{{_highlightResult.sectionTitles.value}}}',
+            '</a>',
+          '</div>',
+          '<div class="search-hits-page">',
+            '<a href="{{{url}}}"  target="_blank">',
+              '{{{_highlightResult.title.value}}}',
+            '</a>',
+          '</div>',
+          '<div class="search-hits-matches">',
+            '<a href="{{{url}}}"  target="_blank">',
+              '{{{_resultMatches}}}',
+            '</a>',
+          '</div>',
+        '</div>',
+      ].join("\n")
+    },
+    transformItems(items) {
+      const newItems = items.map(x => transformItem(x))
+      return newItems
+    },
+  })
+
+  search.addWidgets([
+    instantsearch.widgets.configure({
+      hitsPerPage: 9999,
+      attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
+      attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content']
+    }),
+    searchBox,
+    hits,
+  ])
+  */
+
+  search.start()
+
+  $('#search-container').show()
+  $('#search-container-holding-space').hide()
+
   }
+
 
   if(ALGOLIA_APP_ID && ALGOLIA_API_KEY && ALGOLIA_INDEX_NAME && $('#search-box').length >= 1) {
     setupAlgolia()
   }
 
   $(document).keyup(function (e) {
-    if ($('.ais-search-box--input:focus') && $('.ais-search-box--input').val().length > 0 && (e.keyCode === 13)  && !$('#search-hits').hasClass('full-screen')) {
-      $('#search-hits, .docs-drawer').addClass('full-screen')
+    if ($('.ais-SearchBox-input:focus') && $('.ais-SearchBox-input').val().length > 0 && (e.keyCode === 13)  && !$('#search-hits').hasClass('full-screen')) {
+      $('#search-wrapper, .docs-drawer').addClass('full-screen')
       $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer').hide()
+      $('#search-hits li').addClass('show-li')
       $('#search-box').prepend('<a href="#" class="full-screen__close"><i class="material-icons">close</i><br/>Close</a>')
     }
   })
 
+
   $('body').on('click', '.full-screen__close', function() {
-    $('#search-hits, .docs-drawer').removeClass('full-screen')
+    $('#search-wrapper, .docs-drawer').removeClass('full-screen')
+    $('#search-hits li').removeClass('show-li')
     $('.docs-navigation, .version-menu, .docs-content, #scrollspy-container, .docs-footer-padding, .docs-footer').show()
     $(this).remove()
   })
-
 
   /*
 
@@ -541,7 +672,6 @@ $(function() {
 
   */
   $(window).scroll( function() {
-    console.log('scroll')
     var headerHeight = $('.docs-header').height()
     var windowHeight = $(document).height()
     var scrolledVal = $(document).scrollTop().valueOf()

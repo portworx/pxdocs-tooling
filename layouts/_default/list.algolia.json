@@ -1,4 +1,5 @@
 {{/* Generates a valid Algolia search index */}}
+{{- $urlPrefix := getenv "PRODUCT_URL" -}}
 {{- $.Scratch.Add   "index" slice -}}
 {{- range .Site.AllPages -}}
   {{- if and (not .Draft) (and (not .Params.private) (and (not .Params.hidden) (not .Params.disableSearch))) -}}
@@ -18,7 +19,8 @@
 
         {{- with $currentSection -}}
           {{- $.Scratch.Add "currentSectionTitles" .Title -}}
-          {{- $.Scratch.Set "currentSectionURL" .URL -}}
+          {{- $newURL := printf "%s%s" $urlPrefix .URL -}}
+          {{- $.Scratch.Set "currentSectionURL" $newURL -}}
           {{- $.Scratch.Set "currentSectionKeywords" .Keywords -}}
         {{- end -}}
 
@@ -30,7 +32,8 @@
     {{- $sectionURL := $.Scratch.Get "currentSectionURL" -}}
     {{- $sectionTitles := printf "%s" (delimit $currentSectionTitles " : ") -}}
     {{- $keywords := printf "%s" (delimit .Keywords " ") -}}
-    {{- $.Scratch.Add "index" (dict "objectID" .UniqueID "sectionTitles" $sectionTitles "sectionURL" $sectionURL "content" .Content "title" .Title "url" .URL "keywords" $keywords)}}
+    {{- $newURL := printf "%s%s" $urlPrefix .URL -}}
+    {{- $.Scratch.Add "index" (dict "objectID" .UniqueID "sectionTitles" $sectionTitles "sectionURL" $sectionURL "content" .Content "title" .Title "url" $newURL "keywords" $keywords)}}
   {{- end -}}
 {{- end -}}
 {{- $.Scratch.Get "index" | jsonify -}}
