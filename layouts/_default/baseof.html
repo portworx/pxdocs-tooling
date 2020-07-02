@@ -53,14 +53,18 @@
        <div id="search-wrapper">
         {{- $productName := getenv "PRODUCT_NAME" -}}
         {{- if eq $productName "PX-Enterprise" -}}
+          <p id="search-hits-title">PX-Enterprise</p>
           <div id="search-hits">
           </div>
+          <p id="search-hits-secondary-title">PX-Backup</p>
           <div id="search-hits-secondary-index">
           </div>
         {{- end -}}
         {{- if eq $productName "PX-Backup" -}}
+          <p id="search-hits-secondary-title">PX-Backup</p>
           <div id="search-hits-secondary-index">
           </div>
+          <p id="search-hits-title">PX-Enterprise</p>
           <div id="search-hits">
           </div>
         {{- end -}}
