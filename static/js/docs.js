@@ -143,7 +143,7 @@ instantsearch.widgets.index({ indexName: 'instant_search' })
     const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
     const search = instantsearch({
       routing: true,
-      indexName: ALGOLIA_INDEX_NAME,
+      indexName: ALGOLIA_SECONDARY_INDEX_NAME,
       searchClient,
       searchFunction: function(helper) {
         var searchResults = $('#search-wrapper');
@@ -214,7 +214,7 @@ instantsearch.widgets.index({ indexName: 'instant_search' })
         },
       }),
       instantsearch.widgets
-        .index({ indexName: ALGOLIA_SECONDARY_INDEX_NAME })
+        .index({ indexName: ALGOLIA_INDEX_NAME })
         .addWidgets([
           instantsearch.widgets.configure({
             hitsPerPage: 100,
