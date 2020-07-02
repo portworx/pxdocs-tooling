@@ -133,13 +133,13 @@ $(function() {
     return item
   }
 
-  // this function fires up Algolia when it's called. It's responsible for adding the search box and results to the DOM. 
+  // this function fires up Algolia when it's called. It's responsible for adding the search box and results to the DOM.
 
 instantsearch.widgets.index({ indexName: 'instant_search' })
 
 
   function setupAlgolia() {
-    const ALGOLIA_SECONDARY_INDEX_NAME = 'PX-Backup-1-0' // TODO: Read this from env
+    const ALGOLIA_SECONDARY_INDEX_NAME = 'PX-Enterprise-2-5' // TODO: Read this from env
     const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
     const search = instantsearch({
       routing: true,
