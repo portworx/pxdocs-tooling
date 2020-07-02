@@ -990,11 +990,11 @@ hr.margin {
   /* display: none; */
 }
 
-@media screen and (max-width: 1025px) {
+/* @media screen and (max-width: 1025px) {
   #search-wrapper {
-    /* top: 60px; */
+    top: 60px;
   }
-}
+} */
 
 /* @media screen and (max-width: 759px) {
   #search-wrapper {
@@ -1640,17 +1640,17 @@ h2,h3,h4,h5,h6 a {
 }
 
 #search-wrapper.full-screen {
-  left: 25%;
   background: #fff;
-  bottom: 0;
+  /* bottom: 0;
   height: unset;
-  max-height: unset;
+  max-height: unset; */
   position: relative;
-  width: 620px;
-  margin: 0 auto;
+  width: 625px;
+  margin:0 auto;
+  left:unset;
   box-shadow: none;
   top: 100px;
-  overflow-y: inherit;
+  overflow: unset;
 }
 
 #search-hits.full-screen .search-hits-section {
