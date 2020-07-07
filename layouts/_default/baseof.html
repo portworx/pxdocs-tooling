@@ -107,8 +107,8 @@
           let newParagraph = document.createElement('p')
           newParagraph.id = `search-hits-${element.productName}-title`
           newParagraph.className = 'search-hits-title'
-          newParagraph.innerHTML = `${element.productName}`
-          let newDiv = document.createElement("div")
+          newParagraph.innerHTML = element.productName
+          llet newDiv = document.createElement('div')
           newDiv.id =`search-hits-${element.productName}`
           searchWrapper.appendChild(newParagraph)
           searchWrapper.appendChild(newDiv)
