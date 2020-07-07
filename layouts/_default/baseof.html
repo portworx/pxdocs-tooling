@@ -37,8 +37,7 @@
     <!-- the base algolia stylesheet is no longer of much use to us. we may just remove it. <link rel="stylesheet" href="{{"css/algolia.min.css" | relURL}}?timestamp={{ now.Unix }}"> -->
 
 
-    <link rel="canonical" href="{{ .Permalink }}">
-
+  <link rel="canonical" href="{{ .Permalink }}">
   </head>
   <body data-url="{{ .RelPermalink }}">
     <div class="docs-layout">
@@ -50,24 +49,8 @@
       <!--
         SIDEBAR
        -->
+
        <div id="search-wrapper">
-        {{- $productName := getenv "PRODUCT_NAME" -}}
-        {{- if eq $productName "PX-Enterprise" -}}
-          <p id="search-hits-title">PX-Enterprise</p>
-          <div id="search-hits">
-          </div>
-          <p id="search-hits-secondary-title">PX-Backup</p>
-          <div id="search-hits-secondary-index">
-          </div>
-        {{- end -}}
-        {{- if eq $productName "PX-Backup" -}}
-          <p id="search-hits-secondary-title">PX-Backup</p>
-          <div id="search-hits-secondary-index">
-          </div>
-          <p id="search-hits-title">PX-Enterprise</p>
-          <div id="search-hits">
-          </div>
-        {{- end -}}
       </div>
 
       <div class="docs-drawer">
@@ -108,15 +91,40 @@
     <script src="{{"js/is.min.js" | relURL}}?timestamp={{ now.Unix }}"></script>
     <script>
 
+      function parseProductNamesAndIndices () {
+        const elements = PRODUCT_NAMES_AND_INDICES.split(',')
+        const productNamesAndIndices = []
+        elements.forEach(index => {
+          const productAndIndex = index.split('=')
+          productNamesAndIndices.push({'productName': productAndIndex[0], 'indexName': productAndIndex[1] })
+        })
+        return productNamesAndIndices
+      }
+
+      function populateSearchWrapper (productNamesAndIndices) {
+        let searchWrapper = document.querySelector('#search-wrapper')
+        productNamesAndIndices.forEach(element => {
+          let newParagraph = document.createElement('p')
+          newParagraph.id = `search-hits-${element.productName}-title`
+          newParagraph.className = 'search-hits-title'
+          newParagraph.innerHTML = `${element.productName}`
+          let newDiv = document.createElement("div")
+          newDiv.id =`search-hits-${element.productName}`
+          searchWrapper.appendChild(newParagraph)
+          searchWrapper.appendChild(newDiv)
+        })
+      }
+
       var ALGOLIA_APP_ID = '{{ getenv "ALGOLIA_APP_ID" }}'
       var ALGOLIA_API_KEY = '{{ getenv "ALGOLIA_API_KEY" }}'
-      var ALGOLIA_INDEX_NAME = '{{ getenv "ALGOLIA_INDEX_NAME" }}'
-
+      var PRODUCT_NAMES_AND_INDICES = '{{ getenv "PRODUCT_NAMES_AND_INDICES"}}'
       var VERSIONS_ALL = '{{ getenv "VERSIONS_ALL" }}'
       var VERSIONS_BASE_URL = '{{ getenv "VERSIONS_BASE_URL" }}'
       var VERSIONS_CURRENT = '{{ getenv "VERSIONS_CURRENT" }}'
 
       var EQUALIZE_TABLE_WIDTHS = '{{ .Params.equalizeTableWidths }}'
+      var productNamesAndIndices = parseProductNamesAndIndices()
+      populateSearchWrapper(productNamesAndIndices)
 
     </script>
     <script src="{{"js/docs.js" | relURL}}?timestamp={{ now.Unix }}"></script>

@@ -946,13 +946,13 @@ hr.margin {
   font-weight: 450;
 } */
 
-#search-hits-title, #search-hits-secondary-title {
+.search-hits-title {
   display: flex;
 
   /* testing sticky titles */
   /* position: sticky;
   bottom:0; */
-  
+
   padding-left: 30px;
   padding-top: 10px;
   padding-bottom: 7px;
