@@ -80,7 +80,6 @@ $(function() {
 
   // this function before we display the results, cleaning the output so that it's user-readable.
   function transformItem(item) {
-    const re = new RegExp('^[\s\S]*?<p>')
     var highlightResult = item._highlightResult.content
     var searchWords = highlightResult.matchedWords
 
@@ -90,10 +89,10 @@ $(function() {
       })
       .replace(/^.*?<\/li>/, '')
 
+    processedText = processedText.replace(/<img .*?>/g,'')
     processedText = '<div>' + processedText + '</div>'
 
     let text = $(processedText).text()
-
 
     var foundTerms = {}
 
@@ -133,17 +132,85 @@ $(function() {
     return item
   }
 
-  // this function fires up Algolia when it's called. It's responsible for adding the search box and results to the DOM.
+  function makeConfiguration () {
+    return instantsearch.widgets.configure({
+      hitsPerPage: 10,
+      attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
+      attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content']
+    })
+  }
 
-instantsearch.widgets.index({ indexName: 'instant_search' })
+  function makeSearchBox (containerName) {
+    return instantsearch.widgets.searchBox({
+      container: `#${containerName}`,
+      cssClasses: {
+        // hiding this temporarily. TODO: re-add and restyle the css for the search box
+        // root: 'search-box-root',
+        // input: 'search-box-input',
+      },
+      showReset: false,
+      showLoadingIndicator: false,
+      showSubmit: false,
+      placeholder: 'Search for pages',
+      templates: {
+        // submit: 'submit',
+        // reset: 'reset',
+        // loadingIndicator: 'loading',
+      },
+    })
+  }
 
+  function makeHits (containerName) {
+    return instantsearch.widgets.hits({
+      escapeHTML: false,
+      container: `#${containerName}`,
+      templates: {
+        empty: [
+          '<div class="search-hits-empty">',
+              'no results',
+          '</div>',
+        ].join("\n"),
+        item: [
+          '<div class="search-hits-row">',
+            '<div class="search-hits-section">',
+              '<a href="{{{sectionURL}}}" target="_blank">',
+                '{{{_highlightResult.sectionTitles.value}}}',
+              '</a>',
+            '</div>',
+            '<div class="search-hits-page">',
+              '<a href="{{{url}}}"  target="_blank">',
+                '{{{_highlightResult.title.value}}}',
+              '</a>',
+            '</div>',
+            '<div class="search-hits-matches">',
+              '<a href="{{{url}}}"  target="_blank">',
+                '{{{_resultMatches}}}',
+              '</a>',
+            '</div>',
+          '</div>',
+        ].join("\n")
+      },
+      transformItems(items) {
+        const newItems = items.map(item => transformItem(item))
+        return newItems
+      },
+    })
+  }
+
+  function makeSecondaryIndex(/*indexName, hitsContainerName*/ productNameAndIndex) {
+    return instantsearch.widgets
+    .index({ indexName: productNameAndIndex.indexName })
+    .addWidgets([
+      makeConfiguration(),
+      makeHits(`search-hits-${productNameAndIndex.productName}`),
+    ])
+  }
 
   function setupAlgolia() {
-    const ALGOLIA_SECONDARY_INDEX_NAME = 'PX-Enterprise-2-5' // TODO: Read this from env
     const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
     const search = instantsearch({
       routing: true,
-      indexName: ALGOLIA_SECONDARY_INDEX_NAME,
+      indexName: productNamesAndIndices[0].indexName,
       searchClient,
       searchFunction: function(helper) {
         var searchResults = $('#search-wrapper');
@@ -157,180 +224,13 @@ instantsearch.widgets.index({ indexName: 'instant_search' })
       },
     });
     search.addWidgets([
-      instantsearch.widgets.configure({
-        hitsPerPage: 100,
-        attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
-        attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content']
-      }),
-      instantsearch.widgets.searchBox({
-        container: '#search-box',
-        cssClasses: {
-          // hiding this temporarily. TODO: re-add and restyle the css for the search box
-          // root: 'search-box-root',
-          // input: 'search-box-input',
-        },
-        showReset: false,
-        showLoadingIndicator: false,
-        showSubmit: false,
-        placeholder: 'Search for pages',
-        templates: {
-          // submit: 'submit',
-          // reset: 'reset',
-          // loadingIndicator: 'loading',
-        },
-      }),
-      instantsearch.widgets.hits({
-        escapeHTML: false,
-        container: '#search-hits',
-        templates: {
-          empty: [
-            '<div class="search-hits-empty">',
-                'no results',
-            '</div>',
-          ].join("\n"),
-          item: [
-            '<div class="search-hits-row">',
-              '<div class="search-hits-section">',
-                '<a href="{{{sectionURL}}}" target="_blank">',
-                  '{{{_highlightResult.sectionTitles.value}}}',
-                '</a>',
-              '</div>',
-              '<div class="search-hits-page">',
-                '<a href="{{{url}}}"  target="_blank">',
-                  '{{{_highlightResult.title.value}}}',
-                '</a>',
-              '</div>',
-              '<div class="search-hits-matches">',
-                '<a href="{{{url}}}"  target="_blank">',
-                  '{{{_resultMatches}}}',
-                '</a>',
-              '</div>',
-            '</div>',
-          ].join("\n")
-        },
-        transformItems(items) {
-          const newItems = items.map(item => transformItem(item))
-          return newItems
-        },
-      }),
-      instantsearch.widgets
-        .index({ indexName: ALGOLIA_INDEX_NAME })
-        .addWidgets([
-          instantsearch.widgets.configure({
-            hitsPerPage: 100,
-            attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
-            attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content']
-          }),
-          instantsearch.widgets.hits({
-            escapeHTML: false,
-            container: '#search-hits-secondary-index',
-            templates: {
-              empty: [
-                '<div class="search-hits-empty">',
-                    'no results',
-                '</div>',
-              ].join("\n"),
-              item: [
-                '<div class="search-hits-row">',
-                  '<div class="search-hits-section">',
-                    '<a href="{{{sectionURL}}}" target="_blank">',
-                      '{{{_highlightResult.sectionTitles.value}}}',
-                    '</a>',
-                  '</div>',
-                  '<div class="search-hits-page">',
-                    '<a href="{{{url}}}"  target="_blank">',
-                      '{{{_highlightResult.title.value}}}',
-                    '</a>',
-                  '</div>',
-                  '<div class="search-hits-matches">',
-                    '<a href="{{{url}}}"  target="_blank">',
-                      '{{{_resultMatches}}}',
-                    '</a>',
-                  '</div>',
-                '</div>',
-              ].join("\n")
-            },
-            transformItems(items) {
-              const newItems = items.map(item => transformItem(item))
-              return newItems
-            },
-          }),
-        ]),
-    ]);
-
-    /* Single index search
-    const search = instantsearch({
-      indexName: ALGOLIA_INDEX_NAME,
-      searchClient,
-      routing: true,
-      searchFunction: function(helper) {
-        var searchResults = $('#search-hits');
-        if (helper.state.query === '') {
-          searchResults.hide()
-        }
-        else {
-          searchResults.show()
-        }
-        helper.search()
-      }
-    });
-
-  const searchBox = instantsearch.widgets.searchBox({
-    container: '#search-box',
-    placeholder: 'Search for pages',
-    cssClasses: {
-      root: 'search-box-root',
-      input: 'search-box-input',
-    },
-    reset: true,
-    magnifier: true,
-  });
-
-  const hits = instantsearch.widgets.hits({
-    escapeHTML: false,
-    container: '#search-hits',
-    templates: {
-      empty: [
-        '<div class="search-hits-empty">',
-            'no results',
-        '</div>',
-      ].join("\n"),
-      item: [
-        '<div class="search-hits-row">',
-          '<div class="search-hits-section">',
-            '<a href="{{{sectionURL}}}" target="_blank">',
-              '{{{_highlightResult.sectionTitles.value}}}',
-            '</a>',
-          '</div>',
-          '<div class="search-hits-page">',
-            '<a href="{{{url}}}"  target="_blank">',
-              '{{{_highlightResult.title.value}}}',
-            '</a>',
-          '</div>',
-          '<div class="search-hits-matches">',
-            '<a href="{{{url}}}"  target="_blank">',
-              '{{{_resultMatches}}}',
-            '</a>',
-          '</div>',
-        '</div>',
-      ].join("\n")
-    },
-    transformItems(items) {
-      const newItems = items.map(x => transformItem(x))
-      return newItems
-    },
-  })
-
-  search.addWidgets([
-    instantsearch.widgets.configure({
-      hitsPerPage: 9999,
-      attributesToRetrieve: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content'],
-      attributesToHighlight: ['title', 'keywords', 'objectID', 'sectionTitles', 'url', 'sectionURL', 'content']
-    }),
-    searchBox,
-    hits,
-  ])
-  */
+      makeConfiguration(),
+      makeSearchBox('search-box'),
+      makeHits(`search-hits-${productNamesAndIndices[0].productName}`),
+    ])
+    for (currentIndex = 1 ; currentIndex < productNamesAndIndices.length; currentIndex ++) {
+      search.addWidgets([makeSecondaryIndex(productNamesAndIndices[currentIndex])])
+    }
 
   search.start()
 
@@ -340,7 +240,7 @@ instantsearch.widgets.index({ indexName: 'instant_search' })
   }
 
 
-  if(ALGOLIA_APP_ID && ALGOLIA_API_KEY && ALGOLIA_INDEX_NAME && $('#search-box').length >= 1) {
+  if(ALGOLIA_APP_ID && ALGOLIA_API_KEY && PRODUCT_NAMES_AND_INDICES && $('#search-box').length >= 1) {
     setupAlgolia()
   }
 
