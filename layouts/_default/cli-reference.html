@@ -1,8 +1,6 @@
 {{ define "main" -}}
     {{- partial "contentheader.html" . -}}
 
-    <h1>{{- .Page.Params.name -}} </h1> 
-
     {{- with .Page.Params -}}
       {{- if or .long .short -}}
         <h2> Description </h2>
