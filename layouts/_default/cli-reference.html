@@ -1,0 +1,163 @@
+{{ define "main" -}}
+    {{- partial "contentheader.html" . -}}
+
+    <h1>{{- .Page.Params.name -}} </h1> 
+
+    {{- with .Page.Params -}}
+      {{- if or .long .short -}}
+        <h2> Description </h2>
+        {{- if .long -}}
+          {{- .long -}}
+        {{- else -}}
+          {{- .short -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- if .Page.Params.arguments -}}
+      <h2> Arguments </h2>
+      <table>
+        <tr>
+          <th>Argument</th>
+          <th>Description</th>
+        </tr>
+          {{- with .Page.Params.arguments -}}
+            {{- range . -}}
+              <tr>
+                <td> {{- .name -}} </td>
+                <td> {{- .description -}} </td>
+              </tr>
+            {{- end -}}
+          {{- end -}}
+      </table>
+    {{- end -}}
+    
+    {{- if .Page.Params.flags -}}
+      <h2> Flags </h2>
+      <table>
+        <tr>
+          <th>Flag</th>
+          <th>Description</th>
+          <th>Values</th>
+        </tr>
+        {{- with .Page.Params.flags -}}
+          {{- range . -}}
+            <tr>
+              <td>
+                {{- .name -}}
+              </td>
+              <td>
+                {{- .use -}}
+                {{- if .default -}}
+                  </br>
+                  {{- printf "_Default value:_ %v" .default | markdownify -}}
+                {{- end -}}
+                {{- if .required -}}
+                  </br>
+                  {{- printf "_Required:_ %t" .required | markdownify -}}
+                {{- end -}}
+                {{- if .type -}}
+                  </br>
+                  {{- printf "_Type:_ %s" .type | markdownify -}}
+                {{- end -}}
+                {{- if .singleLetterShorthand -}}
+                  </br>
+                  {{- printf "_Shorthand:_ %s" .singleLetterShorthand | markdownify -}}
+                {{- end -}}
+              </td>
+              <td>
+                {{- if .validValues -}}
+                <i>Valid values:</i>
+                  <ul>
+                    {{- with .validValues -}}
+                      {{- range . -}}
+                        <li>
+                        {{- printf " %v" . -}}
+                        </li>
+                      {{- end -}}
+                    {{- end -}}
+                  </ul>
+                {{- end -}}
+                {{- if .validRange -}}
+                  <i>Valid range:</i>
+                  {{- with .validRange -}}
+                    {{- range. -}}
+                      {{- printf " %v" . -}}
+                    {{- end -}}
+                    {{- "." -}}
+                  {{- end -}}
+                {{- end -}}
+              </td>
+            </tr>
+          {{- end -}}
+        {{- end -}}
+      </table>
+    {{- end -}}
+
+    {{- if .Page.Params.examples -}}
+      <h2> Examples </h2>
+      {{- with .Page.Params.examples -}}
+        {{- range . -}}
+          {{- .description -}}
+          </br>
+          <div class="highlight copyable"><div class="copy-link">
+            <button id="clipboard-icon-2" class="button" tabindex="0">
+              <i class="material-icons">assignment</i>
+            </button>
+            <div class="mdl-tooltip mdl-tooltip--small" for="clipboard-icon-2" data-upgraded=",MaterialTooltip">
+copy to clipboard
+          </div>
+  </div><pre class="chroma"><code class="language-text" data-lang="text">{{- .command -}}</code></pre></div>
+
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- if .Sections -}}
+      <h2> Subcommands </h2>
+      <ul class="list-series">
+        {{- with .Sections -}}
+          {{- range . -}}
+            <li class="list-series__item mdl-card mdl-shadow--2dp">
+            <a href="{{- .URL -}}">
+              <div class="mdl-card__title">
+              <h3 class="mdl-card__title-text">
+                {{- .Params.name -}} 
+              </h3>
+              </div>
+              <div class="mdl-card__supporting-text">
+                <p> {{- .Params.short -}}</p>
+              </div>
+              <i class="material-icons">arrow_forward_ios</i>
+            </a>
+            </li>
+          {{- end -}}
+        {{- end -}}
+        </ul>
+      {{- end -}}
+   
+    {{- if eq .Parent.Params.layout "cli-reference" -}}
+      <h2> Parent command </h2>
+      {{- with .Parent -}}
+        <ul class="list-series">
+          <li class="list-series__item mdl-card mdl-shadow--2dp">
+            <a href="{{- .URL -}}">
+              <div class="mdl-card__title">
+                <h3 class="mdl-card__title-text">
+                  {{- .Params.name -}} 
+                </h3>
+              </div>
+              <div class="mdl-card__supporting-text">
+                <p> {{- .Params.short -}}</p>
+              </div>
+              <i class="material-icons">arrow_forward_ios</i>
+            </a>
+          </li>
+
+        </ul>
+      {{- end -}}
+    {{- end -}}
+
+    {{- partial "prevnext.html" . -}}
+{{ end -}}
+
