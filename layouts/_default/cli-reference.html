@@ -1,95 +1,156 @@
 {{ define "main" -}}
-    {{- partial "contentheader.html" . -}}
+  {{- partial "contentheader.html" . -}}
 
-    {{- with .Page.Params -}}
-      {{- if or .long .short -}}
-        <h2> Description </h2>
-        {{- if .long -}}
-          {{- .long -}}
-        {{- else -}}
-          {{- .short -}}
+  {{- if .Page.Params.syntax -}}
+    <h2> Command Syntax </h2>
+    {{- printf "```text\n%s\n```" .Page.Params.syntax | markdownify -}}
+  {{- end -}}
+
+  {{- with .Page.Params -}}
+    {{- if or .long .short -}}
+      <h2> Description </h2>
+      {{- if .long -}}
+        {{- .long -}}
+      {{- else -}}
+        {{- .short -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if .Page.Params.arguments -}}
+      <h2> Arguments </h2>
+      {{- with .Page.Params.arguments -}}
+        {{- range . -}}
+          <p>
+           {{- printf "`%s`" .name | markdownify -}}
+          </p>
+          {{- if .description -}}
+            <p>
+              {{- .description -}}
+            </p>
+          {{- end -}}
+          {{- if .required -}}
+            <p>
+              {{- printf "_Required:_ %t" .required | markdownify -}}
+            </p>
+          {{- end -}}
         {{- end -}}
       {{- end -}}
     {{- end -}}
 
-    {{- if .Page.Params.arguments -}}
-      <h2> Arguments </h2>
-      <table>
-        <tr>
-          <th>Argument</th>
-          <th>Description</th>
-        </tr>
-          {{- with .Page.Params.arguments -}}
-            {{- range . -}}
-              <tr>
-                <td> {{- .name -}} </td>
-                <td> {{- .description -}} </td>
-              </tr>
-            {{- end -}}
-          {{- end -}}
-      </table>
-    {{- end -}}
-    
     {{- if .Page.Params.flags -}}
       <h2> Flags </h2>
-      <table>
-        <tr>
-          <th>Flag</th>
-          <th>Description</th>
-          <th>Values</th>
-        </tr>
-        {{- with .Page.Params.flags -}}
-          {{- range . -}}
-            <tr>
-              <td>
-                {{- .name -}}
-              </td>
-              <td>
-                {{- .use -}}
-                {{- if .default -}}
-                  </br>
-                  {{- printf "_Default value:_ %v" .default | markdownify -}}
+      {{- with .Page.Params.flags -}}
+        {{- range . -}}
+          <p>
+            {{- if .type -}}
+              {{- printf "`%s` (`%s`)" .name .type | markdownify -}}
+            {{- else -}}
+              {{- printf "`%s`" .name | markdownify -}}
+            {{- end -}}
+          </p>
+          <p>
+            {{- .description -}}
+          </p>
+          
+          {{- if .defaultValue -}}
+            <p>
+              {{- printf "_Default value:_ %v" .defaultValue | markdownify -}}
+            </p>
+            {{- end -}}
+          {{- if .required -}}
+            <p>
+              {{- printf "_Required:_ %t" .required | markdownify -}}
+            </p>
+          {{- end -}}
+          <!--
+          {{- if .type -}}
+            <p>
+              {{- printf "_Type:_ %s" .type | markdownify -}}
+            </p>
+          {{- end -}}
+          -->
+          {{- if .singleLetterShorthand -}}
+            <p>
+              {{- printf "_Shorthand:_ %s" .singleLetterShorthand | markdownify -}}
+            </p>
+          {{- end -}}
+          {{- if .validValues -}}
+            <i>Valid values:</i>
+            <ul>
+              {{- with .validValues -}}
+                {{- range . -}}
+                  <li>
+                    {{- printf " %v" . -}}
+                  </li>
                 {{- end -}}
-                {{- if .required -}}
-                  </br>
-                  {{- printf "_Required:_ %t" .required | markdownify -}}
-                {{- end -}}
-                {{- if .type -}}
-                  </br>
-                  {{- printf "_Type:_ %s" .type | markdownify -}}
-                {{- end -}}
-                {{- if .singleLetterShorthand -}}
-                  </br>
-                  {{- printf "_Shorthand:_ %s" .singleLetterShorthand | markdownify -}}
-                {{- end -}}
-              </td>
-              <td>
-                {{- if .validValues -}}
-                <i>Valid values:</i>
-                  <ul>
-                    {{- with .validValues -}}
-                      {{- range . -}}
-                        <li>
-                        {{- printf " %v" . -}}
-                        </li>
-                      {{- end -}}
-                    {{- end -}}
-                  </ul>
-                {{- end -}}
-                {{- if .validRange -}}
-                  <i>Valid range:</i>
-                  {{- with .validRange -}}
-                    {{- range. -}}
-                      {{- printf " %v" . -}}
-                    {{- end -}}
-                    {{- "." -}}
-                  {{- end -}}
-                {{- end -}}
-              </td>
-            </tr>
+              {{- end -}}
+            </ul>
+          {{- end -}}
+          {{- if .validRange -}}
+            <p>
+              {{- printf "_Valid range:_ %s" .validRange | markdownify -}}
+            </p>
           {{- end -}}
         {{- end -}}
-      </table>
+      {{- end -}}
+    {{- end -}}
+
+    {{- if .Page.Params.inheritedFlags -}}
+      <h2> Inherited flags </h2>
+      {{- with .Page.Params.inheritedFlags -}}
+        {{- range . -}}
+          <p>
+            {{- if .type -}}
+              {{- printf "`%s` (`%s`)" .name .type | markdownify -}}
+            {{- else -}}
+              {{- printf "`%s`" .name | markdownify -}}
+            {{- end -}}
+          </p>
+          <p>
+            {{- .description -}}
+          </p>
+          {{- if .defaultValue -}}
+            <p>
+              {{- printf "_Default value:_ %v" .defaultValue | markdownify -}}
+            </p>
+            {{- end -}}
+          {{- if .required -}}
+            <p>
+              {{- printf "_Required:_ %t" .required | markdownify -}}
+            </p>
+          {{- end -}}
+          <!--
+          {{- if .type -}}
+            <p>
+              {{- printf "_Type:_ %s" .type | markdownify -}}
+            </p>
+          {{- end -}}
+          -->
+          {{- if .singleLetterShorthand -}}
+            <p>
+              {{- printf "_Shorthand:_ %s" .singleLetterShorthand | markdownify -}}
+            </p>
+          {{- end -}}
+          {{- if .validValues -}}
+            <i>Valid values:</i>
+            <ul>
+              {{- with .validValues -}}
+                {{- range . -}}
+                  <li>
+                    {{- printf " %v" . -}}
+                  </li>
+                {{- end -}}
+              {{- end -}}
+            </ul>
+          {{- end -}}
+          {{- if .validRange -}}
+            <p>
+              {{- printf "_Valid range:_ %s" .validRange | markdownify -}}
+            </p>
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
     {{- end -}}
 
     {{- if .Page.Params.examples -}}
@@ -114,7 +175,7 @@
             <a href="{{- .URL -}}">
               <div class="mdl-card__title">
               <h3 class="mdl-card__title-text">
-                {{- .Params.name -}} 
+                {{- .Params.name -}}
               </h3>
               </div>
               <div class="mdl-card__supporting-text">
@@ -127,7 +188,7 @@
         {{- end -}}
         </ul>
       {{- end -}}
-   
+
     {{- if eq .Parent.Params.layout "cli-reference" -}}
       <h2> Parent command </h2>
       {{- with .Parent -}}
@@ -136,7 +197,7 @@
             <a href="{{- .URL -}}">
               <div class="mdl-card__title">
                 <h3 class="mdl-card__title-text">
-                  {{- .Params.name -}} 
+                  {{- .Params.name -}}
                 </h3>
               </div>
               <div class="mdl-card__supporting-text">
@@ -145,10 +206,7 @@
               <i class="material-icons">arrow_forward_ios</i>
             </a>
           </li>
-
         </ul>
       {{- end -}}
     {{- end -}}
 
-    {{- partial "prevnext.html" . -}}
-{{ end -}}
