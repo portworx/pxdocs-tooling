@@ -43,11 +43,17 @@
       {{- with .Page.Params.flags -}}
         {{- range . -}}
           <p>
-            {{- if .type -}}
-              {{- printf "`%s` (`%s`)" .name .type | markdownify -}}
-            {{- else -}}
-              {{- printf "`%s`" .name | markdownify -}}
+            {{- $.Scratch.Add "shorthand" "" -}}
+            {{- $.Scratch.Add "type" "" -}}
+            {{- if .singleLetterShorthand -}}
+              {{- $.Scratch.Add "shorthand" (printf ", `%s`" .singleLetterShorthand) -}}
             {{- end -}}
+            {{- if .type -}}
+              {{- $.Scratch.Add "type" (printf " (`%s`)" .type) -}}
+            {{- end -}}
+            {{- printf "`%s`%s%s" .name ($.Scratch.Get "shorthand")  ($.Scratch.Get "type") | markdownify -}}
+            {{- $.Scratch.Delete "shorthand" -}}
+            {{- $.Scratch.Delete "type" -}}
           </p>
           <p>
             {{- .description -}}
@@ -61,18 +67,6 @@
           {{- if .required -}}
             <p>
               {{- printf "_Required:_ %t" .required | markdownify -}}
-            </p>
-          {{- end -}}
-          <!--
-          {{- if .type -}}
-            <p>
-              {{- printf "_Type:_ %s" .type | markdownify -}}
-            </p>
-          {{- end -}}
-          -->
-          {{- if .singleLetterShorthand -}}
-            <p>
-              {{- printf "_Shorthand:_ %s" .singleLetterShorthand | markdownify -}}
             </p>
           {{- end -}}
           {{- if .validValues -}}
@@ -101,11 +95,17 @@
       {{- with .Page.Params.inheritedFlags -}}
         {{- range . -}}
           <p>
-            {{- if .type -}}
-              {{- printf "`%s` (`%s`)" .name .type | markdownify -}}
-            {{- else -}}
-              {{- printf "`%s`" .name | markdownify -}}
+            {{- $.Scratch.Add "shorthand" "" -}}
+            {{- $.Scratch.Add "type" "" -}}
+            {{- if .singleLetterShorthand -}}
+              {{- $.Scratch.Add "shorthand" (printf ", `%s`" .singleLetterShorthand) -}}
             {{- end -}}
+            {{- if .type -}}
+              {{- $.Scratch.Add "type" (printf " (`%s`)" .type) -}}
+            {{- end -}}
+            {{- printf "`%s`%s%s" .name ($.Scratch.Get "shorthand")  ($.Scratch.Get "type") | markdownify -}}
+            {{- $.Scratch.Delete "shorthand" -}}
+            {{- $.Scratch.Delete "type" -}}
           </p>
           <p>
             {{- .description -}}
