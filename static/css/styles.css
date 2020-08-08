@@ -796,6 +796,11 @@ hr.margin {
   font-weight: 500;
 }
 
+.docs-content homelistSeriesTitle {
+  font-size: 20px;
+  font-weight: 500;
+}
+
 .docs-content h4 {
   font-size: 18px;
   font-weight: 500;
