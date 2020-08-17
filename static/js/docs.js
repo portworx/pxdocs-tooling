@@ -267,24 +267,71 @@ $(function () {
 
   */
 
-  function activateVersionMenu() {
-    var allVersions = VERSIONS_ALL.split(',')
+  function getMasterVersion () {
+    if (VERSIONS_ALL === undefined || BRANCH_VERSION_CONFIG === undefined) {
+      return
+    }
+    const allVersions = BRANCH_VERSION_CONFIG.split(',')
+    let masterVersion
     allVersions.forEach(function (version) {
+      let branch = version.split('=')
+      if (branch[0] === 'master')
+        masterVersion = branch[1]
+    })
+    return masterVersion
+  }
+
+  function replaceMasterWithProductVersion (versionsAll) {
+    let masterVersion = getMasterVersion()
+    const allVersions = versionsAll.split(',')
+    let newVersions = []
+    allVersions.forEach(element => {
+      if (element.includes('master')) {
+        element.replace('master', masterVersion)
+      }
+    newVersions.push(element)
+    })
+    return newVersions.toString()
+  }
+
+  function removeMasterVersion (versionsAll) {
+    let masterVersion = getMasterVersion()
+    const allVersions = versionsAll.split(',')
+    let newVersions = []
+    allVersions.forEach(element => {
+        if (!element.includes(masterVersion)) {
+            newVersions.push(element)
+        }
+    })
+    return newVersions.toString()
+  }
+
+  function activateVersionMenu(allVersions, currentVersion, versionBaseUrl) {
+    allVersions.split(',').forEach(function (version) {
       var versionOption = $('<li class="mdl-menu__item">Version ' + version + '</li>')
 
       versionOption.click(function () {
-        if (version == VERSIONS_CURRENT) return
-        var url = location.protocol + '//' + version + '.' + VERSIONS_BASE_URL
+        if (version == currentVersion) return
+        var url = location.protocol + '//' + version + '.' + versionBaseUrl
         document.location = url
       })
 
       $('#version-menu #version-menu-options').append(versionOption)
     })
-    $('#version-menu #text-button').text('Version: ' + VERSIONS_CURRENT)
+    $('#version-menu #text-button').text('Version: ' + currentVersion)
   }
 
+  let masterVersion = getMasterVersion()
+
   if (VERSIONS_BASE_URL) {
-    activateVersionMenu()
+    if (masterVersion === VERSIONS_CURRENT) {
+      const newVersionsAll = replaceMasterWithProductVersion(VERSIONS_ALL)
+      // console.log(`newVersionsAll: ${newVersionsAll}`)
+      activateVersionMenu(newVersionsAll, VERSIONS_CURRENT, VERSIONS_BASE_URL)
+    } else {
+      const newVersionsAll = removeMasterVersion(VERSIONS_ALL)
+      activateVersionMenu(newVersionsAll, VERSIONS_CURRENT, VERSIONS_BASE_URL)
+    }
     $('#version-menu-dropdown').css({
       visibility: 'visible'
     })
