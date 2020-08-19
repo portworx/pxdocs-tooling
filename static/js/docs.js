@@ -451,12 +451,12 @@ $(function () {
     codeElem.parent().parent().addClass('copyable');
     highlightElem.find('pre code.language-output').parent().parent().addClass('typeOutput');
     var copyDiv = $([
-      '<div class="copy-link">',
+      '<div class="copy-link" align="right" >',
       '<button id="clipboard-icon-' + i + '" class="button">',
       '<i class="material-icons">assignment</i>',
 
       '</button>',
-      '<div class="mdl-tooltip mdl-tooltip--small" for="clipboard-icon-' + i + '">',
+      '<div class="docs-tooltip docs-tooltip-small" for="clipboard-icon-' + i + '">',
       'copy to clipboard',
       '</div>',
       '</div>'
