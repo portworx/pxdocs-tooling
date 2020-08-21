@@ -30,7 +30,7 @@ h2 {
 
 */
 .docs-header {
-  height: 70px;
+  height: 100px;
   margin-left: 0px !important;
   width: 100% !important;
   box-shadow: none !important;
@@ -64,9 +64,9 @@ h2 {
 }
 
 .docs-header .container .navbar-brand img {
-  margin-top: 10px;
+  margin-top: 15px;
   margin-left: 20px;
-  height: 50px;
+  height: 70px;
 }
 
 @media screen and (max-width: 1025px) {
@@ -83,6 +83,7 @@ h2 {
   float: right;
   padding-left: 15px;
   padding-right: 15px;
+  margin-top: 15px;
 }
 
 .docs-header .container .navbar-menus ul {
@@ -109,7 +110,7 @@ h2 {
 .docs-header .container .navbar-menus .header-top-menu {
   list-style-type: none;
   margin-top: 5px;
-  margin-bottom: 0px;
+  margin-bottom: 15px;
 }
 
 .docs-header .container .navbar-menus .header-main-menu {
@@ -118,18 +119,25 @@ h2 {
   margin-top: 10px;
 }
 
-
-.docs-header .container .navbar-menus .header-top-menu li:first-of-type:after {
-  content: '|';
-  color: #ff5000;
-}
-
 .docs-header .container .navbar-menus .header-top-menu li a {
   color: #ff5000;
   text-transform: uppercase;
+  font-family:"Libre Franklin", sans-serif;
+  font-weight: 700;
   padding: 0 15px;
-  font-size: 17px;
-  line-height: 25px;
+  font-size: 16px;
+}
+
+.docs-header .container .navbar-menus .header-top-menu li:nth-child(2) a {
+  color: #ffffff;
+  text-transform: uppercase;
+  font-family:"Libre Franklin", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  background-color: #ff5000;
+  border: 2px solid #ff5000;
+  padding: 5px 25px 5px 25px;
+  margin-left: 10px;
 }
 
 .docs-header .container .navbar-menus .header-main-menu li a {
@@ -470,7 +478,7 @@ h2 {
   width: 300px;
   position: fixed;
   z-index: 2000;
-  top: 70px;
+  top: 100px;
   bottom: 0;
   overflow-y: hidden !important;
   display: flex;
@@ -784,6 +792,11 @@ hr.margin {
 }
 
 .docs-content h3 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.docs-content homelistSeriesTitle {
   font-size: 20px;
   font-weight: 500;
 }
