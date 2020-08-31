@@ -448,8 +448,6 @@ $(function () {
 
  $('.language-output').each(function (i) {
   const element = $(this)
-  console.log('Running')
-  console.log(element)
   element.parent().addClass('highlight typeOutput')
  })
 
