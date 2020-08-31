@@ -445,11 +445,18 @@ $(function () {
     copy paste
 
   */
+
+ $('.language-output').each(function (i) {
+  const element = $(this)
+  console.log('Running')
+  console.log(element)
+  element.parent().addClass('highlight typeOutput')
+ })
+
   $('.highlight').each(function (i) {
     var highlightElem = $(this)
     var codeElem = highlightElem.find('pre code.language-text');
     codeElem.parent().parent().addClass('copyable');
-    highlightElem.find('pre code.language-output').parent().parent().addClass('typeOutput');
     var copyDiv = $([
       '<div class="copy-link">',
       '<button id="clipboard-icon-' + i + '" class="button">',
