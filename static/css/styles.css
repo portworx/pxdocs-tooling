@@ -2066,19 +2066,14 @@ code .s {
 }
 
 .docs-tooltip {
+  background: rgba(97,97,97,.9);
+  border-radius: 2px;
+  color: #fff;
   font-size: 10px;
-  background:rgba(97,97,97,.9);
-  border-radius:2px;
-  color:#fff;
-  font-size:10px;
-  font-weight:500;
-  line-height:14px;
-  max-width:170px;
-  padding:8px;
-  text-align:center;
-  top:236px;
-  margin-left:-46.5px;
-  /* left:771.5px !important; This has no effect whatsoever*/
+  font-weight: 500;
+  line-height: 11px;
+  padding: 8px;
+  transform: translate(29px);
 }
 
 .docs-tooltip.is-active {
