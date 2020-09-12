@@ -1801,13 +1801,11 @@ code .s {
 */
 
 .tab-wrap {
-  -webkit-transition: 0.3s box-shadow ease;
-  transition: 0.3s box-shadow ease;
   border-radius: 6px;
+  border: solid;
+  border-width: 1px;
+  border-color: #55565a;
   max-width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
@@ -1816,10 +1814,8 @@ code .s {
   list-style: none;
   background-color: #fff;
   margin: 40px 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-.tab-wrap:hover { box-shadow: 0 12px 23px rgba(0, 0, 0, 0.23), 0 10px 10px rgba(0, 0, 0, 0.19); }
 
 .tab { display: none; }
 
@@ -1913,25 +1909,16 @@ code .s {
 }
 
 .tab + label {
-  box-shadow: 0 -1px 0 #eee inset;
   border-radius: 6px 6px 0 0;
   cursor: pointer;
   display: block;
   text-decoration: none;
+  font-weight: 600;
   color: #333;
-  -webkit-box-flex: 3;
-  -webkit-flex-grow: 3;
-  -ms-flex-positive: 3;
   flex-grow: 3;
-  text-align: center;
   background-color: #f2f2f2;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   text-align: center;
-  -webkit-transition: 0.3s background-color ease, 0.3s box-shadow ease;
-  transition: 0.3s background-color ease, 0.3s box-shadow ease;
   height: 50px;
   box-sizing: border-box;
   padding: 15px;
@@ -1958,19 +1945,14 @@ code .s {
 
 
 .docs-tooltip {
+  background: rgba(97,97,97,.9);
+  border-radius: 2px;
+  color: #fff;
   font-size: 10px;
-  background:rgba(97,97,97,.9);
-  border-radius:2px;
-  color:#fff;
-  font-size:10px;
-  font-weight:500;
-  line-height:14px;
-  max-width:170px;
-  padding:8px;
-  text-align:center;
-  top:236px;
-  margin-left:-46.5px;
-  /* left:771.5px !important; This has no effect whatsoever*/
+  font-weight: 500;
+  line-height: 11px;
+  padding: 8px;
+  transform: translate(29px);
 }
 
 .docs-tooltip.is-active {
