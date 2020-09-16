@@ -1,5 +1,5 @@
 FROM nginx
-MAINTAINER kaiyadavenport@gmail.com
+LABEL maintainer="nathaniel.wilson@portworx.com"
 COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY ./pxdocs-directs.conf /etc/nginx/pxdocs-directs.conf
 COPY ./px-backup-redirects.conf /etc/nginx/px-backup-redirects.conf
