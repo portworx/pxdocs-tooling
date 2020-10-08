@@ -111,11 +111,11 @@
       let searchWrapper = document.querySelector('#search-wrapper')
       productNamesAndIndices.forEach(element => {
         let newParagraph = document.createElement('p')
-        newParagraph.id = `search-hits-${element.productName}-title`
+        newParagraph.id = `search-hits-${element.indexName}-title`
         newParagraph.className = 'search-hits-title'
         newParagraph.innerHTML = element.productName
         let newDiv = document.createElement('div')
-        newDiv.id = `search-hits-${element.productName}`
+        newDiv.id = `search-hits-${element.indexName}`
         newDiv.classList.add('search-hits')
         searchWrapper.appendChild(newParagraph)
         searchWrapper.appendChild(newDiv)

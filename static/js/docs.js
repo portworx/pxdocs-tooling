@@ -202,7 +202,7 @@ $(function () {
       .index({ indexName: productNameAndIndex.indexName })
       .addWidgets([
         makeConfiguration(),
-        makeHits(`search-hits-${productNameAndIndex.productName}`),
+        makeHits(`search-hits-${productNameAndIndex.indexName}`),
       ])
   }
 
@@ -226,7 +226,7 @@ $(function () {
     search.addWidgets([
       makeConfiguration(),
       makeSearchBox('search-box'),
-      makeHits(`search-hits-${productNamesAndIndices[0].productName}`),
+      makeHits(`search-hits-${productNamesAndIndices[0].indexName}`),
     ])
     for (currentIndex = 1; currentIndex < productNamesAndIndices.length; currentIndex++) {
       search.addWidgets([makeSecondaryIndex(productNamesAndIndices[currentIndex])])
