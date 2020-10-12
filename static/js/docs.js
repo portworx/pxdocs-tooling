@@ -67,18 +67,18 @@ $(function () {
 
   /*
 
-    algolia search
+    Algolia search
 
   */
 
-  // This defines how many chars on either side of a match we display in the results.
+  // Defines how many chars on either side of a match we display in the results.
   var SEARCH_HIGHLIGHT_BLEED = 40
 
   function getMatchIndex(text, search) {
     return text.toLowerCase().indexOf(search.toLowerCase())
   }
 
-  // this function before we display the results, cleaning the output so that it's user-readable.
+  // We call this function before we display the results, cleaning the output so that it's user-readable.
   function transformItem(item) {
     var highlightResult = item._highlightResult.content
     var searchWords = highlightResult.matchedWords
@@ -132,6 +132,11 @@ $(function () {
     return item
   }
 
+  /**
+   * makeConfiguration.
+   * Configures an Algolia widget. See https://www.algolia.com/doc/api-reference/widgets/configure/js/ for details.
+   * @returns a configuration object
+   */
   function makeConfiguration() {
     return instantsearch.widgets.configure({
       hitsPerPage: 100,
@@ -160,6 +165,11 @@ $(function () {
     })
   }
 
+  /**
+   * makeHits.
+   * Creates the divs that will hold our search hits
+   * @param {string} containerName
+   */
   function makeHits(containerName) {
     return instantsearch.widgets.hits({
       escapeHTML: false,
@@ -197,6 +207,12 @@ $(function () {
     })
   }
 
+  /**
+   * makeSecondaryIndex.
+   *
+   * @param {object} productNameAndIndex
+   * @returns {object} Algolia widget
+   */
   function makeSecondaryIndex(/*indexName, hitsContainerName*/ productNameAndIndex) {
     return instantsearch.widgets
       .index({ indexName: productNameAndIndex.indexName })
@@ -206,6 +222,10 @@ $(function () {
       ])
   }
 
+  /**
+   * setupAlgolia.
+   * Initializes Algolia, configures widgets, retrieves search results, and then displays them 
+   */
   function setupAlgolia() {
     const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
     const search = instantsearch({
@@ -223,11 +243,13 @@ $(function () {
         helper.search()
       },
     });
+    // Add a widget for the primary index. For more details about the `addWidgets` function, see the https://www.algolia.com/doc/guides/building-search-ui/widgets/customize-an-existing-widget/js/ page.
     search.addWidgets([
       makeConfiguration(),
       makeSearchBox('search-box'),
       makeHits(`search-hits-${productNamesAndIndices[0].indexName}`),
     ])
+    // Add widgets for the secondary indexes
     for (currentIndex = 1; currentIndex < productNamesAndIndices.length; currentIndex++) {
       search.addWidgets([makeSecondaryIndex(productNamesAndIndices[currentIndex])])
     }
@@ -239,7 +261,7 @@ $(function () {
 
   }
 
-
+  // We check that all environment variables are initialized before we set up Algolia
   if (ALGOLIA_APP_ID && ALGOLIA_API_KEY && PRODUCT_NAMES_AND_INDICES && $('#search-box').length >= 1) {
     setupAlgolia()
   }
@@ -267,7 +289,12 @@ $(function () {
 
   */
 
+  /**
+   * activateVersionMenu.
+   * Displays the version dropdown
+   */
   function activateVersionMenu() {
+    // `VERSIONS_ALL` is a comma-separated list of all versions
     var allVersions = VERSIONS_ALL.split(',')
     allVersions.forEach(function (version) {
       var versionOption = $('<li class="mdl-menu__item">Version ' + version + '</li>')
@@ -298,7 +325,7 @@ $(function () {
 
   var SCROLLSPY_FIXED_OFFSET = 170
   var SCROLLSPY_ACTIVE_BUFFER = 150
-  var SCROLLSPY_HEADER_SELECTOR = "h2,h3"
+  var SCROLLSPY_HEADER_SELECTOR = "h2,h3" //TODO: This shouldn't probably be hardcoded here.
 
   var scrollspyContainer = $('#scrollspy-container')
   var scrollspyList = $('#scrollspy-list')
