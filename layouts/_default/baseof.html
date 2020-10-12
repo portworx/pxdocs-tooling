@@ -97,32 +97,44 @@
   <script src="{{"js/is.min.js" | relURL}}?timestamp={{ now.Unix }}"></script>
   <script>
 
+    /**
+     * parseProductNamesAndIndices.
+     * Divides the `PRODUCT_NAMES_AND_VARIABLES` variable into substrings, and puts them in a JavaScript array
+     * @returns {array} Each element of the array is in the form of {'productName': <productName>, 'indexName': <indexName'}
+     */
     function parseProductNamesAndIndices() {
-      const elements = PRODUCT_NAMES_AND_INDICES.split(',')
+      const elements = PRODUCT_NAMES_AND_INDICES.split(',') // Divide the `PRODUCT_NAMES_AND_VARIABLES` variable into substrings and store th results in an array named `elements`
       const productNamesAndIndices = []
       elements.forEach(index => {
+        // Each element of the `elements` array is in the form of <productName>=<indexName>
         const productAndIndex = index.split('=')
-        productNamesAndIndices.push({ 'productName': productAndIndex[0], 'indexName': productAndIndex[1] })
+        productNamesAndIndices.push({ 'productName': productAndIndex[0], 'indexName': productAndIndex[1] }) // Add a new element 
       })
       return productNamesAndIndices
     }
 
+    /**
+     * populateSearchWrapper.
+     * Iterates over the `productNamesAndIndices` variable and creates a separate `div` for each product.
+     * @param {array} productNamesAndIndices
+     */
     function populateSearchWrapper(productNamesAndIndices) {
       let searchWrapper = document.querySelector('#search-wrapper')
       productNamesAndIndices.forEach(element => {
-        let newParagraph = document.createElement('p')
-        newParagraph.id = `search-hits-${element.indexName}-title`
-        newParagraph.className = 'search-hits-title'
-        newParagraph.innerHTML = element.productName
+        let newParagraph = document.createElement('p') // Create a new `p` element
+        newParagraph.id = `search-hits-${element.indexName}-title` // Use `element.indexName` to generate a unique `id` 
+        newParagraph.className = 'search-hits-title' // `className` is always the same
+        newParagraph.innerHTML = element.productName // Set the `innerHTML` to display the name of the product
+        // The `newDiv` element holds the search results
         let newDiv = document.createElement('div')
-        newDiv.id = `search-hits-${element.indexName}`
+        newDiv.id = `search-hits-${element.indexName}` // Use `element.indexName` to generate a unique `id`
         newDiv.classList.add('search-hits')
         searchWrapper.appendChild(newParagraph)
         searchWrapper.appendChild(newDiv)
       })
     }
 
-    var ALGOLIA_APP_ID = '{{ getenv "ALGOLIA_APP_ID" }}'
+    var ALGOLIA_APP_ID = '{{ getenv "ALGOLIA_APP_ID" }}' // `getenv` is a Hugo function that takes the name of an environment variable as an attribute and returns its value
     var ALGOLIA_API_KEY = '{{ getenv "ALGOLIA_API_KEY" }}'
     var PRODUCT_NAMES_AND_INDICES = '{{ getenv "PRODUCT_NAMES_AND_INDICES"}}'
     var VERSIONS_ALL = '{{ getenv "VERSIONS_ALL" }}'
@@ -130,7 +142,7 @@
     var VERSIONS_CURRENT = '{{ getenv "VERSIONS_CURRENT" }}'
 
     var EQUALIZE_TABLE_WIDTHS = '{{ .Params.equalizeTableWidths }}'
-    var productNamesAndIndices = parseProductNamesAndIndices()
+    var productNamesAndIndices = parseProductNamesAndIndices() // Convert `PRODUCT_NAMES_AND_INDICES` (a comma-separated list of values) to a JavaScript arrray
     populateSearchWrapper(productNamesAndIndices)
 
   </script>

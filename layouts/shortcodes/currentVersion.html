@@ -1,3 +1,4 @@
+{{/* Uses the `TRAVIS_BRANCH` environment variable to determine the version for which the build got triggerd, and then prints it. If `TRAVIS_BRANCH` is not set, then it prints a placeholder - `2.5` */}}
 {{- $travisBranch := getenv "TRAVIS_BRANCH" -}}
 {{- if (eq $travisBranch "master" | or (eq $travisBranch "")) -}}
   {{- 2.5 -}}

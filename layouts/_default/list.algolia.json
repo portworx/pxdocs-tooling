@@ -1,4 +1,5 @@
 {{/* Generates a valid Algolia search index */}}
+{{/* Read the value of the PRODUCT_URL environment variable*/}} 
 {{- $urlPrefix := getenv "PRODUCT_URL" -}}
 {{- $.Scratch.Add   "index" slice -}}
 {{- range .Site.AllPages -}}
@@ -19,6 +20,7 @@
 
         {{- with $currentSection -}}
           {{- $.Scratch.Add "currentSectionTitles" .Title -}}
+          {{/* Prepend $urlPrefix to .URL*/}}
           {{- $newURL := printf "%s%s" $urlPrefix .URL -}}
           {{- $.Scratch.Set "currentSectionURL" $newURL -}}
           {{- $.Scratch.Set "currentSectionKeywords" .Keywords -}}
@@ -32,6 +34,7 @@
     {{- $sectionURL := $.Scratch.Get "currentSectionURL" -}}
     {{- $sectionTitles := printf "%s" (delimit $currentSectionTitles " : ") -}}
     {{- $keywords := printf "%s" (delimit .Keywords " ") -}}
+    {{/* Prepend $urlPrefix to .URL*/}}
     {{- $newURL := printf "%s%s" $urlPrefix .URL -}}
     {{- $.Scratch.Add "index" (dict "objectID" .UniqueID "sectionTitles" $sectionTitles "sectionURL" $sectionURL "content" .Content "title" .Title "url" $newURL "keywords" $keywords)}}
   {{- end -}}
