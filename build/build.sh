@@ -1,0 +1,124 @@
+#!/bin/bash
+
+# The travis_retry function  is not available is subshells/commands. See this tweet for details https://twitter.com/travisci/status/499195739353153539?s=20
+travis_retry() {
+  local result=0
+  local count=1
+  while [[ "${count}" -le 3 ]]; do
+    [[ "${result}" -ne 0 ]] && {
+      echo -e "\\n${ANSI_RED}The command \"${*}\" failed. Retrying, ${count} of 3.${ANSI_RESET}\\n" >&2
+    }
+    # run the command in a way that doesn't disable setting `errexit`
+    "${@}"
+    result="${?}"
+    if [[ $result -eq 0 ]]; then break; fi
+    count="$((count + 1))"
+    sleep 1
+  done
+
+  [[ "${count}" -gt 3 ]] && {
+    echo -e "\\n${ANSI_RED}The command \"${*}\" failed 3 times.${ANSI_RESET}\\n" >&2
+  }
+
+  return "${result}"
+}
+
+# The -e flag makes the build fail if there are any errors
+# The -v flag makes the shell print all lines before executing them
+set -ev
+
+# The name of the triggering repository
+export TRIGGERING_REPO_NAME=$(basename -s .git `git config --get remote.origin.url`)
+# The name of the Portworx Enterprise repository
+export PX_ENTERPRISE_REPO_NAME="pxdocs"
+# The name of the PX-Backup repository
+export PX_BACKUP_REPO_NAME="pxdocs-backup"
+
+# The following environment variables are set based on the triggering repository
+if [ "${TRIGGERING_REPO_NAME}" '==' "${PX_ENTERPRISE_REPO_NAME}" ]; then
+  echo "The triggering repository is Portworx Enterprise"
+  # A comma-separated list of branches and versions for which we build the deployment image, update the Algolia index and push the image to GCP
+  export BRANCH_VERSION_CONFIG=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Enterprise.BRANCH_VERSION_CONFIG)
+  # The latest version. We use this variable in the `export-product-url.sh` script to determine whether the version should be added or not to the URLs that we upload to Algolia.
+  export LATEST_VERSION=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Enterprise.LATEST_VERSION)
+  # The name of the product.
+  export PRODUCT_NAME=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Enterprise.PRODUCT_NAME)
+  # We use this environment variable to determine the name of the Algolia index
+  export PRODUCT_INDEX_NAME=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Enterprise.PRODUCT_INDEX_NAME)
+  # The base URL
+  export VERSIONS_BASE_URL=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Enterprise.VERSIONS_BASE_URL)
+  # A comma-separated list of other product names and indices, in the form of`<product-name>=<product-index>`.
+  export OTHER_PRODUCT_NAMES_AND_INDICES=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Enterprise.OTHER_PRODUCT_NAMES_AND_INDICES)
+  # Each product has its own list of redirects. For each product, we use the `VERSIONS_BASE_URL` environment variable to determine the name of the file where the redirects are stored, and then we save that name in the `NGINX_REDIRECTS_FILE` environment variable
+  export NGINX_REDIRECTS_FILE=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Enterprise.NGINX_REDIRECTS_FILE)
+  # The directory where the PX Enterprise manifests are placed
+  export MANIFESTS_DIRECTORY=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Enterprise.MANIFESTS_DIRECTORY)
+  export BUILDER_IMAGE=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Enterprise.BUILDER_IMAGE_PREFIX)$TRAVIS_COMMIT
+  export SEARCH_INDEX_IMAGE=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Enterprise.SEARCH_INDEX_IMAGE_PREFIX)$TRAVIS_COMMIT
+  export DEPLOYMENT_IMAGE_PREFIX="pxdocs"
+fi
+
+if [ "${TRIGGERING_REPO_NAME}" '==' "${PX_BACKUP_REPO_NAME}" ]; then
+  echo "The triggering repository is PX-Backup"
+  # A comma-separated list of branches and versions for which we build the deployment image, update the Algolia index and push the image to GCP
+  export BRANCH_VERSION_CONFIG=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Backup.BRANCH_VERSION_CONFIG)
+  # The latest version. We use this variable in the `export-product-url.sh` script to determine whether the version should be added or not to the URLs that we upload to Algolia.
+  export LATEST_VERSION=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Backup.LATEST_VERSION)
+  # The name of the product.
+  export PRODUCT_NAME=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Backup.PRODUCT_NAME)
+  # We use this environment variable to determine the name of the Algolia index
+  export PRODUCT_INDEX_NAME=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Backup.PRODUCT_INDEX_NAME)
+  # The base URL
+  export VERSIONS_BASE_URL=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Backup.VERSIONS_BASE_URL)
+  # A comma-separated list of other product names and indices, in the form of`<product-name>=<product-index>`.
+  export OTHER_PRODUCT_NAMES_AND_INDICES=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Backup.OTHER_PRODUCT_NAMES_AND_INDICES)
+  # Each product has its own list of redirects. For each product, we use the `VERSIONS_BASE_URL` environment variable to determine the name of the file where the redirects are stored, and then we save that name in the `NGINX_REDIRECTS_FILE` environment variable
+  export NGINX_REDIRECTS_FILE=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Backup.NGINX_REDIRECTS_FILE)
+  # The directory where the PX Enterprise manifests are placed
+  export MANIFESTS_DIRECTORY=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Backup.MANIFESTS_DIRECTORY)
+  export BUILDER_IMAGE=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Backup.BUILDER_IMAGE_PREFIX)$TRAVIS_COMMIT
+  export SEARCH_INDEX_IMAGE=$(yq r ./themes/pxdocs-tooling/build/products.yaml PX-Backup.SEARCH_INDEX_IMAGE_PREFIX)$TRAVIS_COMMIT
+  export DEPLOYMENT_IMAGE_PREFIX="pxbackup"
+fi
+
+# The following environment variables are **not** set based on the triggering repository
+export ALGOLIA_API_KEY=64ecbeea31e6025386637d89711e31f3
+export ALGOLIA_APP_ID=EWKZLLNQ9L
+export GCP_CLUSTER_ID=production-app-cluster
+export GCP_PROJECT_ID=production-apps-210001
+export GCP_ZONE=us-west1-b
+# Docker builds cannot use uppercase characters in the image name
+export LOWER_CASE_BRANCH=$(echo -n $TRAVIS_BRANCH | awk '{print tolower($0)}')
+export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/$DEPLOYMENT_IMAGE_PREFIX-$LOWER_CASE_BRANCH:$TRAVIS_COMMIT"
+# The current version
+export VERSIONS_CURRENT=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-current-branch-version)
+# A comma-separated list of all versions. We use this variable to build the version selector.
+export VERSIONS_ALL=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-all-versions)
+export VERSIONS_TAG=$(echo -n "$VERSIONS_CURRENT" | sed 's/\./-/g')
+export ALGOLIA_INDEX_NAME="${PRODUCT_INDEX_NAME}-${VERSIONS_TAG}"
+# A comma-separated list of all product names and indices, in the form of `<product-name>=<product-index>`.
+export PRODUCT_NAMES_AND_INDICES="${PRODUCT_NAME}=${PRODUCT_INDEX_NAME}-${TRAVIS_BRANCH/./-},${OTHER_PRODUCT_NAMES_AND_INDICES}"
+# Build images
+travis_retry make image -f ./themes/pxdocs-tooling/build/Makefile
+# Publish site -> public
+make publish-docker -f ./themes/pxdocs-tooling/build/Makefile
+# Build the deployment image
+travis_retry make deployment-image -f ./themes/pxdocs-tooling/build/Makefile
+travis_retry make check-links -f ./themes/pxdocs-tooling/build/Makefile
+# If this is a pull request then we don't want to update algolia or deploy
+if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then exit 0; fi
+# this checks if the current branch is present in the BRANCH_VERSION_CONFIG variable if exists if not
+if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh should-build-current-branch)" != "yes" ]; then exit 0; fi
+# Update the Algolia index
+travis_retry make search-index-image -f ./themes/pxdocs-tooling/build/Makefile
+travis_retry make search-index-docker -f ./themes/pxdocs-tooling/build/Makefile
+# Connect the GCLOUD_SERVICE_ACCOUNT_TOKEN, GCP_PROJECT_ID, GCP_ZONE and GCP_CLUSTER_ID vars -> gcloud and kubectl
+bash themes/pxdocs-tooling/deploy/scripts/ci_connect.sh
+# Push the image to gcr
+echo "Pushing image $DEPLOYMENT_IMAGE"
+gcloud docker -- push $DEPLOYMENT_IMAGE
+echo "Deploying image $DEPLOYMENT_IMAGE"
+cat "${MANIFESTS_DIRECTORY}deployment.yaml" | envsubst
+cat "${MANIFESTS_DIRECTORY}deployment.yaml" | envsubst | kubectl apply -f -
+cat "${MANIFESTS_DIRECTORY}service-template.yaml" | envsubst
+cat "${MANIFESTS_DIRECTORY}service-template.yaml" | envsubst | kubectl apply -f -
