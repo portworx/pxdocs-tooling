@@ -1806,3 +1806,22 @@ code .s {
     text-align: left;
   }
 }
+
+/* 
+
+CLI reference
+
+*/
+
+table.cli-reference-table th {
+  /* color: #fff; */
+  background-color: #f1f1f2;
+  /* text-align: left; */
+
+}
+
+table.cli-reference-table td {
+
+  vertical-align: unset;
+
+}
