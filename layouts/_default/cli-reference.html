@@ -20,10 +20,17 @@
   {{- if .Page.Params.arguments -}}
       <h2> Arguments </h2>
       {{- with .Page.Params.arguments -}}
+      <table class="cli-reference-table">
+        <th>Argument</th>
+        <th>Description</th>
         {{- range . -}}
+        <tr>
+          <td>
           <p>
            {{- printf "`%s`" .name | markdownify -}}
           </p>
+        </td>
+        <td>
           {{- if .description -}}
             <p>
               {{- .description -}}
@@ -34,15 +41,23 @@
               {{- printf "_Required:_ %t" .required | markdownify -}}
             </p>
           {{- end -}}
+        </td>
+        </tr>
         {{- end -}}
+      </table>
       {{- end -}}
     {{- end -}}
 
     {{- if .Page.Params.flags -}}
       <h2> Flags </h2>
       {{- with .Page.Params.flags -}}
+      <table class="cli-reference-table">
+        <th>Flag</th>
+        <th>Description</th>
         {{- range . -}}
-          <p>
+        <tr>
+          <td>
+            <p>
             {{- $.Scratch.Add "shorthand" "" -}}
             {{- $.Scratch.Add "type" "" -}}
             {{- if .singleLetterShorthand -}}
@@ -55,9 +70,11 @@
             {{- $.Scratch.Delete "shorthand" -}}
             {{- $.Scratch.Delete "type" -}}
           </p>
-          <p>
+          </td>
+          <td>
+            <p>
             {{- .description -}}
-          </p>
+            </p>
           
           {{- if .defaultValue -}}
             <p>
@@ -86,15 +103,24 @@
               {{- printf "_Valid range:_ %s" .validRange | markdownify -}}
             </p>
           {{- end -}}
+          </td>
+        </tr>
+      
         {{- end -}}
+      </table>
       {{- end -}}
     {{- end -}}
 
     {{- if .Page.Params.inheritedFlags -}}
       <h2> Inherited flags </h2>
       {{- with .Page.Params.inheritedFlags -}}
+      <table class="cli-reference-table">
+        <th>Flag</th>
+        <th>Description</th>
         {{- range . -}}
-          <p>
+        <tr>
+          <td>
+            <p>
             {{- $.Scratch.Add "shorthand" "" -}}
             {{- $.Scratch.Add "type" "" -}}
             {{- if .singleLetterShorthand -}}
@@ -107,6 +133,8 @@
             {{- $.Scratch.Delete "shorthand" -}}
             {{- $.Scratch.Delete "type" -}}
           </p>
+          </td>
+          <td>
           <p>
             {{- .description -}}
           </p>
@@ -149,21 +177,28 @@
               {{- printf "_Valid range:_ %s" .validRange | markdownify -}}
             </p>
           {{- end -}}
+        </td>
+      </tr>
         {{- end -}}
+      </table>
       {{- end -}}
     {{- end -}}
 
     {{- if .Page.Params.examples -}}
       <h2> Examples </h2>
       {{- with .Page.Params.examples -}}
+      <ul>
         {{- range . -}}
+        <li>
           <p>
           {{- .description -}}
           </br>
           {{- printf "```text\n%s\n```" .command | markdownify -}}
           </p>
+        </li>
         {{- end -}}
       {{- end -}}
+    </ul>
     {{- end -}}
 
     {{- if .Sections -}}
