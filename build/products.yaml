@@ -4,14 +4,14 @@ PX-Enterprise:
   PRODUCT_NAME: Portworx Enterprise
   PRODUCT_INDEX_NAME: PX-Enterprise
   VERSIONS_BASE_URL: docs.portworx.com
-  OTHER_PRODUCT_NAMES_AND_INDICES: PX-Backup=PX-Backup-1-1
+  OTHER_PRODUCT_NAMES_AND_INDICES: PX-Backup=PX-Backup-1-2
   NGINX_REDIRECTS_FILE: px-enterprise-redirects.conf
   MANIFESTS_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/"
   BUILDER_IMAGE_PREFIX: "pxdocs:"
   SEARCH_INDEX_IMAGE_PREFIX: "pxdocs-indexer:"
 PX-Backup:
-  BRANCH_VERSION_CONFIG: 1.1=1.1,1.0=1.0
-  LATEST_VERSION: 1.1
+  BRANCH_VERSION_CONFIG: 1.2=1.2,1.1=1.1,1.0=1.0
+  LATEST_VERSION: 1.2
   PRODUCT_NAME: PX-Backup
   PRODUCT_INDEX_NAME: PX-Backup
   VERSIONS_BASE_URL: backup.docs.portworx.com
