@@ -9,6 +9,7 @@ PX-Enterprise:
   MANIFESTS_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/"
   BUILDER_IMAGE_PREFIX: "pxdocs:"
   SEARCH_INDEX_IMAGE_PREFIX: "pxdocs-indexer:"
+  DEPLOYMENT_IMAGE_PREFIX: "pxdocs"
 PX-Backup:
   BRANCH_VERSION_CONFIG: 1.2=1.2,1.1=1.1,1.0=1.0
   LATEST_VERSION: 1.2
@@ -20,4 +21,4 @@ PX-Backup:
   MANIFESTS_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/pxbackup/"
   BUILDER_IMAGE_PREFIX: "pxbackup:"
   SEARCH_INDEX_IMAGE_PREFIX: "pxbackup-indexer:"
-
+  DEPLOYMENT_IMAGE_PREFIX: "pxbackup"
