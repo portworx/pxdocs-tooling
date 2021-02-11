@@ -128,7 +128,8 @@
     var VERSIONS_ALL = '{{ getenv "VERSIONS_ALL" }}'
     var VERSIONS_BASE_URL = '{{ getenv "VERSIONS_BASE_URL" }}'
     var VERSIONS_CURRENT = '{{ getenv "VERSIONS_CURRENT" }}'
-
+    var BRANCH_VERSION_CONFIG = '{{ getenv "BRANCH_VERSION_CONFIG" }}'
+    var LATEST_VERSION = '{{ getenv "LATEST_VERSION" }}'
     var EQUALIZE_TABLE_WIDTHS = '{{ .Params.equalizeTableWidths }}'
     var productNamesAndIndices = parseProductNamesAndIndices()
     populateSearchWrapper(productNamesAndIndices)
