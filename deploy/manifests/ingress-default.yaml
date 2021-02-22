@@ -13,7 +13,7 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: docs-2-3
+          serviceName: docs-2-6
           servicePort: 80
         path: /
   - host: 2.0.docs.portworx.com
