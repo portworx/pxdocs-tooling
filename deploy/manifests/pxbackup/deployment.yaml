@@ -1,10 +1,15 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pxbackup-${VERSIONS_TAG}
+  labels:
+    app: pxbackup-${VERSIONS_TAG}
   namespace: pxdocs-backup
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      app: pxbackup-${VERSIONS_TAG}
   strategy:
     rollingUpdate:
       maxUnavailable: 1

@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   annotations:
@@ -13,7 +13,7 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: pxbackup-1-0
+          serviceName: pxbackup-1-2
           servicePort: 80
         path: /
   - host: 1.0.backup.docs.portworx.com
@@ -23,6 +23,20 @@ spec:
           serviceName: pxbackup-1-0
           servicePort: 80
         path: /
+  - host: 1.1.backup.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          serviceName: pxbackup-1-1
+          servicePort: 80
+        path: /
+  - host: 1.2.backup.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          serviceName: pxbackup-1-2
+          servicePort: 80
+        path: /
   tls:
   - hosts:
     - backup.docs.portworx.com
@@ -30,3 +44,9 @@ spec:
   - hosts:
     - 1.0.backup.docs.portworx.com
     secretName: ingress-pxbackup-1.0
+  - hosts:
+    - 1.1.backup.docs.portworx.com
+    secretName: ingress-pxbackup-1.1
+  - hosts:
+    - 1.2.backup.docs.portworx.com
+    secretName: ingress-pxbackup-1.2
