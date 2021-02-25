@@ -1,21 +1,7 @@
-{{- $branchVersionConfig := getenv "BRANCH_VERSION_CONFIG" -}}
 {{- $travisBranch := getenv "TRAVIS_BRANCH" -}}
-{{- $defaultVersion:= default "2.5" (getenv "DEFAULT_VERSION") -}}
-
-{{- if and (ne $travisBranch "") (eq $branchVersionConfig "") -}}
-  {{- printf $travisBranch -}}
+{{- if (eq $travisBranch "master" | or (eq $travisBranch "")) -}}
+  {{- 2.5 -}}
 {{- end -}}
-
-{{- if and (eq $travisBranch "") (eq $branchVersionConfig "") -}}
-  {{- printf $defaultVersion -}}
-{{- end -}}
-
-{{- if and (ne $branchVersionConfig "") (ne $travisBranch "") -}}
-  {{- if in $branchVersionConfig $travisBranch -}}
-    {{- printf $travisBranch -}}
-  {{- else -}}
-    {{- $latestVersionArray := findRE "[^=]*" $branchVersionConfig -}}
-    {{- $latestVersion := index ($latestVersionArray) 0 -}}
-    {{- printf $latestVersion -}}
-  {{- end -}}
+{{- if (ne $travisBranch "master" | and (ne $travisBranch "")) -}}
+  {{- $travisBranch -}}
 {{- end -}}
