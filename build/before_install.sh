@@ -8,6 +8,3 @@ curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 # install docker-ce and kubectl
 sudo apt-get update -yq
 sudo apt-get -o Dpkg::Options::="--force-confnew" install -yq docker-ce kubectl
-
-# Install https://github.com/mikefarah/yq
-sudo snap install yq
