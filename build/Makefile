@@ -70,8 +70,6 @@ develop: image
 		-e ALGOLIA_API_KEY \
 		-e ALGOLIA_INDEX_NAME \
 		-e TRAVIS_BRANCH \
-		-e BRANCH_VERSION_CONFIG \
- 		-e DEFAULT_VERSION \
 		-e PRODUCT_URL \
 		-e PRODUCT_NAMES_AND_INDICES \
 		-p $(PORT):$(PORT) \
@@ -89,8 +87,6 @@ publish-docker: prerequisites
 		-e ALGOLIA_API_KEY \
 		-e ALGOLIA_INDEX_NAME \
 		-e TRAVIS_BRANCH \
-		-e BRANCH_VERSION_CONFIG \
- 		-e DEFAULT_VERSION \
 		-e PRODUCT_URL \
 		-e PRODUCT_NAMES_AND_INDICES \
 		-v "$(PWD):/$(VOLUME)" \
