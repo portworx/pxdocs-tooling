@@ -16,7 +16,7 @@ PX-Backup:
   PRODUCT_NAME: PX-Backup
   PRODUCT_INDEX_NAME: PX-Backup
   VERSIONS_BASE_URL: backup.docs.portworx.com
-  OTHER_PRODUCT_NAMES_AND_INDICES: "Portworx Enterprise=PX-Enterprise-2-6"
+  OTHER_PRODUCT_NAMES_AND_INDICES: "Portworx Enterprise=PX-Enterprise-2-7"
   NGINX_REDIRECTS_FILE: px-backup-redirects.conf
   MANIFESTS_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/pxbackup/"
   BUILDER_IMAGE_PREFIX: "pxbackup:"
