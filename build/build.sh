@@ -30,7 +30,7 @@ set -ev
 # The name of the triggering repository
 export TRIGGERING_REPO_NAME=$(basename -s .git `git config --get remote.origin.url`)
 # The name of the Portworx Enterprise repository
-export PX_ENTERPRISE_REPO_NAME="pxdocs"
+export PX_ENTERPRISE_REPO_NAME="single-site-proto"
 # The name of the PX-Backup repository
 export PX_BACKUP_REPO_NAME="pxdocs-backup"
 # The name of the PX-Enterprsie section
