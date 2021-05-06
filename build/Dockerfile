@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-ENV HUGO_VERSION 0.42.1
+ENV HUGO_VERSION 0.83.1
 ENV HUGO_BINARY hugo_${HUGO_VERSION}_linux-64bit
 ENV WORKDIR="/docs"
 
