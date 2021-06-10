@@ -6,7 +6,7 @@ TRIGGERING_REPO_NAME = $(shell basename -s .git `git config --get remote.origin.
 # The following environment variables are set based on the triggering repository
 prerequisites:
 # The triggering repository is Portworx Enterprise (`pxdocs`)
-ifeq ($(TRIGGERING_REPO_NAME),single-site-proto)
+ifeq ($(TRIGGERING_REPO_NAME),pxdocs)
 BUILDER_IMAGE?=pxdocs:developer
 SEARCH_INDEX_IMAGE?=pxdocs-search-index:developer
 DEPLOYMENT_IMAGE?=pxdocs-deployment:developer
@@ -27,6 +27,19 @@ VOLUME=docs
 PUBLISH_CONTAINER_NAME=pxbackup-publish
 SEARCH_INDEX_CONTAINER_NAME=pxbackup-publish
 SEARCH_INDEX_CONTAINER_NAME=pxbackup-search-index
+endif
+
+# The triggering repository is PX-Central (`pxdocs-central`)
+ifeq ($(TRIGGERING_REPO_NAME),pxdocs-central)
+BUILDER_IMAGE?=pxcentral:developer
+SEARCH_INDEX_IMAGE?=pxcentral-search-index:developer
+DEPLOYMENT_IMAGE?=pxcentral-deployment:developer
+PORT?=1919
+DEVELOP_CONTAINER_NAME=pxcentral-develop
+VOLUME=docs
+PUBLISH_CONTAINER_NAME=pxcentral-publish
+SEARCH_INDEX_CONTAINER_NAME=pxcentral-publish
+SEARCH_INDEX_CONTAINER_NAME=pxcentral-search-index
 endif
 
 .PHONY: image

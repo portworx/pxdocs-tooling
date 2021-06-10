@@ -30,13 +30,17 @@ set -ev
 # The name of the triggering repository
 export TRIGGERING_REPO_NAME=$(basename -s .git `git config --get remote.origin.url`)
 # The name of the Portworx Enterprise repository
-export PX_ENTERPRISE_REPO_NAME="single-site-proto"
+export PX_ENTERPRISE_REPO_NAME="pxdocs"
 # The name of the PX-Backup repository
 export PX_BACKUP_REPO_NAME="pxdocs-backup"
+# The name of the PX-Central repository
+export PX_CENTRAL_REPO_NAME="pxdocs-central"
 # The name of the PX-Enterprsie section
 export PX_ENTERPRISE_SECTION_NAME="PX-Enterprise"
 # The name of the PX-Enterprsie section
 export PX_BACKUP_SECTION_NAME="PX-Backup"
+# The name of the PX-Central section
+export PX_CENTRAL_SECTION_NAME="PX-Central"
 
 # The following environment variables are set based on the triggering repository
 if [ "${TRIGGERING_REPO_NAME}" '==' "${PX_ENTERPRISE_REPO_NAME}" ]; then
@@ -49,6 +53,10 @@ fi
 if [ "${TRIGGERING_REPO_NAME}" '==' "${PX_BACKUP_REPO_NAME}" ]; then
   export YAML_SECTION_NAME=$PX_BACKUP_SECTION_NAME
 fi
+if [ "${TRIGGERING_REPO_NAME}" '==' "${PX_CENTRAL_REPO_NAME}" ]; then
+  export YAML_SECTION_NAME=$PX_CENTRAL_SECTION_NAME
+fi
+
 # A comma-separated list of branches and versions for which we build the deployment image, update the Algolia index and push the image to GCP
 export BRANCH_VERSION_CONFIG=$(yq e ".$YAML_SECTION_NAME.BRANCH_VERSION_CONFIG" ./themes/pxdocs-tooling/build/products.yaml)
 # The latest version. We use this variable in the `export-product-url.sh` script to determine whether the version should be added or not to the URLs that we upload to Algolia.
