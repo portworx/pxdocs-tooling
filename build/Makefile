@@ -29,6 +29,19 @@ SEARCH_INDEX_CONTAINER_NAME=pxbackup-publish
 SEARCH_INDEX_CONTAINER_NAME=pxbackup-search-index
 endif
 
+# The triggering repository is PX-Central (`pxdocs-central`)
+ifeq ($(TRIGGERING_REPO_NAME),pxdocs-central)
+BUILDER_IMAGE?=pxcentral:developer
+SEARCH_INDEX_IMAGE?=pxcentral-search-index:developer
+DEPLOYMENT_IMAGE?=pxcentral-deployment:developer
+PORT?=1919
+DEVELOP_CONTAINER_NAME=pxcentral-develop
+VOLUME=docs
+PUBLISH_CONTAINER_NAME=pxcentral-publish
+SEARCH_INDEX_CONTAINER_NAME=pxcentral-publish
+SEARCH_INDEX_CONTAINER_NAME=pxcentral-search-index
+endif
+
 .PHONY: image
 image: prerequisites
 	docker build -t $(BUILDER_IMAGE) -f themes/pxdocs-tooling/build/Dockerfile .

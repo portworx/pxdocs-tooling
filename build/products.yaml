@@ -4,7 +4,7 @@ PX-Enterprise:
   PRODUCT_NAME: Portworx Enterprise
   PRODUCT_INDEX_NAME: PX-Enterprise
   VERSIONS_BASE_URL: docs.portworx.com
-  OTHER_PRODUCT_NAMES_AND_INDICES: PX-Backup=PX-Backup-1-2
+  OTHER_PRODUCT_NAMES_AND_INDICES: "PX-Backup=PX-Backup-1-2,PX-Central=PX-Central-1-3"
   NGINX_REDIRECTS_FILE: px-enterprise-redirects.conf
   MANIFESTS_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/"
   BUILDER_IMAGE_PREFIX: "pxdocs:"
@@ -16,9 +16,22 @@ PX-Backup:
   PRODUCT_NAME: PX-Backup
   PRODUCT_INDEX_NAME: PX-Backup
   VERSIONS_BASE_URL: backup.docs.portworx.com
-  OTHER_PRODUCT_NAMES_AND_INDICES: "Portworx Enterprise=PX-Enterprise-2-7"
+  OTHER_PRODUCT_NAMES_AND_INDICES: "Portworx Enterprise=PX-Enterprise-2-7,PX-Central=PX-Central-1-3"
   NGINX_REDIRECTS_FILE: px-backup-redirects.conf
   MANIFESTS_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/pxbackup/"
   BUILDER_IMAGE_PREFIX: "pxbackup:"
   SEARCH_INDEX_IMAGE_PREFIX: "pxbackup-indexer:"
   DEPLOYMENT_IMAGE_PREFIX: "pxbackup"
+
+PX-Central:
+  BRANCH_VERSION_CONFIG: 1.3=1.3
+  LATEST_VERSION: 1.3
+  PRODUCT_NAME: PX-Central
+  PRODUCT_INDEX_NAME: PX-Central
+  VERSIONS_BASE_URL: central.docs.portworx.com
+  OTHER_PRODUCT_NAMES_AND_INDICES: "Portworx Enterprise=PX-Enterprise-2-7,PX-Backup=PX-Backup-1-2"
+  NGINX_REDIRECTS_FILE: px-central-redirects.conf
+  MANIFESTS_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/pxcentral/"
+  BUILDER_IMAGE_PREFIX: "pxcentral:"
+  SEARCH_INDEX_IMAGE_PREFIX: "pxcentral-indexer:"
+  DEPLOYMENT_IMAGE_PREFIX: "pxcentral"
