@@ -555,12 +555,27 @@ h2 {
 }
 
 #version-menu #vert-button {
+  display: none;
   margin-left: 10px;
   color: #666;
 }
 
 #version-menu #text-button {
-  color: #666 !important;
+  background-color: #f15a24;
+  color: #FFF;
+  font-weight: 400;
+  display: block;
+  margin: auto;
+  width: 90%;
+  margin-left: 15px;
+  padding-right: 10px;
+  text-transform: capitalize;
+}
+
+#version-menu .inline-arrow {
+  margin-bottom: 3px;
+}
+
 }
 
 #version-menu .mdl-menu__container {
