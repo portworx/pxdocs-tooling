@@ -1,6 +1,6 @@
 PX-Enterprise:
-  BRANCH_VERSION_CONFIG: 2.7=2.7,2.6=2.6,2.5=2.5,2.4=2.4,2.3=2.3,2.2=2.2,2.1=2.1,2.0.3=2.0,1.7=1.7
-  LATEST_VERSION: 2.7
+  BRANCH_VERSION_CONFIG: 2.8=2.8,2.7=2.7,2.6=2.6,2.5=2.5,2.4=2.4,2.3=2.3,2.2=2.2,2.1=2.1,2.0.3=2.0,1.7=1.7
+  LATEST_VERSION: 2.8
   PRODUCT_NAME: Portworx Enterprise
   PRODUCT_INDEX_NAME: PX-Enterprise
   VERSIONS_BASE_URL: docs.portworx.com
