@@ -7,7 +7,7 @@ PX-Enterprise:
   OTHER_PRODUCT_NAMES_AND_INDICES: "PX-Backup=PX-Backup-1-2,PX-Central=PX-Central-1-3"
   NGINX_REDIRECTS_FILE: px-enterprise-redirects.conf
   MANIFESTS_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/"
-  MANIFESTS_STAGING_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/staging"
+  MANIFESTS_STAGING_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/staging/"
   BUILDER_IMAGE_PREFIX: "pxdocs:"
   SEARCH_INDEX_IMAGE_PREFIX: "pxdocs-indexer:"
   DEPLOYMENT_IMAGE_PREFIX: "pxdocs"

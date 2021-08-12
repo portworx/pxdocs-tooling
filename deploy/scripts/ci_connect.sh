@@ -7,7 +7,6 @@ if [[ $STAGE == "staging" ]]; then
   GCP_PROJECT_ID=$GCP_STAGING_PROJECT_ID
   GCP_CLUSTER_ID=$GCP_STAGING_CLUSTER_ID
   GCP_ZONE=$GCP_STAGING_ZONE
-  GCLOUD_SERVICE_ACCOUNT_TOKEN=$STAGING_GCLOUD_SVC_TOKEN
 fi
 
 if [ -z "${GCLOUD_SERVICE_ACCOUNT_TOKEN}" ]; then
@@ -26,7 +25,16 @@ if [ -z "${GCP_CLUSTER_ID}" ]; then
   echo >&2 "GCP_CLUSTER_ID needed"
   exit 1
 fi
-echo $GCLOUD_SERVICE_ACCOUNT_TOKEN | base64 -d > ${HOME}/gcloud-service-key.json
+if [[ $STAGE != "staging" ]]; then
+  echo $GCLOUD_SERVICE_ACCOUNT_TOKEN | base64 -d > ${HOME}/gcloud-service-key.json
+else
+  echo $STAGING_GCLOUD_SVC_TOKEN | base64 -d > ${HOME}/gcloud-service-key.json
+  cat ${HOME}/gcloud-service-key.json
+
+  echo $GCLOUD_SERVICE_ACCOUNT_TOKEN | base64 -d > ${HOME}/gcloud-service-key1.json
+  cat ${HOME}/gcloud-service-key1.json
+
+fi
 echo "activating gcloud service account"
 gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
 rm -f ${HOME}/gcloud-service-key.json

@@ -4,7 +4,7 @@ metadata:
   name: docs-${TRAVIS_PULL_REQUEST}
   labels:
     app: docs-${TRAVIS_PULL_REQUEST}
-  namespace: pxdocs
+  namespace: pxdocs-staging
 spec:
   replicas: 1
   selector:
