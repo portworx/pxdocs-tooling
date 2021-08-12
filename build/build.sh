@@ -73,6 +73,7 @@ export OTHER_PRODUCT_NAMES_AND_INDICES=$(yq e ".$YAML_SECTION_NAME.OTHER_PRODUCT
 export NGINX_REDIRECTS_FILE=$(yq e ".$YAML_SECTION_NAME.NGINX_REDIRECTS_FILE" ./themes/pxdocs-tooling/build/products.yaml)
 # The directory where the PX Enterprise manifests are placed
 export MANIFESTS_DIRECTORY=$(yq e ".$YAML_SECTION_NAME.MANIFESTS_DIRECTORY" ./themes/pxdocs-tooling/build/products.yaml)
+export MANIFESTS_STAGING_DIRECTORY=$(yq e ".$YAML_SECTION_NAME.MANIFESTS_STAGING_DIRECTORY" ./themes/pxdocs-tooling/build/products.yaml)
 export BUILDER_IMAGE_PREFIX=$(yq e ".$YAML_SECTION_NAME.BUILDER_IMAGE_PREFIX" ./themes/pxdocs-tooling/build/products.yaml)
 export SEARCH_INDEX_IMAGE_PREFIX=$(yq e ".$YAML_SECTION_NAME.SEARCH_INDEX_IMAGE_PREFIX" ./themes/pxdocs-tooling/build/products.yaml)
 export DEPLOYMENT_IMAGE_PREFIX=$(yq e ".$YAML_SECTION_NAME.DEPLOYMENT_IMAGE_PREFIX" ./themes/pxdocs-tooling/build/products.yaml)
@@ -81,11 +82,34 @@ export DEPLOYMENT_IMAGE_PREFIX=$(yq e ".$YAML_SECTION_NAME.DEPLOYMENT_IMAGE_PREF
 # The following environment variables are **not** set based on the triggering repository
 export ALGOLIA_API_KEY=64ecbeea31e6025386637d89711e31f3
 export ALGOLIA_APP_ID=EWKZLLNQ9L
+
 export GCP_CLUSTER_ID=production-app-cluster
 export GCP_PROJECT_ID=production-apps-210001
 export GCP_ZONE=us-west1-b
+
+export GCP_STAGING_CLUSTER_ID=pxdocs-staging
+export GCP_STAGING_PROJECT_ID=portworx-eng
+export GCP_STAGING_ZONE=us-central1-c
+
 # Docker builds cannot use uppercase characters in the image name
 export LOWER_CASE_BRANCH=$(echo -n $TRAVIS_BRANCH | awk '{print tolower($0)}')
+
+# Set the env vars to the staging values
+if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then
+  export GCP_PROJECT_ID=$GCP_STAGING_PROJECT_ID
+  export GCP_CLUSTER_ID=$GCP_STAGING_CLUSTER_ID
+  export GCP_ZONE=$GCP_STAGING_ZONE
+  export GCLOUD_SERVICE_ACCOUNT_TOKEN=$STAGING_GCLOUD_SVC_TOKEN
+fi
+
+echo "Print env variables"
+echo $TRAVIS_PULL_REQUEST
+echo $GCP_PROJECT_ID
+echo $GCP_CLUSTER_ID
+echo $GCP_ZONE
+echo $GCLOUD_SERVICE_ACCOUNT_TOKEN
+
+
 export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/$DEPLOYMENT_IMAGE_PREFIX-$LOWER_CASE_BRANCH:$TRAVIS_COMMIT"
 # The current version
 export VERSIONS_CURRENT=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-current-branch-version)
@@ -102,8 +126,18 @@ make publish-docker -f ./themes/pxdocs-tooling/build/Makefile
 # Build the deployment image
 travis_retry make deployment-image -f ./themes/pxdocs-tooling/build/Makefile
 travis_retry make check-links -f ./themes/pxdocs-tooling/build/Makefile
-# If this is a pull request then we don't want to update algolia or deploy
-if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then exit 0; fi
+# If this is a pull request then we don't want to update algolia index, but we deploy the PR image to the staging server
+if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then
+  bash themes/pxdocs-tooling/deploy/scripts/ci_connect.sh "staging"
+  # Push the image to gcr
+  echo "Pushing image $DEPLOYMENT_IMAGE"
+  gcloud docker -- push $DEPLOYMENT_IMAGE
+  echo "Deploying image $DEPLOYMENT_IMAGE to staging server"
+  cat "${MANIFESTS_STAGING_DIRECTORY}deployment.yaml" | envsubst
+  cat "${MANIFESTS_STAGING_DIRECTORY}deployment.yaml" | envsubst | kubectl apply -f -
+  cat "${MANIFESTS_STAGING_DIRECTORY}service-template.yaml" | envsubst
+  cat "${MANIFESTS_STAGING_DIRECTORY}service-template.yaml" | envsubst | kubectl apply -f -
+fi
 # this checks if the current branch is present in the BRANCH_VERSION_CONFIG variable if exists if not
 if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh should-build-current-branch)" != "yes" ]; then exit 0; fi
 # Update the Algolia index
