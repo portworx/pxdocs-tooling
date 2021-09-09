@@ -1,1 +1,8 @@
-{{- 2.5 -}}
+{{- $travisBranch := getenv "TRAVIS_BRANCH" -}}
+{{- if (eq $travisBranch "master" | or (eq $travisBranch "")) -}}
+  {{- 2.5 -}}
+{{- end -}}
+{{- $regexPattern := findRE `^(\d+\.)?(\d+\.)?(\*|\d+)$` $travisBranch -}}
+{{- if (ne $travisBranch "master" | and (ne $travisBranch "")) | and (gt (len $regexPattern) 0) -}}
+  {{- $travisBranch -}}
+{{- end -}}
