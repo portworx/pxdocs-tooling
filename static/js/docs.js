@@ -449,7 +449,7 @@ $(function () {
     var highlightElem = $(this)
     var codeElem = highlightElem.find('pre code.language-text');
     codeElem.parent().parent().addClass('copyable');
-    highlightElem.find('pre code.language-output').parent().parent().addClass('typeOutput');
+    $(document).find('code.language-output').parent().addClass('highlight typeOutput');
     var copyDiv = $([
       '<div class="copy-link">',
       '<button id="clipboard-icon-' + i + '" class="button">',

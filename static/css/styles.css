@@ -1341,8 +1341,6 @@ h2,h3,h4,h5,h6 a {
 .highlight.typeOutput
 {
     margin-top: -18px;
-}
-.highlight.typeOutput pre {
     background-color: #f5f4f4;
 }
 
