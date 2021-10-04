@@ -1,3 +1,4 @@
+{{ $_hugo_config := `{ "version": 1 }` }}
 {{$file := .Get 0}}
 {{$page := .Site.GetPage "page" $file }}
 {{$page.Content}}
