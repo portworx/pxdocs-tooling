@@ -1804,3 +1804,68 @@ code .s {
     text-align: left;
   }
 }
+
+/* AsciiDoc styles */
+
+.admonitionblock {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.note {
+  border-left: 3px solid #4a94d0;
+}
+
+.tip {
+  border-left: 3px solid #414042;
+}
+
+.caution {
+  border-left: 3px solid #ff5000;
+}
+
+.warning {
+  border-left: 3px solid #dc522b;
+}
+
+.important {
+  border-left: 3px solid #0070cd;
+}
+
+.admonitionblock table {
+  margin: 0;
+  border-style: hidden;
+}
+
+.admonitionblock table tbody tr td .icon {
+  /* border-style: hidden; */
+}
+
+.icon {
+  border-style: hidden !important;
+  width: 85px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.conum {
+  color: #fff;
+  background-color: #f15a24;
+  font-family: "Open Sans",sans-serif;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.colist ol li p {
+  margin: 0;
+}
+
+.tip {
+
+}
+.note {
+
+}
