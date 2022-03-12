@@ -4,12 +4,12 @@
 <div class="footer-container">
   <div class="middle-col">
      <ul class="footer-links">
-        <li>   <small class="copyright" style="font-size:13px;margin-top:15px;"> © 2021 | Portworx, Inc. </small> | <a class="font-400" href="https://portworx.com/privacy-policy/"> Privacy Policy </a> | <a class="font-400" href="https://portworx.com/about-us/"> About Us </a> | <a href="https://portworx.com/products" class="font-600"> Products </a> | <a class="font-400" href="https://portworx.com/products/getting-started/"> Getting Started </a></li>
+        <li>   <small class="copyright" style="font-size:13px;margin-top:15px;"> © {{ now.Format "2006"}} | Portworx, Inc. </small> | <a class="font-400" href="https://portworx.com/privacy-policy/"> Privacy Policy </a> | <a class="font-400" href="https://portworx.com/about-us/"> About Us </a> | <a href="https://portworx.com/products" class="font-600"> Products </a> | <a class="font-400" href="https://portworx.com/products/getting-started/"> Getting Started </a></li>
      </ul>
   </div>
   <div class="right-col">
     <div>
-      <a class="btn btn-orange">Contact</a>
+      <a class="btn btn-orange" href="https://portworx.com/contact-sales">Contact</a>
       <a href="https://www.linkedin.com/company/portworx" target="blank">
         <img src="https://portworx.com/wp-content/themes/portworx/images/icons/Linkedin.png" class="footer-social" alt="LinkedIn">
       </a>
@@ -21,45 +21,4 @@
       </a>
     </div>
   </div>
-</div>
-<div class="form">
-  <script src="//app-sj15.marketo.com/js/forms2/js/forms2.min.js"> </script>
- <form id="mktoForm_1189"> </form>
- <script>
-   MktoForms2.loadForm("//app-sj15.marketo.com", "126-NHQ-240", 1189, function(form){
-     var parent = jQuery(form.getFormElem()).parent();
-     parent.find(".mktoHasWidth").removeAttr("style");
-     parent.find(".mktoFormCol, .mktoFieldWrap").css("width", "100%");
-     parent.find(".mktoField").each(function(){
-       var $input = jQuery(this), placeholder = $input.prop('title');
-       $input.addClass('footer-input');
-       if($input.attr('id') == 'FirstName'){
-         placeholder = 'first name'; }
-       if($input.attr('id') == 'LastName'){
-         placeholder = 'last name'; }
-       if($input.attr('id') == 'Email'){
-         placeholder = 'email'; }
-       if($input.attr('id') == 'Company'){
-         placeholder = 'company'; }
-       if($input.attr('id') == 'Phone'){
-         placeholder = 'Phone number'; }
-       if($input.attr('id') == 'commentCapture'){
-         placeholder = 'how can we help you?'; }
-       if ($input.hasClass('mktoRequired')) {
-         placeholder += '*'; }
-       $input.attr('placeholder', placeholder);
-     })
-     $('label[for="Country"]').css({
-       display: 'inline-block',
-       marginTop: '5px',
-       height: '20px'
-     })
-     $('label[for="State"]').css({
-       display: 'inline-block',
-       marginTop: '5px',
-       height: '20px'
-     })
-
-   });
- </script>
 </div>
