@@ -592,20 +592,6 @@ $(function () {
 
   /*
 
-    footer toggle
-
-  */
-
-  $('body').on('click', '.btn-orange', function () {
-    $('.form').toggle('slow')
-    if ($(this).text() == 'Contact') {
-      $(this).text('Close')
-    } else {
-      $(this).text('Contact')
-    }
-  })
-  /*
-
     open external links target="_blank"
 
   */
