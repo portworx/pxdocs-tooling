@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pds-${VERSIONS_TAG}
+  labels:
+    app: pds-${VERSIONS_TAG}
+  namespace: pxdocs-pds
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pds-${VERSIONS_TAG}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: pds-${VERSIONS_TAG}
+    spec:
+      containers:
+        - name: nginx
+          image: ${DEPLOYMENT_IMAGE}
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            timeoutSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            timeoutSeconds: 1
+
