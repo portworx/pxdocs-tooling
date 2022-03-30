@@ -42,6 +42,19 @@ SEARCH_INDEX_CONTAINER_NAME=pxcentral-publish
 SEARCH_INDEX_CONTAINER_NAME=pxcentral-search-index
 endif
 
+# The triggering repository is PDS (`pxdocs-pds`)
+ifeq ($(TRIGGERING_REPO_NAME),pxdocs-pds)
+BUILDER_IMAGE?=pds:developer
+SEARCH_INDEX_IMAGE?=pds-search-index:developer
+DEPLOYMENT_IMAGE?=pds-deployment:developer
+PORT?=2121
+DEVELOP_CONTAINER_NAME=pds-develop
+VOLUME=docs
+PUBLISH_CONTAINER_NAME=pds-publish
+SEARCH_INDEX_CONTAINER_NAME=pds-publish
+SEARCH_INDEX_CONTAINER_NAME=pds-search-index
+endif
+
 .PHONY: image
 image: prerequisites
 	docker build -t $(BUILDER_IMAGE) -f themes/pxdocs-tooling/build/Dockerfile .
