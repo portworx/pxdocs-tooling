@@ -1,5 +1,6 @@
 SHELL := /bin/bash
 TOOLING_BRANCH?=master
+export BINDIR = /tmp/bin
 # The name of the triggering repository
 TRIGGERING_REPO_NAME = $(shell basename -s .git `git config --get remote.origin.url`)
 
@@ -54,6 +55,10 @@ PUBLISH_CONTAINER_NAME=pds-publish
 SEARCH_INDEX_CONTAINER_NAME=pds-publish
 SEARCH_INDEX_CONTAINER_NAME=pds-search-index
 endif
+
+${BINDIR}/misspell:
+	@echo "Installing missing $@ ..."
+	curl -L https://git.io/misspell | bash
 
 .PHONY: image
 image: prerequisites
@@ -141,3 +146,11 @@ publish: image publish-docker
 
 .PHONY: search-index
 search-index: image search-index-image publish-docker search-index-docker
+
+.PHONY: spell-check
+spell-check: ${BINDIR}/misspell
+	@git ls-files | grep .md | xargs ${BINDIR}/misspell -i=${IGNORE_WORDS} -error
+
+.PHONY: spell-check-fix
+spell-check-fix: ${BINDIR}/misspell
+	@git ls-files | grep .md | xargs ${BINDIR}/misspell -i=${IGNORE_WORDS} -w
