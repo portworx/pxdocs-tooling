@@ -34,3 +34,15 @@ PX-Central:
   BUILDER_IMAGE_PREFIX: "pxcentral:"
   SEARCH_INDEX_IMAGE_PREFIX: "pxcentral-indexer:"
   DEPLOYMENT_IMAGE_PREFIX: "pxcentral"
+PX-PDS:
+  BRANCH_VERSION_CONFIG: master=1.0
+  LATEST_VERSION: 1.0
+  PRODUCT_NAME: PDS
+  PRODUCT_INDEX_NAME: PDS
+  VERSIONS_BASE_URL: pds.docs.portworx.com
+  OTHER_PRODUCT_NAMES_AND_INDICES: "Portworx Enterprise=PX-Enterprise-2-7,PX-Backup=PX-Backup-1-2"
+  NGINX_REDIRECTS_FILE: px-pds-redirects.conf
+  MANIFESTS_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/pds/"
+  BUILDER_IMAGE_PREFIX: "pds:"
+  SEARCH_INDEX_IMAGE_PREFIX: "pds-indexer:"
+  DEPLOYMENT_IMAGE_PREFIX: "pds"
