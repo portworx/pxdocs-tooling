@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -9,14 +9,17 @@ metadata:
   namespace: pxdocs-pds
 spec:
   rules:
-  - host: staging.docs.portworx.com
+  - host: pds.docs.portworx.com
     http:
       paths:
       - backend:
-          serviceName: pds-1-0
-          servicePort: 80
+          service:
+            name: pds-1-0
+            port:
+              number: 80
         path: /
+        pathType: ImplementationSpecific
   tls:
   - hosts:
     - pds.docs.portworx.com
-    secretName: ingress-pds-tls
+    secretName: ingress-pxdocs-pds-tls
