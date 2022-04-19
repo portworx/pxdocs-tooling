@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: saasbackup-ingress
+  namespace: pxdocs-saasbackup
+spec:
+  rules:
+  - host: backupsaas.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: saasbackup-1-0
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - saasbackup.docs.portworx.com
+    secretName: ingress-pxdocs-saasbackup-tls
