@@ -55,6 +55,19 @@ SEARCH_INDEX_CONTAINER_NAME=pds-publish
 SEARCH_INDEX_CONTAINER_NAME=pds-search-index
 endif
 
+# The triggering repository is PX-Backup SaaS (`pxdocs-saasbackup`)
+ifeq ($(TRIGGERING_REPO_NAME),pxdocs-saasbackup)
+BUILDER_IMAGE?=saasbackup:developer
+SEARCH_INDEX_IMAGE?=saasbackup-search-index:developer
+DEPLOYMENT_IMAGE?=saasbackup-deployment:developer
+PORT?=2323
+DEVELOP_CONTAINER_NAME=saasbackup-develop
+VOLUME=docs
+PUBLISH_CONTAINER_NAME=saasbackup-publish
+SEARCH_INDEX_CONTAINER_NAME=saasbackup-publish
+SEARCH_INDEX_CONTAINER_NAME=saasbackup-search-index
+endif
+
 .PHONY: image
 image: prerequisites
 	docker build -t $(BUILDER_IMAGE) -f themes/pxdocs-tooling/build/Dockerfile .

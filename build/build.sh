@@ -37,6 +37,8 @@ export PX_BACKUP_REPO_NAME="pxdocs-backup"
 export PX_CENTRAL_REPO_NAME="pxdocs-central"
 # The name of the PX-PDS section
 export PX_PDS_REPO_NAME="pxdocs-pds"
+# The name of the PX-PDS section
+export PX_SAASBACKUP_REPO_NAME="pxdocs-saasbackup"
 # The name of the PX-Enterprsie section
 export PX_ENTERPRISE_SECTION_NAME="PX-Enterprise"
 # The name of the PX-Backup section
@@ -45,6 +47,8 @@ export PX_BACKUP_SECTION_NAME="PX-Backup"
 export PX_CENTRAL_SECTION_NAME="PX-Central"
 # The name of the PX-PDS section
 export PX_PDS_SECTION_NAME="PX-PDS"
+# The name of the PX-SAASBACKUP section
+export PX_SAASBACKUP_SECTION_NAME="PX-SAASBACKUP"
 
 # The following environment variables are set based on the triggering repository
 if [ "${TRIGGERING_REPO_NAME}" '==' "${PX_ENTERPRISE_REPO_NAME}" ]; then
@@ -62,6 +66,9 @@ if [ "${TRIGGERING_REPO_NAME}" '==' "${PX_CENTRAL_REPO_NAME}" ]; then
 fi
 if [ "${TRIGGERING_REPO_NAME}" '==' "${PX_PDS_REPO_NAME}" ]; then
   export YAML_SECTION_NAME=$PX_PDS_SECTION_NAME
+fi
+if [ "${TRIGGERING_REPO_NAME}" '==' "${PX_SAASBACKUP_REPO_NAME}" ]; then
+  export YAML_SECTION_NAME=$PX_SAASBACKUP_SECTION_NAME
 fi
 
 # A comma-separated list of branches and versions for which we build the deployment image, update the Algolia index and push the image to GCP
