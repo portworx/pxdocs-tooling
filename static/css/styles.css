@@ -722,6 +722,13 @@ hr.margin {
   font-weight: 500;
 }
 
+.docs-content li p {
+  margin-bottom: 0px !important;
+  font-family: 'Roboto', 'Helvetica', sans-serif !important;
+  color: rgba(0,0,0,.87) !important;
+}
+
+
 /* style bullet list items under an ordered list */
 
 .docs-content ol ul li {
@@ -1089,8 +1096,8 @@ hr.margin {
 .search-box-root {
   box-sizing: border-box;
   color: rgba(0, 0, 0, 0.87);
-  rgba(0,0,0,.87)html	material.min.css:8
-  texthtml	User Agent Style Sheet
+  rgba(0,0,0,.87)html material.min.css:8
+  texthtml  User Agent Style Sheet
   display: inline-block;
   font-family: Roboto, Helvetica, sans-serif;
   font-size: 14px;
@@ -1419,6 +1426,7 @@ h2,h3,h4,h5,h6 a {
 
 .docs-content img {
   max-width: 100% !important;
+  line-height: 24px !important;
 }
 
 
@@ -1435,8 +1443,8 @@ h2,h3,h4,h5,h6 a {
 
 .logo-list-container a {
   -webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   display: inline-block;
   background-color: #f5f5f5;
   padding: 2em;
