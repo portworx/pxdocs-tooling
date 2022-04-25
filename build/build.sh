@@ -37,7 +37,7 @@ export PX_BACKUP_REPO_NAME="pxdocs-backup"
 export PX_CENTRAL_REPO_NAME="pxdocs-central"
 # The name of the PX-PDS section
 export PX_PDS_REPO_NAME="pxdocs-pds"
-# The name of the PX-PDS section
+# The name of the PX-saasbackup section
 export PX_SAASBACKUP_REPO_NAME="pxdocs-saasbackup"
 # The name of the PX-Enterprsie section
 export PX_ENTERPRISE_SECTION_NAME="PX-Enterprise"
@@ -48,7 +48,7 @@ export PX_CENTRAL_SECTION_NAME="PX-Central"
 # The name of the PX-PDS section
 export PX_PDS_SECTION_NAME="PX-PDS"
 # The name of the PX-SAASBACKUP section
-export PX_SAASBACKUP_SECTION_NAME="PX-SAASBACKUP"
+export PX_SAASBACKUP_SECTION_NAME="PX-Saasbackup"
 
 # The following environment variables are set based on the triggering repository
 if [ "${TRIGGERING_REPO_NAME}" '==' "${PX_ENTERPRISE_REPO_NAME}" ]; then
