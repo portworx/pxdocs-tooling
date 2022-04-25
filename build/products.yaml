@@ -42,7 +42,7 @@ PX-Saasbackup:
   VERSIONS_BASE_URL: backup-saas.docs.portworx.com
   OTHER_PRODUCT_NAMES_AND_INDICES: "Portworx Enterprise=PX-Enterprise-2-10,PX-Backup=PX-Backup-2-1"
   NGINX_REDIRECTS_FILE: px-saasbackup-redirects.conf
-  MANIFESTS_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/pxcentral/"
+  MANIFESTS_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/saasbackup/"
   BUILDER_IMAGE_PREFIX: "saasbackup:"
   SEARCH_INDEX_IMAGE_PREFIX: "saasbackup-indexer:"
   DEPLOYMENT_IMAGE_PREFIX: "saasbackup"
