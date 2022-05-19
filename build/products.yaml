@@ -35,7 +35,7 @@ PX-Central:
   SEARCH_INDEX_IMAGE_PREFIX: "pxcentral-indexer:"
   DEPLOYMENT_IMAGE_PREFIX: "pxcentral"
 PX-Saasbackup:
-  BRANCH_VERSION_CONFIG: master=1.0
+  BRANCH_VERSION_CONFIG: master=master
   LATEST_VERSION: master
   PRODUCT_NAME: PX-Backup-SaaS
   PRODUCT_INDEX_NAME: PX-Saasbackup
@@ -47,7 +47,7 @@ PX-Saasbackup:
   SEARCH_INDEX_IMAGE_PREFIX: "saasbackup-indexer:"
   DEPLOYMENT_IMAGE_PREFIX: "saasbackup"
 PX-PDS:
-  BRANCH_VERSION_CONFIG: master=1.0
+  BRANCH_VERSION_CONFIG: master=master
   LATEST_VERSION: master
   PRODUCT_NAME: PDS
   PRODUCT_INDEX_NAME: PDS
