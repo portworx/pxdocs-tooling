@@ -284,10 +284,12 @@ $(function () {
   }
 
   if (VERSIONS_BASE_URL) {
-    activateVersionMenu()
-    $('#version-menu-dropdown').css({
-      visibility: 'visible'
-    })
+    if (VERSIONS_CURRENT != "master") {
+      activateVersionMenu()
+      $('#version-menu-dropdown').css({
+        visibility: 'visible'
+      })
+    }
   }
 
   /*
