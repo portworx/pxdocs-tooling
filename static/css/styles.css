@@ -715,7 +715,7 @@ hr.margin {
   font-weight: normal;
 }
 
-.docs-content p > code {
+.docs-content p > code, .docs-content li > code {
   color: #666;
   background-color: #f5f5f5;
   padding: 4px;
