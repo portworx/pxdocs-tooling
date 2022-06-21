@@ -1,3 +1,11 @@
+@media print {
+   .docs-drawer, .docs-header, .docs-footer {display: none !important;}
+   #scrollspy-container {display: none !important}
+   .docs-content {margin-left: 0px !important; width: 90% !important; max-width: none !important;}
+   body:after {content: "© 2022 Portworx, Inc. Visit http://docs.portworx.com for more documentation."; padding-left: 35px;}
+
+}
+
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
   height: 100%;
