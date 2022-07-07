@@ -1,10 +1,10 @@
 PX-Enterprise:
-  BRANCH_VERSION_CONFIG: 2.10=2.10,2.9=2.9,2.8=2.8,2.7=2.7
-  LATEST_VERSION: 2.10
+  BRANCH_VERSION_CONFIG: 2.11=2.11,2.10=2.10,2.9=2.9,2.8=2.8,2.7=2.7
+  LATEST_VERSION: 2.11
   PRODUCT_NAME: Portworx Enterprise
   PRODUCT_INDEX_NAME: PX-Enterprise
   VERSIONS_BASE_URL: docs.portworx.com
-  OTHER_PRODUCT_NAMES_AND_INDICES: "PX-Backup=PX-Backup-2-1,PX-Central=PX-Central-2-1"
+  OTHER_PRODUCT_NAMES_AND_INDICES: "PX-Backup=PX-Backup-2-2,PX-Central=PX-Central-2-2"
   NGINX_REDIRECTS_FILE: px-enterprise-redirects.conf
   MANIFESTS_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/"
   BUILDER_IMAGE_PREFIX: "pxdocs:"
@@ -16,7 +16,7 @@ PX-Backup:
   PRODUCT_NAME: PX-Backup
   PRODUCT_INDEX_NAME: PX-Backup
   VERSIONS_BASE_URL: backup.docs.portworx.com
-  OTHER_PRODUCT_NAMES_AND_INDICES: "Portworx Enterprise=PX-Enterprise-2-10,PX-Central=PX-Central-2-1"
+  OTHER_PRODUCT_NAMES_AND_INDICES: "Portworx Enterprise=PX-Enterprise-2-11,PX-Central=PX-Central-2-2"
   NGINX_REDIRECTS_FILE: px-backup-redirects.conf
   MANIFESTS_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/pxbackup/"
   BUILDER_IMAGE_PREFIX: "pxbackup:"
@@ -28,7 +28,7 @@ PX-Central:
   PRODUCT_NAME: PX-Central
   PRODUCT_INDEX_NAME: PX-Central
   VERSIONS_BASE_URL: central.docs.portworx.com
-  OTHER_PRODUCT_NAMES_AND_INDICES: "Portworx Enterprise=PX-Enterprise-2-10,PX-Backup=PX-Backup-2-1"
+  OTHER_PRODUCT_NAMES_AND_INDICES: "Portworx Enterprise=PX-Enterprise-2-11,PX-Backup=PX-Backup-2-2"
   NGINX_REDIRECTS_FILE: px-central-redirects.conf
   MANIFESTS_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/pxcentral/"
   BUILDER_IMAGE_PREFIX: "pxcentral:"
@@ -40,7 +40,7 @@ PX-Saasbackup:
   PRODUCT_NAME: PX-Backup-SaaS
   PRODUCT_INDEX_NAME: PX-Saasbackup
   VERSIONS_BASE_URL: baas.docs.portworx.com
-  OTHER_PRODUCT_NAMES_AND_INDICES: "Portworx Enterprise=PX-Enterprise-2-10,PX-Backup=PX-Backup-2-1"
+  OTHER_PRODUCT_NAMES_AND_INDICES: "Portworx Enterprise=PX-Enterprise-2-11,PX-Backup=PX-Backup-2-2"
   NGINX_REDIRECTS_FILE: px-saasbackup-redirects.conf
   MANIFESTS_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/saasbackup/"
   BUILDER_IMAGE_PREFIX: "saasbackup:"
@@ -52,7 +52,7 @@ PX-PDS:
   PRODUCT_NAME: PDS
   PRODUCT_INDEX_NAME: PDS
   VERSIONS_BASE_URL: pds.docs.portworx.com
-  OTHER_PRODUCT_NAMES_AND_INDICES: "Portworx Enterprise=PX-Enterprise-2-7,PX-Backup=PX-Backup-1-2"
+  OTHER_PRODUCT_NAMES_AND_INDICES: "Portworx Enterprise=PX-Enterprise-2-11,PX-Backup=PX-Backup-2-2"
   NGINX_REDIRECTS_FILE: px-pds-redirects.conf
   MANIFESTS_DIRECTORY: "themes/pxdocs-tooling/deploy/manifests/pds/"
   BUILDER_IMAGE_PREFIX: "pds:"
