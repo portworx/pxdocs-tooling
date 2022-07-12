@@ -123,8 +123,9 @@ h2 {
 
 .docs-header .container .navbar-menus .header-main-menu {
   list-style-type: none;
-  margin-left: 4px;
+  margin-left: 210px;
   margin-top: 10px;
+  margin-right: 10px;
 }
 
 .docs-header .container .navbar-menus .header-top-menu li a {
@@ -156,7 +157,7 @@ h2 {
   margin-left: 10px;
   margin-bottom: 15px;
   margin-top: 30px;
-  margin-right: 10px;
+  margin-right: 0px;
 }
 
 /*
