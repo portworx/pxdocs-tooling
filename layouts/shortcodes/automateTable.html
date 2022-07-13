@@ -13,7 +13,7 @@
             {{ range $pathToSource.tableData }}
                 <tr>
                     {{ range . }}
-                    <td>{{ . }}</td>
+                    <td>{{ . | markdownify }}</td>
                     {{ end }} 
                 </tr>
             {{ end }}
