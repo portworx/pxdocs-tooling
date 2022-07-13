@@ -8,7 +8,7 @@
 {{ with $pathTo }}
         <table>
             {{ range $pathToSource.heading }}
-                <th>{{ . }}</th>
+                <th colspan="{{ .colspan }}">{{ .name }}</th>
             {{ end }}
             {{ range $pathToSource.tableData }}
                 <tr>
