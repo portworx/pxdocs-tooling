@@ -742,6 +742,7 @@ hr.margin {
 .docs-content ol ul li {
   color: rgb(51, 68, 76) !important;
   font-family: "Open Sans",sans-serif !important;
+  margin-bottom: 25px;
 }
 
 .docs-content ol ul li > code {
