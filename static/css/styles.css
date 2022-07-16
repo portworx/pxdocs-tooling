@@ -730,6 +730,11 @@ hr.margin {
   font-weight: 500;
 }
 
+/* add a margin beneath ordered list items */
+.docs-content ol li {
+  margin-bottom: 20px;
+}
+
 .docs-content li p {
   margin-bottom: 0px !important;
   font-family: 'Roboto', 'Helvetica', sans-serif !important;
@@ -742,7 +747,6 @@ hr.margin {
 .docs-content ol ul li {
   color: rgb(51, 68, 76) !important;
   font-family: "Open Sans",sans-serif !important;
-  margin-bottom: 25px;
 }
 
 .docs-content ol ul li > code {
