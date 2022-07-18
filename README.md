@@ -13,7 +13,7 @@ It also contains the shared deployment files that are used in the build and depl
 
 ## docs
 
-The Hugo theme has various components that are documented as follows:
+The hugo theme has various components that are documented as follows:
 
  * [material design](docs/material-design.md)
  * [syntax highlighting](docs/syntax-highlighting.md)

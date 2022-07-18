@@ -1,0 +1,37 @@
+{{ define "main" }}
+  {{- .Scratch.Set "pages" .Pages }}
+  {{- if .Sections}}
+    {{- .Scratch.Set "pages" (.Pages | union .Sections) }}
+  {{- end}}
+  {{- $pages := (.Scratch.Get "pages") }}
+  {{- partial "contentheader.html" . }}
+  {{- with .Content }}
+    {{ . }}
+    {{- if and (gt (len $pages) 0) (not $.Params.hidesections) }}
+      <hr class="margin" />
+    {{- end }}
+  {{- end }}
+  {{- if not .Params.hidesections }}
+    {{- $section := . }}
+
+    {{- if $section.Params.logoList -}}
+      <div class="logo-list-container">
+        {{- range $pages.ByWeight }}
+          {{- if and (eq .Parent $section) (not .Params.Hidden)}}
+            {{ .Render "logo-li" }}
+          {{ end }}
+        {{ end }} 
+      </div>
+    {{- else -}}
+      {{- range $pages.ByWeight }}
+        {{- if and (eq .Parent $section) (not .Params.Hidden)}}
+          <div class="listmargin">
+            {{ .Render "li" }}
+          </div>
+        {{ end }}
+      {{ end }} 
+    {{- end -}}
+  {{- end}}
+  {{- partial "prevnext.html" . }}
+{{end}}
+

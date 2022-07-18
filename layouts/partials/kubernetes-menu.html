@@ -1,19 +1,20 @@
 {{- $currentNode := . }}
 {{- $depth := 0 }}
-
 {{- .Scratch.Set "pages" (.Site.Home.Pages | union .Site.Home.Sections) }}
 {{- $pages := (.Scratch.Get "pages") }}
 
 {{- range $pages.ByWeight}}
   {{- if eq .Parent .Site.Home }}
-    {{- template "nav-tree" dict "section" . "currentnode" $currentNode "depth" $depth}}
+    {{- if eq .Section "kubernetes"}}
+      {{- template "kubernetes-nav-tree" dict "section" . "currentnode" $currentNode "depth" $depth}}
+    {{- end }}
   {{- end}}
 {{- end}}
 
 <!--
   nav-link template
  -->
-{{- define "nav-link" }}
+{{- define "kubernetes-nav-link" }}
   {{- $currentNode := .currentnode }}
   {{- $depth := .depth }}
   {{- $node := .node }}
@@ -58,7 +59,7 @@
 <!--
   nav-tree template
  -->
-{{- define "nav-tree" }}
+{{- define "kubernetes-nav-tree" }}
   {{- $currentNode := .currentnode }}
   {{- $depth := .depth }}
   {{- $section := .section }}
@@ -85,7 +86,7 @@
           <!--
             render link
            -->
-          {{- template "nav-link" dict "node" . "currentnode" $currentNode "depth" $depth "mode" "branch"}}
+          {{- template "kubernetes-nav-link" dict "node" . "currentnode" $currentNode "depth" $depth "mode" "branch"}}
 
           <div id="menu-children-{{- .UniqueID -}}" class="menu-children {{- if $open }} open{{ end }}">
             <!--
@@ -93,7 +94,9 @@
              -->
             {{- .Scratch.Set "pages" .Pages }}
             {{- if .Sections}}
-              {{- .Scratch.Set "pages" (.Pages | union .Sections) }}
+              {{- if eq .Section "kubernetes"}}
+                {{- .Scratch.Set "pages" (.Pages | union .Sections) }}
+              {{- end}}
             {{- end}}
             {{- $pages := (.Scratch.Get "pages") }}
 
@@ -102,7 +105,7 @@
              -->
             {{- range $pages.ByWeight }}
 
-              {{- template "nav-tree" dict "section" . "currentnode" $currentNode "depth" (add $depth 1)}}
+              {{- template "kubernetes-nav-tree" dict "section" . "currentnode" $currentNode "depth" (add $depth 1)}}
 
             {{- end}}
           </div>
@@ -114,7 +117,7 @@
        -->
       {{- else}}
 
-        {{- template "nav-link" dict "node" . "currentnode" $currentNode "depth" $depth "mode" "leaf"}}
+        {{- template "kubernetes-nav-link" dict "node" . "currentnode" $currentNode "depth" $depth "mode" "leaf"}}
 
       {{- end}}
     {{- end}}
@@ -123,20 +126,4 @@
   {{- end}}
 {{- end}}
 
-{{- if eq .Site.Title "Portworx Documentation"}}
-  <a
-      style="color:rgb(0, 0, 0);"
-      class="mdl-navigation__link"
-      href="https://backup.docs.portworx.com/"
-    >
-    <span>&nbsp;&nbsp;&nbsp;PX-Backup</span> </a>
-{{- end}}
 
-{{- if eq .Site.Title "PX-Backup Documentation"}}
-  <a
-      style="color:rgb(0, 0, 0);"
-      class="mdl-navigation__link"
-      href="https://docs.portworx.com/"
-    >
-    <span>&nbsp;&nbsp;&nbsp;PX-Enterprise</span> </a>
-{{- end}}

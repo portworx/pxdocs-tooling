@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="{{ .Description }}">
     <meta name="keywords" content="{{ .Keywords }}">
-    <meta name="category" content="{{ .Params.Category }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>{{ .Title }}</title>
 
@@ -49,10 +48,30 @@
       </header>
 
       <!--
-        SIDEBAR
+        VERSION SIDEBAR
        -->
-       <div class="docs-drawer">
-        {{- partial "sidebar.html" . }}
+      <div id="search-hits">
+      </div>
+      <div class="landing-sidebar">
+        <div class="version">
+          <h4>Versions</h4>
+            <div>
+              <ul id="side-version-menu">
+
+              </ul>
+            </div>
+          </div>
+          <div class="orchestrator">
+            <h4>Orchestrator</h4>
+            <ul>
+              <li>
+                <a href="/kubernetes">Kubernetes</a>
+              </li>
+              <li>
+                <a href="/other-orchestrators">Other Orchestrators</a>
+              </li>
+            </ul>
+          </div>
       </div>
 
 
@@ -62,20 +81,42 @@
       <main class="docs-content mdl-color--white-50">
         <div class="top-padding"></div>
         <div id="page-content">
-          {{ block "main" . }}
+          <h1>Portworx Documentation</h1>
+
+          <div id="search-box-holding">
+            <div id="ais-search-box-holding">
+              <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Search Portworx version 2.3 on Kubernetes" role="textbox" spellcheck="false" type="text" value="" class="ais-search-box--input-holding">
+            </div>
+          </div>
+
+
+          <!-- Draw the section titles and their child section titles -->
+          {{ range .Site.Pages }}
+            {{ if eq .Params.landing "k8s"}}
+            <div>
+              <div>
+                <a href="{{.RelPermalink}}"><h2>{{ .Title }}</h2></a>
+                <!-- <p> <strong> Description: </strong> {{ .Description }} </p>
+                <p> <strong>Link: </strong> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </p> -->
+              </div>
+              <div>
+                <ul>
+                {{ with . }}
+                  {{ range .Sections }}
+                      <li> <a class="post-title" href="{{.RelPermalink}}">{{ .Title }}</a> </li>
+                  {{ end }}
+                {{ end }}
+                </ul>
+              </div>
+            </div>
+            {{ end }}
           {{ end }}
+
         </div>
       </main>
 
-      <div id="scrollspy-container">
-        <nav>
-          <ul id="scrollspy-list">
 
-          </ul>
-        </nav>
-      </div>
-
-
+      <!-- We need to modify the footer. maybe we can add a wrap div to the other baseof that shortens it on the left side when the sidebar is present -->
       <div class="docs-footer-padding"></div>
       <footer class="docs-footer">
         {{- partial "footer.html" . }}

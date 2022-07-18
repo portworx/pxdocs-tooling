@@ -1,15 +1,10 @@
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: docs-${VERSIONS_TAG}
-  labels:
-    app: docs-${VERSIONS_TAG}
   namespace: pxdocs
 spec:
   replicas: 3
-  selector:
-    matchLabels:
-      app: docs-${VERSIONS_TAG}
   strategy:
     rollingUpdate:
       maxUnavailable: 1

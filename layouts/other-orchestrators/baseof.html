@@ -7,6 +7,9 @@
     <meta name="keywords" content="{{ .Keywords }}">
     <meta name="category" content="{{ .Params.Category }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    {{- if .Params.hasSibling}}
+    <meta name="robots" content="noindex">
+    {{end}}
     <title>{{ .Title }}</title>
 
     <meta property="og:locale" content="en_US" />
@@ -39,7 +42,6 @@
     <link rel="stylesheet" href="{{"css/instantsearch-theme-algolia.min.css" | relURL}}?timestamp={{ now.Unix }}">
 
     <link rel="canonical" href="{{ .Permalink }}">
-
   </head>
   <body data-url="{{ .RelPermalink }}">
     <div class="docs-layout">
@@ -51,8 +53,8 @@
       <!--
         SIDEBAR
        -->
-       <div class="docs-drawer">
-        {{- partial "sidebar.html" . }}
+      <div class="docs-drawer">
+        {{- partial "other-orchestrators-sidebar.html" . }}
       </div>
 
 

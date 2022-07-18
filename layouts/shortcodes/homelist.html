@@ -2,16 +2,14 @@
   {{- $series := .Get "series" -}}
   {{- $series2 := .Get "series2" -}}
   {{- $series3 := .Get "series3" -}}
-  {{- $seriesExternal := .Get "seriesExternal" -}}
-
   <ul class="list-series">
     {{ range where .Site.Pages "Params.series" $series }}
       <li class="list-series__item mdl-card mdl-shadow--2dp">
         <a href="{{.Permalink}}">
           <div class="mdl-card__title">
-            <homelistSeriesTitle class="mdl-card__title-text">
+            <h3 class="mdl-card__title-text">
               {{.Title}}
-            </homelistSeriesTitle>
+            </h3>
           </div>
           <div class="mdl-card__supporting-text">
               <p>{{.Description}}</p>
@@ -24,9 +22,9 @@
       <li class="list-series__item mdl-card mdl-shadow--2dp">
         <a href="{{.Permalink}}">
           <div class="mdl-card__title">
-            <homelistSeriesTitle class="mdl-card__title-text">
+            <h3 class="mdl-card__title-text">
               {{.Title}}
-            </homelistSeriesTitle>
+            </h3>
           </div>
           <div class="mdl-card__supporting-text">
               <p>{{.Description}}</p>
@@ -39,9 +37,9 @@
       <li class="list-series__item mdl-card mdl-shadow--2dp">
         <a href="{{.Permalink}}">
           <div class="mdl-card__title">
-            <homelistSeriesTitle class="mdl-card__title-text">
+            <h3 class="mdl-card__title-text">
               {{.Title}}
-            </homelistSeriesTitle>
+            </h3>
           </div>
           <div class="mdl-card__supporting-text">
               <p>{{.Description}}</p>
@@ -50,31 +48,6 @@
         </a>
       </li>
     {{ end }}
-
-    {{- with $seriesExternal -}}
-      {{- $items := split . ";" -}}
-      {{- range $items -}}
-        {{- $urlTitleDescription := split . "|" -}}
-        {{- $url := trim (index $urlTitleDescription 0) " " -}}
-        {{- $title := trim (index $urlTitleDescription 1) " " -}}
-        {{- $description := trim (index $urlTitleDescription 2) " " -}}
-        <li class="list-series__item mdl-card mdl-shadow--2dp">
-          <a href="{{- $url -}}">
-            <div class="mdl-card__title">
-              <homelistSeriesTitle class="mdl-card__title-text">
-                {{- $title -}}
-              </homelistSeriesTitle>
-            </div>
-            <div class="mdl-card__supporting-text">
-                <p>{{- $description -}}</p>
-            </div>
-            <i class="material-icons">arrow_forward_ios</i>
-          </a>
-        </li>
-
-      {{- end -}}
-    {{- end -}}
-
   </ul>
 {{ end }}
 <style>

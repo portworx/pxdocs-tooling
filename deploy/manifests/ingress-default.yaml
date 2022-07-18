@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   annotations:
@@ -13,7 +13,7 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: docs-2-6
+          serviceName: docs-2-3
           servicePort: 80
         path: /
   - host: 2.0.docs.portworx.com
@@ -44,27 +44,6 @@ spec:
           serviceName: docs-2-3
           servicePort: 80
         path: /
-  - host: 2.4.docs.portworx.com
-    http:
-      paths:
-      - backend:
-          serviceName: docs-2-4
-          servicePort: 80
-        path: /
-  - host: 2.5.docs.portworx.com
-    http:
-      paths:
-      - backend:
-          serviceName: docs-2-5
-          servicePort: 80
-        path: /
-  - host: 2.6.docs.portworx.com
-    http:
-      paths:
-      - backend:
-          serviceName: docs-2-6
-          servicePort: 80
-        path: /
   - host: 1.7.docs.portworx.com
     http:
       paths:
@@ -92,12 +71,3 @@ spec:
   - hosts:
     - 2.3.docs.portworx.com
     secretName: ingress-pxdocs-2.3
-  - hosts:
-    - 2.4.docs.portworx.com
-    secretName: ingress-pxdocs-2.4
-  - hosts:
-    - 2.5.docs.portworx.com
-    secretName: ingress-pxdocs-2.5
-  - hosts:
-    - 2.6.docs.portworx.com
-    secretName: ingress-pxdocs-2.6
