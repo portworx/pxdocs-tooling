@@ -583,6 +583,24 @@ h2 {
 */
 
 
+.other-products-heading {
+  margin: 40px 10px 10px 10px;
+  width: 94%;
+  font-weight: bold;
+  color: #55565a;
+  font-size: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
+}
+
+.docset-link span {
+  color: black;
+}
+
+.mdl-navigation__link span {
+  margin-left: 10px;
+}
+
 .docs-layout .docs-navigation .mdl-navigation__link {
   display: flex !important;
   flex-direction: row;
