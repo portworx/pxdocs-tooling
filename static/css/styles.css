@@ -1,5 +1,10 @@
-/* Using Sass for more complex landing page css. Make edits in `sassy.scss` and build outputs to `sassy-output.css` */
-@import 'sassy-output.css';
+@media print {
+   .docs-drawer, .docs-header, .docs-footer {display: none !important;}
+   #scrollspy-container {display: none !important}
+   .docs-content {margin-left: 0px !important; width: 90% !important; max-width: none !important;}
+   body:after {content: "© 2022 Portworx, Inc. Visit http://docs.portworx.com for more documentation."; padding-left: 35px;}
+
+}
 
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
@@ -15,7 +20,7 @@ h2 {
 }
 
 .docs-layout {
-  height: 100%;
+  /* height: 100%; */
 }
 
 .docs-main {
@@ -33,7 +38,7 @@ h2 {
 
 */
 .docs-header {
-  height: 70px;
+  height: 100px;
   margin-left: 0px !important;
   width: 100% !important;
   box-shadow: none !important;
@@ -67,9 +72,9 @@ h2 {
 }
 
 .docs-header .container .navbar-brand img {
-  margin-top: 10px;
+  margin-top: 15px;
   margin-left: 20px;
-  height: 50px;
+  height: 70px;
 }
 
 @media screen and (max-width: 1025px) {
@@ -86,6 +91,7 @@ h2 {
   float: right;
   padding-left: 15px;
   padding-right: 15px;
+  margin-top: 15px;
 }
 
 .docs-header .container .navbar-menus ul {
@@ -112,7 +118,7 @@ h2 {
 .docs-header .container .navbar-menus .header-top-menu {
   list-style-type: none;
   margin-top: 5px;
-  margin-bottom: 0px;
+  margin-bottom: 15px;
 }
 
 .docs-header .container .navbar-menus .header-main-menu {
@@ -121,18 +127,25 @@ h2 {
   margin-top: 10px;
 }
 
-
-.docs-header .container .navbar-menus .header-top-menu li:first-of-type:after {
-  content: '|';
-  color: #ff5000;
-}
-
 .docs-header .container .navbar-menus .header-top-menu li a {
   color: #ff5000;
   text-transform: uppercase;
+  font-family:"Libre Franklin", sans-serif;
+  font-weight: 700;
   padding: 0 15px;
-  font-size: 17px;
-  line-height: 25px;
+  font-size: 16px;
+}
+
+.docs-header .container .navbar-menus .header-top-menu li:nth-child(2) a {
+  color: #ffffff;
+  text-transform: uppercase;
+  font-family:"Libre Franklin", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  background-color: #ff5000;
+  border: 2px solid #ff5000;
+  padding: 5px 25px 5px 25px;
+  margin-left: 10px;
 }
 
 .docs-header .container .navbar-menus .header-main-menu li a {
@@ -470,10 +483,10 @@ h2 {
 
 .docs-drawer {
   border: none;
-  max-width: 300px;
+  width: 300px;
   position: fixed;
   z-index: 2000;
-  top: 70px;
+  top: 100px;
   bottom: 0;
   overflow-y: hidden !important;
   display: flex;
@@ -710,7 +723,47 @@ hr.margin {
   font-weight: normal;
 }
 
-.docs-content p > code {
+.docs-content p > code, .docs-content li > code {
+  color: #666;
+  background-color: #f5f5f5;
+  padding: 4px;
+  font-weight: 500;
+}
+
+/* add a margin beneath ordered list items */
+.docs-content ol li {
+  margin-bottom: 20px;
+}
+
+.docs-content li p {
+  margin-bottom: 0px !important;
+  font-family: 'Roboto', 'Helvetica', sans-serif !important;
+  /* color: rgba(0,0,0,.87) !important; */
+}
+
+
+/* style bullet list items under an ordered list */
+
+.docs-content ol ul li {
+  color: rgb(51, 68, 76) !important;
+  font-family: "Open Sans",sans-serif !important;
+}
+
+.docs-content ol ul li > code {
+  color: #666;
+  background-color: #f5f5f5;
+  padding: 4px;
+  font-weight: 500;
+}
+
+/* style bullet list items under an ordered list */
+
+.docs-content ol ul li {
+  color: rgb(51, 68, 76) !important;
+  font-family: "Open Sans",sans-serif !important;
+}
+
+.docs-content ol ul li > code {
   color: #666;
   background-color: #f5f5f5;
   padding: 4px;
@@ -773,6 +826,11 @@ hr.margin {
 }
 
 .docs-content h3 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.docs-content homelistSeriesTitle {
   font-size: 20px;
   font-weight: 500;
 }
@@ -873,157 +931,252 @@ hr.margin {
 
 */
 
-#search-hits {
-  position: fixed;
-  left: 296px;
-  top: 113px;
-  width: 400px;
-  padding: 10px;
-  background-color: #fafafa;
+
+
+/* begin new search */
+
+.ais-Hits {
+  /* display: flex; */
+  /* width: 550px; */
+  /* height: 90vh; */
+  /* max-height: 750px; */
+  /* overflow: scroll; */
   z-index: 1000;
-  display: none;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, .15);
-  max-height: 450px;
-  overflow-y: auto;
 }
 
-#landing-search-hits {
-  width: 680px;
-  padding: 10px;
-  background-color: #fafafa;
-  /* set a high z index so it floats over the other divs */
-  z-index: 1000;
-  display: none;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, .15);
-  max-height: 450px;
-  overflow-y: auto;
+.ais-Hits-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+}
 
-  /* define how this should be displayed, flex works */
+.ais-Hits-item {
+  padding: 15px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
+.search-hits-row {
+  border-bottom-style: solid;
+  border-color: #ccc;
+  border-width: 1px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+/* .ais-Hits-item::after {
+  content: '';
+  width: 100%;
+  border-bottom: solid 1px #000;
+  margin-bottom: 5px;
+} */
+
+
+/* end new search */
+
+#search-wrapper {
+  flex-direction: column;
   display: flex;
-  /* position this relative to it's location within the other divs */
-  position: relative;
-  /* pin this div to the top left of its position  */
-  top: 0px;
-  left: 0px;
-  /* pull the content below it up underneath it */
-  margin-bottom: -470px;
+  position: sticky;
+  top: 0;
+  width: 550px;
+  left:300px;
+  overflow: scroll;
+  /* this works, but is fixed in height, so even if there are fewer results, the pane will be full height */
+  height: 800px;
+  margin-bottom: calc(800px * -1);
+
+
+
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, .15);
+  background-color: #fafafa;
+  display: none;
+  z-index: 1000;
 }
 
-@media screen and (max-width: 1025px) {
-  #search-hits {
+/* #search-hits::before, #search-hits-secondary-index::before {
+  content: 'index';
+  display: flex;
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-bottom: 7px;
+  padding-right: 30px;
+  color: #fff;
+  background-color: #414042;
+  font-size: 16px;
+  font-weight: 450;
+} */
+
+.search-hits-title {
+  display: flex;
+
+  /* testing sticky titles */
+  /* position: sticky;
+  bottom:0; */
+
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-bottom: 7px;
+  padding-right: 30px;
+  margin:10px;
+  margin-bottom: 0px;
+  color: #fff;
+  background-color: #414042;
+  font-size: 16px;
+  font-weight: 450;
+}
+
+.search-hits {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  z-index: 1000;
+  /* display: none; */
+}
+
+.search-hits li:nth-of-type(1n+5) {
+  display: none;
+}
+
+.show-li{
+  display: list-item!important;
+}
+
+/* @media screen and (max-width: 1025px) {
+  #search-wrapper {
     top: 60px;
   }
-  #landing-search-hits {
-    top: 35%;
-  }
-}
+} */
 
-@media screen and (max-width: 759px) {
-  #search-hits {
+/* @media screen and (max-width: 759px) {
+  #search-wrapper {
     width: auto;
     right: 0;
   }
-  #landing-search-hits {
-    top: 35%;
-  }
-}
+} */
 
-@media screen and (max-width: 579px) {
-  #search-hits {
+@media screen and (max-width: 840px) {
+  #search-wrapper {
     bottom: 0;
     left: 0;
     right: auto;
-    top: 127px;
-    max-width: 280px;
+    /* this set's the search wrapper div's location in relation to where the div originates. We need the `0` value here to instruct the browser where to pin search wrapper when scrolling with sticky positioning */
+    top: 0;
+    /* this renders the div down, out of the way of the search bar, but preserves its original location for sticky pinning  */
+    transform: translateY(65px);
+    width: 300px;
     z-index: 10000;
     max-height: 100%;
+    box-shadow: none;
+    /* this adheres search-wrapper to the top of the header */
+    position: sticky;
   }
-  #landing-search-hits {
-    top: 35%;
+
+  .search-hits {
+    z-index: 10000;
   }
 }
 
-.search-box-input {
+.ais-SearchBox-input {
   width: 100% !important;
+  -webkit-appearance: none;
+  -webkit-rtl-ordering: logical;
+  -webkit-user-select: text;
+  background-attachment: scroll;
+  background-clip: border-box;
+  background-color: #fff;
+  background-image: url("../images/magnifierIcon.svg");
+  background-repeat: no-repeat;
+  background-origin: padding-box;
+  background-position-x: 15px;
+  background-position-y: 50%;
+  background-size: 20px;
+  border-color: rgb(212, 216, 227);
+  border-style: solid;
+  border-radius: 4px;
+  border-width: 1px;
+  box-shadow: rgba(85, 95, 110, 0.2) 0px 1px 1px 0px;
+  box-sizing: border-box;
+  color: #000;
+  display: inline-block;
+  font-family: Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  height: 46px;
+  line-height: 20px;
+  margin: 0px;
+  padding-bottom: 10px;
+  padding-left: 35px;
+  padding-right: 10px;
+  padding-top: 10px;
+  text-align: start;
+  text-indent: 0px;
+  /* transition-delay: 0s, 0s;
+  transition-duration: 0.4s, 0.4s;
+  transition-property: box-shadow, background;
+  transition-timing-function: ease, ease; */
+  /* vertical-align: middle;
+  white-space: normal; */
+  writing-mode: horizontal-tb;
+  outline: none;
 }
 
-#search-hits .search-hits-empty {
+.search-box-root {
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.87);
+  rgba(0,0,0,.87)html material.min.css:8
+  texthtml  User Agent Style Sheet
+  display: inline-block;
+  font-family: Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  height: 46px;
+  line-height: 20px;
+  max-width: 300px;
+  position: relative;
+  white-space: nowrap;
+  width: 290px;
+}
+
+.aa-input-search::-webkit-search-decoration {
+  background: url("http://www.w3.org/2000/svg") no-repeat;
+}
+
+.search-hits-empty {
   margin: 15px;
   color: #f15a24;
 }
 
-#search-hits .search-hits-row {
+.search-hits-row {
   margin: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid #ccc;
 }
 
-#search-hits .search-hits-section {
+.search-hits-section {
   font-size: 0.8em;
 }
 
-#search-hits .search-hits-section a {
+.search-hits-section a {
   text-decoration: none;
   color: #f15a24;
 }
 
-#search-hits .search-hits-page a {
+.search-hits-page a {
   color: #666;
 }
 
-#search-hits .search-hits-page em {
+.search-hits-page em {
   color: #f15a24;
 }
 
-#search-hits .search-hits-matches a {
+.search-hits-matches a {
   font-size: 0.8em;
   font-weight: normal;
   color: #999;
   text-decoration: none;
 }
 
-#search-hits .search-hits-matches em {
-  color: #f15a24;
-}
-
-/* Landing page search hits */
-
-#landing-search-hits .landing-search-hits-empty {
-  margin: 15px;
-  color: #f15a24;
-}
-
-#landing-search-hits .landing-search-hits-row {
-  margin: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #ccc;
-}
-
-#landing-search-hits .landing-search-hits-section {
-  font-size: 0.8em;
-}
-
-#landing-search-hits .landing-search-hits-section a {
-  text-decoration: none;
-  color: #f15a24;
-}
-
-#landing-search-hits .landing-search-hits-page a {
-  color: #666;
-}
-
-#landing-search-hits .landing-search-hits-page em {
-  color: #f15a24;
-}
-
-#landing-search-hits .landing-search-hits-matches a {
-  /* font-size: 0.8em; */
-  font-weight: normal;
-  color: #999;
-  text-decoration: none;
-}
-
-#landing-search-hits .landing-search-hits-matches em {
+.search-hits-matches em {
   color: #f15a24;
 }
 
@@ -1222,8 +1375,6 @@ h2,h3,h4,h5,h6 a {
 .highlight.typeOutput
 {
     margin-top: -18px;
-}
-.highlight.typeOutput pre {
     background-color: #f5f4f4;
 }
 
@@ -1302,6 +1453,7 @@ h2,h3,h4,h5,h6 a {
 
 .docs-content img {
   max-width: 100% !important;
+  line-height: 24px !important;
 }
 
 
@@ -1318,8 +1470,8 @@ h2,h3,h4,h5,h6 a {
 
 .logo-list-container a {
   -webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   display: inline-block;
   background-color: #f5f5f5;
   padding: 2em;
@@ -1343,6 +1495,7 @@ h2,h3,h4,h5,h6 a {
 .logo-list-image img {
   width: 100%;
   height: auto;
+  max-height: 150px;
 }
 
 .logo-list-title {
@@ -1452,7 +1605,6 @@ h2,h3,h4,h5,h6 a {
 .list-series__item .mdl-card__supporting-text p {
   font-size: 13px;
   color: #000;
-  font-weight: 500;
   text-decoration: none;
 }
 
@@ -1539,29 +1691,29 @@ h2,h3,h4,h5,h6 a {
   margin: 0 auto;
 }
 
-#search-hits.full-screen {
-  left: 0;
+#search-wrapper.full-screen {
   background: #fff;
-  bottom: 0;
-  height: 100%;
-  max-height: 100%;
+  /* bottom: 0;
+  height: unset;
+  max-height: unset; */
   position: relative;
-  width: 620px;
-  margin: 0 auto;
+  width: 625px;
+  margin:0 auto;
+  left:unset;
   box-shadow: none;
   top: 100px;
-  overflow-y: inherit;
+  overflow: unset;
 }
 
-#search-hits.full-screen .search-hits-section {
+.search-hits.full-screen .search-hits-section {
   font-size: 1em;
 }
 
-#search-hits.full-screen .search-hits-page {
+.search-hits.full-screen .search-hits-page {
   font-size: 1.2em;
 }
 
-#search-hits.full-screen .search-hits-matches a {
+.search-hits.full-screen .search-hits-matches a {
   font-size: 1em;
 }
 
@@ -1602,7 +1754,7 @@ h2,h3,h4,h5,h6 a {
     font-size: 1.5em
   }
 
-  #search-hits.full-screen {
+  .search-hits.full-screen {
     max-width: 320px;
   }
 
@@ -1685,4 +1837,258 @@ code .s {
     padding: .5em .25em .5em 1em;
     text-align: left;
   }
+}
+
+/* AsciiDoc styles */
+
+.admonitionblock {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.note {
+  border-left: 3px solid #4a94d0;
+}
+
+.tip {
+  border-left: 3px solid #414042;
+}
+
+.caution {
+  border-left: 3px solid #ff5000;
+}
+
+.warning {
+  border-left: 3px solid #dc522b;
+}
+
+.important {
+  border-left: 3px solid #0070cd;
+}
+
+.admonitionblock table {
+  margin: 0;
+  border-style: hidden;
+}
+
+.admonitionblock table tbody tr td .icon {
+  /* border-style: hidden; */
+}
+
+.icon {
+  border-style: hidden !important;
+  width: 85px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.conum {
+  color: #fff;
+  background-color: #f15a24;
+  font-family: "Open Sans",sans-serif;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.colist ol li p {
+  margin: 0;
+}
+
+.tip {
+
+}
+.note {
+
+}
+
+/* Style a temporary area for other doc sets */
+
+.landing-doc-sets {
+  background-color: #f5f5f5;
+  padding: 1rem 2rem 0rem 2rem;
+  border-radius: 1rem;
+}
+.landing-doc-sets h2 {
+ margin: 0; 
+}
+.landing-doc-sets ul {
+  padding-top: 0;
+}
+
+/*
+
+  tabbed content
+
+*/
+
+.tab-wrap {
+  border-radius: 6px;
+  border: solid;
+  border-width: 1px;
+  border-color: #55565a;
+  max-width: 100%;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  position: relative;
+  list-style: none;
+  background-color: #fff;
+  margin: 40px 0;
+}
+
+
+.tab { display: none; }
+
+
+.tab:checked:nth-of-type(1) ~ .tab-content:nth-of-type(1) {
+  opacity: 1;
+  -webkit-transition: 0.5s opacity ease-in, 0.8s -webkit-transform ease;
+  transition: 0.5s opacity ease-in, 0.8s transform ease;
+  position: relative;
+  top: 0;
+  z-index: 100;
+  -webkit-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  transform: translateY(0px);
+  text-shadow: 0 0 0;
+}
+
+.tab:checked:nth-of-type(2) ~ .tab-content:nth-of-type(2) {
+  opacity: 1;
+  -webkit-transition: 0.5s opacity ease-in, 0.8s -webkit-transform ease;
+  transition: 0.5s opacity ease-in, 0.8s transform ease;
+  position: relative;
+  top: 0;
+  z-index: 100;
+  -webkit-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  transform: translateY(0px);
+  text-shadow: 0 0 0;
+}
+
+.tab:checked:nth-of-type(3) ~ .tab-content:nth-of-type(3) {
+  opacity: 1;
+  -webkit-transition: 0.5s opacity ease-in, 0.8s -webkit-transform ease;
+  transition: 0.5s opacity ease-in, 0.8s transform ease;
+  position: relative;
+  top: 0;
+  z-index: 100;
+  -webkit-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  transform: translateY(0px);
+  text-shadow: 0 0 0;
+}
+
+.tab:checked:nth-of-type(4) ~ .tab-content:nth-of-type(4) {
+  opacity: 1;
+  -webkit-transition: 0.5s opacity ease-in, 0.8s -webkit-transform ease;
+  transition: 0.5s opacity ease-in, 0.8s transform ease;
+  position: relative;
+  top: 0;
+  z-index: 100;
+  -webkit-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  transform: translateY(0px);
+  text-shadow: 0 0 0;
+}
+
+.tab:checked:nth-of-type(5) ~ .tab-content:nth-of-type(5) {
+  opacity: 1;
+  -webkit-transition: 0.5s opacity ease-in, 0.8s -webkit-transform ease;
+  transition: 0.5s opacity ease-in, 0.8s transform ease;
+  position: relative;
+  top: 0;
+  z-index: 100;
+  -webkit-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  transform: translateY(0px);
+  text-shadow: 0 0 0;
+}
+
+.tab:first-of-type:not(:last-of-type) + label {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.tab:not(:first-of-type):not(:last-of-type) + label { border-radius: 0; }
+
+.tab:last-of-type:not(:first-of-type) + label {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.tab:checked + label {
+  background-color: #fff;
+  box-shadow: 0 -1px 0 #fff inset;
+  cursor: default;
+}
+
+.tab:checked + label:hover {
+  box-shadow: 0 -1px 0 #fff inset;
+  background-color: #fff;
+}
+
+.tab + label {
+  border-radius: 6px 6px 0 0;
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+  font-weight: 600;
+  color: #333;
+  flex-grow: 3;
+  background-color: #f2f2f2;
+  user-select: none;
+  text-align: center;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.tab + label:hover {
+  background-color: #f9f9f9;
+  box-shadow: 0 1px 0 #f4f4f4 inset;
+}
+
+.tab-content {
+  padding: 10px 25px;
+  background-color: transparent;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  opacity: 0;
+  left: 0;
+  -webkit-transform: translateY(-3px);
+  -ms-transform: translateY(-3px);
+  transform: translateY(-3px);
+  border-radius: 6px;
+}
+
+.docs-tooltip {
+  background: rgba(97,97,97,.9);
+  border-radius: 2px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 11px;
+  padding: 8px;
+  transform: translate(29px);
+}
+
+.docs-tooltip {
+  background: rgba(97,97,97,.9);
+  border-radius: 2px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 11px;
+  padding: 8px;
+  transform: translate(29px);
+}
+
+.docs-tooltip.is-active {
+  -webkit-animation:pulse 200ms cubic-bezier(0,0,.2,1)forwards;animation:pulse 200ms cubic-bezier(0,0,.2,1)forwards;
 }

@@ -1,0 +1,21 @@
+<!-- take input from the shortcode as a string -->
+{{- $source := .Get "source" -}}
+<!-- set the path to the `automateTable` location -->
+{{- $pathTo := .Site.Data.automateTable -}}
+<!-- Use the index function to fetch the location object using the source string. Without this, Hugo doesn't understand what the `source` string means -->
+{{- $pathToSource := index $pathTo $source -}}
+
+{{ with $pathTo }}
+        <table>
+            {{ range $pathToSource.heading }}
+                <th colspan="{{ .colspan }}">{{ .name }}</th>
+            {{ end }}
+            {{ range $pathToSource.tableData }}
+                <tr>
+                    {{ range . }}
+                    <td>{{ . | markdownify }}</td>
+                    {{ end }} 
+                </tr>
+            {{ end }}
+        </table>
+{{ end }}
