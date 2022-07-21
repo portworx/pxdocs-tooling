@@ -125,45 +125,31 @@
 
 <h6 class="other-products-heading">Other products</h6>
 
-{{- if eq .Site.Title "Portworx Documentation"}}
-<a
-class="mdl-navigation__link docset-link"
-href="https://central.docs.portworx.com/"
->
-<span>PX-Central on-premises</span> </a>
-<a
-class="mdl-navigation__link docset-link"
-href="https://baas.docs.portworx.com/"
->
-<span>PX-Backup as-a-service</span> </a>
-<a
-class="mdl-navigation__link docset-link"
-href="https://pds.docs.portworx.com/"
->
-<span>Portworx Data Services</span> </a>
-<a
-class="mdl-navigation__link docset-link"
-href="https://backup.docs.portworx.com/"
->
-<span>PX-Backup</span> </a>
-{{- end}}
-
-{{- if eq .Site.Title "PX-Backup Documentation"}}
+{{- if not (eq .Site.Title "Portworx Documentation")}}
 <a
 class="mdl-navigation__link docset-link"
 href="https://docs.portworx.com/"
 >
 <span>Portworx Enterprise</span> </a>
+{{- end}}
+
+{{- if not (eq .Site.Title "PX-Central Documentation")}}
 <a
 class="mdl-navigation__link docset-link"
 href="https://central.docs.portworx.com/"
 >
 <span>PX-Central on-premises</span> </a>
+{{- end}}
+
+{{- if not (eq .Site.Title "PX-Backup as-a-service Documentation")}}
 <a
 class="mdl-navigation__link docset-link"
 href="https://baas.docs.portworx.com/"
 >
 <span>PX-Backup as-a-service</span> </a>
+{{- end}}
+
+{{- if not (eq .Site.Title "Portworx Data Services Documentation")}}
 <a
 class="mdl-navigation__link docset-link"
 href="https://pds.docs.portworx.com/"
@@ -171,69 +157,7 @@ href="https://pds.docs.portworx.com/"
 <span>Portworx Data Services</span> </a>
 {{- end}}
 
-
-{{- if eq .Site.Title "PX-Central Documentation"}}
-<a
-class="mdl-navigation__link docset-link"
-href="https://docs.portworx.com/"
->
-<span>Portworx Enterprise</span> </a>
-<a
-class="mdl-navigation__link docset-link"
-href="https://baas.docs.portworx.com/"
->
-<span>PX-Backup as-a-service</span> </a>
-<a
-class="mdl-navigation__link docset-link"
-href="https://pds.docs.portworx.com/"
->
-<span>Portworx Data Services</span> </a>
-<a
-class="mdl-navigation__link docset-link"
-href="https://backup.docs.portworx.com/"
->
-<span>PX-Backup</span> </a>
-{{- end}}
-
-{{- if eq .Site.Title "Portworx Data Services Documentation"}}
-<a
-class="mdl-navigation__link docset-link"
-href="https://docs.portworx.com/"
->
-<span>Portworx Enterprise</span> </a>
-<a
-class="mdl-navigation__link docset-link"
-href="https://central.docs.portworx.com/"
->
-<span>PX-Central on-premises</span> </a>
-<a
-class="mdl-navigation__link docset-link"
-href="https://baas.docs.portworx.com/"
->
-<span>PX-Backup as-a-service</span> </a>
-<a
-class="mdl-navigation__link docset-link"
-href="https://backup.docs.portworx.com/"
->
-<span>PX-Backup</span> </a>
-{{- end}}
-
-{{- if eq .Site.Title "PX-Backup as-a-service Documentation"}}
-<a
-class="mdl-navigation__link docset-link"
-href="https://docs.portworx.com/"
->
-<span>Portworx Enterprise</span> </a>
-<a
-class="mdl-navigation__link docset-link"
-href="https://central.docs.portworx.com/"
->
-<span>PX-Central on-premises</span> </a>
-<a
-class="mdl-navigation__link docset-link"
-href="https://pds.docs.portworx.com/"
->
-<span>Portworx Data Services</span> </a>
+{{- if not (eq .Site.Title "PX-Backup Documentation")}}
 <a
 class="mdl-navigation__link docset-link"
 href="https://backup.docs.portworx.com/"
