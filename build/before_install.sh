@@ -23,4 +23,5 @@ PXVERSION=2.12.0
 branch=gs-rel-${PXVERSION}
 
 # Get version from the code
-curl https://raw.githubusercontent.com/portworx/porx/${branch}/vendor/github.com/libopenstorage/openstorage/api/server/sdk/api/api.swagger.json
+curl=$(curl https://raw.githubusercontent.com/portworx/porx/${branch}/vendor/github.com/libopenstorage/openstorage/api/server/sdk/api/api.swagger.json)
+echo $curl
