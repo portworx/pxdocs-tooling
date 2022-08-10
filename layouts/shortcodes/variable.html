@@ -1,0 +1,15 @@
+<!-- take input from the shortcode as a string -->
+{{- $var := .Get "var" -}}
+<!-- set the path to the `automateTable` location -->
+{{- $pathTo := .Site.Data.names -}}
+<!-- Use the index function to fetch the location object using the source string. Without this, Hugo doesn't understand what the `source` string means -->
+{{- $pathToVar := index $pathTo $var -}}
+
+<!-- check if there's a valid value in all of the shortcodes being called -->
+{{- if $pathToVar }}
+    <!-- output the associated shortcode value -->
+    {{ $pathToVar }}
+{{- else -}}
+    <!-- if no valid value, fail the build and explain why -->
+    {{ errorf "unspecified variable: %q. Ensure your variable exists in the names.yaml file" $var }}
+{{- end -}}
