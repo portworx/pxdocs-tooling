@@ -16,12 +16,21 @@ fi
 
 # try to pull from porx
 
-# Portworx Version
-PXVERSION=2.12.0
+if [ -z "$GH_BOT_TOKEN" ] ; then
+    echo "You must first get a personal token from github: https://github.com/settings/tokens"
+    echo "Then save your personal token in an env var: export GITHUB_PERSONAL_TOKEN=ghp_..."
+    exit 1
+fi
+
+# Just pulling this from build.sh for now. We probably want to pull data before the main build script runs.
+export PX_VERSION=$(yq e ".$YAML_SECTION_NAME.LATEST_VERSION" ./themes/pxdocs-tooling/build/products.yaml)
 
 # PX BRANCH
-branch=gs-rel-${PXVERSION}
+branch=gs-rel-${PX_VERSION}
 
 # Get version from the code
-curl=$(curl https://raw.githubusercontent.com/portworx/porx/${branch}/vendor/github.com/libopenstorage/openstorage/api/server/sdk/api/api.swagger.json)
-echo $curl
+curl -H "Authorization: bearer $GH_BOT_TOKEN" \
+https://raw.githubusercontent.com/portworx/porx/${branch}/vendor/github.com/libopenstorage/openstorage/api/server/sdk/api/api.swagger.json\
+		--output api.swagger.json --silent
+ver=$(cat api.swagger.json | jq -r '.info.version')
+echo "Px version v${PX_VERSION} on branch ${branch} uses the SDK version v${ver}"
