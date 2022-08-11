@@ -25,6 +25,11 @@ fi
 # Just pulling this from build.sh for now. We probably want to pull data before the main build script runs.
 export PX_VERSION=$(yq e ".$YAML_SECTION_NAME.LATEST_VERSION" ./themes/pxdocs-tooling/build/products.yaml)
 
+if [ -z "$PX_VERSION" ] ; then
+    echo "Missing PX_VERSION value"
+    exit 1
+fi
+
 # PX BRANCH
 branch=gs-rel-${PX_VERSION}
 
