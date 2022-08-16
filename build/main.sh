@@ -14,7 +14,7 @@ source ./themes/pxdocs-tooling/build/set_env_vars.sh
 # disable PR check for testing
 # if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then 
     echo "pulling data for automation"
-    source ./themes/pxdocs-tooling/build/pull_data.sh
+    source ./themes/pxdocs-tooling/build/pull_sdk_version.sh
     
     # we can put any other automation we want to here 
 # fi
