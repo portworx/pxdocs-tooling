@@ -7,10 +7,10 @@ echo "$PWD"
 # The most important thing is that these all run within the same process, so env vars are shared.
 
 echo "setting env vars"
-./themes/pxdocs-tooling/build/set_env_vars.sh
+source ./themes/pxdocs-tooling/build/set_env_vars.sh
 
 echo "pulling data for automation"
-./themes/pxdocs-tooling/build/pull_data.sh
+source ./themes/pxdocs-tooling/build/pull_data.sh
 
 echo "running build"
-./themes/pxdocs-tooling/build/build.sh
+source ./themes/pxdocs-tooling/build/build.sh
