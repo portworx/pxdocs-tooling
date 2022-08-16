@@ -10,12 +10,14 @@ echo "setting env vars"
 source ./themes/pxdocs-tooling/build/set_env_vars.sh
 
 # We need to decide if we only want to run this on upstream builds, or also for PRs. We currently don't export ecypted env vars to PRs, so I'll have this exit. 
-if [ "${TRAVIS_PULL_REQUEST}" == "true" ]; then 
+
+# disable PR check for testing
+# if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then 
     echo "pulling data for automation"
     source ./themes/pxdocs-tooling/build/pull_data.sh
     
     # we can put any other automation we want to here 
-fi
+# fi
 
 
 echo "running build"
