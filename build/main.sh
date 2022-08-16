@@ -4,3 +4,4 @@
 # The most important thing is that these all run within the same process, so env vars are shared.
 source set_env_vars.sh
 source pull_data.sh
+source build.sh
