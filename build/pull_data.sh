@@ -47,6 +47,8 @@ echo "getting data from porx"
 curl -H "Authorization: bearer $GH_BOT_TOKEN" \
 https://raw.githubusercontent.com/portworx/porx/${branch}/vendor/github.com/libopenstorage/openstorage/api/server/sdk/api/api.swagger.json\
 		--output api.swagger.json --silent
+
+echo "parsing output through jq"
 ver=$(cat api.swagger.json | jq -r '.info.version')
 
 # Keep logging this version into Travis, it'll be helpful for debugging if something goes wrong
