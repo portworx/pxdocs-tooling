@@ -51,3 +51,7 @@ echo "Px version v${PX_VERSION} on branch ${branch} uses the SDK version v${ver}
 # 1. init env vars in the `before_install.sh` file, or define a new one that inits all env vars that build scripts will use
 # 2. run scripts that pull data
 # 3. run hugo, etc. 
+
+# Wishlist:
+# * an override setting that allows us to run this locally and build a file that can be used to override the automated output. We can put an if statement into
+#   the template to pull the override file rather than the generated one if it exists. This would be most useful in other data pull scripts, maybe not here.
