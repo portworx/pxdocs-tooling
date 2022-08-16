@@ -6,36 +6,43 @@
 #     exit 0; 
 # fi
 
+echo "checking $GH_BOT_TOKEN"
 # Ensure that the token is set
 if [ -z "$GH_BOT_TOKEN" ] ; then
     echo "Travis env vars missing a github personal token"
     exit 1
 fi
 
+echo "checking $LATEST_VERSION"
 # Ensure the env vars are set successfully
 if [ -z "$LATEST_VERSION" ] ; then
     echo "Missing LATEST_VERSION env var"
     exit 1
 fi
 
+echo "checking $YAML_SECTION_NAME"
 if [ -z "$YAML_SECTION_NAME" ] ; then
     echo "Missing YAML_SECTION_NAME env var"
     exit 1
 fi
 
+echo "checking $TRIGGERING_REPO_NAME"
 if [ -z "$TRIGGERING_REPO_NAME" ] ; then
     echo "Missing TRIGGERING_REPO_NAME env var"
     exit 1
 fi
 
+echo "checking $PX_ENTERPRISE_REPO_NAME"
 if [ -z "$PX_ENTERPRISE_REPO_NAME" ] ; then
     echo "Missing PX_ENTERPRISE_REPO_NAME env var"
     exit 1
 fi
 
+echo "building branch variable"
 # build the Portworx branch string
 branch=gs-rel-${LATEST_VERSION}
 
+echo "getting data from porx"
 # Get version from porx
 curl -H "Authorization: bearer $GH_BOT_TOKEN" \
 https://raw.githubusercontent.com/portworx/porx/${branch}/vendor/github.com/libopenstorage/openstorage/api/server/sdk/api/api.swagger.json\
