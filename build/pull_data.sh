@@ -1,7 +1,10 @@
 # try to pull from porx
 
 # We need to decide if we only want to run this on upstream builds, or also for PRs. We currently don't export ecypted env vars to PRs, so I'll have this exit. 
-if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then exit 0; fi
+if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then 
+    echo "not PR, exting"
+    exit 0; 
+fi
 
 # Ensure that the token is set
 if [ -z "$GH_BOT_TOKEN" ] ; then

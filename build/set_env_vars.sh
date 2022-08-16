@@ -44,6 +44,8 @@ if [ "${TRIGGERING_REPO_NAME}" '==' "${PX_SAASBACKUP_REPO_NAME}" ]; then
   export YAML_SECTION_NAME=$PX_SAASBACKUP_SECTION_NAME
 fi
 
+echo "YAML_SECTION_NAME set to: ${YAML_SECTION_NAME}"
+
 # A comma-separated list of branches and versions for which we build the deployment image, update the Algolia index and push the image to GCP
 export BRANCH_VERSION_CONFIG=$(yq e ".$YAML_SECTION_NAME.BRANCH_VERSION_CONFIG" ./themes/pxdocs-tooling/build/products.yaml)
 # The latest version. We use this variable in the `export-product-url.sh` script to determine whether the version should be added or not to the URLs that we upload to Algolia.
@@ -82,3 +84,5 @@ export VERSIONS_TAG=$(echo -n "$VERSIONS_CURRENT" | sed 's/\./-/g')
 export ALGOLIA_INDEX_NAME="${PRODUCT_INDEX_NAME}-${VERSIONS_TAG}"
 # A comma-separated list of all product names and indices, in the form of `<product-name>=<product-index>`.
 export PRODUCT_NAMES_AND_INDICES="${PRODUCT_NAME}=${PRODUCT_INDEX_NAME}-${TRAVIS_BRANCH/./-},${OTHER_PRODUCT_NAMES_AND_INDICES}"
+
+echo "env vars set successfully"
