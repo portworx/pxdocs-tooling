@@ -40,7 +40,9 @@ fi
 
 echo "building branch variable"
 # build the Portworx branch string
-branch=gs-rel-${LATEST_VERSION}
+branch=gs-rel-${LATEST_VERSION}.0
+
+echo $branch
 
 echo "getting data from porx"
 # Get version from porx
