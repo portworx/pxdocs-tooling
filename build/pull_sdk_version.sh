@@ -57,7 +57,7 @@ ver=$(cat api.swagger.json | jq -r '.info.version')
 echo "Px version v${LATEST_VERSION} on branch ${branch} uses the SDK version v${ver}"
 
 # Write the value into a YAML file under the `/data` folder
-$ver > /data/sdk.yaml
+echo "${ver}" > "/data/sdk.yaml"
 
 # Verify the file has been created
 fileread=$(cat /data/sdk.yaml)
