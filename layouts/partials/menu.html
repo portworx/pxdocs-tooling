@@ -28,9 +28,9 @@
 
       <div class="menu-link-title">
         {{- if or (eq $mode "branch") (eq $depth 0) }}
-          <span class="branchlink{{- if eq .URL $currentNode.URL}} active mdl-color-text--primary {{ end }}">&nbsp;&nbsp;&nbsp;{{.LinkTitle}}</span>
+          <span class="branchlink{{- if eq .URL $currentNode.URL}} active mdl-color-text--primary {{ end }}">{{.LinkTitle}}</span>
         {{- else}}
-          <span class="leaflink{{- if eq .URL $currentNode.URL}} active mdl-color-text--primary {{ end }}">&nbsp;&nbsp;&nbsp;{{.LinkTitle}}</span>
+          <span class="leaflink{{- if eq .URL $currentNode.URL}} active mdl-color-text--primary {{ end }}">{{.LinkTitle}}</span>
         {{- end}}
       </div>
 
@@ -123,138 +123,44 @@
   {{- end}}
 {{- end}}
 
-{{- if eq .Site.Title "Portworx Documentation"}}
-<a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
-href="https://central.docs.portworx.com/"
->
-<span>&nbsp;&nbsp;&nbsp;PX-Central on-premises</span> </a>
-<a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
-href="https://baas.docs.portworx.com/"
->
-<span>&nbsp;&nbsp;&nbsp;PX-Backup as-a-service</span> </a>
-<a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
-href="https://pds.docs.portworx.com/"
->
-<span>&nbsp;&nbsp;&nbsp;Portworx Data Services</span> </a>
-<a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
-href="https://backup.docs.portworx.com/"
->
-<span>&nbsp;&nbsp;&nbsp;PX-Backup</span> </a>
-{{- end}}
+<h6 class="other-products-heading">Other products</h6>
 
-{{- if eq .Site.Title "PX-Backup Documentation"}}
+{{- if not (eq .Site.Title "Portworx Documentation")}}
 <a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
+class="mdl-navigation__link docset-link"
 href="https://docs.portworx.com/"
 >
-<span>&nbsp;&nbsp;&nbsp;Portworx Enterprise</span> </a>
-<a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
-href="https://central.docs.portworx.com/"
->
-<span>&nbsp;&nbsp;&nbsp;PX-Central on-premises</span> </a>
-<a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
-href="https://baas.docs.portworx.com/"
->
-<span>&nbsp;&nbsp;&nbsp;PX-Backup as-a-service</span> </a>
-<a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
-href="https://pds.docs.portworx.com/"
->
-<span>&nbsp;&nbsp;&nbsp;Portworx Data Services</span> </a>
+<span>Portworx Enterprise</span> </a>
 {{- end}}
 
-
-{{- if eq .Site.Title "PX-Central Documentation"}}
+{{- if not (eq .Site.Title "PX-Central Documentation")}}
 <a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
-href="https://docs.portworx.com/"
->
-<span>&nbsp;&nbsp;&nbsp;Portworx Enterprise</span> </a>
-<a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
-href="https://baas.docs.portworx.com/"
->
-<span>&nbsp;&nbsp;&nbsp;PX-Backup as-a-service</span> </a>
-<a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
-href="https://pds.docs.portworx.com/"
->
-<span>&nbsp;&nbsp;&nbsp;Portworx Data Services</span> </a>
-<a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
-href="https://backup.docs.portworx.com/"
->
-<span>&nbsp;&nbsp;&nbsp;PX-Backup</span> </a>
-{{- end}}
-
-{{- if eq .Site.Title "Portworx Data Services Documentation"}}
-<a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
-href="https://docs.portworx.com/"
->
-<span>&nbsp;&nbsp;&nbsp;Portworx Enterprise</span> </a>
-<a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
+class="mdl-navigation__link docset-link"
 href="https://central.docs.portworx.com/"
 >
-<span>&nbsp;&nbsp;&nbsp;PX-Central on-premises</span> </a>
-<a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
-href="https://baas.docs.portworx.com/"
->
-<span>&nbsp;&nbsp;&nbsp;PX-Backup as-a-service</span> </a>
-<a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
-href="https://backup.docs.portworx.com/"
->
-<span>&nbsp;&nbsp;&nbsp;PX-Backup</span> </a>
+<span>PX-Central on-premises</span> </a>
 {{- end}}
 
-{{- if eq .Site.Title "PX-Backup as-a-service Documentation"}}
+{{- if not (eq .Site.Title "PX-Backup as-a-service Documentation")}}
 <a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
-href="https://docs.portworx.com/"
+class="mdl-navigation__link docset-link"
+href="https://baas.docs.portworx.com/"
 >
-<span>&nbsp;&nbsp;&nbsp;Portworx Enterprise</span> </a>
+<span>PX-Backup as-a-service</span> </a>
+{{- end}}
+
+{{- if not (eq .Site.Title "Portworx Data Services Documentation")}}
 <a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
-href="https://central.docs.portworx.com/"
->
-<span>&nbsp;&nbsp;&nbsp;PX-Central on-premises</span> </a>
-<a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
+class="mdl-navigation__link docset-link"
 href="https://pds.docs.portworx.com/"
 >
-<span>&nbsp;&nbsp;&nbsp;Portworx Data Services</span> </a>
+<span>Portworx Data Services</span> </a>
+{{- end}}
+
+{{- if not (eq .Site.Title "PX-Backup Documentation")}}
 <a
-style="color:rgb(0, 0, 0);"
-class="mdl-navigation__link"
+class="mdl-navigation__link docset-link"
 href="https://backup.docs.portworx.com/"
 >
-<span>&nbsp;&nbsp;&nbsp;PX-Backup</span> </a>
+<span>PX-Backup</span> </a>
 {{- end}}

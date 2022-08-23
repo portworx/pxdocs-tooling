@@ -158,6 +158,26 @@ h2 {
  font-weight: bold;
 }
 
+
+/*
+
+  ALERT BAR
+
+*/
+
+#alert-bar {
+  background-color: #dc522b;
+  color: #ffffff;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+
+
 /*
 
  FOOTER
@@ -582,6 +602,17 @@ h2 {
 */
 
 
+.other-products-heading {
+  margin: 40px 25px 10px 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid;
+}
+
+
+.mdl-navigation__link span {
+  margin-left: 10px;
+}
+
 .docs-layout .docs-navigation .mdl-navigation__link {
  display: flex !important;
  flex-direction: row;
@@ -729,10 +760,15 @@ hr.margin {
  font-weight: 500;
 }
 
+/* add a margin beneath ordered list items */
+.docs-content ol li {
+  margin-bottom: 20px;
+}
+
 .docs-content li p {
- margin-bottom: 0px !important;
- font-family: 'Roboto', 'Helvetica', sans-serif !important;
- color: rgba(0,0,0,.87) !important;
+  margin-bottom: 0px !important;
+  font-family: 'Roboto', 'Helvetica', sans-serif !important;
+  /* color: rgba(0,0,0,.87) !important; */
 }
 
 

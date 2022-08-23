@@ -8,12 +8,12 @@
 {{ with $pathTo }}
         <table>
             {{ range $pathToSource.heading }}
-                <th>{{ . }}</th>
+                <th colspan="{{ .colspan }}">{{ .name }}</th>
             {{ end }}
             {{ range $pathToSource.tableData }}
                 <tr>
                     {{ range . }}
-                    <td>{{ . }}</td>
+                    <td>{{ . | markdownify }}</td>
                     {{ end }} 
                 </tr>
             {{ end }}
