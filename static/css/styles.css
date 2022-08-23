@@ -3,6 +3,7 @@
   #scrollspy-container {display: none !important}
   .docs-content {margin-left: 0px !important; width: 90% !important; max-width: none !important;}
   body:after {content: "© 2022 Portworx, Inc. Visit http://docs.portworx.com for more documentation."; padding-left: 35px;}
+
 }
 
 html, body {
@@ -121,9 +122,9 @@ h2 {
 }
 
 .docs-header .container .navbar-menus .header-main-menu {
- margin-left: 230px;
- margin-top: 10px;
-}
+  margin-left: 230px;
+  margin-top: 10px;
+ }
 
 .docs-header .container .navbar-menus .header-top-menu li a {
  color: #ff5000;
@@ -147,33 +148,33 @@ h2 {
 }
 
 .docs-header .container .navbar-menus .header-main-menu a {
- color: #ffffff;
- padding: 0px;
- font-size: 15px;
- line-height: 20px;
- margin-left: 10px;
- margin-bottom: 15px;
- margin-top: 30px;
- margin-right: 0px;
- font-weight: bold;
-}
+  color: #ffffff;
+  padding: 0px;
+  font-size: 15px;
+  line-height: 20px;
+  margin-left: 10px;
+  margin-bottom: 15px;
+  margin-top: 30px;
+  margin-right: 0px;
+  font-weight: bold;
+ }
 
 
 /*
 
-  ALERT BAR
+ ALERT BAR
 
 */
 
 #alert-bar {
-  background-color: #dc522b;
-  color: #ffffff;
-  padding: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+ background-color: #dc522b;
+ color: #ffffff;
+ padding: 10px;
+ font-size: 18px;
+ font-weight: bold;
+ margin-top: 30px;
+ margin-bottom: 10px;
+ border-radius: 5px;
 }
 
 
@@ -603,14 +604,14 @@ h2 {
 
 
 .other-products-heading {
-  margin: 40px 25px 10px 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid;
+ margin: 40px 25px 10px 10px;
+ padding-bottom: 10px;
+ border-bottom: 1px solid;
 }
 
 
 .mdl-navigation__link span {
-  margin-left: 10px;
+ margin-left: 10px;
 }
 
 .docs-layout .docs-navigation .mdl-navigation__link {
@@ -762,13 +763,13 @@ hr.margin {
 
 /* add a margin beneath ordered list items */
 .docs-content ol li {
-  margin-bottom: 20px;
+ margin-bottom: 20px;
 }
 
 .docs-content li p {
-  margin-bottom: 0px !important;
-  font-family: 'Roboto', 'Helvetica', sans-serif !important;
-  /* color: rgba(0,0,0,.87) !important; */
+ margin-bottom: 0px !important;
+ font-family: 'Roboto', 'Helvetica', sans-serif !important;
+ /* color: rgba(0,0,0,.87) !important; */
 }
 
 
