@@ -1,14 +1,18 @@
-<a href="{{ .RelPermalink }}" class="no-underline">
-  <div class="logo-list-block">
-    {{- if (isset .Params "logo" ) -}}
-      <div class="logo-list-image">
-        <img src="{{ .Params.logo }}" /> 
-      </div>
-      <div class="logo-list-title">
-        {{ .Title }}
-      </div>
-    {{- else -}}
-      {{ .Title }}
-    {{- end -}}
-  </div>
-</a>
+<div class="grid-div">
+  <a href="{{ .RelPermalink }}" class="no-underline">
+    <div class="logo-list-block">
+        <div class="logo-list-image">
+          {{- if (isset .Params "logo" ) -}}
+          <img src="{{ .Params.logo }}" />
+          {{- end -}}
+        </div>
+        <div class="logo-list-title">
+          {{- if (isset .Params "linktitle" ) -}}
+            {{ .Params.linktitle }}
+          {{- else -}}
+            {{ .Title }}
+          {{- end -}}
+        </div>
+    </div>
+  </a>
+</div>
