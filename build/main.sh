@@ -15,6 +15,7 @@ source ./themes/pxdocs-tooling/build/set_env_vars.sh
 # if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then 
     echo "pulling data for automation"
     source ./themes/pxdocs-tooling/build/pull_sdk_version.sh
+    source ./themes/pxdocs-tooling/build/pull_pxctl.sh
     
     # we can put any other automation we want to here 
 # fi
