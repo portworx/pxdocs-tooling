@@ -1,0 +1,249 @@
+{{ define "main" -}}
+  {{- partial "contentheader.html" . -}}
+
+  {{- if .Page.Params.syntax -}}
+    <h2> Command Syntax </h2>
+    {{- printf "```text\n%s\n```" .Page.Params.syntax | markdownify -}}
+  {{- end -}}
+
+  {{- with .Page.Params -}}
+    {{- if or .long .short -}}
+      <h2> Description </h2>
+      {{- if .long -}}
+        {{- .long -}}
+      {{- else -}}
+        {{- .short -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if .Page.Params.arguments -}}
+      <h2> Arguments </h2>
+      {{- with .Page.Params.arguments -}}
+      <table class="cli-reference-table">
+        <th>Argument</th>
+        <th>Description</th>
+        {{- range . -}}
+        <tr>
+          <td>
+          <p>
+           {{- printf "`%s`" .name | markdownify -}}
+          </p>
+        </td>
+        <td>
+          {{- if .description -}}
+            <p>
+              {{- .description -}}
+            </p>
+          {{- end -}}
+          {{- if .required -}}
+            <p>
+              {{- printf "_Required:_ %t" .required | markdownify -}}
+            </p>
+          {{- end -}}
+        </td>
+        </tr>
+        {{- end -}}
+      </table>
+      {{- end -}}
+    {{- end -}}
+
+    {{- if .Page.Params.flags -}}
+      <h2> Flags </h2>
+      {{- with .Page.Params.flags -}}
+      <table class="cli-reference-table">
+        <th>Flag</th>
+        <th>Description</th>
+        {{- range . -}}
+        <tr>
+          <td>
+            <p>
+            {{- $.Scratch.Add "shorthand" "" -}}
+            {{- $.Scratch.Add "type" "" -}}
+            {{- if .singleLetterShorthand -}}
+              {{- $.Scratch.Add "shorthand" (printf ", `%s`" .singleLetterShorthand) -}}
+            {{- end -}}
+            {{- if .type -}}
+              {{- $.Scratch.Add "type" (printf " (`%s`)" .type) -}}
+            {{- end -}}
+            {{- printf "`%s`%s%s" .name ($.Scratch.Get "shorthand")  ($.Scratch.Get "type") | markdownify -}}
+            {{- $.Scratch.Delete "shorthand" -}}
+            {{- $.Scratch.Delete "type" -}}
+          </p>
+          </td>
+          <td>
+            <p>
+            {{- .description -}}
+            </p>
+          
+          {{- if .defaultValue -}}
+            <p>
+              {{- printf "_Default value:_ %v" .defaultValue | markdownify -}}
+            </p>
+            {{- end -}}
+          {{- if .required -}}
+            <p>
+              {{- printf "_Required:_ %t" .required | markdownify -}}
+            </p>
+          {{- end -}}
+          {{- if .validValues -}}
+            <i>Valid values:</i>
+            <ul>
+              {{- with .validValues -}}
+                {{- range . -}}
+                  <li>
+                    {{- printf " %v" . -}}
+                  </li>
+                {{- end -}}
+              {{- end -}}
+            </ul>
+          {{- end -}}
+          {{- if .validRange -}}
+            <p>
+              {{- printf "_Valid range:_ %s" .validRange | markdownify -}}
+            </p>
+          {{- end -}}
+          </td>
+        </tr>
+      
+        {{- end -}}
+      </table>
+      {{- end -}}
+    {{- end -}}
+
+    {{- if .Page.Params.inheritedFlags -}}
+      <h2> Inherited flags </h2>
+      {{- with .Page.Params.inheritedFlags -}}
+      <table class="cli-reference-table">
+        <th>Flag</th>
+        <th>Description</th>
+        {{- range . -}}
+        <tr>
+          <td>
+            <p>
+            {{- $.Scratch.Add "shorthand" "" -}}
+            {{- $.Scratch.Add "type" "" -}}
+            {{- if .singleLetterShorthand -}}
+              {{- $.Scratch.Add "shorthand" (printf ", `%s`" .singleLetterShorthand) -}}
+            {{- end -}}
+            {{- if .type -}}
+              {{- $.Scratch.Add "type" (printf " (`%s`)" .type) -}}
+            {{- end -}}
+            {{- printf "`%s`%s%s" .name ($.Scratch.Get "shorthand")  ($.Scratch.Get "type") | markdownify -}}
+            {{- $.Scratch.Delete "shorthand" -}}
+            {{- $.Scratch.Delete "type" -}}
+          </p>
+          </td>
+          <td>
+          <p>
+            {{- .description -}}
+          </p>
+          {{- if .defaultValue -}}
+            <p>
+              {{- printf "_Default value:_ %v" .defaultValue | markdownify -}}
+            </p>
+            {{- end -}}
+          {{- if .required -}}
+            <p>
+              {{- printf "_Required:_ %t" .required | markdownify -}}
+            </p>
+          {{- end -}}
+          <!--
+          {{- if .type -}}
+            <p>
+              {{- printf "_Type:_ %s" .type | markdownify -}}
+            </p>
+          {{- end -}}
+          -->
+          {{- if .singleLetterShorthand -}}
+            <p>
+              {{- printf "_Shorthand:_ %s" .singleLetterShorthand | markdownify -}}
+            </p>
+          {{- end -}}
+          {{- if .validValues -}}
+            <i>Valid values:</i>
+            <ul>
+              {{- with .validValues -}}
+                {{- range . -}}
+                  <li>
+                    {{- printf " %v" . -}}
+                  </li>
+                {{- end -}}
+              {{- end -}}
+            </ul>
+          {{- end -}}
+          {{- if .validRange -}}
+            <p>
+              {{- printf "_Valid range:_ %s" .validRange | markdownify -}}
+            </p>
+          {{- end -}}
+        </td>
+      </tr>
+        {{- end -}}
+      </table>
+      {{- end -}}
+    {{- end -}}
+
+    {{- if .Page.Params.examples -}}
+      <h2> Examples </h2>
+      {{- with .Page.Params.examples -}}
+      <ul>
+        {{- range . -}}
+        <li>
+          <p>
+          {{- .description -}}
+          </br>
+          {{- printf "```text\n%s\n```" .command | markdownify -}}
+          </p>
+        </li>
+        {{- end -}}
+      {{- end -}}
+    </ul>
+    {{- end -}}
+
+    {{- if .Sections -}}
+      <h2> Subcommands </h2>
+      <ul class="list-series">
+        {{- with .Sections -}}
+          {{- range . -}}
+            <li class="list-series__item mdl-card mdl-shadow--2dp">
+            <a href="{{- .URL -}}">
+              <div class="mdl-card__title">
+              <h3 class="mdl-card__title-text">
+                {{- .Params.title -}}
+              </h3>
+              </div>
+              <div class="mdl-card__supporting-text">
+                <p> {{- .Params.short -}}</p>
+              </div>
+              <i class="material-icons">arrow_forward_ios</i>
+            </a>
+            </li>
+          {{- end -}}
+        {{- end -}}
+        </ul>
+      {{- end -}}
+
+    {{- if eq .Parent.Params.layout "cli-reference" -}}
+      <h2> Parent command </h2>
+      {{- with .Parent -}}
+        <ul class="list-series">
+          <li class="list-series__item mdl-card mdl-shadow--2dp">
+            <a href="{{- .URL -}}">
+              <div class="mdl-card__title">
+                <h3 class="mdl-card__title-text">
+                  {{- .Params.title -}}
+                </h3>
+              </div>
+              <div class="mdl-card__supporting-text">
+                <p> {{- .Params.short -}}</p>
+              </div>
+              <i class="material-icons">arrow_forward_ios</i>
+            </a>
+          </li>
+        </ul>
+      {{- end -}}
+    {{- end -}}
+  
+  {{- partial "prevnext.html" . }}
+{{ end }}
