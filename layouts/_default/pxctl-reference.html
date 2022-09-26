@@ -3,12 +3,12 @@
 
   <!-- https://gohugo.io/templates/data-templates/ -->
 
-  {{- if .Page.Params.syntax -}}
+  {{- if .Site.Data.name -}}
     <h2> Command Syntax </h2>
-    {{- printf "```text\n%s\n```" .Page.Params.syntax | markdownify -}}
+    {{- printf "```text\n%s\n```" .Site.Data.name | markdownify -}}
   {{- end -}}
 
-  {{- with .Page.Params -}}
+  {{- with .Site.Data.name -}}
     {{- if or .long .short -}}
       <h2> Description </h2>
       {{- if .long -}}
