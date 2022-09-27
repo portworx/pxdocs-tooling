@@ -557,3 +557,65 @@ $(function () {
     $('.docs-footer').show()
   })
 })
+
+/*
+
+  Check for feedback form
+
+*/
+
+// #This is designed to test whether we're actually getting the form:
+//
+// var str,
+// element = document.getElementById('feedback123');
+// if (element != null) {
+//   str = element.value;
+// }
+// else {
+//   str = 'still null';
+// }
+// console.log('form value:')
+// console.log(str)
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  let myForm = document.getElementById("feedback123");
+  let formData = new FormData(myForm);
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(formData).toString(),
+  })
+    .then(() => console.log("Form successfully submitted"))
+    .catch((error) => alert(error));
+};
+
+document
+.getElementById("feedback123")
+.addEventListener("submit", handleSubmit);
+
+
+
+// document.getElementById("feedback123").addEventListener("click", sendFeedback(e));
+
+// function sendFeedback(e) {
+// e.preventDefault();
+// const form = document.getElementById("feedback123");
+// console.log(form);
+// }
+
+
+
+  // function sendFeedback(event) {
+  //   event.preventDefault();
+  //   let form = document.getElementById("feedback");
+  //   let formData = new FormData(myForm);
+  //   console.log(formData);
+  // }
+
+
+
+  
+
+  // const form = document.getElementById("feedback");
+  // console.log(form);
