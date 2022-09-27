@@ -2107,3 +2107,54 @@ Highlight styling
   line-height: inherit;
   font-size: inherit;
 }
+
+/* 
+
+Feedback form
+
+*/
+
+button {
+  color: #ffffff;
+  background-color: rgb(241, 90, 36);
+  padding: 15px 20px;
+  border: none;
+  margin-left: 486px;
+}
+
+button:focus {
+  background-color: #414042;
+}
+
+div label i {
+  color: #f15a24;
+  font-size: 36px !important;
+  padding-bottom: 20px;
+}
+
+textarea {
+  width: 550px;
+  height: 80px;
+  font-family:Arial, Helvetica, sans-serif;
+  padding:10px;
+}
+
+#feedbackTitle {
+  font-size:24px;
+  display:inline;
+}
+
+#feedbackRadio {
+  display: inline;
+  margin-left: 180px;
+}
+
+form {
+  padding-bottom: 20px;
+  padding-top: 25px;
+  padding-left: 60px;
+}
+
+form div {
+  padding: 10px;
+}
