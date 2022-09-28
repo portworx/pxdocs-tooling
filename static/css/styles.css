@@ -2278,6 +2278,7 @@ textarea {
   background-color: rgb(241, 90, 36);
   padding: 8px 8px;
   border: none;
+  cursor: pointer;
 }
 
 #feedbackButton button:focus {
@@ -2294,6 +2295,36 @@ textarea {
 #feedbackTitle {
   font-size:18px;;
 }
+
+#feedbackRadio label i {
+  font-size: 20px;
+  padding-left: 20px;
+  float: right;
+}
+
+#feedbackRadio input[type=radio] {
+  display: none;
+}
+
+#feedbackRadio label i:hover {
+  opacity:0.6;
+  cursor: pointer;
+}
+
+#feedbackRadio label i:active {
+  opacity:0.4;
+  cursor: pointer;
+}
+
+#feedbackRadio input[type=radio]:checked + label > i {
+  /* border: 20px solid rgba(228, 154, 94, 0.619); */
+  opacity: 0;
+}
+
+
+
+
+
 
 <form id="feedback123" name="test" data-netlify="true">
   <div id="feedbackTopRow">
