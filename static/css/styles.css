@@ -2303,22 +2303,22 @@ textarea {
 }
 
 #feedbackRadio input[type=radio] {
-  display: none;
+  appearance: none;
 }
 
-#feedbackRadio label i:hover {
+#feedbackRadio label:hover {
   opacity:0.6;
   cursor: pointer;
 }
 
-#feedbackRadio label i:active {
+#feedbackRadio label:active {
   opacity:0.4;
   cursor: pointer;
 }
 
-#feedbackRadio input[type=radio]:checked + label > i {
-  /* border: 20px solid rgba(228, 154, 94, 0.619); */
-  opacity: 0;
+#feedbackRadio label input[type=radio]:checked + i {
+  color: #ff5000
+  /* opacity: 0; */
 }
 
 
