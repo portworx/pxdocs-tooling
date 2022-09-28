@@ -1,14 +1,33 @@
 <form id="feedback123" name="test" data-netlify="true">
+  <div id="feedbackTopRow">
   <div id="feedbackTitle">Was this page helpful?</div>
-  <div id="feedbackRadio">
-    <input type="radio" name="sentiment" value="like"/><label><i class="material-icons">thumb_up</i></label>
-    <input type="radio" name="sentiment" value="dislike"/><label><i class="material-icons">thumb_down</i></label>
+    <div id="feedbackRadio">
+      <input type="radio" name="sentiment" value="like"/><label><i class="material-icons">thumb_up</i></label>
+      <input type="radio" name="sentiment" value="dislike"/><label><i class="material-icons">thumb_down</i></label>
+    </div>
   </div>
-  <div id="feedbackText">
-    <label><textarea name="message" placeholder="Feedback text goes here" maxlength="2000"></textarea></label>
+  <div id="feedbackMidRow">
+    <div id="feedbackText">
+      <label><textarea name="message" placeholder="Tell us how we can make this page better" maxlength="2000"></textarea></label>
+    </div>
   </div>
-  <div id="feedbackButton">
-    <button type="submit">Submit</button>
+  <div id="feedbackBottomRow">
+    <div id="feedbackButton">
+      <button type="submit">Submit</button>
+    </div>
   </div>
 </form>
 
+<!-- 
+  
+--------------------------- 
+| was help?       | like b|
+|--------------------------
+|                         |
+| text box                |
+|                         |
+--------------------------- 
+|                 submit b|
+---------------------------
+
+-->
