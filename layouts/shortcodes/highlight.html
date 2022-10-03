@@ -1,1 +1,1 @@
-<span id="highlight">{{ .Inner | markdownify}}</span>
+<span id="highlight">{{ .Inner | htmlEscape | markdownify }}</span>
