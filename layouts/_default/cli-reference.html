@@ -1,0 +1,154 @@
+{{ define "main" -}}
+  {{- partial "contentheader.html" . -}}
+
+  <!-- take input from the shortcode as a string -->
+  {{- $source := .Page.Params.datasource -}}
+  <!-- set the path to the `automateTable` location -->
+  {{- $pathTo := .Site.Data -}}
+  <!-- Use the index function to fetch the location object using the source string. Without this, Hugo doesn't understand what the `source` string means -->
+  {{- $pathToSource := index $pathTo $source -}}
+  {{ $countvar := 0 }}
+  {{ $fullcommand := slice "pxctl" }}
+
+  
+  {{ partial "recursive.html" (dict "context" . "pathToSource" $pathToSource "fullcommand" $fullcommand "countvar" $countvar) }}
+  
+{{/* end main */}}
+{{ end }}
+
+{{ define "partials/recursive.html" }}
+  {{- $pathToSource := .pathToSource }}
+  {{- $fullcommand := .fullcommand }}
+  {{- $countvar := .countvar }}
+  {{ $outputcommand := "" }}
+
+  {{ range .pathToSource }}
+    {{if not .hidden }}
+
+      {{ $fullcommand = append .name $fullcommand }}
+
+      <h2>
+        {{range $fullcommand }}
+          {{.}}
+        {{end}}
+      </h2>
+
+      {{/*
+        this ugly code fragment builds a single string from the $fullcommand slice,
+        prints that output into a markdown code box,
+        and then zeroes out the string (just in case)
+        */}}
+      {{ range $fullcommand }}
+        {{ $outputcommand = printf "%s %s" $outputcommand . }}
+      {{end}}
+      {{- printf "```text\n%s\n```" $outputcommand | markdownify -}}
+      {{ $outputcommand = "" }}
+
+      {{/*
+        print either the long or short descriptions, if they exist
+        */}}
+      {{- if or .long .short -}}
+        <h4> Description </h4>
+        {{- if .long -}}
+          {{- .long -}}
+        {{- else -}}
+          {{- .short -}}
+        {{- end -}}
+      {{- end -}}
+
+      {{/*
+        print the example, if it exists
+        */}}
+      {{- if .example -}}
+        <h4> Example </h4>
+        {{- printf "```text\n%s\n```" .example | markdownify -}}
+      {{- end -}}
+
+      {{- if .flags -}}
+        <h4> Flags </h4>
+        
+        <table class="cli-reference-table">
+          <th>Flag</th>
+          <th>Description</th>
+          {{- range .flags -}}
+          <tr>
+            <td>
+              <p>
+              {{- $shorthand := "" -}}
+              {{- $type := "" -}}
+              {{- if (index . "single-letter-shorthand") -}}
+                {{- $shorthand = (printf ", `-%s`" (index . "single-letter-shorthand")) -}}
+              {{- end -}}
+              {{- if .type -}}
+                {{- $type = (printf " (`%s`)" .type) -}}
+              {{- end -}}
+              {{- printf "`--%s`%s%s" .name $shorthand $type | markdownify -}}
+            </p>
+            </td>
+            <td>
+              <p>
+              {{- .use -}}
+              </p>
+            
+            {{- if .default -}}
+              <p>
+                {{- printf "_Default value:_ %v" .default | markdownify -}}
+              </p>
+              {{- end -}}
+            {{- if .required -}}
+              <p>
+                {{- printf "_Required:_ %t" .required | markdownify -}}
+              </p>
+            {{- end -}}
+            {{- if .validValues -}}
+              <i>Valid values:</i>
+              <ul>
+                {{- with .validValues -}}
+                  {{- range . -}}
+                    <li>
+                      {{- printf " %v" . -}}
+                    </li>
+                  {{- end -}}
+                {{- end -}}
+              </ul>
+            {{- end -}}
+            {{- if .validRange -}}
+              <p>
+                {{- printf "_Valid range:_ %s" .validRange | markdownify -}}
+              </p>
+            {{- end -}}
+            </td>
+          </tr>
+        
+          {{- end -}}
+        </table>
+        
+      {{- end -}}
+
+      {{- if .subcmd -}}
+        {{ $countvar = 1}}
+        {{ partial "recursive.html" (dict "context" . "pathToSource" .subcmd "fullcommand" $fullcommand) }}
+      {{- end -}}
+    
+      {{/* find the length of the array */}}
+      {{ $numSlices := len $fullcommand }}
+      
+      {{/* prevent this from running if there's only 1 slice in the array*/}}
+      {{if gt $numSlices 1 }}
+        {{/* choose the array elements we want to keep */}}
+        {{ $numSlices = sub $numSlices 1}}
+      {{ end }}
+      
+      {{/* save the new array as only that*/}}
+      {{ $fullcommand = first $numSlices $fullcommand }}
+
+    {{ end }}
+    
+    
+
+    
+  
+  {{/* end range pathToSource */}}  
+  {{- end -}}
+{{/* end recursive */}}  
+{{- end -}}
