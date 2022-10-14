@@ -27,12 +27,6 @@
 
       {{ $fullcommand = append .name $fullcommand }}
 
-      <h2>
-        {{range $fullcommand }}
-          {{.}}
-        {{end}}
-      </h2>
-
       {{/*
         this ugly code fragment builds a single string from the $fullcommand slice,
         prints that output into a markdown code box,
@@ -41,6 +35,11 @@
       {{ range $fullcommand }}
         {{ $outputcommand = printf "%s %s" $outputcommand . }}
       {{end}}
+
+      <h2 id="{{ urlize $outputcommand }}">
+        {{- printf "%s" $outputcommand | markdownify -}}
+      </h2>
+
       {{- printf "```text\n%s\n```" $outputcommand | markdownify -}}
       {{ $outputcommand = "" }}
 
