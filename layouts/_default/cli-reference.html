@@ -40,6 +40,11 @@
         {{- printf "%s" $outputcommand | markdownify -}}
       </h2>
 
+      {{/* If there's an arg required, say as much in the code box */}}
+      {{ if (index . "args-required") }}
+        {{ $outputcommand = printf "%s <required-argument>" $outputcommand }}
+      {{ end }}
+
       {{- printf "```text\n%s\n```" $outputcommand | markdownify -}}
       {{ $outputcommand = "" }}
 
