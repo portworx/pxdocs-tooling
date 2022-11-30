@@ -1,5 +1,5 @@
 FROM mhart/alpine-node:8
-MAINTAINER kaiyadavenport@gmail.com
+LABEL maintainer="nathaniel.wilson@portworx.com"
 RUN apk update
 RUN apk upgrade
 RUN apk add bash git
