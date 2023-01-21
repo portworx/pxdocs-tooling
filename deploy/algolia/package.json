@@ -8,6 +8,6 @@
   },
   "dependencies": {
     "algoliasearch": "^3.24.9",
-    "atomic-algolia": "^0.3.17"
+    "atomic-algolia": "^0.3.19"
   }
 }
