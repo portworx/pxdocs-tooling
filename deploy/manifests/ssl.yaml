@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ingress-pxdocs-2.13
+  namespace: pxdocs
+spec:
+  secretName: ingress-pxdocs-2.13-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  dnsNames:
+  - 2.13.docs.portworx.com
