@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ingress-pxcentral-2.5
+  namespace: pxdocs-central
+spec:
+  secretName: ingress-pxcentral-2.5-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  dnsNames:
+  - 2.5.backup.docs.portworx.com

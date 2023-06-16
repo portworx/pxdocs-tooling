@@ -1,0 +1,125 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pxbackup-ingress
+  namespace: pxdocs-backup
+spec:
+  rules:
+  - host: backup.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pxbackup-2-4
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  - host: 1.0.backup.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pxbackup-1-0
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  - host: 1.1.backup.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pxbackup-1-1
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  - host: 1.2.backup.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pxbackup-1-2
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  - host: 2.0.backup.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pxbackup-2-0
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  - host: 2.1.backup.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pxbackup-2-1
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  - host: 2.2.backup.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pxbackup-2-2
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  - host: 2.3.backup.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pxbackup-2-3
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  - host: 2.4.backup.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pxbackup-2-4
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - backup.docs.portworx.com
+    secretName: ingress-pxbackup-tls
+  - hosts:
+    - 1.0.backup.docs.portworx.com
+    secretName: ingress-pxbackup-1.0-tls
+  - hosts:
+    - 1.1.backup.docs.portworx.com
+    secretName: ingress-pxbackup-1.1-tls
+  - hosts:
+    - 1.2.backup.docs.portworx.com
+    secretName: ingress-pxbackup-1.2-tls
+  - hosts:
+    - 2.0.backup.docs.portworx.com
+    secretName: ingress-pxbackup-2.0-tls
+  - hosts:
+    - 2.1.backup.docs.portworx.com
+    secretName: ingress-pxbackup-2.1-tls
+  - hosts:
+    - 2.2.backup.docs.portworx.com
+    secretName: ingress-pxbackup-2.2-tls
+  - hosts:
+    - 2.3.backup.docs.portworx.com
+    secretName: ingress-pxbackup-2.3-tls
+  - hosts:
+    - 2.4.backup.docs.portworx.com
+    secretName: ingress-pxbackup-2.4-tls

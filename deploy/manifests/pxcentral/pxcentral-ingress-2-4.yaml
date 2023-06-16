@@ -1,0 +1,99 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pxcentral-ingress
+  namespace: pxdocs-central
+spec:
+  rules:
+  - host: central.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pxcentral-2-4
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  - host: 1.3.central.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pxcentral-1-3
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  - host: 2.0.central.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pxcentral-2-0
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  - host: 2.1.central.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pxcentral-2-1
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  - host: 2.2.central.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pxcentral-2-2
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  - host: 2.3.central.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pxcentral-2-3
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  - host: 2.4.central.docs.portworx.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pxcentral-2-4
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - central.docs.portworx.com
+    secretName: ingress-pxcentral-tls
+  - hosts:
+    - 1.3.central.docs.portworx.com
+    secretName: ingress-pxcentral-1.3-tls
+  - hosts:
+    - 2.0.central.docs.portworx.com
+    secretName: ingress-pxcentral-2.0-tls
+  - hosts:
+    - 2.1.central.docs.portworx.com
+    secretName: ingress-pxcentral-2.1-tls
+  - hosts:
+    - 2.2.central.docs.portworx.com
+    secretName: ingress-pxcentral-2.2-tls
+  - hosts:
+    - 2.3.central.docs.portworx.com
+    secretName: ingress-pxcentral-2.3-tls
+  - hosts:
+    - 2.4.central.docs.portworx.com
+    secretName: ingress-pxcentral-2.4-tls
