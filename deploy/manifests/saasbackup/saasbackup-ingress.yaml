@@ -23,6 +23,7 @@ spec:
             name: saasbackup-1-0
             port:
               number: 80
+              name: docs-port
         path: /
         pathType: ImplementationSpecific
   tls:

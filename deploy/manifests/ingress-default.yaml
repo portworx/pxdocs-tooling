@@ -13,6 +13,7 @@ spec:
             name: docs-2-13
             port:
               number: 80
+              name: docs-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.0.docs.portworx.com
@@ -23,6 +24,7 @@ spec:
             name: docs-2-11
             port:
               number: 80
+              name: docs-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.1.docs.portworx.com
@@ -33,6 +35,7 @@ spec:
             name: docs-2-11
             port:
               number: 80
+              name: docs-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.2.docs.portworx.com
@@ -43,6 +46,7 @@ spec:
             name: docs-2-11
             port:
               number: 80
+              name: docs-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.3.docs.portworx.com
@@ -53,6 +57,7 @@ spec:
             name: docs-2-11
             port:
               number: 80
+              name: docs-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.4.docs.portworx.com
@@ -63,6 +68,7 @@ spec:
             name: docs-2-11
             port:
               number: 80
+              name: docs-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.5.docs.portworx.com
@@ -73,6 +79,7 @@ spec:
             name: docs-2-11
             port:
               number: 80
+              name: docs-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.6.docs.portworx.com
@@ -83,6 +90,7 @@ spec:
             name: docs-2-11
             port:
               number: 80
+              name: docs-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.7.docs.portworx.com
@@ -93,6 +101,7 @@ spec:
             name: docs-2-11
             port:
               number: 80
+              name: docs-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.8.docs.portworx.com
@@ -103,6 +112,7 @@ spec:
             name: docs-2-11
             port:
               number: 80
+              name: docs-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.9.docs.portworx.com
@@ -113,6 +123,7 @@ spec:
             name: docs-2-9
             port:
               number: 80
+              name: docs-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.10.docs.portworx.com
@@ -123,6 +134,7 @@ spec:
             name: docs-2-10
             port:
               number: 80
+              name: docs-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.11.docs.portworx.com
@@ -133,6 +145,7 @@ spec:
             name: docs-2-11
             port:
               number: 80
+              name: docs-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.12.docs.portworx.com
@@ -143,6 +156,7 @@ spec:
             name: docs-2-12
             port:
               number: 80
+              name: docs-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.13.docs.portworx.com
@@ -153,6 +167,7 @@ spec:
             name: docs-2-13
             port:
               number: 80
+              name: docs-port
         path: /
         pathType: ImplementationSpecific
   - host: 1.7.docs.portworx.com
@@ -163,6 +178,7 @@ spec:
             name: docs-2-11
             port:
               number: 80
+              name: docs-port
         path: /
         pathType: ImplementationSpecific
   tls:

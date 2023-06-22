@@ -4,10 +4,11 @@ metadata:
   name: saasbackup-${VERSIONS_TAG}
   namespace: pxdocs-saasbackup
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
   - port: 80
     protocol: TCP
+    name: docs-port
   selector:
     app: saasbackup-${VERSIONS_TAG}
 
