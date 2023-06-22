@@ -8,6 +8,6 @@ spec:
   ports:
   - port: 80
     protocol: TCP
-    name: docs-port
+    name: backup-port
   selector:
     app: pxbackup-${VERSIONS_TAG}

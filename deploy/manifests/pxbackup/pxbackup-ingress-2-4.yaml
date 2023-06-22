@@ -13,6 +13,7 @@ spec:
             name: pxbackup-2-4
             port:
               number: 80
+              name: backup-port
         path: /
         pathType: ImplementationSpecific
   - host: 1.0.backup.docs.portworx.com
@@ -23,6 +24,7 @@ spec:
             name: pxbackup-1-0
             port:
               number: 80
+              name: backup-port
         path: /
         pathType: ImplementationSpecific
   - host: 1.1.backup.docs.portworx.com
@@ -33,6 +35,7 @@ spec:
             name: pxbackup-1-1
             port:
               number: 80
+              name: backup-port
         path: /
         pathType: ImplementationSpecific
   - host: 1.2.backup.docs.portworx.com
@@ -43,6 +46,7 @@ spec:
             name: pxbackup-1-2
             port:
               number: 80
+              name: backup-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.0.backup.docs.portworx.com
@@ -53,6 +57,7 @@ spec:
             name: pxbackup-2-0
             port:
               number: 80
+              name: backup-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.1.backup.docs.portworx.com
@@ -63,6 +68,7 @@ spec:
             name: pxbackup-2-1
             port:
               number: 80
+              name: backup-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.2.backup.docs.portworx.com
@@ -73,6 +79,7 @@ spec:
             name: pxbackup-2-2
             port:
               number: 80
+              name: backup-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.3.backup.docs.portworx.com
@@ -83,6 +90,7 @@ spec:
             name: pxbackup-2-3
             port:
               number: 80
+              name: backup-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.4.backup.docs.portworx.com
@@ -93,6 +101,7 @@ spec:
             name: pxbackup-2-4
             port:
               number: 80
+              name: backup-port
         path: /
         pathType: ImplementationSpecific
   tls:
