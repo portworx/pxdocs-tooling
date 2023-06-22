@@ -4,9 +4,10 @@ metadata:
   name: docs-${VERSIONS_TAG}
   namespace: pxdocs
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
   - port: 80
+    name: docs-port
     protocol: TCP
   selector:
     app: docs-${VERSIONS_TAG}

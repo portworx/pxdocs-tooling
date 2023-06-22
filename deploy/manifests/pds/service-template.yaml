@@ -4,10 +4,11 @@ metadata:
   name: pds-${VERSIONS_TAG}
   namespace: pxdocs-pds
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
   - port: 80
     protocol: TCP
+    name: docs-port
   selector:
     app: pds-${VERSIONS_TAG}
 
