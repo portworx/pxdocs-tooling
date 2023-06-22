@@ -13,7 +13,7 @@ spec:
             name: pxcentral-2-5
             port:
               number: 80
-              name: docs-port
+              name: central-port
         path: /
         pathType: ImplementationSpecific
   - host: 1.3.central.docs.portworx.com
@@ -24,7 +24,7 @@ spec:
             name: pxcentral-1-3
             port:
               number: 80
-              name: docs-port
+              name: central-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.0.central.docs.portworx.com
@@ -35,7 +35,7 @@ spec:
             name: pxcentral-2-0
             port:
               number: 80
-              name: docs-port
+              name: central-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.1.central.docs.portworx.com
@@ -46,7 +46,7 @@ spec:
             name: pxcentral-2-1
             port:
               number: 80
-              name: docs-port
+              name: central-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.2.central.docs.portworx.com
@@ -57,7 +57,7 @@ spec:
             name: pxcentral-2-2
             port:
               number: 80
-              name: docs-port
+              name: central-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.3.central.docs.portworx.com
@@ -68,7 +68,7 @@ spec:
             name: pxcentral-2-3
             port:
               number: 80
-              name: docs-port
+              name: central-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.4.central.docs.portworx.com
@@ -79,7 +79,7 @@ spec:
             name: pxcentral-2-4
             port:
               number: 80
-              name: docs-port
+              name: central-port
         path: /
         pathType: ImplementationSpecific
   - host: 2.5.central.docs.portworx.com
@@ -90,7 +90,7 @@ spec:
             name: pxcentral-2-5
             port:
               number: 80
-              name: docs-port
+              name: central-port
         path: /
         pathType: ImplementationSpecific
   tls:

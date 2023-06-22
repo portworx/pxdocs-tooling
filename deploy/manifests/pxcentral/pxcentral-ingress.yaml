@@ -15,7 +15,7 @@ spec:
       - backend:
           serviceName: pxcentral-1-3
           servicePort: 80
-          name: docs-port
+          name: central-port
         path: /
   - host: 1.3.central.docs.portworx.com
     http:
@@ -23,7 +23,7 @@ spec:
       - backend:
           serviceName: pxcentral-1-3
           servicePort: 80
-          name: docs-port
+          name: central-port
         path: /
   tls:
   - hosts:
