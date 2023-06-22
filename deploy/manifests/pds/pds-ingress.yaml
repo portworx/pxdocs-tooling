@@ -17,7 +17,7 @@ spec:
             name: pds-1-0
             port:
               number: 80
-              name: docs-port
+              name: pds-port
         path: /
         pathType: ImplementationSpecific
   tls:
