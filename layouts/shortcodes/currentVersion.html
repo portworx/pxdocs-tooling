@@ -1,6 +1,6 @@
 {{- $travisBranch := getenv "TRAVIS_BRANCH" -}}
 {{- if (eq $travisBranch "master" | or (eq $travisBranch "")) -}}
-  {{- 2.5 -}}
+  {{- 2.13 -}}
 {{- end -}}
 {{- if (ne $travisBranch "master" | and (ne $travisBranch "")) -}}
   {{- $travisBranch -}}
