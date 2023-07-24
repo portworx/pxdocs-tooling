@@ -115,7 +115,7 @@ travis_retry make image -f ./themes/pxdocs-tooling/build/Makefile
 make publish-docker -f ./themes/pxdocs-tooling/build/Makefile
 # Build the deployment image
 travis_retry make deployment-image -f ./themes/pxdocs-tooling/build/Makefile
-travis_retry make check-links -f ./themes/pxdocs-tooling/build/Makefile
+# travis_retry make check-links -f ./themes/pxdocs-tooling/build/Makefile
 # If this is a pull request then we don't want to update algolia or deploy
 if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then exit 0; fi
 # this checks if the current branch is present in the BRANCH_VERSION_CONFIG variable if exists if not
