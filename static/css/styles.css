@@ -167,14 +167,20 @@ h2 {
 */
 
 #alert-bar {
- background-color: #dc522b;
- color: #ffffff;
+ background-color: #FEF8F6;
+ color: #f15a24;
  padding: 10px;
- font-size: 18px;
- font-weight: bold;
+ font-size: 15px;
  margin-top: 30px;
  margin-bottom: 10px;
- border-radius: 5px;
+ border: 1px solid #dc522b;
+ border-radius: 4px;
+}
+
+#alert-bar a {
+  font-size: 15px;
+  color: #f15a24; /* White color for the link */
+  text-decoration: underline; /* Optional: to distinguish it as a link */
 }
 
 
@@ -202,7 +208,7 @@ h2 {
  .docs-footer {
    display: none;
  }
-
+ 
  .docs-footer-padding {
    display: none;
  }

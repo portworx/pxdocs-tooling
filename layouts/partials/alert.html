@@ -1,3 +1,14 @@
 {{ if isset .Site.Data "alert" }}
-    <div id="alert-bar">{{( $alert := index .Site.Data "alert").alert_msg}}</div>
-{{end}}
+  {{ $alerts := index .Site.Data "alert" }}
+  {{ if isset $alerts "alert_msgs" }}
+    {{ range $alerts.alert_msgs }}
+    
+    <div id="alert-bar">
+        
+        {{ . | safeHTML}}
+
+    </div>  
+
+    {{ end }}
+  {{ end }}
+{{ end }}
