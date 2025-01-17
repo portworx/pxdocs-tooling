@@ -133,6 +133,8 @@ publish-docker: prerequisites
 
 .PHONY: search-index-docker
 search-index-docker: prerequisites
+	@echo "Running search indexing..."
+	@echo "ALGOLIA_API_KEY: $(shell echo $(ALGOLIA_API_KEY) | cut -c1-4)***"
 	source ./themes/pxdocs-tooling/build/export-product-url.sh && docker run --rm \
 		--name $(SEARCH_INDEX_CONTAINER_NAME) \
 		-v "$(PWD)/public/algolia.json:/app/indexer/public/algolia.json" \
