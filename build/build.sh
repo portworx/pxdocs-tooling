@@ -93,7 +93,7 @@ export DEPLOYMENT_IMAGE_PREFIX=$(yq e ".$YAML_SECTION_NAME.DEPLOYMENT_IMAGE_PREF
 
 
 # The following environment variables are **not** set based on the triggering repository
-export ALGOLIA_API_KEY=64ecbeea31e6025386637d89711e31f3
+export ALGOLIA_API_KEY=2edeef002effcc910872d22eb648a88d
 export ALGOLIA_APP_ID=EWKZLLNQ9L
 export GCP_CLUSTER_ID=px-production
 export GCP_PROJECT_ID=production-apps-210001
