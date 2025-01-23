@@ -121,8 +121,9 @@ if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then exit 0; fi
 # this checks if the current branch is present in the BRANCH_VERSION_CONFIG variable if exists if not
 if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh should-build-current-branch)" != "yes" ]; then exit 0; fi
 # Update the Algolia index
-travis_retry make search-index-image -f ./themes/pxdocs-tooling/build/Makefile
-travis_retry make search-index-docker -f ./themes/pxdocs-tooling/build/Makefile
+# travis_retry make search-index-image -f ./themes/pxdocs-tooling/build/Makefile
+# temporary stopping the algolia index update, since algolia indexing leads to failure for px-backup docs build
+# travis_retry make search-index-docker -f ./themes/pxdocs-tooling/build/Makefile
 # Connect the GCLOUD_SERVICE_ACCOUNT_TOKEN, GCP_PROJECT_ID, GCP_ZONE and GCP_CLUSTER_ID vars -> gcloud and kubectl
 bash themes/pxdocs-tooling/deploy/scripts/ci_connect.sh
 # Push the image to gcr
